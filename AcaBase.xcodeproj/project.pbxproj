@@ -9,13 +9,38 @@
 /* Begin PBXBuildFile section */
 		303139DF245C4DB5005EEF87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303139DE245C4DB5005EEF87 /* AppDelegate.swift */; };
 		303139E1245C4DB5005EEF87 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303139E0245C4DB5005EEF87 /* SceneDelegate.swift */; };
-		303139E3245C4DB5005EEF87 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303139E2245C4DB5005EEF87 /* ViewController.swift */; };
 		303139E6245C4DB5005EEF87 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 303139E4245C4DB5005EEF87 /* Main.storyboard */; };
 		303139E9245C4DB5005EEF87 /* AcaBase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 303139E7245C4DB5005EEF87 /* AcaBase.xcdatamodeld */; };
 		303139EB245C4DB7005EEF87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 303139EA245C4DB7005EEF87 /* Assets.xcassets */; };
 		303139EE245C4DB7005EEF87 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 303139EC245C4DB7005EEF87 /* LaunchScreen.storyboard */; };
 		303139F9245C4DB8005EEF87 /* AcaBaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303139F8245C4DB8005EEF87 /* AcaBaseTests.swift */; };
 		30313A04245C4DB8005EEF87 /* AcaBaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A03245C4DB8005EEF87 /* AcaBaseUITests.swift */; };
+		30313A17245C50CE005EEF87 /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A11245C50CE005EEF87 /* SplashPresenter.swift */; };
+		30313A18245C50CE005EEF87 /* SplashWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A12245C50CE005EEF87 /* SplashWorker.swift */; };
+		30313A19245C50CE005EEF87 /* SplashRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A13245C50CE005EEF87 /* SplashRouter.swift */; };
+		30313A1A245C50CE005EEF87 /* SplashModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A14245C50CE005EEF87 /* SplashModels.swift */; };
+		30313A1B245C50CE005EEF87 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A15245C50CE005EEF87 /* SplashViewController.swift */; };
+		30313A1C245C50CE005EEF87 /* SplashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A16245C50CE005EEF87 /* SplashInteractor.swift */; };
+		30313A23245C5192005EEF87 /* SplashViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A1F245C5192005EEF87 /* SplashViewControllerTests.swift */; };
+		30313A24245C5192005EEF87 /* SplashInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A20245C5192005EEF87 /* SplashInteractorTests.swift */; };
+		30313A25245C5192005EEF87 /* SplashWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A21245C5192005EEF87 /* SplashWorkerTests.swift */; };
+		30313A26245C5192005EEF87 /* SplashPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A22245C5192005EEF87 /* SplashPresenterTests.swift */; };
+		30313A30245C5998005EEF87 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A2A245C5998005EEF87 /* LoginPresenter.swift */; };
+		30313A31245C5998005EEF87 /* LoginWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A2B245C5998005EEF87 /* LoginWorker.swift */; };
+		30313A32245C5998005EEF87 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A2C245C5998005EEF87 /* LoginRouter.swift */; };
+		30313A33245C5998005EEF87 /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A2D245C5998005EEF87 /* LoginModels.swift */; };
+		30313A34245C5998005EEF87 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A2E245C5998005EEF87 /* LoginViewController.swift */; };
+		30313A35245C5998005EEF87 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A2F245C5998005EEF87 /* LoginInteractor.swift */; };
+		30313A3D245C66D3005EEF87 /* SubscribePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A37245C66D3005EEF87 /* SubscribePresenter.swift */; };
+		30313A3E245C66D3005EEF87 /* SubscribeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A38245C66D3005EEF87 /* SubscribeWorker.swift */; };
+		30313A3F245C66D3005EEF87 /* SubscribeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A39245C66D3005EEF87 /* SubscribeRouter.swift */; };
+		30313A40245C66D3005EEF87 /* SubscribeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A3A245C66D3005EEF87 /* SubscribeModels.swift */; };
+		30313A41245C66D3005EEF87 /* SubscribeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A3B245C66D3005EEF87 /* SubscribeViewController.swift */; };
+		30313A42245C66D3005EEF87 /* SubscribeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30313A3C245C66D3005EEF87 /* SubscribeInteractor.swift */; };
+		30775AB0245CD0B700677FE5 /* UserWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775AAF245CD0B700677FE5 /* UserWorker.swift */; };
+		30775AB2245CD0DC00677FE5 /* UserCoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775AB1245CD0DC00677FE5 /* UserCoreDataStore.swift */; };
+		30775AB4245CD21200677FE5 /* CoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775AB3245CD21200677FE5 /* CoreDataStore.swift */; };
+		30775AB6245CD84100677FE5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775AB5245CD84100677FE5 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +64,6 @@
 		303139DB245C4DB4005EEF87 /* AcaBase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AcaBase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		303139DE245C4DB5005EEF87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		303139E0245C4DB5005EEF87 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		303139E2245C4DB5005EEF87 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		303139E5245C4DB5005EEF87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		303139E8245C4DB5005EEF87 /* AcaBase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AcaBase.xcdatamodel; sourceTree = "<group>"; };
 		303139EA245C4DB7005EEF87 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,6 +75,32 @@
 		303139FF245C4DB8005EEF87 /* AcaBaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AcaBaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		30313A03245C4DB8005EEF87 /* AcaBaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcaBaseUITests.swift; sourceTree = "<group>"; };
 		30313A05245C4DB8005EEF87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30313A11245C50CE005EEF87 /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
+		30313A12245C50CE005EEF87 /* SplashWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashWorker.swift; sourceTree = "<group>"; };
+		30313A13245C50CE005EEF87 /* SplashRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashRouter.swift; sourceTree = "<group>"; };
+		30313A14245C50CE005EEF87 /* SplashModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashModels.swift; sourceTree = "<group>"; };
+		30313A15245C50CE005EEF87 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		30313A16245C50CE005EEF87 /* SplashInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInteractor.swift; sourceTree = "<group>"; };
+		30313A1F245C5192005EEF87 /* SplashViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewControllerTests.swift; sourceTree = "<group>"; };
+		30313A20245C5192005EEF87 /* SplashInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInteractorTests.swift; sourceTree = "<group>"; };
+		30313A21245C5192005EEF87 /* SplashWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashWorkerTests.swift; sourceTree = "<group>"; };
+		30313A22245C5192005EEF87 /* SplashPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenterTests.swift; sourceTree = "<group>"; };
+		30313A2A245C5998005EEF87 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		30313A2B245C5998005EEF87 /* LoginWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWorker.swift; sourceTree = "<group>"; };
+		30313A2C245C5998005EEF87 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
+		30313A2D245C5998005EEF87 /* LoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModels.swift; sourceTree = "<group>"; };
+		30313A2E245C5998005EEF87 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		30313A2F245C5998005EEF87 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
+		30313A37245C66D3005EEF87 /* SubscribePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribePresenter.swift; sourceTree = "<group>"; };
+		30313A38245C66D3005EEF87 /* SubscribeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeWorker.swift; sourceTree = "<group>"; };
+		30313A39245C66D3005EEF87 /* SubscribeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeRouter.swift; sourceTree = "<group>"; };
+		30313A3A245C66D3005EEF87 /* SubscribeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeModels.swift; sourceTree = "<group>"; };
+		30313A3B245C66D3005EEF87 /* SubscribeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeViewController.swift; sourceTree = "<group>"; };
+		30313A3C245C66D3005EEF87 /* SubscribeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeInteractor.swift; sourceTree = "<group>"; };
+		30775AAF245CD0B700677FE5 /* UserWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWorker.swift; sourceTree = "<group>"; };
+		30775AB1245CD0DC00677FE5 /* UserCoreDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoreDataStore.swift; sourceTree = "<group>"; };
+		30775AB3245CD21200677FE5 /* CoreDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStore.swift; sourceTree = "<group>"; };
+		30775AB5245CD84100677FE5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +153,10 @@
 			children = (
 				303139DE245C4DB5005EEF87 /* AppDelegate.swift */,
 				303139E0245C4DB5005EEF87 /* SceneDelegate.swift */,
-				303139E2245C4DB5005EEF87 /* ViewController.swift */,
+				30775AAE245CD09300677FE5 /* Models */,
+				30775AAC245CD08200677FE5 /* Services */,
+				30775AAD245CD08900677FE5 /* Workers */,
+				30313A1E245C50E7005EEF87 /* Scenes */,
 				303139E4245C4DB5005EEF87 /* Main.storyboard */,
 				303139EA245C4DB7005EEF87 /* Assets.xcassets */,
 				303139EC245C4DB7005EEF87 /* LaunchScreen.storyboard */,
@@ -117,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				303139F8245C4DB8005EEF87 /* AcaBaseTests.swift */,
+				30313A27245C5197005EEF87 /* Scenes */,
 				303139FA245C4DB8005EEF87 /* Info.plist */,
 			);
 			path = AcaBaseTests;
@@ -129,6 +183,99 @@
 				30313A05245C4DB8005EEF87 /* Info.plist */,
 			);
 			path = AcaBaseUITests;
+			sourceTree = "<group>";
+		};
+		30313A1D245C50DA005EEF87 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				30313A11245C50CE005EEF87 /* SplashPresenter.swift */,
+				30313A12245C50CE005EEF87 /* SplashWorker.swift */,
+				30313A13245C50CE005EEF87 /* SplashRouter.swift */,
+				30313A14245C50CE005EEF87 /* SplashModels.swift */,
+				30313A15245C50CE005EEF87 /* SplashViewController.swift */,
+				30313A16245C50CE005EEF87 /* SplashInteractor.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		30313A1E245C50E7005EEF87 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				30313A1D245C50DA005EEF87 /* Splash */,
+				30313A29245C5972005EEF87 /* Login */,
+				30313A36245C66BE005EEF87 /* Subscribe */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		30313A27245C5197005EEF87 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				30313A28245C51A3005EEF87 /* Splash */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		30313A28245C51A3005EEF87 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				30313A1F245C5192005EEF87 /* SplashViewControllerTests.swift */,
+				30313A20245C5192005EEF87 /* SplashInteractorTests.swift */,
+				30313A21245C5192005EEF87 /* SplashWorkerTests.swift */,
+				30313A22245C5192005EEF87 /* SplashPresenterTests.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		30313A29245C5972005EEF87 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				30313A2A245C5998005EEF87 /* LoginPresenter.swift */,
+				30313A2B245C5998005EEF87 /* LoginWorker.swift */,
+				30313A2C245C5998005EEF87 /* LoginRouter.swift */,
+				30313A2D245C5998005EEF87 /* LoginModels.swift */,
+				30313A2E245C5998005EEF87 /* LoginViewController.swift */,
+				30313A2F245C5998005EEF87 /* LoginInteractor.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		30313A36245C66BE005EEF87 /* Subscribe */ = {
+			isa = PBXGroup;
+			children = (
+				30313A37245C66D3005EEF87 /* SubscribePresenter.swift */,
+				30313A38245C66D3005EEF87 /* SubscribeWorker.swift */,
+				30313A39245C66D3005EEF87 /* SubscribeRouter.swift */,
+				30313A3A245C66D3005EEF87 /* SubscribeModels.swift */,
+				30313A3B245C66D3005EEF87 /* SubscribeViewController.swift */,
+				30313A3C245C66D3005EEF87 /* SubscribeInteractor.swift */,
+			);
+			path = Subscribe;
+			sourceTree = "<group>";
+		};
+		30775AAC245CD08200677FE5 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				30775AB1245CD0DC00677FE5 /* UserCoreDataStore.swift */,
+				30775AB3245CD21200677FE5 /* CoreDataStore.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		30775AAD245CD08900677FE5 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				30775AAF245CD0B700677FE5 /* UserWorker.swift */,
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
+		30775AAE245CD09300677FE5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				30775AB5245CD84100677FE5 /* User.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,10 +409,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30313A34245C5998005EEF87 /* LoginViewController.swift in Sources */,
+				30313A31245C5998005EEF87 /* LoginWorker.swift in Sources */,
 				303139E9245C4DB5005EEF87 /* AcaBase.xcdatamodeld in Sources */,
-				303139E3245C4DB5005EEF87 /* ViewController.swift in Sources */,
+				30775AB6245CD84100677FE5 /* User.swift in Sources */,
+				30313A32245C5998005EEF87 /* LoginRouter.swift in Sources */,
+				30313A19245C50CE005EEF87 /* SplashRouter.swift in Sources */,
+				30313A40245C66D3005EEF87 /* SubscribeModels.swift in Sources */,
+				30775AB4245CD21200677FE5 /* CoreDataStore.swift in Sources */,
 				303139DF245C4DB5005EEF87 /* AppDelegate.swift in Sources */,
 				303139E1245C4DB5005EEF87 /* SceneDelegate.swift in Sources */,
+				30313A30245C5998005EEF87 /* LoginPresenter.swift in Sources */,
+				30313A42245C66D3005EEF87 /* SubscribeInteractor.swift in Sources */,
+				30313A41245C66D3005EEF87 /* SubscribeViewController.swift in Sources */,
+				30313A35245C5998005EEF87 /* LoginInteractor.swift in Sources */,
+				30775AB0245CD0B700677FE5 /* UserWorker.swift in Sources */,
+				30313A1C245C50CE005EEF87 /* SplashInteractor.swift in Sources */,
+				30313A3E245C66D3005EEF87 /* SubscribeWorker.swift in Sources */,
+				30313A3F245C66D3005EEF87 /* SubscribeRouter.swift in Sources */,
+				30313A17245C50CE005EEF87 /* SplashPresenter.swift in Sources */,
+				30775AB2245CD0DC00677FE5 /* UserCoreDataStore.swift in Sources */,
+				30313A18245C50CE005EEF87 /* SplashWorker.swift in Sources */,
+				30313A33245C5998005EEF87 /* LoginModels.swift in Sources */,
+				30313A3D245C66D3005EEF87 /* SubscribePresenter.swift in Sources */,
+				30313A1A245C50CE005EEF87 /* SplashModels.swift in Sources */,
+				30313A1B245C50CE005EEF87 /* SplashViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +442,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				303139F9245C4DB8005EEF87 /* AcaBaseTests.swift in Sources */,
+				30313A26245C5192005EEF87 /* SplashPresenterTests.swift in Sources */,
+				30313A24245C5192005EEF87 /* SplashInteractorTests.swift in Sources */,
+				30313A25245C5192005EEF87 /* SplashWorkerTests.swift in Sources */,
+				30313A23245C5192005EEF87 /* SplashViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,13 +611,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X85RM6NZ27;
+				DEVELOPMENT_TEAM = 8SXGJSBHLD;
 				INFOPLIST_FILE = AcaBase/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.AcaBase;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AcaBase.proj;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -457,13 +629,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X85RM6NZ27;
+				DEVELOPMENT_TEAM = 8SXGJSBHLD;
 				INFOPLIST_FILE = AcaBase/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.AcaBase;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AcaBase.proj;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

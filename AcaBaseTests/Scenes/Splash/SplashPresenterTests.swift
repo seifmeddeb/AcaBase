@@ -64,6 +64,6 @@ class SplashPresenterTests: XCTestCase
     sut.presentSomething(response: response)
     
     // Then
-    XCTAssertTrue(spy.displaySomethingCalled, "presentSomething(response:) should ask the view controller to display the result")
+    XCTAssertTrue(spy.displaySomethingCalled, "presentLoginUser(response:) should ask the view controller to display the result")
   }
 }

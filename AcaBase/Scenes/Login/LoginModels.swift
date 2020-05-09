@@ -14,20 +14,47 @@ import UIKit
 
 enum Login
 {
-  // MARK: Use cases
-  
-  enum User
-  {
-    struct Request
+    // MARK: User Login
+    
+    enum User
     {
-        var email : String
-        var password : String
+        struct Request
+        {
+            var email : String
+            var password : String
+        }
+        struct Response
+        {
+            var user : UserDao?
+        }
+        struct ViewModel
+        {
+            enum Result
+            {
+                struct Successfull {
+                    var name : String
+                    var email : String
+                }
+                struct Failure {
+                    var errorMsg : String
+                }
+            }
+        }
     }
-    struct Response
+    
+    // MARK: AutoFill data
+    enum Users
     {
+        struct Request
+        {
+        }
+        struct Response
+        {
+            var users : [UserDao]?
+        }
+        struct ViewModel
+        {
+            var email : String
+        }
     }
-    struct ViewModel
-    {
-    }
-  }
 }

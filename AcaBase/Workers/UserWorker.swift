@@ -18,8 +18,23 @@ class UserWorker {
       self.usersStore = usersStore
     }
     
-    func fetchUserForLogin() {
+    func fetchAllUsers(completionHandler: @escaping ([UserDao]?) -> Void) {
         
+    }
+    
+    func fetchUserForLogin(email: String, completionHandler: @escaping (UserDao?) -> Void) {
+        self.usersStore.fetchUserForLogin(email: email) { (user: () throws -> UserDao?) -> Void in
+            do {
+                let user = try user()
+                DispatchQueue.main.async {
+                  completionHandler(user)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                  completionHandler(nil)
+                }
+            }
+        }
     }
     
     func createUser() {
@@ -29,6 +44,8 @@ class UserWorker {
 
 protocol UsersStoreProtocol {
     
-    func fetchUserForLogin(email: String, completionHandler: @escaping (() throws -> User?) -> Void)
-    func createUser(orderToCreate: User, completionHandler: @escaping (() throws -> User?) -> Void)
+    func fetchUserForLogin(email: String, completionHandler: @escaping (() throws -> UserDao?) -> Void)
+    func createUser(userToCreate: UserDao, completionHandler: @escaping (() throws -> UserDao?) -> Void)
+    func fetchAllUsers(completionHandler: @escaping ([UserDao]?) -> Void)
+    
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct User {
+struct UserDao {
     
     var firstName: String
     var lastName: String

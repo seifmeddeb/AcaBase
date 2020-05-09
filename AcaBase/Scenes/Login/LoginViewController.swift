@@ -14,7 +14,9 @@ import UIKit
 
 protocol LoginDisplayLogic: class
 {
-    func displayLoginResult(viewModel: Login.User.ViewModel)
+    func displaySuccessfullLogin(viewModel: Login.User.ViewModel.Result.Successfull)
+    func displayFailLogin(viewModel: Login.User.ViewModel.Result.Failure)
+    func displayAutoFillEmails(viewModel: Login.Users.ViewModel)
 }
 
 class LoginViewController: UIViewController, LoginDisplayLogic
@@ -69,27 +71,49 @@ class LoginViewController: UIViewController, LoginDisplayLogic
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        doSomething()
+        fetchAutoFillEmails()
+    }
+    
+    // MARK: IBOutlets
+    
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var pswTextField: UITextField!
+    
+    // MARK: IBActions
+    
+    @IBAction func login(_ sender: Any) {
+        loginUser()
     }
     
     // MARK: Login User
     
-    //@IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var nameTextField: UITextField!
-    
-    @IBAction func login(_ sender: Any) {
+    func loginUser()
+    {
+        let request = Login.User.Request(email: emailTextField.text!, password: pswTextField.text!)
+        interactor?.loginUser(request: request)
     }
     
-    func doSomething()
+    func displaySuccessfullLogin(viewModel: Login.User.ViewModel.Result.Successfull)
     {
-        let request = Login.User.Request(email: emailTextField.text!, password: nameTextField.text!)
-        interactor?.doSomething(request: request)
+        emailTextField.text = viewModel.name
     }
     
-    func displayLoginResult(viewModel: Login.User.ViewModel)
-    {
-        //nameTextField.text = viewModel.name
+    func displayFailLogin(viewModel: Login.User.ViewModel.Result.Failure) {
+        let alert = UIAlertController(title: "Error", message: viewModel.errorMsg, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true)
+    }
+    // MARK: AutoFillEmails
+    
+    func fetchAutoFillEmails() {
+        let request = Login.Users.Request()
+        interactor?.fetchAutoFillEmails(request: request)
+    }
+    
+    func displayAutoFillEmails(viewModel: Login.Users.ViewModel) {
+        emailTextField.text = viewModel.email
     }
     
 }

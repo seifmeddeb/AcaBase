@@ -14,8 +14,8 @@ import UIKit
 
 protocol LoginBusinessLogic
 {
-    func doSomething(request: Login.User.Request)
     func loginUser(request: Login.User.Request)
+    func fetchAutoFillEmails(request: Login.Users.Request)
 }
 
 protocol LoginDataStore
@@ -25,26 +25,23 @@ protocol LoginDataStore
 
 class LoginInteractor: LoginBusinessLogic, LoginDataStore
 {
+    func fetchAutoFillEmails(request: Login.Users.Request) {
+        worker.fetchAllUsers(completionHandler: { (users) in
+            let response = Login.Users.Response(users: users)
+            self.presenter?.presentAutoFillEmails(response: response)
+        })
+    }
+    
     var presenter: LoginPresentationLogic?
-    var worker: LoginWorker?
+    var worker = UserWorker(usersStore: UserCoreDataStore())
     //var name: String = ""
     
     // MARK: Do something
     
-    func doSomething(request: Login.User.Request)
-    {
-        worker = LoginWorker()
-        worker?.doSomeWork()
-        
-        let response = Login.User.Response()
-        presenter?.presentSomething(response: response)
-    }
-    
     func loginUser(request: Login.User.Request) {
-        worker = LoginWorker()
-        worker?.doSomeWork()
-        
-        let response = Login.User.Response()
-        presenter?.presentSomething(response: response)
+        worker.fetchUserForLogin(email: request.email, completionHandler: { (user) in
+            let response = Login.User.Response(user: user)
+            self.presenter?.presentLoginUser(response: response)
+        })
     }
 }

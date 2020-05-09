@@ -14,18 +14,33 @@ import UIKit
 
 protocol LoginPresentationLogic
 {
-  func presentSomething(response: Login.User.Response)
+    func presentLoginUser(response: Login.User.Response)
+    func presentAutoFillEmails(response: Login.Users.Response)
 }
 
 class LoginPresenter: LoginPresentationLogic
 {
-  weak var viewController: LoginDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentSomething(response: Login.User.Response)
-  {
-    let viewModel = Login.User.ViewModel()
-    viewController?.displayLoginResult(viewModel: viewModel)
-  }
+    weak var viewController: LoginDisplayLogic?
+    
+    // MARK: Do something
+    
+    func presentLoginUser(response: Login.User.Response)
+    {
+        
+        if let user = response.user {
+            let loggedUser = Login.User.ViewModel.Result.Successfull(name: user.firstName+" "+user.lastName, email: user.email)
+            viewController?.displaySuccessfullLogin(viewModel: loggedUser)
+        }
+        else {
+            let loginError = Login.User.ViewModel.Result.Failure(errorMsg: "Wrong email or Password please retry !")
+            viewController?.displayFailLogin(viewModel: loginError)
+        }
+    }
+    
+    func presentAutoFillEmails(response: Login.Users.Response)
+    {
+        let email = response.users?.last?.email ?? ""
+        let viewModel = Login.Users.ViewModel(email: email)
+        viewController?.displayAutoFillEmails(viewModel: viewModel)
+    }
 }

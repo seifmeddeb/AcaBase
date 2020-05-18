@@ -1,0 +1,6 @@
+module Pods_AcaBase {
+  umbrella header "Pods-AcaBase-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -18,12 +18,14 @@ class UserWorker {
       self.usersStore = usersStore
     }
     
-    func fetchAllUsers(completionHandler: @escaping ([UserDao]?) -> Void) {
+    
+    // MARK: Login
+    func fetchAllUsers(completionHandler: @escaping ([UserDAO]?) -> Void) {
         
     }
     
-    func fetchUserForLogin(email: String, completionHandler: @escaping (UserDao?) -> Void) {
-        self.usersStore.fetchUserForLogin(email: email) { (user: () throws -> UserDao?) -> Void in
+    func fetchUserForLogin(email: String, completionHandler: @escaping (UserDAO?) -> Void) {
+        self.usersStore.fetchUserForLogin(email: email) { (user: () throws -> UserDAO?) -> Void in
             do {
                 let user = try user()
                 DispatchQueue.main.async {
@@ -37,15 +39,43 @@ class UserWorker {
         }
     }
     
-    func createUser() {
-        
+    func loginUser(loginRequest: Login.User.Request, completionHandler: @escaping (UserDAO?) -> Void) {
+        self.usersStore.loginUser(userRequest: loginRequest) { (loggedInUser: () throws -> UserDAO) -> Void in
+            do {
+                let user = try loggedInUser()
+                DispatchQueue.main.async {
+                  completionHandler(user)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                  completionHandler(nil)
+                }
+            }
+        }
     }
+    // MARK: Subscribe
+    func subscribeUser(subscribeRequest: Subscribe.User.Request, completionHandler: @escaping (() throws -> UserDAO) -> Void) {
+        self.usersStore.subscribeUser(userToCreate: subscribeRequest) { (createdUser: () throws -> UserDAO) in
+            do {
+                let user = try createdUser()
+                DispatchQueue.main.async {
+                    completionHandler{ return user }
+                }
+            } catch {
+                DispatchQueue.main.async {
+                  completionHandler{ throw error }
+                }
+            }
+        }
+    }
+    
 }
 
 protocol UsersStoreProtocol {
     
-    func fetchUserForLogin(email: String, completionHandler: @escaping (() throws -> UserDao?) -> Void)
-    func createUser(userToCreate: UserDao, completionHandler: @escaping (() throws -> UserDao?) -> Void)
-    func fetchAllUsers(completionHandler: @escaping ([UserDao]?) -> Void)
+    func fetchUserForLogin(email: String, completionHandler: @escaping (() throws -> UserDAO?) -> Void)
+    func subscribeUser(userToCreate: Subscribe.User.Request, completionHandler: @escaping (() throws -> UserDAO) -> Void)
+    func fetchAllUsers(completionHandler: @escaping ([UserDAO]?) -> Void)
+    func loginUser(userRequest: Login.User.Request, completionHandler: @escaping (() throws -> UserDAO) -> Void)
     
 }

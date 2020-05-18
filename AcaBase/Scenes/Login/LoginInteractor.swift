@@ -34,13 +34,14 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore
     
     var presenter: LoginPresentationLogic?
     var worker = UserWorker(usersStore: UserCoreDataStore())
+    var workerApi = UserWorker(usersStore: UserAPI())
     //var name: String = ""
     
-    // MARK: Do something
+    // MARK: Login User
     
     func loginUser(request: Login.User.Request) {
-        worker.fetchUserForLogin(email: request.email, completionHandler: { (user) in
-            let response = Login.User.Response(user: user)
+        workerApi.loginUser(loginRequest:request , completionHandler: { userResponse in
+            let response = Login.User.Response(user: userResponse)
             self.presenter?.presentLoginUser(response: response)
         })
     }

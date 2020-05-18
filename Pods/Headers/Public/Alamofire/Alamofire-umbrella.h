@@ -1,0 +1,1 @@
+/Users/Seif/Desktop/AcaBase/Pods/Target Support Files/Alamofire/Alamofire-umbrella.h

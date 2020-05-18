@@ -16,16 +16,34 @@ enum Subscribe
 {
   // MARK: Use cases
   
-  enum Something
+  enum User
   {
-    struct Request
+    struct Request : Codable
     {
+        var firstName : String
+        var lastName : String
+        var phone : String
+        var email : String
+        var password : String
+        var image : String
+        
+        enum CodingKeys: String, CodingKey {
+            case firstName = "first_name"
+            case lastName = "last_name"
+            case phone = "phone_number"
+            case email = "email"
+            case password = "password"
+            case image = "picture"
+        }
     }
     struct Response
     {
+        var user : UserDAO?
+        var errorMsg : String?
     }
     struct ViewModel
     {
+        var message : String
     }
   }
 }

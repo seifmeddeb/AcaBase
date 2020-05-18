@@ -14,7 +14,7 @@ import UIKit
 
 protocol SubscribeBusinessLogic
 {
-  func doSomething(request: Subscribe.Something.Request)
+  func registerUser(request: Subscribe.User.Request)
 }
 
 protocol SubscribeDataStore
@@ -25,17 +25,32 @@ protocol SubscribeDataStore
 class SubscribeInteractor: SubscribeBusinessLogic, SubscribeDataStore
 {
   var presenter: SubscribePresentationLogic?
-  var worker: SubscribeWorker?
+  var worker: UserWorker?
   //var name: String = ""
   
-  // MARK: Do something
+  // MARK: Register User
   
-  func doSomething(request: Subscribe.Something.Request)
+  func registerUser(request: Subscribe.User.Request)
   {
-    worker = SubscribeWorker()
-    worker?.doSomeWork()
+    worker = UserWorker(usersStore: UserAPI())
+    worker?.subscribeUser(subscribeRequest: request, completionHandler: { (userDAO) in
+        
+        var response = Subscribe.User.Response()
+        
+        do {
+            response.user = try userDAO()
+        } catch {
+            if let subscribeError = error as? UserAPIError.Subscribe {
+                response.errorMsg = subscribeError.message
+            } else {
+                response.errorMsg = error.localizedDescription
+            }
+            
+        }
+        
+        self.presenter?.presentRegister(response: response)
+    })
     
-    let response = Subscribe.Something.Response()
-    presenter?.presentSomething(response: response)
+    
   }
 }

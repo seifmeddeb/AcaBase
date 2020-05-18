@@ -18,14 +18,19 @@ enum Login
     
     enum User
     {
-        struct Request
+        struct Request : Codable
         {
             var email : String
             var password : String
+            
+            enum CodingKeys: String, CodingKey {
+                case email = "username"
+                case password = "password"
+            }
         }
         struct Response
         {
-            var user : UserDao?
+            var user : UserDAO?
         }
         struct ViewModel
         {
@@ -50,7 +55,7 @@ enum Login
         }
         struct Response
         {
-            var users : [UserDao]?
+            var users : [UserDAO]?
         }
         struct ViewModel
         {

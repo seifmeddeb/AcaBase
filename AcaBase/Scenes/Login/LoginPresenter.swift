@@ -28,7 +28,7 @@ class LoginPresenter: LoginPresentationLogic
     {
         
         if let user = response.user {
-            let loggedUser = Login.User.ViewModel.Result.Successfull(name: user.firstName+" "+user.lastName, email: user.email)
+            let loggedUser = Login.User.ViewModel.Result.Successfull(name: user.currentUser.firstName+" "+user.currentUser.lastName, email: user.currentUser.email)
             viewController?.displaySuccessfullLogin(viewModel: loggedUser)
         }
         else {
@@ -39,7 +39,7 @@ class LoginPresenter: LoginPresentationLogic
     
     func presentAutoFillEmails(response: Login.Users.Response)
     {
-        let email = response.users?.last?.email ?? ""
+        let email = response.users?.last?.currentUser.email ?? ""
         let viewModel = Login.Users.ViewModel(email: email)
         viewController?.displayAutoFillEmails(viewModel: viewModel)
     }

@@ -14,7 +14,7 @@ import UIKit
 
 protocol SubscribePresentationLogic
 {
-  func presentSomething(response: Subscribe.Something.Response)
+  func presentRegister(response: Subscribe.User.Response)
 }
 
 class SubscribePresenter: SubscribePresentationLogic
@@ -23,9 +23,14 @@ class SubscribePresenter: SubscribePresentationLogic
   
   // MARK: Do something
   
-  func presentSomething(response: Subscribe.Something.Response)
+  func presentRegister(response: Subscribe.User.Response)
   {
-    let viewModel = Subscribe.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
+    var viewModel = Subscribe.User.ViewModel(message: "")
+    if let errorMsg = response.errorMsg {
+        viewModel.message = errorMsg
+    } else {
+        viewModel.message = Strings.registerSuccess
+    }
+    viewController?.displayRegister(viewModel: viewModel)
   }
 }

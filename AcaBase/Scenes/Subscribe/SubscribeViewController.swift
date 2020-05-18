@@ -14,7 +14,7 @@ import UIKit
 
 protocol SubscribeDisplayLogic: class
 {
-    func displaySomething(viewModel: Subscribe.Something.ViewModel)
+    func displayRegister(viewModel: Subscribe.User.ViewModel)
 }
 
 class SubscribeViewController: UIViewController, SubscribeDisplayLogic
@@ -69,29 +69,135 @@ class SubscribeViewController: UIViewController, SubscribeDisplayLogic
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        doSomething()
+        emailTextField.delegate = self
+        firstNameTextField.delegate = self
+        passwordTextField.delegate = self
+        
+        lastNameTextField.delegate = self
+        phoneTextField.delegate = self
+        confPassTextField.delegate = self
+        
     }
     
-    // MARK: Do something
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        registerForKeyboardNotifications()
+    }
     
-    @IBOutlet weak var nameTextField: UITextField!
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        deregisterFromKeyboardNotifications()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    // MARK: IBOutlets
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var lastNameTextField: UITextField!
+    @IBOutlet weak var phoneTextField: UITextField!
+    @IBOutlet weak var confPassTextField: UITextField!
+    @IBOutlet weak var profileImageView: UIImageView!
     
+
+    private var activeField: UITextField?
+    
+    // MARK: IBActions
+    
+    @IBAction func profileImage(_ sender: Any) {
+        ImagePickerManager().pickImage(self){ image in
+            self.profileImageView.image = image
+        }
+    }
     @IBAction func subscribe(_ sender: Any) {
+        subscribeUser()
     }
     
     @IBAction func login(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
-    func doSomething()
+    
+    // MARK: Requests
+    
+    func subscribeUser()
     {
-        let request = Subscribe.Something.Request()
-        interactor?.doSomething(request: request)
+        let request = Subscribe.User.Request(firstName: firstNameTextField.text ?? "", lastName: lastNameTextField.text ?? "", phone: phoneTextField.text ?? "", email: emailTextField.text ?? "", password: passwordTextField.text ?? "", image: "data:image/png;base64,\("sdsd"/*self.profileImageView.image!.pngData()?.base64EncodedString() ?? ""*/)")
+        interactor?.registerUser(request: request)
     }
     
-    func displaySomething(viewModel: Subscribe.Something.ViewModel)
+    // MARK: Displays
+    
+    func displayRegister(viewModel: Subscribe.User.ViewModel)
     {
-        //nameTextField.text = viewModel.name
+        let alert = UIAlertController(title: "", message: viewModel.message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true)
+    }
+}
+extension SubscribeViewController : UITextFieldDelegate {
+    
+    func registerForKeyboardNotifications(){
+        //Adding notifies on keyboard appearing
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    func deregisterFromKeyboardNotifications(){
+        //Removing notifies on keyboard appearing
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc func keyboardWasShown(notification: NSNotification){
+        //Need to calculate keyboard exact size due to Apple suggestions
+        self.scrollView.isScrollEnabled = true
+        let info = notification.userInfo!
+        let keyboardSize = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size
+        let contentInsets : UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize!.height, right: 0.0)
+
+        self.scrollView.contentInset = contentInsets
+        self.scrollView.scrollIndicatorInsets = contentInsets
+
+        var aRect : CGRect = self.view.frame
+        aRect.size.height -= keyboardSize!.height
+        if let activeField = self.activeField {
+            if (!aRect.contains(activeField.frame.origin)){
+                self.scrollView.scrollRectToVisible(activeField.frame, animated: true)
+            }
+        }
+    }
+
+    @objc func keyboardWillBeHidden(notification: NSNotification){
+        //Once keyboard disappears, restore original positions
+        self.scrollView.contentInset = UIEdgeInsets.zero
+        self.scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
+        self.view.endEditing(true)
+    }
+
+    func textFieldDidBeginEditing(_ textField: UITextField){
+        activeField = textField
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField){
+        activeField = nil
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+       // Try to find next responder
+       if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+          nextField.becomeFirstResponder()
+       } else {
+          // Not found, so remove keyboard.
+          textField.resignFirstResponder()
+       }
+       // Do not add a line break
+       return false
     }
 }

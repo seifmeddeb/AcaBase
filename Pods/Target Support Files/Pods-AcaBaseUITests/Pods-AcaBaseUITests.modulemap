@@ -1,0 +1,6 @@
+framework module Pods_AcaBaseUITests {
+  umbrella header "Pods-AcaBaseUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

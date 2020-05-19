@@ -32,7 +32,7 @@ class LoginPresenter: LoginPresentationLogic
             viewController?.displaySuccessfullLogin(viewModel: loggedUser)
         }
         else {
-            let loginError = Login.User.ViewModel.Result.Failure(errorMsg: "Wrong email or Password please retry !")
+            let loginError = Login.User.ViewModel.Result.Failure(errorMsg: "Wrong email or Password please retry !", emailError: response.emailError, passwordError: response.passwordError)
             viewController?.displayFailLogin(viewModel: loginError)
         }
     }

@@ -14,43 +14,52 @@ import UIKit
 
 protocol SubscribeBusinessLogic
 {
-  func registerUser(request: Subscribe.User.Request)
+    func registerUser(request: Subscribe.User.Request)
 }
 
 protocol SubscribeDataStore
 {
-  //var name: String { get set }
+    //var name: String { get set }
 }
 
 class SubscribeInteractor: SubscribeBusinessLogic, SubscribeDataStore
 {
-  var presenter: SubscribePresentationLogic?
-  var worker: UserWorker?
-  //var name: String = ""
-  
-  // MARK: Register User
-  
-  func registerUser(request: Subscribe.User.Request)
-  {
-    worker = UserWorker(usersStore: UserAPI())
-    worker?.subscribeUser(subscribeRequest: request, completionHandler: { (userDAO) in
-        
-        var response = Subscribe.User.Response()
-        
-        do {
-            response.user = try userDAO()
-        } catch {
-            if let subscribeError = error as? UserAPIError.Subscribe {
-                response.errorMsg = subscribeError.message
-            } else {
-                response.errorMsg = error.localizedDescription
+    var presenter: SubscribePresentationLogic?
+    var worker: UserWorker?
+    //var name: String = ""
+    
+    // MARK: Register User
+    
+    func registerUser(request: Subscribe.User.Request)
+    {
+        worker = UserWorker(usersStore: UserAPI())
+        worker?.subscribeUser(subscribeRequest: request, completionHandler: { (userDAO) in
+            
+            var response = Subscribe.User.Response()
+            
+            do {
+                response.user = try userDAO()
+            } catch {
+                if let subscribeError = error as? UserAPIError.Subscribe {
+                    response.errorMsg = subscribeError.message
+                } else {
+                    if let cannotError = error as? UserAPIError {
+                        switch cannotError {
+                        case .CannotGetSubscribeError(let msg):
+                            response.errorMsg = msg
+                        case .CannotSubscribe(let msg):
+                            response.errorMsg = msg
+                        }
+                    } else {
+                        response.errorMsg = error.localizedDescription
+                    }
+                }
+                
             }
             
-        }
+            self.presenter?.presentRegister(response: response)
+        })
         
-        self.presenter?.presentRegister(response: response)
-    })
-    
-    
-  }
+        
+    }
 }

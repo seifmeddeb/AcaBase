@@ -47,6 +47,7 @@
 		3083A4DC246CA48400EEE2C8 /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3083A4DB246CA48400EEE2C8 /* ImagePickerManager.swift */; };
 		3083A4DE246DB54300EEE2C8 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3083A4DD246DB54300EEE2C8 /* CustomView.swift */; };
 		3083A4E02472260200EEE2C8 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3083A4DF2472260200EEE2C8 /* Strings.swift */; };
+		3083A4E22472E07300EEE2C8 /* DataValidationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3083A4E12472E07300EEE2C8 /* DataValidationWorker.swift */; };
 		51683FFD1B9F193EA06AB7DB /* libPods-AcaBaseUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5906901FA5016DC76F23FED /* libPods-AcaBaseUITests.a */; };
 		AA473CEBF170754F8EC9456C /* libPods-AcaBaseTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC8C062BCE194DD30CC3A562 /* libPods-AcaBaseTests.a */; };
 		E4D1E5B2FDB80F93305209FC /* libPods-AcaBase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 260DBC0908F80714B48D644A /* libPods-AcaBase.a */; };
@@ -118,6 +119,7 @@
 		3083A4DB246CA48400EEE2C8 /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
 		3083A4DD246DB54300EEE2C8 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		3083A4DF2472260200EEE2C8 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		3083A4E12472E07300EEE2C8 /* DataValidationWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataValidationWorker.swift; sourceTree = "<group>"; };
 		41972351D4544088E9047F88 /* Pods-AcaBase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AcaBase.release.xcconfig"; path = "Target Support Files/Pods-AcaBase/Pods-AcaBase.release.xcconfig"; sourceTree = "<group>"; };
 		5B1B7CFB2263F72134078256 /* Pods-AcaBaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AcaBaseUITests.debug.xcconfig"; path = "Target Support Files/Pods-AcaBaseUITests/Pods-AcaBaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8A82A2FB947AEDAC2C20A8B5 /* Pods-AcaBaseUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AcaBaseUITests.release.xcconfig"; path = "Target Support Files/Pods-AcaBaseUITests/Pods-AcaBaseUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				30775AAF245CD0B700677FE5 /* UserWorker.swift */,
+				3083A4E12472E07300EEE2C8 /* DataValidationWorker.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -567,6 +570,7 @@
 				30313A42245C66D3005EEF87 /* SubscribeInteractor.swift in Sources */,
 				30313A41245C66D3005EEF87 /* SubscribeViewController.swift in Sources */,
 				30313A35245C5998005EEF87 /* LoginInteractor.swift in Sources */,
+				3083A4E22472E07300EEE2C8 /* DataValidationWorker.swift in Sources */,
 				30775AB0245CD0B700677FE5 /* UserWorker.swift in Sources */,
 				30313A1C245C50CE005EEF87 /* SplashInteractor.swift in Sources */,
 				30313A3E245C66D3005EEF87 /* SubscribeWorker.swift in Sources */,

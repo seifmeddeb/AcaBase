@@ -27,7 +27,7 @@
                                                 <color key="textColor" red="0.1713830779084507" green="0.75807032761267601" blue="0.40944695443521123" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="e-mail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FtS-HS-COM">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E-mail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FtS-HS-COM">
                                                 <rect key="frame" x="62" y="319" width="48.5" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -36,19 +36,19 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pkn-Qq-lMH">
                                                 <rect key="frame" x="62" y="350" width="290" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="continue"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="continue" textContentType="email"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="BYZ-38-t0r" id="JTU-9P-pg7"/>
                                                 </connections>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M6x-jq-poB">
-                                                <rect key="frame" x="62" y="404" width="74" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M6x-jq-poB">
+                                                <rect key="frame" x="62" y="409" width="74" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KUc-BO-u9T">
-                                                <rect key="frame" x="62" y="435" width="290" height="34"/>
+                                                <rect key="frame" x="62" y="440" width="290" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
                                                 <connections>
@@ -56,7 +56,7 @@
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ACE-fr-5rK">
-                                                <rect key="frame" x="68.5" y="509" width="277" height="29"/>
+                                                <rect key="frame" x="68.5" y="497" width="277" height="29"/>
                                                 <state key="normal">
                                                     <attributedString key="attributedTitle">
                                                         <fragment content="Don't have an account ? create one now !">
@@ -73,7 +73,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WUH-QN-vM4">
-                                                <rect key="frame" x="168.5" y="588" width="77" height="32"/>
+                                                <rect key="frame" x="168.5" y="576" width="77" height="32"/>
                                                 <color key="backgroundColor" red="0.17138307790000001" green="0.75807032760000004" blue="0.40944695440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                 <inset key="contentEdgeInsets" minX="15" minY="5" maxX="15" maxY="5"/>
@@ -84,6 +84,18 @@
                                                     <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hpQ-Ej-FjC"/>
                                                 </connections>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O84-Af-kb1">
+                                                <rect key="frame" x="62" y="389" width="290" height="0.0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WaZ-eI-TWe">
+                                                <rect key="frame" x="62" y="479" width="290" height="0.0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
@@ -92,20 +104,26 @@
                                             <constraint firstItem="WUH-QN-vM4" firstAttribute="centerX" secondItem="ayB-an-kXg" secondAttribute="centerX" id="7jp-PM-nSq"/>
                                             <constraint firstItem="KUc-BO-u9T" firstAttribute="centerX" secondItem="ayB-an-kXg" secondAttribute="centerX" id="8Ci-qO-RI7"/>
                                             <constraint firstItem="iiG-K7-sGf" firstAttribute="top" secondItem="ayB-an-kXg" secondAttribute="top" constant="120" id="A8L-Db-JN5"/>
+                                            <constraint firstItem="WaZ-eI-TWe" firstAttribute="top" secondItem="KUc-BO-u9T" secondAttribute="bottom" constant="5" id="AYG-jH-n8t"/>
                                             <constraint firstItem="pkn-Qq-lMH" firstAttribute="width" secondItem="ayB-an-kXg" secondAttribute="width" multiplier="0.700483" id="DaV-Nq-aa7"/>
                                             <constraint firstItem="KUc-BO-u9T" firstAttribute="width" secondItem="pkn-Qq-lMH" secondAttribute="width" id="Dnr-yR-kja"/>
                                             <constraint firstItem="ACE-fr-5rK" firstAttribute="centerX" secondItem="ayB-an-kXg" secondAttribute="centerX" id="J8O-Ry-n1W"/>
                                             <constraint firstItem="pkn-Qq-lMH" firstAttribute="centerX" secondItem="ayB-an-kXg" secondAttribute="centerX" id="NJB-Uq-ooD"/>
-                                            <constraint firstItem="M6x-jq-poB" firstAttribute="top" secondItem="pkn-Qq-lMH" secondAttribute="bottom" constant="20" id="PTy-Cz-DME"/>
+                                            <constraint firstItem="M6x-jq-poB" firstAttribute="top" secondItem="O84-Af-kb1" secondAttribute="bottom" constant="20" id="PTy-Cz-DME"/>
+                                            <constraint firstItem="WaZ-eI-TWe" firstAttribute="trailing" secondItem="KUc-BO-u9T" secondAttribute="trailing" id="RVF-BS-sQN"/>
                                             <constraint firstItem="pkn-Qq-lMH" firstAttribute="top" secondItem="FtS-HS-COM" secondAttribute="bottom" constant="10" id="Rpo-hG-Npt"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="M6x-jq-poB" secondAttribute="trailing" constant="20" symbolic="YES" id="TlC-1t-1Rg"/>
                                             <constraint firstItem="KUc-BO-u9T" firstAttribute="top" secondItem="M6x-jq-poB" secondAttribute="bottom" constant="10" id="WRS-PI-7WW"/>
                                             <constraint firstItem="FtS-HS-COM" firstAttribute="leading" secondItem="pkn-Qq-lMH" secondAttribute="leading" id="Xf1-ER-9hg"/>
                                             <constraint firstItem="M6x-jq-poB" firstAttribute="leading" secondItem="pkn-Qq-lMH" secondAttribute="leading" id="ch5-PT-L5k"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FtS-HS-COM" secondAttribute="trailing" constant="20" symbolic="YES" id="frH-7o-rQH"/>
-                                            <constraint firstItem="ACE-fr-5rK" firstAttribute="top" secondItem="KUc-BO-u9T" secondAttribute="bottom" constant="40" id="fzG-uF-qPC"/>
+                                            <constraint firstItem="ACE-fr-5rK" firstAttribute="top" secondItem="WaZ-eI-TWe" secondAttribute="bottom" constant="18" id="fzG-uF-qPC"/>
+                                            <constraint firstItem="O84-Af-kb1" firstAttribute="leading" secondItem="pkn-Qq-lMH" secondAttribute="leading" id="gb1-Ip-A0q"/>
+                                            <constraint firstItem="WaZ-eI-TWe" firstAttribute="leading" secondItem="M6x-jq-poB" secondAttribute="leading" id="izO-mZ-lEN"/>
+                                            <constraint firstItem="O84-Af-kb1" firstAttribute="trailing" secondItem="pkn-Qq-lMH" secondAttribute="trailing" id="kFA-L0-LRn"/>
                                             <constraint firstItem="iiG-K7-sGf" firstAttribute="centerX" secondItem="ayB-an-kXg" secondAttribute="centerX" id="lhE-jk-Qb0"/>
                                             <constraint firstItem="pkn-Qq-lMH" firstAttribute="top" secondItem="iiG-K7-sGf" secondAttribute="bottom" constant="200" id="tLK-Fm-WH3"/>
+                                            <constraint firstItem="O84-Af-kb1" firstAttribute="top" secondItem="pkn-Qq-lMH" secondAttribute="bottom" constant="5" id="z6e-HH-08v"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -132,6 +150,8 @@
                     <navigationItem key="navigationItem" title="Login" id="i5H-z2-egr"/>
                     <connections>
                         <outlet property="emailTextField" destination="pkn-Qq-lMH" id="9KL-db-2qN"/>
+                        <outlet property="errorEmailLabel" destination="O84-Af-kb1" id="ytl-Bq-jCL"/>
+                        <outlet property="errorPasswordLabel" destination="WaZ-eI-TWe" id="rag-qI-tLh"/>
                         <outlet property="pswTextField" destination="KUc-BO-u9T" id="LSC-GK-hRC"/>
                         <outlet property="scrollView" destination="at2-yJ-TeN" id="9pU-vd-Nj1"/>
                     </connections>
@@ -169,7 +189,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ShU-pT-VL1">
                                                 <rect key="frame" x="62" y="332" width="290" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                <textInputTraits key="textInputTraits" spellCheckingType="no" returnKeyType="next"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E-mail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9AF-OM-vzY">
                                                 <rect key="frame" x="62" y="556" width="48.5" height="21"/>
@@ -180,7 +200,7 @@
                                             <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9pW-rD-Glt">
                                                 <rect key="frame" x="62" y="587" width="290" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ng7-w1-HlQ">
                                                 <rect key="frame" x="62" y="641" width="74" height="21"/>
@@ -232,7 +252,7 @@
                                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bcR-6Z-9Sr">
                                                 <rect key="frame" x="62" y="417" width="290" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                <textInputTraits key="textInputTraits" spellCheckingType="no" returnKeyType="next"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gRI-61-wIo">
                                                 <rect key="frame" x="62" y="471" width="49" height="21"/>
@@ -243,7 +263,7 @@
                                             <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TDa-Yq-88R">
                                                 <rect key="frame" x="62" y="502" width="290" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password confirmation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="52h-lh-Y2P">
                                                 <rect key="frame" x="62" y="726" width="174.5" height="21"/>
@@ -254,7 +274,7 @@
                                             <textField opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bBs-06-PrQ">
                                                 <rect key="frame" x="62" y="757" width="290" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dtW-V9-IDH">
                                                 <rect key="frame" x="147" y="136" width="120" height="120"/>

@@ -31,6 +31,8 @@ enum Login
         struct Response
         {
             var user : UserDAO?
+            var emailError : String?
+            var passwordError : String?
         }
         struct ViewModel
         {
@@ -42,6 +44,8 @@ enum Login
                 }
                 struct Failure {
                     var errorMsg : String
+                    var emailError : String?
+                    var passwordError : String?
                 }
             }
         }

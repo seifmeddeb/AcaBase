@@ -35,14 +35,30 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore
     var presenter: LoginPresentationLogic?
     var worker = UserWorker(usersStore: UserCoreDataStore())
     var workerApi = UserWorker(usersStore: UserAPI())
-    //var name: String = ""
+    var workerDataValidation = DataValidationWorker()
     
     // MARK: Login User
     
     func loginUser(request: Login.User.Request) {
-        workerApi.loginUser(loginRequest:request , completionHandler: { userResponse in
-            let response = Login.User.Response(user: userResponse)
+        
+        if let response = validateLoginRequest(request: request) {
             self.presenter?.presentLoginUser(response: response)
-        })
+        } else {
+            workerApi.loginUser(loginRequest:request , completionHandler: { userResponse in
+                let response = Login.User.Response(user: userResponse)
+                self.presenter?.presentLoginUser(response: response)
+            })
+        }
+    }
+    
+    private func validateLoginRequest(request: Login.User.Request) -> Login.User.Response? {
+        var response : Login.User.Response?
+        if !workerDataValidation.isValidEmail(request.email) {
+            response = Login.User.Response(emailError: "Please insert a valid email adress")
+        }
+        if request.password.count < 1 {
+            response = Login.User.Response(emailError: response?.emailError, passwordError: "Please insert your password")
+        }
+        return response
     }
 }

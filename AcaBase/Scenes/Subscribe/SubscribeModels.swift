@@ -14,36 +14,60 @@ import UIKit
 
 enum Subscribe
 {
-  // MARK: Use cases
-  
-  enum User
-  {
-    struct Request : Codable
+    // MARK: Use cases
+    
+    enum User
     {
-        var firstName : String
-        var lastName : String
-        var phone : String
-        var email : String
-        var password : String
-        var image : String
-        
-        enum CodingKeys: String, CodingKey {
-            case firstName = "first_name"
-            case lastName = "last_name"
-            case phone = "phone_number"
-            case email = "email"
-            case password = "password"
-            case image = "picture"
+        struct Request : Codable
+        {
+            var firstName : String
+            var lastName : String
+            var phone : String
+            var email : String
+            var password : String
+            var passwordRepeat : String?
+            var image : String
+            
+            enum CodingKeys: String, CodingKey {
+                case firstName = "first_name"
+                case lastName = "last_name"
+                case phone = "phone_number"
+                case email = "email"
+                case password = "password"
+                case passwordRepeat = "passwordRepeat"
+                case image = "picture"
+            }
+        }
+        struct Response
+        {
+            var user : UserDAO?
+            var errorMsg : String?
+            var firstNameError : String?
+            var lastNameError : String?
+            var phoneError : String?
+            var pictureError : String?
+            var emailError : String?
+            var passwordError : String?
+            var passwordRepeatError : String?
+        }
+        struct ViewModel
+        {
+            enum Result
+            {
+                struct Successfull {
+                    var user : UserDAO
+                }
+                struct Failure {
+                    var errorMsg : String?
+                    var firstNameError : String?
+                    var lastNameError : String?
+                    var phoneError : String?
+                    var pictureError : String?
+                    var emailError : String?
+                    var passwordError : String?
+                    var passwordRepeatError : String?
+                }
+            }
         }
     }
-    struct Response
-    {
-        var user : UserDAO?
-        var errorMsg : String?
-    }
-    struct ViewModel
-    {
-        var message : String
-    }
-  }
 }

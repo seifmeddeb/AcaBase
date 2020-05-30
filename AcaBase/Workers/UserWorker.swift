@@ -69,6 +69,22 @@ class UserWorker {
         }
     }
     
+    // MARK: Reset Password
+    func ResetPassword(for request: Login.ResetPassword.Request, completionHandler: @escaping (APIResponse?) -> Void) {
+        self.usersStore.ResetPassword(for: request) { (response: () throws -> APIResponse) in
+            do {
+                let response = try response()
+                DispatchQueue.main.async {
+                    completionHandler( response )
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completionHandler( nil )
+                }
+            }
+        }
+    }
+    
 }
 
 protocol UsersStoreProtocol {
@@ -77,5 +93,6 @@ protocol UsersStoreProtocol {
     func subscribeUser(userToCreate: Subscribe.User.Request, completionHandler: @escaping (() throws -> UserDAO) -> Void)
     func fetchAllUsers(completionHandler: @escaping ([UserDAO]?) -> Void)
     func loginUser(userRequest: Login.User.Request, completionHandler: @escaping (() throws -> UserDAO) -> Void)
+    func ResetPassword(for request: Login.ResetPassword.Request, completionHandler: @escaping (() throws -> APIResponse) -> Void)
     
 }

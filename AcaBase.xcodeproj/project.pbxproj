@@ -44,6 +44,8 @@
 		30775AB8245DA8EC00677FE5 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775AB7245DA8EC00677FE5 /* UserAPI.swift */; };
 		30775ABB245F44A900677FE5 /* ManagedUser+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775AB9245F44A900677FE5 /* ManagedUser+CoreDataClass.swift */; };
 		30775ABC245F44A900677FE5 /* ManagedUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775ABA245F44A900677FE5 /* ManagedUser+CoreDataProperties.swift */; };
+		3078CC88247F7344009BB013 /* UIViewController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3078CC87247F7344009BB013 /* UIViewController+Helpers.swift */; };
+		3078CC8A24814AEE009BB013 /* UIAlertController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3078CC8924814AEE009BB013 /* UIAlertController+Helpers.swift */; };
 		3083A4DC246CA48400EEE2C8 /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3083A4DB246CA48400EEE2C8 /* ImagePickerManager.swift */; };
 		3083A4DE246DB54300EEE2C8 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3083A4DD246DB54300EEE2C8 /* CustomView.swift */; };
 		3083A4E02472260200EEE2C8 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3083A4DF2472260200EEE2C8 /* Strings.swift */; };
@@ -116,6 +118,8 @@
 		30775AB7245DA8EC00677FE5 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		30775AB9245F44A900677FE5 /* ManagedUser+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedUser+CoreDataClass.swift"; sourceTree = "<group>"; };
 		30775ABA245F44A900677FE5 /* ManagedUser+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3078CC87247F7344009BB013 /* UIViewController+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Helpers.swift"; sourceTree = "<group>"; };
+		3078CC8924814AEE009BB013 /* UIAlertController+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Helpers.swift"; sourceTree = "<group>"; };
 		3083A4DB246CA48400EEE2C8 /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
 		3083A4DD246DB54300EEE2C8 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		3083A4DF2472260200EEE2C8 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
@@ -320,6 +324,8 @@
 				3083A4DB246CA48400EEE2C8 /* ImagePickerManager.swift */,
 				3083A4DD246DB54300EEE2C8 /* CustomView.swift */,
 				3083A4DF2472260200EEE2C8 /* Strings.swift */,
+				3078CC87247F7344009BB013 /* UIViewController+Helpers.swift */,
+				3078CC8924814AEE009BB013 /* UIAlertController+Helpers.swift */,
 			);
 			path = "View Helpers";
 			sourceTree = "<group>";
@@ -569,6 +575,7 @@
 				3083A4DE246DB54300EEE2C8 /* CustomView.swift in Sources */,
 				30313A42245C66D3005EEF87 /* SubscribeInteractor.swift in Sources */,
 				30313A41245C66D3005EEF87 /* SubscribeViewController.swift in Sources */,
+				3078CC88247F7344009BB013 /* UIViewController+Helpers.swift in Sources */,
 				30313A35245C5998005EEF87 /* LoginInteractor.swift in Sources */,
 				3083A4E22472E07300EEE2C8 /* DataValidationWorker.swift in Sources */,
 				30775AB0245CD0B700677FE5 /* UserWorker.swift in Sources */,
@@ -581,6 +588,7 @@
 				30313A33245C5998005EEF87 /* LoginModels.swift in Sources */,
 				30313A3D245C66D3005EEF87 /* SubscribePresenter.swift in Sources */,
 				30313A1A245C50CE005EEF87 /* SplashModels.swift in Sources */,
+				3078CC8A24814AEE009BB013 /* UIAlertController+Helpers.swift in Sources */,
 				30313A1B245C50CE005EEF87 /* SplashViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -761,6 +769,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8SXGJSBHLD;
+				GCC_OPTIMIZATION_LEVEL = s;
 				INFOPLIST_FILE = AcaBase/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -780,6 +789,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8SXGJSBHLD;
+				GCC_OPTIMIZATION_LEVEL = s;
 				INFOPLIST_FILE = AcaBase/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

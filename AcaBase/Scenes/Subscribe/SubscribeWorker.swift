@@ -14,7 +14,35 @@ import UIKit
 
 class SubscribeWorker
 {
-  func doSomeWork()
-  {
-  }
+    var workerDV = DataValidationWorker()
+    
+    func checkData(for request: Subscribe.User.Request) -> Bool
+    {
+        return workerDV.isValidEmail(request.email) && request.firstName.count > 0 && request.lastName.count > 0 && request.image.count > 35
+            && workerDV.isValidPhoneNumber(request.phone) && request.password.count > 5 && request.password == request.passwordRepeat
+    }
+    
+    func getErrorMessages(from request: Subscribe.User.Request, for response: inout Subscribe.User.Response) {
+        if !workerDV.isValidEmail(request.email) {
+            response.emailError = "Not a valid Email address"
+        }
+        if !(request.firstName.count > 0) {
+            response.firstNameError = "Mandatory field"
+        }
+        if !(request.lastName.count > 0) {
+            response.lastNameError = "Mandatory field"
+        }
+        if !(request.image.count > 35) {
+            response.pictureError = "Please select a profile image"
+        }
+        if !workerDV.isValidPhoneNumber(request.phone) {
+            response.phoneError = "Not a valid phone number"
+        }
+        if !(request.password.count > 5) {
+            response.passwordError = "password doesn't fit criteria"
+        }
+        if request.password != request.passwordRepeat {
+            response.passwordRepeatError = "Password confirmation doesn't match"
+        }
+    }
 }

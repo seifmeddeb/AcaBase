@@ -62,4 +62,7 @@ class UserCoreDataStore : UsersStoreProtocol {
         
     }
     
+    func ResetPassword(for request: Login.ResetPassword.Request, completionHandler: @escaping (() throws -> APIResponse) -> Void) {
+        
+    }
 }

@@ -16,6 +16,8 @@ protocol LoginDisplayLogic: class
 {
     func displaySuccessfullLogin(viewModel: Login.User.ViewModel.Result.Successfull)
     func displayFailLogin(viewModel: Login.User.ViewModel.Result.Failure)
+    func displayResetPasswordSuccess(viewModel: Login.ResetPassword.ViewModel)
+    func displayResetPasswordFailure(viewModel: Login.ResetPassword.ViewModel)
     func displayAutoFillEmails(viewModel: Login.Users.ViewModel)
 }
 
@@ -92,6 +94,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic
     
     // MARK: IBOutlets
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var pswTextField: UITextField!
@@ -104,33 +107,50 @@ class LoginViewController: UIViewController, LoginDisplayLogic
     @IBAction func login(_ sender: Any) {
         loginUser()
     }
-    
+    @IBAction func forgotPassword(_ sender: Any) {
+        let alert = UIAlertController(title: "Reset Password", message: "A Password reset email will be sent to the provided email address", preferredStyle: .alert)
+        alert.addTextField {
+            $0.placeholder = "your email address"
+            $0.keyboardType = .emailAddress
+            $0.addTarget(alert, action: #selector(alert.textDidChangeInResetPasswordAlert), for: .editingChanged)
+        }
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive))
+        
+        let resetAction = UIAlertAction(title: "Reset Password", style: .default) { [unowned self] _ in
+            guard let email = alert.textFields?[0].text else { return }
+            self.resetPassword(for: email)
+        }
+        
+        resetAction.isEnabled = false
+        alert.addAction(resetAction)
+        self.present(alert,animated: true)
+    }
     // MARK: Login User
     
     func loginUser()
     {
+        startAnimating(activityIndicator)
         let request = Login.User.Request(email: emailTextField.text!, password: pswTextField.text!)
         interactor?.loginUser(request: request)
     }
     
     func displaySuccessfullLogin(viewModel: Login.User.ViewModel.Result.Successfull)
     {
+        stopAnimating(activityIndicator)
         emailTextField.text = viewModel.name
     }
     
     func displayFailLogin(viewModel: Login.User.ViewModel.Result.Failure) {
+        stopAnimating(activityIndicator)
         resetFormErrors()
         var hasFormError = false
         if let emailError = viewModel.emailError {
-            errorEmailLabel.text = emailError
-            emailTextField.layer.borderColor = UIColor.red.cgColor
-            emailTextField.layer.borderWidth = 1.0
+            setError(for: emailTextField, label: errorEmailLabel, text: emailError)
             hasFormError = true
         }
         if let passwordError = viewModel.passwordError {
-            errorPasswordLabel.text = passwordError
-            pswTextField.layer.borderColor = UIColor.red.cgColor
-            pswTextField.layer.borderWidth = 1.0
+            setError(for: pswTextField, label: errorPasswordLabel, text: passwordError)
             hasFormError = true
         }
         if !hasFormError {
@@ -141,6 +161,34 @@ class LoginViewController: UIViewController, LoginDisplayLogic
             }))
             self.present(alert, animated: true)
         }
+    }
+    
+    // MARK: Reset Password
+    
+    func resetPassword(for email: String) {
+        startAnimating(activityIndicator)
+        let request = Login.ResetPassword.Request(email: email)
+        interactor?.resetPassword(request: request)
+    }
+    
+    func displayResetPasswordSuccess(viewModel: Login.ResetPassword.ViewModel) {
+        stopAnimating(activityIndicator)
+        let alert = UIAlertController(title: "", message: viewModel.message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true)
+    }
+    
+    func displayResetPasswordFailure(viewModel: Login.ResetPassword.ViewModel) {
+        stopAnimating(activityIndicator)
+        let alert = UIAlertController(title: "", message: viewModel.message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+            alert.dismiss(animated: true) {
+                self.forgotPassword(self)
+            }
+        }))
+        self.present(alert, animated: true)
     }
     
     private func resetFormErrors() {

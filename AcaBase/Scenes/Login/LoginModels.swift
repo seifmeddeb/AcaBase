@@ -52,6 +52,23 @@ enum Login
     }
     
     // MARK: AutoFill data
+    enum ResetPassword
+    {
+        struct Request
+        {
+            var email : String
+        }
+        struct Response
+        {
+            var apiResponse : APIResponse?
+        }
+        struct ViewModel
+        {
+            var message : String
+        }
+    }
+    
+    // MARK: AutoFill data
     enum Users
     {
         struct Request

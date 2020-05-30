@@ -15,6 +15,7 @@ import UIKit
 protocol LoginPresentationLogic
 {
     func presentLoginUser(response: Login.User.Response)
+    func presentResetPassword(response: Login.ResetPassword.Response)
     func presentAutoFillEmails(response: Login.Users.Response)
 }
 
@@ -42,5 +43,14 @@ class LoginPresenter: LoginPresentationLogic
         let email = response.users?.last?.currentUser.email ?? ""
         let viewModel = Login.Users.ViewModel(email: email)
         viewController?.displayAutoFillEmails(viewModel: viewModel)
+    }
+    
+    func presentResetPassword(response: Login.ResetPassword.Response) {
+        let viewModel = Login.ResetPassword.ViewModel(message: response.apiResponse?.message ?? "Something went wrong please try again 😢")
+        if response.apiResponse?.status == "error" {
+            viewController?.displayResetPasswordFailure(viewModel: viewModel)
+        } else {
+            viewController?.displayResetPasswordSuccess(viewModel: viewModel)
+        }
     }
 }

@@ -85,3 +85,7 @@ struct SubscribeRequest : Codable {
     }
     
 }
+struct APIResponse : Codable {
+    var status : String
+    var message : String
+}

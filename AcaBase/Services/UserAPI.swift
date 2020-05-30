@@ -22,9 +22,10 @@ class UserAPI : UsersStoreProtocol {
     
     // Register API call
     func subscribeUser(userToCreate: Subscribe.User.Request, completionHandler: @escaping (() throws -> UserDAO) -> Void) {
+        let request = SubscribeRequest(firstName: userToCreate.firstName, lastName: userToCreate.lastName, phone: userToCreate.phone, email: userToCreate.email, password: userToCreate.password, image: userToCreate.image)
         AF.request("http://vps800310.ovh.net/api/register",
                    method: .post,
-                   parameters: userToCreate,
+                   parameters: request,
                    encoder: JSONParameterEncoder.default)
             .validate(statusCode:200..<300)
             .responseJSON { response in
@@ -62,6 +63,24 @@ class UserAPI : UsersStoreProtocol {
                    encoder: JSONParameterEncoder.default)
             .validate(statusCode:200..<300)
             .responseDecodable(of: UserDAO.self) { response in
+                
+                guard let userResponse = response.value else {
+                    completionHandler{throw response.error!}
+                    return
+                }
+                completionHandler{return userResponse}
+                
+        }
+    }
+    
+    // MARK: Reset Password
+    func ResetPassword(for request: Login.ResetPassword.Request, completionHandler: @escaping (() throws -> APIResponse) -> Void) {
+        AF.request("http://vps800310.ovh.net/api/user/password/reset",
+                   method: .post,
+                   parameters: ["email": "\(request.email)"],
+                   encoder: JSONParameterEncoder.default)
+            .validate(statusCode:200..<500)
+            .responseDecodable(of: APIResponse.self) { response in
                 
                 guard let userResponse = response.value else {
                     completionHandler{throw response.error!}

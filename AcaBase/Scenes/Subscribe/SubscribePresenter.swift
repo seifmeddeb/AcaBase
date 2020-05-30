@@ -14,23 +14,35 @@ import UIKit
 
 protocol SubscribePresentationLogic
 {
-  func presentRegister(response: Subscribe.User.Response)
+    func presentRegister(response: Subscribe.User.Response)
 }
 
 class SubscribePresenter: SubscribePresentationLogic
 {
-  weak var viewController: SubscribeDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentRegister(response: Subscribe.User.Response)
-  {
-    var viewModel = Subscribe.User.ViewModel(message: "")
-    if let errorMsg = response.errorMsg {
-        viewModel.message = errorMsg
-    } else {
-        viewModel.message = Strings.registerSuccess
+    weak var viewController: SubscribeDisplayLogic?
+    
+    // MARK: Do something
+    
+    func presentRegister(response: Subscribe.User.Response)
+    {
+        if let user = response.user {
+            let viewModel = Subscribe.User.ViewModel.Result.Successfull(user: user)
+            viewController?.displaySuccessfullRegister(viewModel: viewModel)
+        } else {
+            var viewModel = Subscribe.User.ViewModel.Result.Failure()
+            if let errorMsg = response.errorMsg {
+                viewModel.errorMsg = errorMsg
+                viewController?.displayFailureRegister(viewModel: viewModel)
+            } else {
+                viewModel.emailError = response.emailError
+                viewModel.firstNameError = response.firstNameError
+                viewModel.lastNameError = response.lastNameError
+                viewModel.phoneError = response.phoneError
+                viewModel.pictureError = response.pictureError
+                viewModel.passwordError = response.passwordError
+                viewModel.passwordRepeatError = response.passwordRepeatError
+                viewController?.displayFormError(viewModel: viewModel)
+            }
+        }
     }
-    viewController?.displayRegister(viewModel: viewModel)
-  }
 }

@@ -14,7 +14,9 @@ import UIKit
 
 protocol SubscribeDisplayLogic: class
 {
-    func displayRegister(viewModel: Subscribe.User.ViewModel)
+    func displaySuccessfullRegister(viewModel: Subscribe.User.ViewModel.Result.Successfull)
+    func displayFailureRegister(viewModel: Subscribe.User.ViewModel.Result.Failure)
+    func displayFormError(viewModel: Subscribe.User.ViewModel.Result.Failure)
 }
 
 class SubscribeViewController: UIViewController, SubscribeDisplayLogic
@@ -76,7 +78,8 @@ class SubscribeViewController: UIViewController, SubscribeDisplayLogic
         lastNameTextField.delegate = self
         phoneTextField.delegate = self
         confPassTextField.delegate = self
-        
+        textFields = [firstNameTextField,emailTextField,passwordTextField,lastNameTextField,phoneTextField,confPassTextField]
+        labels = [firstNameErrorLbl,lastNameErrorLbl,phoneErrorLbl,emailErrorLbl,pswErrorLbl,pswConfErrorLbl,pictureErrorLbl]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,6 +98,7 @@ class SubscribeViewController: UIViewController, SubscribeDisplayLogic
     
     // MARK: IBOutlets
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -104,9 +108,17 @@ class SubscribeViewController: UIViewController, SubscribeDisplayLogic
     @IBOutlet weak var confPassTextField: UITextField!
     @IBOutlet weak var profileImageView: UIImageView!
     
-
-    private var activeField: UITextField?
+    @IBOutlet weak var firstNameErrorLbl: UILabel!
+    @IBOutlet weak var lastNameErrorLbl: UILabel!
+    @IBOutlet weak var phoneErrorLbl: UILabel!
+    @IBOutlet weak var emailErrorLbl: UILabel!
+    @IBOutlet weak var pswErrorLbl: UILabel!
+    @IBOutlet weak var pswConfErrorLbl: UILabel!
+    @IBOutlet weak var pictureErrorLbl: UILabel!
     
+    private var activeField: UITextField?
+    private var textFields = [UITextField?]()
+    private var labels = [UILabel?]()
     // MARK: IBActions
     
     @IBAction func profileImage(_ sender: Any) {
@@ -115,7 +127,7 @@ class SubscribeViewController: UIViewController, SubscribeDisplayLogic
         }
     }
     @IBAction func subscribe(_ sender: Any) {
-        subscribeUser()
+        registerUser()
     }
     
     @IBAction func login(_ sender: Any) {
@@ -124,21 +136,63 @@ class SubscribeViewController: UIViewController, SubscribeDisplayLogic
     
     // MARK: Requests
     
-    func subscribeUser()
+    func registerUser()
     {
-        let request = Subscribe.User.Request(firstName: firstNameTextField.text ?? "", lastName: lastNameTextField.text ?? "", phone: phoneTextField.text ?? "", email: emailTextField.text ?? "", password: passwordTextField.text ?? "", image: "data:image/png;base64,\("sdsd"/*self.profileImageView.image!.pngData()?.base64EncodedString() ?? ""*/)")
+        startAnimating(activityIndicator)
+        var request = Subscribe.User.Request(firstName: firstNameTextField.text ?? "", lastName: lastNameTextField.text ?? "", phone: phoneTextField.text ?? "", email: emailTextField.text ?? "", password: passwordTextField.text ?? "", image: "data:image/png;base64,\("sdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsd"/*self.profileImageView.image?.pngData()?.base64EncodedString() ?? ""*/)")
+        request.passwordRepeat = confPassTextField.text ?? ""
         interactor?.registerUser(request: request)
     }
     
     // MARK: Displays
     
-    func displayRegister(viewModel: Subscribe.User.ViewModel)
+    func displaySuccessfullRegister(viewModel: Subscribe.User.ViewModel.Result.Successfull)
     {
-        let alert = UIAlertController(title: "", message: viewModel.message, preferredStyle: .alert)
+        stopAnimating(activityIndicator)
+        resetFormErrors(for: textFields, and: labels)
+        let alert = UIAlertController(title: "", message: "Welcome \(viewModel.user.currentUser.firstName) 🥳 ! \n A verification email has been sent to you \n Check it out before logging in 🤓", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+            alert.dismiss(animated: true) {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }))
+        self.present(alert, animated: true)
+    }
+    
+    func displayFailureRegister(viewModel: Subscribe.User.ViewModel.Result.Failure) {
+        stopAnimating(activityIndicator)
+        resetFormErrors(for: textFields, and: labels)
+        let alert = UIAlertController(title: "", message: viewModel.errorMsg ?? "Something went wrong", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
             alert.dismiss(animated: true, completion: nil)
         }))
         self.present(alert, animated: true)
+    }
+    
+    func displayFormError(viewModel: Subscribe.User.ViewModel.Result.Failure) {
+        stopAnimating(activityIndicator)
+        resetFormErrors(for: textFields, and: labels)
+        if let lastNameTxt = viewModel.lastNameError {
+            setError(for: lastNameTextField, label: lastNameErrorLbl, text: lastNameTxt)
+        }
+        if let firstNameTxt = viewModel.firstNameError {
+            setError(for: firstNameTextField, label: firstNameErrorLbl, text: firstNameTxt)
+        }
+        if let phoneTxt = viewModel.phoneError {
+            setError(for: phoneTextField, label: phoneErrorLbl, text: phoneTxt)
+        }
+        if let emailTxt = viewModel.emailError {
+            setError(for: emailTextField, label: emailErrorLbl, text: emailTxt)
+        }
+        if let pictureTxt = viewModel.pictureError {
+            pictureErrorLbl.text = pictureTxt
+        }
+        if let pswTxt = viewModel.passwordError {
+            setError(for: passwordTextField, label: pswErrorLbl, text: pswTxt)
+        }
+        if let pswConfTxt = viewModel.passwordRepeatError {
+            setError(for: confPassTextField, label: pswConfErrorLbl, text: pswConfTxt)
+        }
     }
 }
 extension SubscribeViewController : UITextFieldDelegate {

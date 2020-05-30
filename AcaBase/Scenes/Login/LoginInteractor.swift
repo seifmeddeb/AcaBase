@@ -15,6 +15,7 @@ import UIKit
 protocol LoginBusinessLogic
 {
     func loginUser(request: Login.User.Request)
+    func resetPassword(request: Login.ResetPassword.Request)
     func fetchAutoFillEmails(request: Login.Users.Request)
 }
 
@@ -54,11 +55,25 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore
     private func validateLoginRequest(request: Login.User.Request) -> Login.User.Response? {
         var response : Login.User.Response?
         if !workerDataValidation.isValidEmail(request.email) {
-            response = Login.User.Response(emailError: "Please insert a valid email adress")
+            response = Login.User.Response(emailError: "Please insert a valid email address")
         }
         if request.password.count < 1 {
             response = Login.User.Response(emailError: response?.emailError, passwordError: "Please insert your password")
         }
         return response
     }
+    
+    // MARK: Reset Password
+    func resetPassword(request: Login.ResetPassword.Request) {
+        if !workerDataValidation.isValidEmail(request.email) {
+            let response = Login.ResetPassword.Response(apiResponse: APIResponse(status: "error", message: "Please insert a valid email address"))
+            self.presenter?.presentResetPassword(response: response)
+        } else {
+            workerApi.ResetPassword(for: request, completionHandler: { userResponse in
+                let response = Login.ResetPassword.Response(apiResponse: userResponse)
+                self.presenter?.presentResetPassword(response: response)
+            })
+        }
+    }
 }
+    

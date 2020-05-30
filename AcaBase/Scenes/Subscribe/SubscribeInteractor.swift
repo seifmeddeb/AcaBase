@@ -26,6 +26,7 @@ class SubscribeInteractor: SubscribeBusinessLogic, SubscribeDataStore
 {
     var presenter: SubscribePresentationLogic?
     var worker: UserWorker?
+    var subscribeWorker: SubscribeWorker = SubscribeWorker()
     //var name: String = ""
     
     // MARK: Register User
@@ -33,33 +34,40 @@ class SubscribeInteractor: SubscribeBusinessLogic, SubscribeDataStore
     func registerUser(request: Subscribe.User.Request)
     {
         worker = UserWorker(usersStore: UserAPI())
-        worker?.subscribeUser(subscribeRequest: request, completionHandler: { (userDAO) in
-            
-            var response = Subscribe.User.Response()
-            
-            do {
-                response.user = try userDAO()
-            } catch {
-                if let subscribeError = error as? UserAPIError.Subscribe {
-                    response.errorMsg = subscribeError.message
-                } else {
-                    if let cannotError = error as? UserAPIError {
-                        switch cannotError {
-                        case .CannotGetSubscribeError(let msg):
-                            response.errorMsg = msg
-                        case .CannotSubscribe(let msg):
-                            response.errorMsg = msg
-                        }
+        if subscribeWorker.checkData(for: request) {
+            worker?.subscribeUser(subscribeRequest: request, completionHandler: { (userDAO) in
+                
+                var response = Subscribe.User.Response()
+                
+                do {
+                    response.user = try userDAO()
+                    UserDefaults.standard.set(response.user?.accessToken, forKey: "token")
+                    UserDefaults.standard.synchronize()
+                } catch {
+                    if let subscribeError = error as? UserAPIError.Subscribe {
+                        response.errorMsg = subscribeError.message
                     } else {
-                        response.errorMsg = error.localizedDescription
+                        if let cannotError = error as? UserAPIError {
+                            switch cannotError {
+                            case .CannotGetSubscribeError(let msg):
+                                response.errorMsg = msg
+                            case .CannotSubscribe(let msg):
+                                response.errorMsg = msg
+                            }
+                        } else {
+                            response.errorMsg = "Something went wrong"
+                        }
                     }
+                    
                 }
                 
-            }
-            
+                self.presenter?.presentRegister(response: response)
+            })
+        } else {
+            var response = Subscribe.User.Response()
+            subscribeWorker.getErrorMessages(from: request, for: &response)
             self.presenter?.presentRegister(response: response)
-        })
-        
+        }
         
     }
 }

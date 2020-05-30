@@ -17,4 +17,17 @@ class DataValidationWorker {
         return emailPred.evaluate(with: email)
     }
     
+    func isValidPhoneNumber(_ phone: String) -> Bool {
+        do {
+            let detector = try NSDataDetector(types: NSTextCheckingResult.CheckingType.phoneNumber.rawValue)
+            let matches = detector.matches(in: phone, options: [], range: NSRange(location: 0, length: phone.count))
+            if let res = matches.first {
+                return res.resultType == .phoneNumber && res.range.location == 0 && res.range.length == phone.count
+            } else {
+                return false
+            }
+        } catch {
+            return false
+        }
+    }
 }

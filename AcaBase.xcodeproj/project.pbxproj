@@ -46,6 +46,7 @@
 		30775ABC245F44A900677FE5 /* ManagedUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775ABA245F44A900677FE5 /* ManagedUser+CoreDataProperties.swift */; };
 		3078CC88247F7344009BB013 /* UIViewController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3078CC87247F7344009BB013 /* UIViewController+Helpers.swift */; };
 		3078CC8A24814AEE009BB013 /* UIAlertController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3078CC8924814AEE009BB013 /* UIAlertController+Helpers.swift */; };
+		3078CC8C2482CD4E009BB013 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3078CC8B2482CD4E009BB013 /* Home.storyboard */; };
 		3083A4DC246CA48400EEE2C8 /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3083A4DB246CA48400EEE2C8 /* ImagePickerManager.swift */; };
 		3083A4DE246DB54300EEE2C8 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3083A4DD246DB54300EEE2C8 /* CustomView.swift */; };
 		3083A4E02472260200EEE2C8 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3083A4DF2472260200EEE2C8 /* Strings.swift */; };
@@ -120,6 +121,7 @@
 		30775ABA245F44A900677FE5 /* ManagedUser+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagedUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3078CC87247F7344009BB013 /* UIViewController+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Helpers.swift"; sourceTree = "<group>"; };
 		3078CC8924814AEE009BB013 /* UIAlertController+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Helpers.swift"; sourceTree = "<group>"; };
+		3078CC8B2482CD4E009BB013 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		3083A4DB246CA48400EEE2C8 /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
 		3083A4DD246DB54300EEE2C8 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		3083A4DF2472260200EEE2C8 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				30775AAD245CD08900677FE5 /* Workers */,
 				30313A1E245C50E7005EEF87 /* Scenes */,
 				303139E4245C4DB5005EEF87 /* Main.storyboard */,
+				3078CC8B2482CD4E009BB013 /* Home.storyboard */,
 				303139EA245C4DB7005EEF87 /* Assets.xcassets */,
 				303139EC245C4DB7005EEF87 /* LaunchScreen.storyboard */,
 				303139EF245C4DB7005EEF87 /* Info.plist */,
@@ -463,6 +466,7 @@
 				303139EE245C4DB7005EEF87 /* LaunchScreen.storyboard in Resources */,
 				303139EB245C4DB7005EEF87 /* Assets.xcassets in Resources */,
 				303139E6245C4DB5005EEF87 /* Main.storyboard in Resources */,
+				3078CC8C2482CD4E009BB013 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -64,7 +64,7 @@ class SplashViewControllerTests: XCTestCase
   
   // MARK: Tests
   
-  func testShouldDoSomethingWhenViewIsLoaded()
+  /*func testShouldDoSomethingWhenViewIsLoaded()
   {
     // Given
     let spy = SplashBusinessLogicSpy()
@@ -88,5 +88,5 @@ class SplashViewControllerTests: XCTestCase
     
     // Then
     //XCTAssertEqual(sut.nameTextField.text, "", "displaySomething(viewModel:) should update the name text field")
-  }
+  }*/
 }

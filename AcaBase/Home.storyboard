@@ -27,9 +27,15 @@
                                                     <constraint firstAttribute="width" secondItem="H7j-pH-1if" secondAttribute="height" multiplier="1:1" id="eIQ-Ee-fUJ"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xD0-FY-G5n">
+                                                <rect key="frame" x="8" y="57" width="46" height="30"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
+                                            <constraint firstItem="xD0-FY-G5n" firstAttribute="top" secondItem="l3u-9z-5SK" secondAttribute="top" constant="57" id="6Hp-cO-9uP"/>
+                                            <constraint firstItem="xD0-FY-G5n" firstAttribute="leading" secondItem="l3u-9z-5SK" secondAttribute="leading" constant="8" id="Ld3-mX-q24"/>
                                             <constraint firstItem="H7j-pH-1if" firstAttribute="top" secondItem="l3u-9z-5SK" secondAttribute="top" constant="-50" id="VrP-D2-tYO"/>
                                             <constraint firstAttribute="height" constant="1000" id="br5-WE-mpl"/>
                                             <constraint firstItem="H7j-pH-1if" firstAttribute="leading" secondItem="l3u-9z-5SK" secondAttribute="leading" id="mIg-aT-zLz"/>

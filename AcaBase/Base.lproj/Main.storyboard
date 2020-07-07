@@ -7,6 +7,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--MainHomePage-->
+        <scene sceneID="a8L-4b-LiU">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Home" referencedIdentifier="MainHomePage" id="7Vn-TM-Dfa" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="UOi-2P-4Vk"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YQb-dj-9yR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1598" y="-283"/>
+        </scene>
         <!--Login-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -124,12 +134,22 @@
                                                     <action selector="forgotPassword:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mUn-ID-gwD"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XQ4-PP-82O">
+                                                <rect key="frame" x="309" y="25" width="84" height="30"/>
+                                                <state key="normal" title="Guest Mode">
+                                                    <color key="titleColor" red="0.17138307790000001" green="0.75807032760000004" blue="0.40944695440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <segue destination="7Vn-TM-Dfa" kind="show" id="N4U-25-GK6"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="750" id="3Rx-eS-OSp"/>
                                             <constraint firstItem="WUH-QN-vM4" firstAttribute="top" secondItem="ACE-fr-5rK" secondAttribute="bottom" constant="50" id="3ph-Xb-OL6"/>
                                             <constraint firstItem="sSe-l5-OXz" firstAttribute="top" secondItem="WUH-QN-vM4" secondAttribute="bottom" constant="8" id="6qf-PZ-hUT"/>
+                                            <constraint firstItem="XQ4-PP-82O" firstAttribute="top" secondItem="ayB-an-kXg" secondAttribute="top" constant="25" id="7gL-Xa-A15"/>
                                             <constraint firstItem="WUH-QN-vM4" firstAttribute="centerX" secondItem="ayB-an-kXg" secondAttribute="centerX" id="7jp-PM-nSq"/>
                                             <constraint firstItem="KUc-BO-u9T" firstAttribute="centerX" secondItem="ayB-an-kXg" secondAttribute="centerX" id="8Ci-qO-RI7"/>
                                             <constraint firstItem="iiG-K7-sGf" firstAttribute="top" secondItem="ayB-an-kXg" secondAttribute="top" constant="120" id="A8L-Db-JN5"/>
@@ -152,6 +172,7 @@
                                             <constraint firstItem="WaZ-eI-TWe" firstAttribute="leading" secondItem="M6x-jq-poB" secondAttribute="leading" id="izO-mZ-lEN"/>
                                             <constraint firstItem="O84-Af-kb1" firstAttribute="trailing" secondItem="pkn-Qq-lMH" secondAttribute="trailing" id="kFA-L0-LRn"/>
                                             <constraint firstItem="iiG-K7-sGf" firstAttribute="centerX" secondItem="ayB-an-kXg" secondAttribute="centerX" id="lhE-jk-Qb0"/>
+                                            <constraint firstAttribute="trailing" secondItem="XQ4-PP-82O" secondAttribute="trailing" constant="21" id="qFB-fW-j4x"/>
                                             <constraint firstItem="pkn-Qq-lMH" firstAttribute="top" secondItem="iiG-K7-sGf" secondAttribute="bottom" constant="200" id="tLK-Fm-WH3"/>
                                             <constraint firstItem="O84-Af-kb1" firstAttribute="top" secondItem="pkn-Qq-lMH" secondAttribute="bottom" constant="5" id="z6e-HH-08v"/>
                                         </constraints>

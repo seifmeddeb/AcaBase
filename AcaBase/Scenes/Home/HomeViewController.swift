@@ -14,7 +14,7 @@ import UIKit
 
 protocol HomeDisplayLogic: class
 {
-    func displaySomething(viewModel: Home.Something.ViewModel)
+    func displayTrainers(viewModel: Home.Trainers.ViewModel)
 }
 
 class HomeViewController: UIViewController, HomeDisplayLogic
@@ -67,43 +67,94 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     // MARK: IBOutlets
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    // MARK: Properties
+    
+    var trainers = [TrainerDAO]()
     
     // MARK: View lifecycle
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.isHidden = true
-        doSomething()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.setHomePageNavBar(for: self.navigationItem)
+        scrollView.delegate = self
+        getTrainers()
     }
     
-    // MARK: Do something
+    // MARK: Actions
+    
+    @objc func clickTitleButton() {
+        print("clickTitleButton")
+    }
+    
+    @objc func clickRightButton() {
+        print("clickRightButton")
+    }
+    
+    @objc func clickLeftButton() {
+        print("clickLeftButton")
+    }
+    
+    // MARK: ✅ Interactor Calls
+    // MARK: get Trainers
     
     
-    func doSomething()
+    func getTrainers()
     {
-        let request = Home.Something.Request()
-        interactor?.doSomething(request: request)
+        let request = Home.Trainers.Request()
+        interactor?.getTrainers(request: request)
     }
     
-    func displaySomething(viewModel: Home.Something.ViewModel)
+    func displayTrainers(viewModel: Home.Trainers.ViewModel)
     {
         //nameTextField.text = viewModel.name
+        trainers = viewModel.trainers
+        self.collectionView.reloadData()
     }
 }
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return (trainers.count > 3) ? 4 : 0
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teacherCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teacherCell", for: indexPath) as! TrainerCell
+        cell.set(trainer: trainers[indexPath.row])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
        return CGSize(width: 128.0, height: 142.0)
+    }
+}
+
+// MARK: Navigation Bar Animation
+extension HomeViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        var offset = self.scrollView.contentOffset.y / 150
+        if offset > 1 {
+            offset = 1
+            navigationItem.leftBarButtonItem?.customView?.alpha = 1
+            navigationItem.rightBarButtonItem?.customView?.alpha = 1
+            navigationItem.titleView?.alpha = 1
+            navigationController?.navigationBar.backgroundColor = UIColor(white: 1, alpha: 1)
+            self.navigationController?.navigationBar.layer.masksToBounds = false
+            self.navigationController?.navigationBar.layer.shadowColor = UIColor.lightGray.cgColor
+            self.navigationController?.navigationBar.layer.shadowOpacity = 0.8
+            self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+            self.navigationController?.navigationBar.layer.shadowRadius = 1
+        } else {
+            print(offset)
+            navigationItem.leftBarButtonItem?.customView?.alpha = offset
+            navigationItem.rightBarButtonItem?.customView?.alpha = offset
+            navigationItem.titleView?.alpha = offset
+            navigationController?.navigationBar.backgroundColor = UIColor(white: 1, alpha: offset)
+        }
     }
 }

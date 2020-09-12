@@ -21,11 +21,13 @@ protocol LoginBusinessLogic
 
 protocol LoginDataStore
 {
-    //var name: String { get set }
+    var userToPass : UserDAO? { get set }
 }
 
 class LoginInteractor: LoginBusinessLogic, LoginDataStore
 {
+    var userToPass: UserDAO?
+    
     func fetchAutoFillEmails(request: Login.Users.Request) {
         worker.fetchAllUsers(completionHandler: { (users) in
             let response = Login.Users.Response(users: users)
@@ -43,10 +45,13 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore
     func loginUser(request: Login.User.Request) {
         
         if let response = validateLoginRequest(request: request) {
+            userToPass = response.user
             self.presenter?.presentLoginUser(response: response)
         } else {
             workerApi.loginUser(loginRequest:request , completionHandler: { userResponse in
                 let response = Login.User.Response(user: userResponse)
+                UserDefaults.standard.set(response.user?.accessToken, forKey: "token")
+                UserDefaults.standard.synchronize()
                 self.presenter?.presentLoginUser(response: response)
             })
         }

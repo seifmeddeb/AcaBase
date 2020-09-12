@@ -107,6 +107,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic
     @IBAction func login(_ sender: Any) {
         loginUser()
     }
+    
     @IBAction func forgotPassword(_ sender: Any) {
         let alert = UIAlertController(title: "Reset Password", message: "A Password reset email will be sent to the provided email address", preferredStyle: .alert)
         alert.addTextField {
@@ -138,7 +139,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic
     func displaySuccessfullLogin(viewModel: Login.User.ViewModel.Result.Successfull)
     {
         stopAnimating(activityIndicator)
-        emailTextField.text = viewModel.name
+        router?.routeToHome(segue: nil)
     }
     
     func displayFailLogin(viewModel: Login.User.ViewModel.Result.Failure) {

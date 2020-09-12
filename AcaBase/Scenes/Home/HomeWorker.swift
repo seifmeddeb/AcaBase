@@ -12,9 +12,29 @@
 
 import UIKit
 
-class HomeWorker
-{
-  func doSomeWork()
-  {
-  }
+class HomeWorker {
+    
+    var mainPageStore : MainPageStoreProtocol
+    
+    init(mainPageStore: MainPageStoreProtocol)
+    {
+        self.mainPageStore = mainPageStore
+    }
+    
+    func getTrainers(completionHandler: @escaping ([TrainerDAO]?) -> Void) {
+        self.mainPageStore.fetchTrainers() { (trainers: () throws -> [TrainerDAO]) -> Void in
+            do {
+                let trainers = try trainers()
+                DispatchQueue.main.async {
+                    completionHandler(trainers)
+                }
+            } catch {
+                let nserror = error as NSError
+                print("Unresolved error \(nserror), \(nserror.userInfo)")
+                DispatchQueue.main.async {
+                    completionHandler(nil)
+                }
+            }
+        }
+    }
 }

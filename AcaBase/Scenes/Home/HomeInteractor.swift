@@ -14,7 +14,7 @@ import UIKit
 
 protocol HomeBusinessLogic
 {
-  func doSomething(request: Home.Something.Request)
+  func getTrainers(request: Home.Trainers.Request)
 }
 
 protocol HomeDataStore
@@ -25,17 +25,18 @@ protocol HomeDataStore
 class HomeInteractor: HomeBusinessLogic, HomeDataStore
 {
   var presenter: HomePresentationLogic?
-  var worker: HomeWorker?
+    var workerApi = HomeWorker(mainPageStore: MainPageAPI())
   //var name: String = ""
   
-  // MARK: Do something
+  // MARK: get trainers
   
-  func doSomething(request: Home.Something.Request)
+  func getTrainers(request: Home.Trainers.Request)
   {
-    worker = HomeWorker()
-    worker?.doSomeWork()
+    workerApi.getTrainers { (trainers) in
+        let response = Home.Trainers.Response(trainers:trainers )
+        self.presenter?.presentTrainers(response: response)
+    }
     
-    let response = Home.Something.Response()
-    presenter?.presentSomething(response: response)
+    
   }
 }

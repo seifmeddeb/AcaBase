@@ -16,16 +16,19 @@ enum Home
 {
   // MARK: Use cases
   
-  enum Something
+  enum Trainers
   {
     struct Request
     {
     }
     struct Response
     {
+        var trainers : [TrainerDAO]?
     }
     struct ViewModel
     {
+        var trainers : [TrainerDAO]
+        var errorMsg : String?
     }
   }
 }

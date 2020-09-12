@@ -14,18 +14,19 @@ import UIKit
 
 protocol HomePresentationLogic
 {
-  func presentSomething(response: Home.Something.Response)
+    func presentTrainers(response: Home.Trainers.Response)
 }
 
 class HomePresenter: HomePresentationLogic
 {
-  weak var viewController: HomeDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentSomething(response: Home.Something.Response)
-  {
-    let viewModel = Home.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
-  }
+    weak var viewController: HomeDisplayLogic?
+    
+    // MARK: Do something
+    
+    func presentTrainers(response: Home.Trainers.Response)
+    {
+        let viewModel = Home.Trainers.ViewModel(trainers: response.trainers ?? [TrainerDAO](), errorMsg: "error fetching trainers")
+        viewController?.displayTrainers(viewModel: viewModel)
+        
+    }
 }

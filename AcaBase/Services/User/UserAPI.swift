@@ -23,7 +23,7 @@ class UserAPI : UsersStoreProtocol {
     // Register API call
     func subscribeUser(userToCreate: Subscribe.User.Request, completionHandler: @escaping (() throws -> UserDAO) -> Void) {
         let request = SubscribeRequest(firstName: userToCreate.firstName, lastName: userToCreate.lastName, phone: userToCreate.phone, email: userToCreate.email, password: userToCreate.password, image: userToCreate.image)
-        AF.request("http://vps800310.ovh.net/api/register",
+        AF.request(registerUrl,
                    method: .post,
                    parameters: request,
                    encoder: JSONParameterEncoder.default)
@@ -57,7 +57,7 @@ class UserAPI : UsersStoreProtocol {
     
     // login_check API call
     func loginUser(userRequest: Login.User.Request, completionHandler: @escaping (() throws -> UserDAO) -> Void) {
-        AF.request("http://vps800310.ovh.net/api/login_check",
+        AF.request(loginUrl,
                    method: .post,
                    parameters: userRequest,
                    encoder: JSONParameterEncoder.default)
@@ -75,7 +75,7 @@ class UserAPI : UsersStoreProtocol {
     
     // MARK: Reset Password
     func ResetPassword(for request: Login.ResetPassword.Request, completionHandler: @escaping (() throws -> APIResponse) -> Void) {
-        AF.request("http://vps800310.ovh.net/api/user/password/reset",
+        AF.request(resetPasswordUrl,
                    method: .post,
                    parameters: ["email": "\(request.email)"],
                    encoder: JSONParameterEncoder.default)

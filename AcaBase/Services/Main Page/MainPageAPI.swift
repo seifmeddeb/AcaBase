@@ -22,12 +22,30 @@ class MainPageAPI : MainPageStoreProtocol {
             .responseDecodable(of: [TrainerDAO].self) { response in
                 
                 guard let trainersList = response.value else {
-                    print(response.error!)
+                    print("fetchTrainers: \(response.error!)")
                     completionHandler{throw response.error!}
                     return
                 }
                 completionHandler{return trainersList}
                 
+        }
+    }
+    
+    func fetchTopics(completionHandler: @escaping (() throws -> [TopicDAO]) -> Void) {
+        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer "+UserDefaults.standard.string(forKey: "token")!)])
+        AF.request(topicsUrl,
+                   method: .get,
+                   parameters: nil,
+                   headers: headers)
+            .validate(statusCode:200..<300)
+            .responseDecodable(of: [TopicDAO].self) { response in
+                
+                guard let topicsList = response.value else {
+                    print("fetchTopics: \(response.error!)")
+                    completionHandler{throw response.error!}
+                    return
+                }
+                completionHandler{return topicsList}
         }
     }
     

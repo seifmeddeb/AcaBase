@@ -14,29 +14,35 @@ import UIKit
 
 protocol HomeBusinessLogic
 {
-  func getTrainers(request: Home.Trainers.Request)
+    func getTrainers(request: Home.Trainers.Request)
+    func getTopics(request: Home.Topics.Request)
 }
 
 protocol HomeDataStore
 {
-  //var name: String { get set }
+    //var name: String { get set }
 }
 
 class HomeInteractor: HomeBusinessLogic, HomeDataStore
 {
-  var presenter: HomePresentationLogic?
+    var presenter: HomePresentationLogic?
     var workerApi = HomeWorker(mainPageStore: MainPageAPI())
-  //var name: String = ""
-  
-  // MARK: get trainers
-  
-  func getTrainers(request: Home.Trainers.Request)
-  {
-    workerApi.getTrainers { (trainers) in
-        let response = Home.Trainers.Response(trainers:trainers )
-        self.presenter?.presentTrainers(response: response)
+    //var name: String = ""
+    
+    // MARK: HomeBusinessLogic Stubs
+    
+    func getTrainers(request: Home.Trainers.Request)
+    {
+        workerApi.getTrainers { (trainers) in
+            let response = Home.Trainers.Response(trainers:trainers )
+            self.presenter?.presentTrainers(response: response)
+        }
     }
     
-    
-  }
+    func getTopics(request: Home.Topics.Request) {
+        workerApi.getTopics { topics in
+            let response = Home.Topics.Response(topics: topics )
+            self.presenter?.presentTopics(response: response)
+        }
+    }
 }

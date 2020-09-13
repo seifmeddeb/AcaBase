@@ -37,4 +37,21 @@ class HomeWorker {
             }
         }
     }
+    
+    func getTopics(completionHandler: @escaping ([TopicDAO]?) -> Void) {
+        self.mainPageStore.fetchTopics { (topics: () throws -> [TopicDAO]) in
+            do {
+                let topics = try topics()
+                DispatchQueue.main.async {
+                    completionHandler(topics)
+                }
+            } catch {
+                let nserror = error as NSError
+                print("Unresolved error \(nserror), \(nserror.userInfo)")
+                DispatchQueue.main.async {
+                    completionHandler(nil)
+                }
+            }
+        }
+    }
 }

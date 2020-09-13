@@ -18,3 +18,4 @@ let resetPasswordUrl = mainUrl+"user/password/reset"
 
 // MARK: Main Page URLs
 let trainersUrl = mainUrl+"trainers"
+let topicsUrl = mainUrl+"subjects"

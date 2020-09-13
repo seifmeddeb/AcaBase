@@ -31,4 +31,20 @@ enum Home
         var errorMsg : String?
     }
   }
+    
+  enum Topics
+  {
+    struct Request
+    {
+    }
+    struct Response
+    {
+        var topics : [TopicDAO]?
+    }
+    struct ViewModel
+    {
+        var topics : [TopicDAO]
+        var errorMsg : String?
+    }
+  }
 }

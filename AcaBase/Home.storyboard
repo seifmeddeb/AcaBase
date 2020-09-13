@@ -11,7 +11,6 @@
         <!--Home View Controller-->
         <scene sceneID="ocM-vz-9IH">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2aA-52-yOe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="8Cl-hd-7UM" customClass="HomeViewController" customModule="AcaBase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qhC-p4-NI7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -23,7 +22,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l3u-9z-5SK" userLabel="content view">
                                         <rect key="frame" x="0.0" y="-44" width="414" height="1500"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H7j-pH-1if">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home-image-4000x4000" translatesAutoresizingMaskIntoConstraints="NO" id="H7j-pH-1if">
                                                 <rect key="frame" x="0.0" y="-75" width="414" height="414"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="H7j-pH-1if" secondAttribute="height" multiplier="1:1" id="eIQ-Ee-fUJ"/>
@@ -223,21 +222,21 @@ Lorem Ipsum is simply dummy text of the printing.</string>
                                                     <constraint firstItem="Vs0-Xc-O5Z" firstAttribute="leading" secondItem="5kC-VM-sNf" secondAttribute="leading" id="t6N-OE-C1g"/>
                                                 </constraints>
                                             </view>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="HJ3-mn-dwA">
-                                                <rect key="frame" x="0.0" y="464.5" width="413" height="142"/>
+                                            <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="HJ3-mn-dwA">
+                                                <rect key="frame" x="0.0" y="464.5" width="413" height="145"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="142" id="p1U-pk-Z5c"/>
+                                                    <constraint firstAttribute="height" constant="145" id="p1U-pk-Z5c"/>
                                                 </constraints>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Xna-yN-16c">
                                                     <size key="itemSize" width="128" height="128"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="teacherCell" id="9ys-ci-RM6" customClass="TrainerCell" customModule="AcaBase" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="142"/>
+                                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="teacherCell" id="9ys-ci-RM6" customClass="TrainerCell" customModule="AcaBase" customModuleProvider="target">
+                                                        <rect key="frame" x="20" y="1.5" width="128" height="142"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="lgi-br-lBW">
                                                             <rect key="frame" x="0.0" y="0.0" width="128" height="142"/>
@@ -258,12 +257,14 @@ Lorem Ipsum is simply dummy text of the printing.</string>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Peter Avis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRz-gm-wxI">
                                                                     <rect key="frame" x="32.5" y="60" width="63" height="16"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggh-xf-7Nd">
                                                                     <rect key="frame" x="24.5" y="76" width="79" height="11.5"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <attributedString key="attributedText">
                                                                         <fragment content="MATH TEACHER">
                                                                             <attributes>
@@ -284,6 +285,7 @@ Lorem Ipsum is simply dummy text of the printing.</string>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFU-yA-iIc">
                                                                     <rect key="frame" x="35" y="97.5" width="58" height="11.5"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <attributedString key="attributedText">
                                                                         <fragment content="500 Answers">
                                                                             <attributes>
@@ -309,6 +311,7 @@ Lorem Ipsum is simply dummy text of the printing.</string>
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstItem="iRz-gm-wxI" firstAttribute="centerX" secondItem="lgi-br-lBW" secondAttribute="centerX" id="4qz-Ha-6nS"/>
                                                                 <constraint firstItem="sFU-yA-iIc" firstAttribute="top" secondItem="ggh-xf-7Nd" secondAttribute="bottom" constant="10" id="6aL-Q9-ADI"/>
@@ -322,14 +325,38 @@ Lorem Ipsum is simply dummy text of the printing.</string>
                                                                 <constraint firstItem="Keh-2C-q7b" firstAttribute="width" secondItem="lgi-br-lBW" secondAttribute="width" multiplier="0.2" id="xSv-kV-ckq"/>
                                                                 <constraint firstItem="ggh-xf-7Nd" firstAttribute="top" secondItem="iRz-gm-wxI" secondAttribute="bottom" id="xWn-R8-Pyb"/>
                                                             </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="3"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                                    <real key="value" value="1"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                                    <size key="value" width="0.0" height="2"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                                    <real key="value" value="1"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
                                                         </collectionViewCellContentView>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <size key="customSize" width="128" height="142"/>
                                                         <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                <real key="value" value="1"/>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                                <real key="value" value="2"/>
                                                             </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                <color key="value" systemColor="systemGray4Color" red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                                <real key="value" value="0.29999999999999999"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                                <size key="value" width="1" height="2"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
@@ -340,16 +367,21 @@ Lorem Ipsum is simply dummy text of the printing.</string>
                                                         </connections>
                                                     </collectionViewCell>
                                                 </cells>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                        <size key="value" width="0.0" height="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <outlet property="dataSource" destination="8Cl-hd-7UM" id="VHC-he-0xv"/>
                                                     <outlet property="delegate" destination="8Cl-hd-7UM" id="veA-ID-XMC"/>
                                                 </connections>
                                             </collectionView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="green_shape" translatesAutoresizingMaskIntoConstraints="NO" id="8P0-qq-4Y9">
-                                                <rect key="frame" x="0.0" y="622" width="414" height="481.5"/>
+                                                <rect key="frame" x="0.0" y="625" width="414" height="481.5"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PXK-HV-vVE">
-                                                <rect key="frame" x="20" y="626.5" width="374" height="24"/>
+                                                <rect key="frame" x="20" y="629.5" width="374" height="24"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wRK-dl-TP4">
                                                         <rect key="frame" x="0.0" y="0.0" width="107" height="24"/>
@@ -393,10 +425,10 @@ Lorem Ipsum is simply dummy text of the printing.</string>
                                                 </constraints>
                                             </view>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AEZ-FE-g1X">
-                                                <rect key="frame" x="20" y="660.5" width="374" height="310"/>
+                                                <rect key="frame" x="20" y="663.5" width="374" height="313"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="310" id="bV3-iV-Xdn"/>
+                                                    <constraint firstAttribute="height" constant="313" id="bV3-iV-Xdn"/>
                                                 </constraints>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="QIo-FG-MYw">
                                                     <size key="itemSize" width="160" height="150"/>
@@ -405,26 +437,98 @@ Lorem Ipsum is simply dummy text of the printing.</string>
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Lag-Qv-Idg">
+                                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="topicCell" id="Lag-Qv-Idg" customClass="TopicCell" customModule="AcaBase" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="160" height="150"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hUS-Qb-4b5">
                                                             <rect key="frame" x="0.0" y="0.0" width="160" height="150"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U4R-qn-KKv">
-                                                                    <rect key="frame" x="0.0" y="10.5" width="160" height="128"/>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U4R-qn-KKv">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="100"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="100" id="0zp-Or-Sp7"/>
+                                                                    </constraints>
                                                                 </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yod-Yg-l3H">
+                                                                    <rect key="frame" x="10" y="105" width="40.5" height="19.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="452-v9-sPv">
+                                                                    <rect key="frame" x="10" y="125" width="31" height="14.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEv-h6-rbp">
+                                                                    <rect key="frame" x="120" y="110" width="30" height="30"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="sEv-h6-rbp" secondAttribute="height" multiplier="1:1" id="A5I-nE-V7J"/>
+                                                                    </constraints>
+                                                                    <state key="normal" title="Button" image="check_grey"/>
+                                                                    <state key="selected" image="check_green"/>
+                                                                </button>
                                                             </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="sEv-h6-rbp" secondAttribute="trailing" constant="10" id="1jM-Lh-R14"/>
                                                                 <constraint firstAttribute="trailing" secondItem="U4R-qn-KKv" secondAttribute="trailing" id="95u-f4-bvC"/>
+                                                                <constraint firstItem="452-v9-sPv" firstAttribute="leading" secondItem="hUS-Qb-4b5" secondAttribute="leading" constant="10" id="GgG-pR-TcT"/>
+                                                                <constraint firstItem="452-v9-sPv" firstAttribute="top" secondItem="Yod-Yg-l3H" secondAttribute="bottom" constant="0.5" id="SzA-JM-c09"/>
+                                                                <constraint firstItem="Yod-Yg-l3H" firstAttribute="leading" secondItem="hUS-Qb-4b5" secondAttribute="leading" constant="10" id="U18-15-9gK"/>
+                                                                <constraint firstAttribute="bottom" secondItem="sEv-h6-rbp" secondAttribute="bottom" constant="10" id="Vkd-MA-fuQ"/>
+                                                                <constraint firstItem="sEv-h6-rbp" firstAttribute="top" secondItem="U4R-qn-KKv" secondAttribute="bottom" constant="10" id="hkX-g2-Y9M"/>
                                                                 <constraint firstItem="U4R-qn-KKv" firstAttribute="leading" secondItem="hUS-Qb-4b5" secondAttribute="leading" id="kej-q1-KOi"/>
+                                                                <constraint firstItem="Yod-Yg-l3H" firstAttribute="top" secondItem="U4R-qn-KKv" secondAttribute="bottom" constant="5" id="lTF-lE-etf"/>
                                                                 <constraint firstItem="U4R-qn-KKv" firstAttribute="top" secondItem="hUS-Qb-4b5" secondAttribute="top" id="u4p-cz-vQm"/>
                                                             </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="3"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                                    <real key="value" value="1"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                                    <real key="value" value="1"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                                    <size key="value" width="0.0" height="4"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
                                                         </collectionViewCellContentView>
                                                         <size key="customSize" width="160" height="150"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                                <real key="value" value="1"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                                <real key="value" value="0.29999999999999999"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                                <size key="value" width="0.0" height="2"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outlet property="checkBtn" destination="sEv-h6-rbp" id="FwV-DE-3bm"/>
+                                                            <outlet property="descLbl" destination="452-v9-sPv" id="56g-R5-SFN"/>
+                                                            <outlet property="imageView" destination="U4R-qn-KKv" id="9Ct-hF-sdt"/>
+                                                            <outlet property="titleLbl" destination="Yod-Yg-l3H" id="pc2-1g-Pq2"/>
+                                                        </connections>
                                                     </collectionViewCell>
                                                 </cells>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="8Cl-hd-7UM" id="Z9e-aU-MyS"/>
+                                                    <outlet property="delegate" destination="8Cl-hd-7UM" id="A4v-s7-WK0"/>
+                                                </connections>
                                             </collectionView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -487,17 +591,20 @@ Lorem Ipsum is simply dummy text of the printing.</string>
                     <connections>
                         <outlet property="collectionView" destination="HJ3-mn-dwA" id="cZv-8J-4gn"/>
                         <outlet property="scrollView" destination="8EY-bz-Y8A" id="Bno-rp-Ysb"/>
+                        <outlet property="topicCollectionView" destination="AEZ-FE-g1X" id="HXS-iL-ynj"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2aA-52-yOe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1902.8985507246377" y="77.678571428571431"/>
         </scene>
-        <!--Home Tab Bar Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="q8K-Ip-bIG">
             <objects>
-                <tabBarController storyboardIdentifier="HomeTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="Pg3-YI-RAJ" customClass="HomeTabBarController" customModule="AcaBase" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="HomeTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="Pg3-YI-RAJ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CfH-ec-yZF">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -548,7 +655,10 @@ Lorem Ipsum is simply dummy text of the printing.</string>
     </scenes>
     <resources>
         <image name="bg_green" width="512" height="512"/>
+        <image name="check_green" width="30" height="30"/>
+        <image name="check_grey" width="30" height="30"/>
         <image name="green_shape" width="606.5" height="481.5"/>
+        <image name="home-image-4000x4000" width="1000" height="1000"/>
         <image name="notif" width="30" height="30"/>
         <image name="plus_btn" width="30" height="30"/>
         <image name="user" width="30" height="30"/>

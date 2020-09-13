@@ -15,6 +15,7 @@ import UIKit
 protocol HomeDisplayLogic: class
 {
     func displayTrainers(viewModel: Home.Trainers.ViewModel)
+    func displayTopics(viewModel: Home.Topics.ViewModel)
 }
 
 class HomeViewController: UIViewController, HomeDisplayLogic
@@ -64,14 +65,16 @@ class HomeViewController: UIViewController, HomeDisplayLogic
         }
     }
     
-    // MARK: IBOutlets
+    // MARK: 🔌 IBOutlets
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var topicCollectionView: UICollectionView!
     
     // MARK: Properties
     
     var trainers = [TrainerDAO]()
+    var topics = [TopicDAO]()
     
     // MARK: View lifecycle
     
@@ -83,6 +86,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
         self.setHomePageNavBar(for: self.navigationItem)
         scrollView.delegate = self
         getTrainers()
+        getTopics()
     }
     
     // MARK: Actions
@@ -100,9 +104,9 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     }
     
     // MARK: ✅ Interactor Calls
+    
+    
     // MARK: get Trainers
-    
-    
     func getTrainers()
     {
         let request = Home.Trainers.Request()
@@ -115,14 +119,34 @@ class HomeViewController: UIViewController, HomeDisplayLogic
         trainers = viewModel.trainers
         self.collectionView.reloadData()
     }
+    
+    // MARK: get Topics
+    
+    func getTopics() {
+        let request = Home.Topics.Request()
+        interactor?.getTopics(request: request)
+    }
+    
+    func displayTopics(viewModel: Home.Topics.ViewModel) {
+        topics = viewModel.topics
+        self.topicCollectionView.reloadData()
+    }
 }
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if topicCollectionView == collectionView {
+            return (topics.count > 3) ? 4 : 0
+        }
         return (trainers.count > 3) ? 4 : 0
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if topicCollectionView == collectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "topicCell", for: indexPath) as! TopicCell
+            cell.set(viewModel: topics[indexPath.row])
+            return cell
+        }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teacherCell", for: indexPath) as! TrainerCell
         cell.set(trainer: trainers[indexPath.row])
         return cell
@@ -130,7 +154,10 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-       return CGSize(width: 128.0, height: 142.0)
+        if topicCollectionView == collectionView {
+            return CGSize(width: 160.0, height: 150.0)
+        }
+        return CGSize(width: 128.0, height: 142.0)
     }
 }
 
@@ -150,7 +177,6 @@ extension HomeViewController: UIScrollViewDelegate {
             self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0, height: 2.0)
             self.navigationController?.navigationBar.layer.shadowRadius = 1
         } else {
-            print(offset)
             navigationItem.leftBarButtonItem?.customView?.alpha = offset
             navigationItem.rightBarButtonItem?.customView?.alpha = offset
             navigationItem.titleView?.alpha = offset

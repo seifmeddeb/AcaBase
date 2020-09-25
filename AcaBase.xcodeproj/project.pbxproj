@@ -47,6 +47,8 @@
 		3043BBE125094E7D005AB2A1 /* UIImageView+Helpers .swift in Sources */ = {isa = PBXBuildFile; fileRef = 3043BBE025094E7D005AB2A1 /* UIImageView+Helpers .swift */; };
 		3043BBE5250D7157005AB2A1 /* UIColor+CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3043BBE4250D7157005AB2A1 /* UIColor+CustomColors.swift */; };
 		3043BBE7250D7EFF005AB2A1 /* UINavigationController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3043BBE6250D7EFF005AB2A1 /* UINavigationController+Helpers.swift */; };
+		306683B5251D48E5004F8797 /* MainTabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306683B4251D48E5004F8797 /* MainTabbarViewController.swift */; };
+		306683BD251D4FF6004F8797 /* Tutor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 306683BC251D4FF6004F8797 /* Tutor.storyboard */; };
 		30775AB0245CD0B700677FE5 /* UserWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775AAF245CD0B700677FE5 /* UserWorker.swift */; };
 		30775AB2245CD0DC00677FE5 /* UserCoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775AB1245CD0DC00677FE5 /* UserCoreDataStore.swift */; };
 		30775AB4245CD21200677FE5 /* CoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775AB3245CD21200677FE5 /* CoreDataStore.swift */; };
@@ -140,6 +142,8 @@
 		3043BBE025094E7D005AB2A1 /* UIImageView+Helpers .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Helpers .swift"; sourceTree = "<group>"; };
 		3043BBE4250D7157005AB2A1 /* UIColor+CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColors.swift"; sourceTree = "<group>"; };
 		3043BBE6250D7EFF005AB2A1 /* UINavigationController+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Helpers.swift"; sourceTree = "<group>"; };
+		306683B4251D48E5004F8797 /* MainTabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarViewController.swift; sourceTree = "<group>"; };
+		306683BC251D4FF6004F8797 /* Tutor.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tutor.storyboard; sourceTree = "<group>"; };
 		30775AAF245CD0B700677FE5 /* UserWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWorker.swift; sourceTree = "<group>"; };
 		30775AB1245CD0DC00677FE5 /* UserCoreDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoreDataStore.swift; sourceTree = "<group>"; };
 		30775AB3245CD21200677FE5 /* CoreDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStore.swift; sourceTree = "<group>"; };
@@ -226,6 +230,7 @@
 			children = (
 				303139DE245C4DB5005EEF87 /* AppDelegate.swift */,
 				303139E0245C4DB5005EEF87 /* SceneDelegate.swift */,
+				306683B3251D48A9004F8797 /* Custom Views */,
 				3083A4DA246CA45100EEE2C8 /* Helpers */,
 				30775AAE245CD09300677FE5 /* Models */,
 				30775AAC245CD08200677FE5 /* Services */,
@@ -233,6 +238,7 @@
 				30313A1E245C50E7005EEF87 /* Scenes */,
 				303139E4245C4DB5005EEF87 /* Main.storyboard */,
 				3078CC8B2482CD4E009BB013 /* Home.storyboard */,
+				306683BC251D4FF6004F8797 /* Tutor.storyboard */,
 				303139EA245C4DB7005EEF87 /* Assets.xcassets */,
 				303139EC245C4DB7005EEF87 /* LaunchScreen.storyboard */,
 				303139EF245C4DB7005EEF87 /* Info.plist */,
@@ -368,6 +374,14 @@
 				30872B04250E41B400D2E6EE /* TopicCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		306683B3251D48A9004F8797 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				306683B4251D48E5004F8797 /* MainTabbarViewController.swift */,
+			);
+			path = "Custom Views";
 			sourceTree = "<group>";
 		};
 		30775AAC245CD08200677FE5 /* Services */ = {
@@ -560,6 +574,7 @@
 				303139EE245C4DB7005EEF87 /* LaunchScreen.storyboard in Resources */,
 				303139EB245C4DB7005EEF87 /* Assets.xcassets in Resources */,
 				303139E6245C4DB5005EEF87 /* Main.storyboard in Resources */,
+				306683BD251D4FF6004F8797 /* Tutor.storyboard in Resources */,
 				3078CC8C2482CD4E009BB013 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -656,6 +671,7 @@
 			files = (
 				30313A34245C5998005EEF87 /* LoginViewController.swift in Sources */,
 				3043BBCF25093681005AB2A1 /* Trainer.swift in Sources */,
+				306683B5251D48E5004F8797 /* MainTabbarViewController.swift in Sources */,
 				30313A31245C5998005EEF87 /* LoginWorker.swift in Sources */,
 				303139E9245C4DB5005EEF87 /* AcaBase.xcdatamodeld in Sources */,
 				3043BBE7250D7EFF005AB2A1 /* UINavigationController+Helpers.swift in Sources */,

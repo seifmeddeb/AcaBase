@@ -97,6 +97,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     
     @objc func clickRightButton() {
         print("clickRightButton")
+        router?.routeToLogin(segue: nil)
     }
     
     @objc func clickLeftButton() {
@@ -159,6 +160,11 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         }
         return CGSize(width: 128.0, height: 142.0)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "DetailTutor", sender: self)
+    }
+    
 }
 
 // MARK: Navigation Bar Animation

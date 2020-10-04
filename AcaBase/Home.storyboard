@@ -211,6 +211,9 @@ Lorem Ipsum is simply dummy text of the printing.</string>
                                                                 </fragment>
                                                             </attributedString>
                                                         </state>
+                                                        <connections>
+                                                            <segue destination="Naa-T8-hkr" kind="show" identifier="TutorList" id="DPs-SM-zBN"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -610,6 +613,16 @@ Lorem Ipsum is simply dummy text of the printing.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RmX-cn-hxT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2509" y="50"/>
+        </scene>
+        <!--TutorList-->
+        <scene sceneID="h2k-4s-kiF">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TutorList" id="Naa-T8-hkr" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="3Lt-QJ-CzM"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g56-gB-gRt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2580" y="146"/>
         </scene>
         <!--Main Tabbar View Controller-->
         <scene sceneID="q8K-Ip-bIG">

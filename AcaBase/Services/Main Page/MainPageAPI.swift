@@ -11,7 +11,7 @@ import Alamofire
 
 class MainPageAPI : MainPageStoreProtocol {
     
-    func fetchTrainers(completionHandler: @escaping (() throws -> [TrainerDAO]) -> Void) {
+    func fetchTrainers(completionHandler: @escaping (() throws -> [TutorDAO]) -> Void) {
         let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer "+UserDefaults.standard.string(forKey: "token")!)])
         
         AF.request(trainersUrl,
@@ -19,7 +19,7 @@ class MainPageAPI : MainPageStoreProtocol {
                    parameters: nil,
                    headers: headers)
             .validate(statusCode:200..<300)
-            .responseDecodable(of: [TrainerDAO].self) { response in
+            .responseDecodable(of: [TutorDAO].self) { response in
                 
                 guard let trainersList = response.value else {
                     print("fetchTrainers: \(response.error!)")

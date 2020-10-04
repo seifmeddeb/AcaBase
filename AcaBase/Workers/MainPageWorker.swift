@@ -20,7 +20,7 @@ class MainPageWorker {
 
 protocol MainPageStoreProtocol {
     
-    func fetchTrainers(completionHandler: @escaping (() throws -> [TrainerDAO]) -> Void)
+    func fetchTrainers(completionHandler: @escaping (() throws -> [TutorDAO]) -> Void)
     func fetchTopics(completionHandler: @escaping (() throws -> [TopicDAO]) -> Void)
     
 }

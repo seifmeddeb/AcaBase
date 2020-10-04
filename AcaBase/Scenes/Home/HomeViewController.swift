@@ -14,7 +14,7 @@ import UIKit
 
 protocol HomeDisplayLogic: class
 {
-    func displayTrainers(viewModel: Home.Trainers.ViewModel)
+    func displayTrainers(viewModel: Home.Tutors.ViewModel)
     func displayTopics(viewModel: Home.Topics.ViewModel)
 }
 
@@ -22,7 +22,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
 {
     var interactor: HomeBusinessLogic?
     var router: (NSObjectProtocol & HomeRoutingLogic & HomeDataPassing)?
-    
+    var offset = CGFloat()
     // MARK: Object lifecycle
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
@@ -73,7 +73,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     
     // MARK: Properties
     
-    var trainers = [TrainerDAO]()
+    var trainers = [TutorDAO]()
     var topics = [TopicDAO]()
     
     // MARK: View lifecycle
@@ -83,12 +83,37 @@ class HomeViewController: UIViewController, HomeDisplayLogic
         super.viewDidLoad()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.setHomePageNavBar(for: self.navigationItem)
         scrollView.delegate = self
         getTrainers()
         getTopics()
+        self.setNeedsStatusBarAppearanceUpdate()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if let navigationBar = self.navigationController?.navigationBar {
+            let navBarAppearance = UINavigationBarAppearance()
+            // bar appearance making navbar not transparent
+            navigationBar.standardAppearance = navBarAppearance
+            navigationBar.scrollEdgeAppearance = navBarAppearance
+            navigationBar.compactAppearance = navBarAppearance
+            navigationBar.barStyle = .default
+            navigationBar.prefersLargeTitles = false
+            navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationBar.shadowImage = UIImage()
+            
+        }
+        self.setHomePageNavBar(for: self.navigationItem, titleViewOpacity: offset)
+        navbarAnimation()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        navbarAnimation()
+    }
     // MARK: Actions
     
     @objc func clickTitleButton() {
@@ -110,14 +135,14 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     // MARK: get Trainers
     func getTrainers()
     {
-        let request = Home.Trainers.Request()
+        let request = Home.Tutors.Request()
         interactor?.getTrainers(request: request)
     }
     
-    func displayTrainers(viewModel: Home.Trainers.ViewModel)
+    func displayTrainers(viewModel: Home.Tutors.ViewModel)
     {
         //nameTextField.text = viewModel.name
-        trainers = viewModel.trainers
+        trainers = viewModel.tutors
         self.collectionView.reloadData()
     }
     
@@ -131,6 +156,29 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     func displayTopics(viewModel: Home.Topics.ViewModel) {
         topics = viewModel.topics
         self.topicCollectionView.reloadData()
+    }
+    
+    // MARK: Private functions
+    
+    private func navbarAnimation(){
+        if offset > 1 {
+            offset = 1
+            navigationItem.leftBarButtonItem?.customView?.alpha = 1
+            navigationItem.rightBarButtonItem?.customView?.alpha = 1
+            navigationItem.titleView?.alpha = 1
+            navigationController?.navigationBar.backgroundColor = UIColor(white: 1, alpha: 1)
+            self.navigationController?.navigationBar.layer.masksToBounds = false
+            self.navigationController?.navigationBar.layer.shadowColor = UIColor.lightGray.cgColor
+            self.navigationController?.navigationBar.layer.shadowOpacity = 0.8
+            self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+            self.navigationController?.navigationBar.layer.shadowRadius = 1
+        } else {
+            navigationItem.leftBarButtonItem?.customView?.alpha = offset
+            navigationItem.rightBarButtonItem?.customView?.alpha = offset
+            navigationItem.titleView?.alpha = offset
+            self.navigationController?.navigationBar.alpha = offset
+            navigationController?.navigationBar.backgroundColor = UIColor(white: 1, alpha: offset)
+        }
     }
 }
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -164,29 +212,12 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         performSegue(withIdentifier: "DetailTutor", sender: self)
     }
-    
 }
 
 // MARK: Navigation Bar Animation
 extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        var offset = self.scrollView.contentOffset.y / 150
-        if offset > 1 {
-            offset = 1
-            navigationItem.leftBarButtonItem?.customView?.alpha = 1
-            navigationItem.rightBarButtonItem?.customView?.alpha = 1
-            navigationItem.titleView?.alpha = 1
-            navigationController?.navigationBar.backgroundColor = UIColor(white: 1, alpha: 1)
-            self.navigationController?.navigationBar.layer.masksToBounds = false
-            self.navigationController?.navigationBar.layer.shadowColor = UIColor.lightGray.cgColor
-            self.navigationController?.navigationBar.layer.shadowOpacity = 0.8
-            self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-            self.navigationController?.navigationBar.layer.shadowRadius = 1
-        } else {
-            navigationItem.leftBarButtonItem?.customView?.alpha = offset
-            navigationItem.rightBarButtonItem?.customView?.alpha = offset
-            navigationItem.titleView?.alpha = offset
-            navigationController?.navigationBar.backgroundColor = UIColor(white: 1, alpha: offset)
-        }
+        self.offset = self.scrollView.contentOffset.y / 150
+        self.navbarAnimation()
     }
 }

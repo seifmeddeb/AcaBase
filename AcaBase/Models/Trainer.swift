@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct TrainerDAO : Codable {
+struct TutorDAO : Codable {
     
     var objectId: Int
     var email: String

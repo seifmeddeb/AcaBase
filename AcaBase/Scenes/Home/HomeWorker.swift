@@ -21,8 +21,8 @@ class HomeWorker {
         self.mainPageStore = mainPageStore
     }
     
-    func getTrainers(completionHandler: @escaping ([TrainerDAO]?) -> Void) {
-        self.mainPageStore.fetchTrainers() { (trainers: () throws -> [TrainerDAO]) -> Void in
+    func getTutors(completionHandler: @escaping ([TutorDAO]?) -> Void) {
+        self.mainPageStore.fetchTrainers() { (trainers: () throws -> [TutorDAO]) -> Void in
             do {
                 let trainers = try trainers()
                 DispatchQueue.main.async {

@@ -37,10 +37,18 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginNavController)
     }
     
-    func routeToDetailTutor(segue: UIStoryboardSegue?) {
+    @objc func routeToDetailTutor(segue: UIStoryboardSegue?) {
         if let segue = segue {
-            print("works")
+            let destinationVC = segue.destination as! TutorViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToDetailTutor(source: dataStore!, destination: &destinationDS)
         }
+    }
+    
+    func passDataToDetailTutor(source: HomeDataStore, destination: inout TutorDataStore)
+    {
+        let selectedRow = viewController?.collectionView?.indexPathsForSelectedItems?[0].row
+        destination.tutorToDisplay = source.tutors?[selectedRow!]
     }
     
     //func routeToSomewhere(segue: UIStoryboardSegue?)

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIViewController{
-    func setHomePageNavBar(for navigationItem: UINavigationItem){
+    func setHomePageNavBar(for navigationItem: UINavigationItem, titleViewOpacity: CGFloat? = nil){
         
         let homeViewController = self as! HomeViewController
         let button =  UIButton(type: .custom)
@@ -22,6 +22,9 @@ extension UIViewController{
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         button.setTitle("Poser une question", for: .normal)
         button.cornerRadius = 17
+        if let alpha = titleViewOpacity {
+            button.alpha = alpha
+        }
         button.addTarget(self, action: #selector(homeViewController.clickTitleButton), for: .touchUpInside)
         navigationItem.titleView = button
         

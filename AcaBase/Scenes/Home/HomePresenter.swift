@@ -14,7 +14,7 @@ import UIKit
 
 protocol HomePresentationLogic
 {
-    func presentTrainers(response: Home.Trainers.Response)
+    func presentTrainers(response: Home.Tutors.Response)
     func presentTopics(response: Home.Topics.Response)
 }
 
@@ -24,9 +24,9 @@ class HomePresenter: HomePresentationLogic
     
     // MARK: Do something
     
-    func presentTrainers(response: Home.Trainers.Response)
+    func presentTrainers(response: Home.Tutors.Response)
     {
-        let viewModel = Home.Trainers.ViewModel(trainers: response.trainers ?? [TrainerDAO](), errorMsg: "error fetching trainers")
+        let viewModel = Home.Tutors.ViewModel(tutors: response.tutors ?? [TutorDAO](), errorMsg: "error fetching trainers")
         viewController?.displayTrainers(viewModel: viewModel)
         
     }

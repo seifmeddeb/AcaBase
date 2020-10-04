@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3019FCF82520F36E004C259E /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3083A4DD246DB54300EEE2C8 /* CustomView.swift */; };
+		3019FD05252107F9004C259E /* TutorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3019FCFF252107F9004C259E /* TutorPresenter.swift */; };
+		3019FD06252107F9004C259E /* TutorWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3019FD00252107F9004C259E /* TutorWorker.swift */; };
+		3019FD07252107F9004C259E /* TutorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3019FD01252107F9004C259E /* TutorRouter.swift */; };
+		3019FD08252107F9004C259E /* TutorModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3019FD02252107F9004C259E /* TutorModels.swift */; };
+		3019FD09252107F9004C259E /* TutorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3019FD03252107F9004C259E /* TutorViewController.swift */; };
+		3019FD0A252107F9004C259E /* TutorInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3019FD04252107F9004C259E /* TutorInteractor.swift */; };
 		303139DF245C4DB5005EEF87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303139DE245C4DB5005EEF87 /* AppDelegate.swift */; };
 		303139E1245C4DB5005EEF87 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303139E0245C4DB5005EEF87 /* SceneDelegate.swift */; };
 		303139E6245C4DB5005EEF87 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 303139E4245C4DB5005EEF87 /* Main.storyboard */; };
@@ -66,11 +73,17 @@
 		307A2F0E249672F500F15F3C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307A2F08249672F500F15F3C /* HomeViewController.swift */; };
 		307A2F0F249672F500F15F3C /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307A2F09249672F500F15F3C /* HomeInteractor.swift */; };
 		3083A4DC246CA48400EEE2C8 /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3083A4DB246CA48400EEE2C8 /* ImagePickerManager.swift */; };
-		3083A4DE246DB54300EEE2C8 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3083A4DD246DB54300EEE2C8 /* CustomView.swift */; };
 		3083A4E02472260200EEE2C8 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3083A4DF2472260200EEE2C8 /* Strings.swift */; };
 		3083A4E22472E07300EEE2C8 /* DataValidationWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3083A4E12472E07300EEE2C8 /* DataValidationWorker.swift */; };
 		30872B05250E41B400D2E6EE /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30872B04250E41B400D2E6EE /* TopicCell.swift */; };
 		30872B07250E432800D2E6EE /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30872B06250E432800D2E6EE /* Topic.swift */; };
+		30F8BE462528C4C50059417A /* TutorListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F8BE402528C4C50059417A /* TutorListPresenter.swift */; };
+		30F8BE472528C4C50059417A /* TutorListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F8BE412528C4C50059417A /* TutorListWorker.swift */; };
+		30F8BE482528C4C50059417A /* TutorListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F8BE422528C4C50059417A /* TutorListRouter.swift */; };
+		30F8BE492528C4C50059417A /* TutorListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F8BE432528C4C50059417A /* TutorListModels.swift */; };
+		30F8BE4A2528C4C50059417A /* TutorListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F8BE442528C4C50059417A /* TutorListViewController.swift */; };
+		30F8BE4B2528C4C50059417A /* TutorListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F8BE452528C4C50059417A /* TutorListInteractor.swift */; };
+		30F8BE502528C5090059417A /* TutorList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30F8BE4F2528C5090059417A /* TutorList.storyboard */; };
 		51683FFD1B9F193EA06AB7DB /* libPods-AcaBaseUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5906901FA5016DC76F23FED /* libPods-AcaBaseUITests.a */; };
 		AA473CEBF170754F8EC9456C /* libPods-AcaBaseTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC8C062BCE194DD30CC3A562 /* libPods-AcaBaseTests.a */; };
 		E4D1E5B2FDB80F93305209FC /* libPods-AcaBase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 260DBC0908F80714B48D644A /* libPods-AcaBase.a */; };
@@ -96,6 +109,12 @@
 /* Begin PBXFileReference section */
 		02A2602EC87E343B44F096C7 /* Pods-AcaBase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AcaBase.debug.xcconfig"; path = "Target Support Files/Pods-AcaBase/Pods-AcaBase.debug.xcconfig"; sourceTree = "<group>"; };
 		260DBC0908F80714B48D644A /* libPods-AcaBase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AcaBase.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3019FCFF252107F9004C259E /* TutorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorPresenter.swift; sourceTree = "<group>"; };
+		3019FD00252107F9004C259E /* TutorWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorWorker.swift; sourceTree = "<group>"; };
+		3019FD01252107F9004C259E /* TutorRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorRouter.swift; sourceTree = "<group>"; };
+		3019FD02252107F9004C259E /* TutorModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorModels.swift; sourceTree = "<group>"; };
+		3019FD03252107F9004C259E /* TutorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorViewController.swift; sourceTree = "<group>"; };
+		3019FD04252107F9004C259E /* TutorInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorInteractor.swift; sourceTree = "<group>"; };
 		303139DB245C4DB4005EEF87 /* AcaBase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AcaBase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		303139DE245C4DB5005EEF87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		303139E0245C4DB5005EEF87 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -166,6 +185,13 @@
 		3083A4E12472E07300EEE2C8 /* DataValidationWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataValidationWorker.swift; sourceTree = "<group>"; };
 		30872B04250E41B400D2E6EE /* TopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
 		30872B06250E432800D2E6EE /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
+		30F8BE402528C4C50059417A /* TutorListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorListPresenter.swift; sourceTree = "<group>"; };
+		30F8BE412528C4C50059417A /* TutorListWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorListWorker.swift; sourceTree = "<group>"; };
+		30F8BE422528C4C50059417A /* TutorListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorListRouter.swift; sourceTree = "<group>"; };
+		30F8BE432528C4C50059417A /* TutorListModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorListModels.swift; sourceTree = "<group>"; };
+		30F8BE442528C4C50059417A /* TutorListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorListViewController.swift; sourceTree = "<group>"; };
+		30F8BE452528C4C50059417A /* TutorListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorListInteractor.swift; sourceTree = "<group>"; };
+		30F8BE4F2528C5090059417A /* TutorList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TutorList.storyboard; sourceTree = "<group>"; };
 		41972351D4544088E9047F88 /* Pods-AcaBase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AcaBase.release.xcconfig"; path = "Target Support Files/Pods-AcaBase/Pods-AcaBase.release.xcconfig"; sourceTree = "<group>"; };
 		5B1B7CFB2263F72134078256 /* Pods-AcaBaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AcaBaseUITests.debug.xcconfig"; path = "Target Support Files/Pods-AcaBaseUITests/Pods-AcaBaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8A82A2FB947AEDAC2C20A8B5 /* Pods-AcaBaseUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AcaBaseUITests.release.xcconfig"; path = "Target Support Files/Pods-AcaBaseUITests/Pods-AcaBaseUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -203,6 +229,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3019FD0E25210810004C259E /* TutorDetails */ = {
+			isa = PBXGroup;
+			children = (
+				3019FCFF252107F9004C259E /* TutorPresenter.swift */,
+				3019FD00252107F9004C259E /* TutorWorker.swift */,
+				3019FD01252107F9004C259E /* TutorRouter.swift */,
+				3019FD02252107F9004C259E /* TutorModels.swift */,
+				3019FD03252107F9004C259E /* TutorViewController.swift */,
+				3019FD04252107F9004C259E /* TutorInteractor.swift */,
+			);
+			path = TutorDetails;
+			sourceTree = "<group>";
+		};
 		303139D2245C4DB4005EEF87 = {
 			isa = PBXGroup;
 			children = (
@@ -239,6 +278,7 @@
 				303139E4245C4DB5005EEF87 /* Main.storyboard */,
 				3078CC8B2482CD4E009BB013 /* Home.storyboard */,
 				306683BC251D4FF6004F8797 /* Tutor.storyboard */,
+				30F8BE4F2528C5090059417A /* TutorList.storyboard */,
 				303139EA245C4DB7005EEF87 /* Assets.xcassets */,
 				303139EC245C4DB7005EEF87 /* LaunchScreen.storyboard */,
 				303139EF245C4DB7005EEF87 /* Info.plist */,
@@ -282,6 +322,8 @@
 		30313A1E245C50E7005EEF87 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				30F8BE3F2528C4870059417A /* AllTutors */,
+				3019FD0E25210810004C259E /* TutorDetails */,
 				307A2F102496730100F15F3C /* Home */,
 				30313A1D245C50DA005EEF87 /* Splash */,
 				30313A29245C5972005EEF87 /* Login */,
@@ -441,6 +483,19 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		30F8BE3F2528C4870059417A /* AllTutors */ = {
+			isa = PBXGroup;
+			children = (
+				30F8BE402528C4C50059417A /* TutorListPresenter.swift */,
+				30F8BE412528C4C50059417A /* TutorListWorker.swift */,
+				30F8BE422528C4C50059417A /* TutorListRouter.swift */,
+				30F8BE432528C4C50059417A /* TutorListModels.swift */,
+				30F8BE442528C4C50059417A /* TutorListViewController.swift */,
+				30F8BE452528C4C50059417A /* TutorListInteractor.swift */,
+			);
+			path = AllTutors;
+			sourceTree = "<group>";
+		};
 		B95F9307C9A9FA2510736A02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -574,6 +629,7 @@
 				303139EE245C4DB7005EEF87 /* LaunchScreen.storyboard in Resources */,
 				303139EB245C4DB7005EEF87 /* Assets.xcassets in Resources */,
 				303139E6245C4DB5005EEF87 /* Main.storyboard in Resources */,
+				30F8BE502528C5090059417A /* TutorList.storyboard in Resources */,
 				306683BD251D4FF6004F8797 /* Tutor.storyboard in Resources */,
 				3078CC8C2482CD4E009BB013 /* Home.storyboard in Resources */,
 			);
@@ -669,14 +725,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30F8BE472528C4C50059417A /* TutorListWorker.swift in Sources */,
 				30313A34245C5998005EEF87 /* LoginViewController.swift in Sources */,
 				3043BBCF25093681005AB2A1 /* Trainer.swift in Sources */,
 				306683B5251D48E5004F8797 /* MainTabbarViewController.swift in Sources */,
 				30313A31245C5998005EEF87 /* LoginWorker.swift in Sources */,
+				30F8BE482528C4C50059417A /* TutorListRouter.swift in Sources */,
 				303139E9245C4DB5005EEF87 /* AcaBase.xcdatamodeld in Sources */,
 				3043BBE7250D7EFF005AB2A1 /* UINavigationController+Helpers.swift in Sources */,
 				307A2F0F249672F500F15F3C /* HomeInteractor.swift in Sources */,
+				3019FD05252107F9004C259E /* TutorPresenter.swift in Sources */,
+				3019FCF82520F36E004C259E /* CustomView.swift in Sources */,
 				30775AB8245DA8EC00677FE5 /* UserAPI.swift in Sources */,
+				3019FD0A252107F9004C259E /* TutorInteractor.swift in Sources */,
 				30775AB6245CD84100677FE5 /* User.swift in Sources */,
 				30313A32245C5998005EEF87 /* LoginRouter.swift in Sources */,
 				307A2F0C249672F500F15F3C /* HomeRouter.swift in Sources */,
@@ -687,6 +748,7 @@
 				3043BBDC25093B91005AB2A1 /* Endpoints.swift in Sources */,
 				30313A40245C66D3005EEF87 /* SubscribeModels.swift in Sources */,
 				3043BBE5250D7157005AB2A1 /* UIColor+CustomColors.swift in Sources */,
+				30F8BE4B2528C4C50059417A /* TutorListInteractor.swift in Sources */,
 				307A2F0D249672F500F15F3C /* HomeModels.swift in Sources */,
 				307A2F0E249672F500F15F3C /* HomeViewController.swift in Sources */,
 				30775AB4245CD21200677FE5 /* CoreDataStore.swift in Sources */,
@@ -699,7 +761,6 @@
 				303139DF245C4DB5005EEF87 /* AppDelegate.swift in Sources */,
 				303139E1245C4DB5005EEF87 /* SceneDelegate.swift in Sources */,
 				30313A30245C5998005EEF87 /* LoginPresenter.swift in Sources */,
-				3083A4DE246DB54300EEE2C8 /* CustomView.swift in Sources */,
 				30313A42245C66D3005EEF87 /* SubscribeInteractor.swift in Sources */,
 				30313A41245C66D3005EEF87 /* SubscribeViewController.swift in Sources */,
 				3078CC88247F7344009BB013 /* UIViewController+Helpers.swift in Sources */,
@@ -710,8 +771,15 @@
 				30313A3E245C66D3005EEF87 /* SubscribeWorker.swift in Sources */,
 				30313A3F245C66D3005EEF87 /* SubscribeRouter.swift in Sources */,
 				30313A17245C50CE005EEF87 /* SplashPresenter.swift in Sources */,
+				30F8BE492528C4C50059417A /* TutorListModels.swift in Sources */,
 				30775AB2245CD0DC00677FE5 /* UserCoreDataStore.swift in Sources */,
+				3019FD09252107F9004C259E /* TutorViewController.swift in Sources */,
+				3019FD07252107F9004C259E /* TutorRouter.swift in Sources */,
+				30F8BE4A2528C4C50059417A /* TutorListViewController.swift in Sources */,
 				307A2F0A249672F500F15F3C /* HomePresenter.swift in Sources */,
+				3019FD06252107F9004C259E /* TutorWorker.swift in Sources */,
+				3019FD08252107F9004C259E /* TutorModels.swift in Sources */,
+				30F8BE462528C4C50059417A /* TutorListPresenter.swift in Sources */,
 				30313A18245C50CE005EEF87 /* SplashWorker.swift in Sources */,
 				30313A33245C5998005EEF87 /* LoginModels.swift in Sources */,
 				3043BBD5250939CE005AB2A1 /* MainPageWorker.swift in Sources */,

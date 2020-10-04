@@ -16,7 +16,7 @@ class TrainerCell: UICollectionViewCell {
     @IBOutlet weak var answersNbrLabel: UILabel!
     
     
-    func set(trainer: TrainerDAO){
+    func set(trainer: TutorDAO){
         trainerImageView.setImageAsync(url: URL(string:trainer.picture ?? ""))
         nameLabel.text = trainer.fullName
         subjectLabel.text = trainer.followers ?? ""

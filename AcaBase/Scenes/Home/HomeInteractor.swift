@@ -14,27 +14,28 @@ import UIKit
 
 protocol HomeBusinessLogic
 {
-    func getTrainers(request: Home.Trainers.Request)
+    func getTrainers(request: Home.Tutors.Request)
     func getTopics(request: Home.Topics.Request)
 }
 
 protocol HomeDataStore
 {
-    //var name: String { get set }
+    var tutors: [TutorDAO]? { get set }
 }
 
 class HomeInteractor: HomeBusinessLogic, HomeDataStore
 {
     var presenter: HomePresentationLogic?
     var workerApi = HomeWorker(mainPageStore: MainPageAPI())
-    //var name: String = ""
+    var tutors: [TutorDAO]?
     
     // MARK: HomeBusinessLogic Stubs
     
-    func getTrainers(request: Home.Trainers.Request)
+    func getTrainers(request: Home.Tutors.Request)
     {
-        workerApi.getTrainers { (trainers) in
-            let response = Home.Trainers.Response(trainers:trainers )
+        workerApi.getTutors { (tutors) in
+            self.tutors = tutors
+            let response = Home.Tutors.Response(tutors:tutors )
             self.presenter?.presentTrainers(response: response)
         }
     }

@@ -14,28 +14,27 @@ import UIKit
 
 protocol TutorListBusinessLogic
 {
-  func doSomething(request: TutorList.Something.Request)
+    func getTutors(request: TutorList.Tutors.Request)
 }
 
 protocol TutorListDataStore
 {
-  //var name: String { get set }
+    var tutorList : [TutorDAO]? { get set }
 }
 
 class TutorListInteractor: TutorListBusinessLogic, TutorListDataStore
 {
-  var presenter: TutorListPresentationLogic?
-  var worker: TutorListWorker?
-  //var name: String = ""
-  
-  // MARK: Do something
-  
-  func doSomething(request: TutorList.Something.Request)
-  {
-    worker = TutorListWorker()
-    worker?.doSomeWork()
+    var presenter: TutorListPresentationLogic?
+    var worker: TutorListWorker?
+    var tutorList : [TutorDAO]?
     
-    let response = TutorList.Something.Response()
-    presenter?.presentSomething(response: response)
-  }
+    // MARK: Do something
+    
+    func getTutors(request: TutorList.Tutors.Request)
+    {
+        if let tutorList = self.tutorList {
+        let response = TutorList.Tutors.Response(tutorList: tutorList)
+        presenter?.presentTutorList(response: response)
+        }
+    }
 }

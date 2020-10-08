@@ -14,18 +14,26 @@ import UIKit
 
 protocol TutorListPresentationLogic
 {
-  func presentSomething(response: TutorList.Something.Response)
+    func presentTutorList(response: TutorList.Tutors.Response)
 }
 
 class TutorListPresenter: TutorListPresentationLogic
 {
-  weak var viewController: TutorListDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentSomething(response: TutorList.Something.Response)
-  {
-    let viewModel = TutorList.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
-  }
+    weak var viewController: TutorListDisplayLogic?
+    
+    // MARK: Do something
+    
+    func presentTutorList(response: TutorList.Tutors.Response)
+    {
+        var tutorViewModels = [TutorViewModel]()
+        
+        for tutor in response.tutorList {
+            let subjects = getSubjectsString(for: tutor.subjects)
+            let imageUrl = URL(string: tutor.picture ?? "")
+            let tutor = TutorViewModel(model: tutor, subjects: subjects, imageUrl: imageUrl)
+            tutorViewModels.append(tutor)
+        }
+        let viewModel = TutorList.Tutors.ViewModel(tutorList: tutorViewModels)
+        viewController?.displayTutorList(viewModel: viewModel)
+    }
 }

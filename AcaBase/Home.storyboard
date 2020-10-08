@@ -19,10 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8EY-bz-Y8A">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l3u-9z-5SK" userLabel="content view">
-                                        <rect key="frame" x="0.0" y="-44" width="414" height="1500"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1500"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home-image-4000x4000" translatesAutoresizingMaskIntoConstraints="NO" id="H7j-pH-1if">
                                                 <rect key="frame" x="0.0" y="-75" width="414" height="414"/>
@@ -63,7 +63,7 @@
                                                 <state key="normal" image="notif"/>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="SM7-wY-P5m">
-                                                <rect key="frame" x="344" y="20" width="20" height="20"/>
+                                                <rect key="frame" x="20" y="20" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="HQh-fp-GkV"/>
                                                     <constraint firstAttribute="height" constant="20" id="uDT-gT-nWY"/>
@@ -548,6 +548,7 @@ Lorem Ipsum is simply dummy text of the printing.</string>
                                             <constraint firstItem="PXK-HV-vVE" firstAttribute="leading" secondItem="l3u-9z-5SK" secondAttribute="leading" constant="20" id="DhN-cC-qr5"/>
                                             <constraint firstAttribute="trailing" secondItem="8P0-qq-4Y9" secondAttribute="trailing" id="DnD-Ig-ZrS"/>
                                             <constraint firstItem="PXK-HV-vVE" firstAttribute="top" secondItem="HJ3-mn-dwA" secondAttribute="bottom" constant="20" id="FFQ-pc-wRI"/>
+                                            <constraint firstItem="SM7-wY-P5m" firstAttribute="leading" secondItem="l3u-9z-5SK" secondAttribute="leading" constant="20" id="HX3-km-Ygc"/>
                                             <constraint firstItem="xD0-FY-G5n" firstAttribute="leading" secondItem="l3u-9z-5SK" secondAttribute="leading" constant="20" id="Ld3-mX-q24"/>
                                             <constraint firstAttribute="trailing" secondItem="5kC-VM-sNf" secondAttribute="trailing" constant="20" id="ODQ-rN-IPA"/>
                                             <constraint firstItem="xD0-FY-G5n" firstAttribute="top" secondItem="THP-kq-tl9" secondAttribute="bottom" constant="15" id="Ote-DU-EG5"/>
@@ -560,7 +561,6 @@ Lorem Ipsum is simply dummy text of the printing.</string>
                                             <constraint firstItem="5kC-VM-sNf" firstAttribute="leading" secondItem="l3u-9z-5SK" secondAttribute="leading" constant="20" id="hFO-n5-nTJ"/>
                                             <constraint firstAttribute="trailing" secondItem="PXK-HV-vVE" secondAttribute="trailing" constant="20" id="i6F-af-TcY"/>
                                             <constraint firstItem="8P0-qq-4Y9" firstAttribute="top" secondItem="HJ3-mn-dwA" secondAttribute="bottom" constant="15.5" id="i6y-oK-u3k"/>
-                                            <constraint firstItem="EEF-qR-Vpx" firstAttribute="leading" secondItem="SM7-wY-P5m" secondAttribute="trailing" constant="10" id="jVq-QD-YX1"/>
                                             <constraint firstItem="H7j-pH-1if" firstAttribute="leading" secondItem="l3u-9z-5SK" secondAttribute="leading" id="mIg-aT-zLz"/>
                                             <constraint firstItem="HJ3-mn-dwA" firstAttribute="top" secondItem="5kC-VM-sNf" secondAttribute="bottom" constant="15" id="nba-G7-NuE"/>
                                             <constraint firstItem="CrX-bG-NuY" firstAttribute="width" secondItem="l3u-9z-5SK" secondAttribute="width" multiplier="0.8" id="pKy-Cr-n4V"/>
@@ -574,27 +574,27 @@ Lorem Ipsum is simply dummy text of the printing.</string>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="l3u-9z-5SK" firstAttribute="trailing" secondItem="8EY-bz-Y8A" secondAttribute="trailing" id="6Wx-cy-c7R"/>
-                                    <constraint firstItem="l3u-9z-5SK" firstAttribute="top" secondItem="8EY-bz-Y8A" secondAttribute="top" constant="-44" id="BYQ-Hu-BGU"/>
+                                    <constraint firstItem="l3u-9z-5SK" firstAttribute="top" secondItem="8EY-bz-Y8A" secondAttribute="top" id="BYQ-Hu-BGU"/>
                                     <constraint firstItem="l3u-9z-5SK" firstAttribute="leading" secondItem="8EY-bz-Y8A" secondAttribute="leading" id="Pyf-lZ-WEl"/>
                                     <constraint firstItem="l3u-9z-5SK" firstAttribute="width" secondItem="8EY-bz-Y8A" secondAttribute="width" id="foI-1m-zWM"/>
                                     <constraint firstItem="l3u-9z-5SK" firstAttribute="bottom" secondItem="8EY-bz-Y8A" secondAttribute="bottom" id="zho-eT-a4F"/>
                                 </constraints>
-                                <inset key="scrollIndicatorInsets" minX="0.0" minY="-44" maxX="0.0" maxY="0.0"/>
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bjK-aa-Si6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="8EY-bz-Y8A" firstAttribute="top" secondItem="qhC-p4-NI7" secondAttribute="top" constant="44" id="AHS-IE-8O6"/>
                             <constraint firstItem="8EY-bz-Y8A" firstAttribute="leading" secondItem="bjK-aa-Si6" secondAttribute="leading" id="C8X-Ho-Wnp"/>
                             <constraint firstItem="bjK-aa-Si6" firstAttribute="trailing" secondItem="8EY-bz-Y8A" secondAttribute="trailing" id="Fbk-Th-nGa"/>
                             <constraint firstItem="bjK-aa-Si6" firstAttribute="bottom" secondItem="8EY-bz-Y8A" secondAttribute="bottom" id="bNT-76-9t1"/>
+                            <constraint firstItem="8EY-bz-Y8A" firstAttribute="top" secondItem="bjK-aa-Si6" secondAttribute="top" id="l0x-Am-vlc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="eWV-xv-RsP"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="collectionView" destination="HJ3-mn-dwA" id="cZv-8J-4gn"/>
+                        <outlet property="scrollTopConstraint" destination="BYQ-Hu-BGU" id="UxC-mJ-mPL"/>
                         <outlet property="scrollView" destination="8EY-bz-Y8A" id="Bno-rp-Ysb"/>
                         <outlet property="topicCollectionView" destination="AEZ-FE-g1X" id="HXS-iL-ynj"/>
                         <segue destination="XJZ-a2-o1n" kind="presentation" identifier="DetailTutor" modalPresentationStyle="overFullScreen" modalTransitionStyle="coverVertical" id="Pdf-D7-eda"/>

@@ -45,12 +45,24 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing
         }
     }
     
+    @objc func routeToTutorList(segue: UIStoryboardSegue?) {
+        if let segue = segue {
+            let destinationVC = segue.destination as! TutorListViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToTutorList(source: dataStore!, destination: &destinationDS)
+        }
+    }
+    
     func passDataToDetailTutor(source: HomeDataStore, destination: inout TutorDataStore)
     {
         let selectedRow = viewController?.collectionView?.indexPathsForSelectedItems?[0].row
         destination.tutorToDisplay = source.tutors?[selectedRow!]
     }
     
+    func passDataToTutorList(source: HomeDataStore, destination: inout TutorListDataStore)
+    {
+        destination.tutorList = source.tutors ?? [TutorDAO]()
+    }
     //func routeToSomewhere(segue: UIStoryboardSegue?)
     //{
     //  if let segue = segue {

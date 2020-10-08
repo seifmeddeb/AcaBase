@@ -14,18 +14,27 @@ import UIKit
 
 enum TutorList
 {
-  // MARK: Use cases
-  
-  enum Something
-  {
-    struct Request
+    // MARK: Use cases
+    
+    enum Tutors
     {
+        struct Request
+        {
+        }
+        struct Response
+        {
+            var tutorList = [TutorDAO]()
+        }
+        struct ViewModel
+        {
+            var tutorList = [TutorViewModel]()            
+        }
     }
-    struct Response
-    {
-    }
-    struct ViewModel
-    {
-    }
-  }
+}
+
+struct TutorViewModel {
+    
+    var model : TutorDAO
+    var subjects : String
+    var imageUrl : URL?
 }

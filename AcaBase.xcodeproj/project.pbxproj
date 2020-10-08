@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		300E9A26252E6DD800E37E11 /* TutorListViewController+UIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300E9A25252E6DD800E37E11 /* TutorListViewController+UIHelpers.swift */; };
+		300E9A2B252E878600E37E11 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300E9A2A252E878600E37E11 /* HelperFunctions.swift */; };
 		3019FCF82520F36E004C259E /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3083A4DD246DB54300EEE2C8 /* CustomView.swift */; };
 		3019FD05252107F9004C259E /* TutorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3019FCFF252107F9004C259E /* TutorPresenter.swift */; };
 		3019FD06252107F9004C259E /* TutorWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3019FD00252107F9004C259E /* TutorWorker.swift */; };
@@ -109,6 +111,8 @@
 /* Begin PBXFileReference section */
 		02A2602EC87E343B44F096C7 /* Pods-AcaBase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AcaBase.debug.xcconfig"; path = "Target Support Files/Pods-AcaBase/Pods-AcaBase.debug.xcconfig"; sourceTree = "<group>"; };
 		260DBC0908F80714B48D644A /* libPods-AcaBase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AcaBase.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		300E9A25252E6DD800E37E11 /* TutorListViewController+UIHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TutorListViewController+UIHelpers.swift"; sourceTree = "<group>"; };
+		300E9A2A252E878600E37E11 /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		3019FCFF252107F9004C259E /* TutorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorPresenter.swift; sourceTree = "<group>"; };
 		3019FD00252107F9004C259E /* TutorWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorWorker.swift; sourceTree = "<group>"; };
 		3019FD01252107F9004C259E /* TutorRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorRouter.swift; sourceTree = "<group>"; };
@@ -229,6 +233,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		300E9A24252E6DA400E37E11 /* ViewController+Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				300E9A25252E6DD800E37E11 /* TutorListViewController+UIHelpers.swift */,
+			);
+			path = "ViewController+Helpers";
+			sourceTree = "<group>";
+		};
 		3019FD0E25210810004C259E /* TutorDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,6 +409,7 @@
 		3043BBDA25093B6B005AB2A1 /* View Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				300E9A24252E6DA400E37E11 /* ViewController+Helpers */,
 				3083A4DB246CA48400EEE2C8 /* ImagePickerManager.swift */,
 				3043BBE025094E7D005AB2A1 /* UIImageView+Helpers .swift */,
 				3083A4DD246DB54300EEE2C8 /* CustomView.swift */,
@@ -479,6 +492,7 @@
 			children = (
 				3043BBDA25093B6B005AB2A1 /* View Helpers */,
 				3043BBDB25093B91005AB2A1 /* Endpoints.swift */,
+				300E9A2A252E878600E37E11 /* HelperFunctions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -750,6 +764,7 @@
 				3043BBE5250D7157005AB2A1 /* UIColor+CustomColors.swift in Sources */,
 				30F8BE4B2528C4C50059417A /* TutorListInteractor.swift in Sources */,
 				307A2F0D249672F500F15F3C /* HomeModels.swift in Sources */,
+				300E9A26252E6DD800E37E11 /* TutorListViewController+UIHelpers.swift in Sources */,
 				307A2F0E249672F500F15F3C /* HomeViewController.swift in Sources */,
 				30775AB4245CD21200677FE5 /* CoreDataStore.swift in Sources */,
 				307A2F0B249672F500F15F3C /* HomeWorker.swift in Sources */,
@@ -781,6 +796,7 @@
 				3019FD08252107F9004C259E /* TutorModels.swift in Sources */,
 				30F8BE462528C4C50059417A /* TutorListPresenter.swift in Sources */,
 				30313A18245C50CE005EEF87 /* SplashWorker.swift in Sources */,
+				300E9A2B252E878600E37E11 /* HelperFunctions.swift in Sources */,
 				30313A33245C5998005EEF87 /* LoginModels.swift in Sources */,
 				3043BBD5250939CE005AB2A1 /* MainPageWorker.swift in Sources */,
 				30313A3D245C66D3005EEF87 /* SubscribePresenter.swift in Sources */,

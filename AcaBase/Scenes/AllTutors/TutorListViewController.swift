@@ -14,10 +14,10 @@ import UIKit
 
 protocol TutorListDisplayLogic: class
 {
-    func displaySomething(viewModel: TutorList.Something.ViewModel)
+    func displayTutorList(viewModel: TutorList.Tutors.ViewModel)
 }
 
-class TutorListViewController: UIViewController, TutorListDisplayLogic, UISearchControllerDelegate
+class TutorListViewController: UIViewController, TutorListDisplayLogic
 {
     var interactor: TutorListBusinessLogic?
     var router: (NSObjectProtocol & TutorListRoutingLogic & TutorListDataPassing)?
@@ -69,70 +69,10 @@ class TutorListViewController: UIViewController, TutorListDisplayLogic, UISearch
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        doSomething()
+        getTutorsList()
+        self.setSearchBarUI()
         
         self.title = "Find a tutor"
-        
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.delegate = self
-        
-        let searchBar = searchController.searchBar
-        searchBar.tintColor = UIColor.white
-        searchBar.barTintColor = UIColor.white
-        
-        if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
-            textfield.textColor = UIColor.blue
-            if let backgroundview = textfield.subviews.first {
-                
-                // Background color
-                backgroundview.backgroundColor = UIColor.white
-                
-                // Rounded corner
-                backgroundview.layer.cornerRadius = 10;
-                backgroundview.clipsToBounds = true;
-            }
-        }
-        
-        if let navigationBar = self.navigationController?.navigationBar {
-            navigationBar.tintColor = .white
-            navigationBar.barTintColor = primaryBlue
-            let navBarAppearance = UINavigationBarAppearance()
-            navBarAppearance.configureWithOpaqueBackground()
-            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-            navBarAppearance.backgroundColor = primaryBlue
-            navigationBar.standardAppearance = navBarAppearance
-            navigationBar.scrollEdgeAppearance = navBarAppearance
-            navigationBar.barStyle = .black
-            navigationBar.alpha = 1
-            navigationBar.layer.masksToBounds = false
-            navigationBar.layer.shadowColor = UIColor.lightGray.cgColor
-            navigationBar.layer.shadowOpacity = 0.8
-            navigationBar.layer.shadowOffset = CGSize(width: 0, height: 4.0)
-            navigationBar.layer.shadowRadius = 1
-            navigationBar.prefersLargeTitles = true
-        }
-        UISegmentedControl.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([.foregroundColor: UIColor.white], for: .normal)
-        UISegmentedControl.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([.foregroundColor: primaryBlue], for: .selected)
-        UISegmentedControl.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
-        //UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [.foregroundColor: UIColor.white]
-        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search", attributes: [.foregroundColor: UIColor.white])
-        searchBar.searchTextField.textColor = .white
-        searchBar.searchTextField.defaultTextAttributes = [.foregroundColor: UIColor.white]
-        if let glassIconView = searchBar.searchTextField.leftView as? UIImageView {
-            //Magnifying glass
-            glassIconView.image = glassIconView.image?.withRenderingMode(.alwaysTemplate)
-            glassIconView.tintColor = .white
-        }
-        searchController.searchBar.scopeButtonTitles = ["Math", "French", "English","Physics"]
-        searchController.searchBar.showsScopeBar = true
-        
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-        
-        self.setNeedsStatusBarAppearanceUpdate()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -140,40 +80,61 @@ class TutorListViewController: UIViewController, TutorListDisplayLogic, UISearch
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if let navigationBar = self.navigationController?.navigationBar {
-            navigationBar.tintColor = .white
-            navigationBar.barTintColor = primaryBlue
-            let navBarAppearance = UINavigationBarAppearance()
-            navBarAppearance.configureWithOpaqueBackground()
-            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-            navBarAppearance.backgroundColor = primaryBlue
-            navigationBar.standardAppearance = navBarAppearance
-            navigationBar.scrollEdgeAppearance = navBarAppearance
-            navigationBar.barStyle = .default
-            navigationBar.alpha = 1
-            navigationBar.layer.masksToBounds = false
-            navigationBar.layer.shadowColor = UIColor.lightGray.cgColor
-            navigationBar.layer.shadowOpacity = 0.8
-            navigationBar.layer.shadowOffset = CGSize(width: 0, height: 4.0)
-            navigationBar.layer.shadowRadius = 1
-            navigationBar.prefersLargeTitles = true
-        }
+        self.navigationController?.navigationBar.isHidden = false
+        self.resetNavBarWhenAppearing()
     }
+
+    // MARK: Properties
     
+    var tutorList = [TutorViewModel]()
     
-    // MARK: Do something
+    // MARK: IBOutlets
     
-    //@IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var tableView: UITableView!
     
-    func doSomething()
+    // MARK: getTutorsList
+    func getTutorsList()
     {
-        let request = TutorList.Something.Request()
-        interactor?.doSomething(request: request)
+        let request = TutorList.Tutors.Request()
+        interactor?.getTutors(request: request)
     }
     
-    func displaySomething(viewModel: TutorList.Something.ViewModel)
+    func displayTutorList(viewModel: TutorList.Tutors.ViewModel)
     {
-        //nameTextField.text = viewModel.name
+        self.tutorList = viewModel.tutorList
+        self.tableView.reloadData()
     }
+}
+extension TutorListViewController : UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tutorList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TutorCell", for: indexPath) as! TutorCell
+        let viewModel = self.tutorList[indexPath.row]
+        cell.set(tutor: viewModel)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+}
+
+class TutorCell : UITableViewCell {
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var subjectsLabel: UILabel!
+    @IBOutlet weak var answersLabel: UILabel!
+    @IBOutlet weak var pictureImgView: UIImageView!
+    
+    func set(tutor: TutorViewModel) {
+        nameLabel.text = tutor.model.fullName
+        subjectsLabel.text = tutor.subjects
+        answersLabel.attributedText = getAnsweredQuestions(answersNbr: tutor.model.answredQuestions)
+        pictureImgView.setImageAsync(url: tutor.imageUrl)
+    }
+    
 }

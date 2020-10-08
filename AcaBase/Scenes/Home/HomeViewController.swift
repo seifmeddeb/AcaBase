@@ -70,6 +70,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var topicCollectionView: UICollectionView!
+    @IBOutlet weak var scrollTopConstraint: NSLayoutConstraint!
     
     // MARK: Properties
     
@@ -93,27 +94,15 @@ class HomeViewController: UIViewController, HomeDisplayLogic
         return .darkContent
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-        if let navigationBar = self.navigationController?.navigationBar {
-            let navBarAppearance = UINavigationBarAppearance()
-            // bar appearance making navbar not transparent
-            navigationBar.standardAppearance = navBarAppearance
-            navigationBar.scrollEdgeAppearance = navBarAppearance
-            navigationBar.compactAppearance = navBarAppearance
-            navigationBar.barStyle = .default
-            navigationBar.prefersLargeTitles = false
-            navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationBar.shadowImage = UIImage()
-            
-        }
+    override func viewDidAppear(_ animated: Bool) {
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.backgroundColor = .white
+        self.navigationController?.navigationBar.standardAppearance = navBarAppearance
+        self.navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
         self.setHomePageNavBar(for: self.navigationItem, titleViewOpacity: offset)
         navbarAnimation()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        navbarAnimation()
-    }
     // MARK: Actions
     
     @objc func clickTitleButton() {
@@ -173,14 +162,18 @@ class HomeViewController: UIViewController, HomeDisplayLogic
             self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0, height: 2.0)
             self.navigationController?.navigationBar.layer.shadowRadius = 1
         } else {
+            if offset < 0 {offset=0}
             navigationItem.leftBarButtonItem?.customView?.alpha = offset
             navigationItem.rightBarButtonItem?.customView?.alpha = offset
             navigationItem.titleView?.alpha = offset
             self.navigationController?.navigationBar.alpha = offset
             navigationController?.navigationBar.backgroundColor = UIColor(white: 1, alpha: offset)
+            self.navigationController?.navigationBar.isHidden = (offset <= 0)
+            print(offset)
         }
     }
 }
+
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if topicCollectionView == collectionView {

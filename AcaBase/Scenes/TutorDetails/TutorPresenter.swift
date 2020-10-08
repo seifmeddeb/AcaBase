@@ -32,19 +32,4 @@ class TutorPresenter: TutorPresentationLogic
         
         viewController?.displayTutor(viewModel: viewModel)
     }
-    
-    // MARK: Private functions
-    
-    private func getSubjectsString(for subjects: [SubjectDAO]?) -> String {
-        var subjectsString = ""
-        if let unwrappedSubjects = subjects {
-            for subject in unwrappedSubjects.enumerated() {
-                subjectsString += subject.element.name
-                if subject.offset != unwrappedSubjects.count {
-                    subjectsString += "/"
-                }
-            }
-        }
-        return subjectsString
-    }
 }

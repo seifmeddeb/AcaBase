@@ -82,12 +82,10 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
         scrollView.delegate = self
         getTrainers()
         getTopics()
-        self.setNeedsStatusBarAppearanceUpdate()
+
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -95,8 +93,12 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         let navBarAppearance = UINavigationBarAppearance()
         navBarAppearance.backgroundColor = .white
+        self.navigationController?.navigationBar.compactAppearance = navBarAppearance
         self.navigationController?.navigationBar.standardAppearance = navBarAppearance
         self.navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
         self.setHomePageNavBar(for: self.navigationItem, titleViewOpacity: offset)
@@ -119,9 +121,6 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     }
     
     // MARK: ✅ Interactor Calls
-    
-    
-    // MARK: get Trainers
     func getTrainers()
     {
         let request = Home.Tutors.Request()

@@ -24,10 +24,29 @@ enum TutorList
         struct Response
         {
             var tutorList = [TutorDAO]()
+            var subjectsList = [SubjectDAO]()
         }
         struct ViewModel
         {
-            var tutorList = [TutorViewModel]()            
+            var tutorList = [TutorViewModel]()
+            var subjectsList = [Int:String]()
+        }
+    }
+    
+    enum FilterTutors
+    {
+        struct Request
+        {
+            var subject : String?
+            var tutorName : String?
+        }
+        struct Response
+        {
+            var filtredTutorList = [TutorDAO]()
+        }
+        struct ViewModel
+        {
+            var filtredTutorList = [TutorViewModel]()
         }
     }
 }

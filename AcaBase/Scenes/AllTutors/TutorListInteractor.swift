@@ -15,26 +15,41 @@ import UIKit
 protocol TutorListBusinessLogic
 {
     func getTutors(request: TutorList.Tutors.Request)
+    func filterTutors(request: TutorList.FilterTutors.Request)
 }
 
 protocol TutorListDataStore
 {
     var tutorList : [TutorDAO]? { get set }
+    var topicList : [TopicDAO]? { get set }
 }
 
 class TutorListInteractor: TutorListBusinessLogic, TutorListDataStore
 {
     var presenter: TutorListPresentationLogic?
-    var worker: TutorListWorker?
+    var worker: TutorListWorker!
     var tutorList : [TutorDAO]?
+    var topicList : [TopicDAO]?
     
     // MARK: Do something
     
     func getTutors(request: TutorList.Tutors.Request)
     {
+        worker = TutorListWorker()
+        if let tutorList = self.tutorList, let topicList = self.topicList {
+            let subjectList = worker.getSubjectsFromTopicList(topicList: topicList)
+            let response = TutorList.Tutors.Response(tutorList: tutorList,subjectsList: subjectList)
+            presenter?.presentTutorList(response: response)
+        }
+    }
+    
+    func filterTutors(request: TutorList.FilterTutors.Request)
+    {
+        worker = TutorListWorker()
         if let tutorList = self.tutorList {
-        let response = TutorList.Tutors.Response(tutorList: tutorList)
-        presenter?.presentTutorList(response: response)
+            let filtredTutorList = worker.filter(tutorList: tutorList, with: request.tutorName, and: request.subject)
+            let response = TutorList.FilterTutors.Response(filtredTutorList: filtredTutorList)
+            presenter?.presentFilteredTutorList(response: response)
         }
     }
 }

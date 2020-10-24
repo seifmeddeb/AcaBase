@@ -77,7 +77,10 @@ class TutorViewController: UIViewController, TutorDisplayLogic
     {
         super.viewDidAppear(animated)
         self.view.backgroundColor = UIColor(white: 0, alpha: 0.4)
-        
+        let gesture = UITapGestureRecognizer(target: self, action:  #selector (self.dismissViewController (_:)))
+        gesture.delegate = self
+        self.parentContentView.addGestureRecognizer(gesture)
+            
     }
     
     override func viewDidDisappear(_ animated: Bool)
@@ -105,6 +108,7 @@ class TutorViewController: UIViewController, TutorDisplayLogic
     @IBOutlet weak var experienceTitleLbl: UILabel!
     @IBOutlet weak var experienceDescLbl: UILabel!
     @IBOutlet weak var reviewsTitleLbl: UILabel!
+    @IBOutlet weak var parentContentView: UIView!
     @IBOutlet weak var reviewsTableView: UITableView!
     
     
@@ -135,7 +139,16 @@ class TutorViewController: UIViewController, TutorDisplayLogic
     }
     @IBAction func addToFavouritePressed(_ sender: Any) {
     }
+    @objc func dismissViewController(_ sender:UITapGestureRecognizer){
+        self.dismiss()
+    }
 }
+extension TutorViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        return touch.view == self.parentContentView
+    }
+}
+
 extension TutorViewController : UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

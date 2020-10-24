@@ -33,13 +33,14 @@ extension TutorListViewController : UISearchControllerDelegate {
         }
     }
     
-    func setSearchBarUI() {
+    func setSearchBarUI(subjects: [Int:String]) {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.delegate = self
         
-        let searchBar = searchController.searchBar
+        self.searchBar = searchController.searchBar
         searchBar.tintColor = UIColor.white
         searchBar.barTintColor = UIColor.white
+        searchBar.delegate = self
         
         if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
             textfield.textColor = UIColor.blue
@@ -78,7 +79,7 @@ extension TutorListViewController : UISearchControllerDelegate {
         UISegmentedControl.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
         //UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [.foregroundColor: UIColor.white]
-        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search", attributes: [.foregroundColor: UIColor.white])
+        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search", attributes: [.foregroundColor: UIColor.white.withAlphaComponent(0.4)])
         searchBar.searchTextField.textColor = .white
         searchBar.searchTextField.defaultTextAttributes = [.foregroundColor: UIColor.white]
         if let glassIconView = searchBar.searchTextField.leftView as? UIImageView {
@@ -86,9 +87,11 @@ extension TutorListViewController : UISearchControllerDelegate {
             glassIconView.image = glassIconView.image?.withRenderingMode(.alwaysTemplate)
             glassIconView.tintColor = .white
         }
-        searchController.searchBar.scopeButtonTitles = ["Math", "French", "English","Physics"]
+        let subjectsNames = Array(subjects.values)
+        searchController.searchBar.scopeButtonTitles = subjectsNames
         searchController.searchBar.showsScopeBar = true
-        
+        searchController.obscuresBackgroundDuringPresentation = false
+
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         

@@ -62,6 +62,7 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing
     func passDataToTutorList(source: HomeDataStore, destination: inout TutorListDataStore)
     {
         destination.tutorList = source.tutors ?? [TutorDAO]()
+        destination.topicList = source.topics ?? [TopicDAO]()
     }
     //func routeToSomewhere(segue: UIStoryboardSegue?)
     //{

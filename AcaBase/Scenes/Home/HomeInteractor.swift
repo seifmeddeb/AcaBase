@@ -21,6 +21,7 @@ protocol HomeBusinessLogic
 protocol HomeDataStore
 {
     var tutors: [TutorDAO]? { get set }
+    var topics: [TopicDAO]? { get set }
 }
 
 class HomeInteractor: HomeBusinessLogic, HomeDataStore
@@ -28,6 +29,7 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore
     var presenter: HomePresentationLogic?
     var workerApi = HomeWorker(mainPageStore: MainPageAPI())
     var tutors: [TutorDAO]?
+    var topics: [TopicDAO]?
     
     // MARK: HomeBusinessLogic Stubs
     
@@ -42,6 +44,7 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore
     
     func getTopics(request: Home.Topics.Request) {
         workerApi.getTopics { topics in
+            self.topics = topics
             let response = Home.Topics.Response(topics: topics )
             self.presenter?.presentTopics(response: response)
         }

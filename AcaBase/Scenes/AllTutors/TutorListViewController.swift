@@ -15,13 +15,13 @@ import UIKit
 protocol TutorListDisplayLogic: class
 {
     func displayTutorList(viewModel: TutorList.Tutors.ViewModel)
+    func displayFilteredTutorList(viewModel: TutorList.FilterTutors.ViewModel)
 }
 
 class TutorListViewController: UIViewController, TutorListDisplayLogic
 {
     var interactor: TutorListBusinessLogic?
     var router: (NSObjectProtocol & TutorListRoutingLogic & TutorListDataPassing)?
-    lazy var searchBar = UISearchBar(frame: CGRect.zero)
     // MARK: Object lifecycle
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
@@ -70,7 +70,6 @@ class TutorListViewController: UIViewController, TutorListDisplayLogic
     {
         super.viewDidLoad()
         getTutorsList()
-        self.setSearchBarUI()
         
         self.title = "Find a tutor"
     }
@@ -83,11 +82,11 @@ class TutorListViewController: UIViewController, TutorListDisplayLogic
         self.navigationController?.navigationBar.isHidden = false
         self.resetNavBarWhenAppearing()
     }
-
+    
     // MARK: Properties
     
     var tutorList = [TutorViewModel]()
-    
+    var searchBar : UISearchBar!
     // MARK: IBOutlets
     
     @IBOutlet weak var tableView: UITableView!
@@ -102,9 +101,42 @@ class TutorListViewController: UIViewController, TutorListDisplayLogic
     func displayTutorList(viewModel: TutorList.Tutors.ViewModel)
     {
         self.tutorList = viewModel.tutorList
+        self.setSearchBarUI(subjects: viewModel.subjectsList)
+        let scopeTitle = searchBar.scopeButtonTitles?[searchBar.selectedScopeButtonIndex]
+        filterTutorsList(subject: scopeTitle, tutorName: searchBar.text)
+    }
+    
+    // MARK: filterTutorsList
+    func filterTutorsList(subject: String?, tutorName: String?)
+    {
+        let request = TutorList.FilterTutors.Request(subject: subject, tutorName: tutorName)
+        interactor?.filterTutors(request: request)
+    }
+    
+    func displayFilteredTutorList(viewModel: TutorList.FilterTutors.ViewModel) {
+        self.tutorList = viewModel.filtredTutorList
         self.tableView.reloadData()
     }
 }
+// MARK: UISearchBarDelegate
+extension TutorListViewController : UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        let scopeTitle = searchBar.scopeButtonTitles?[searchBar.selectedScopeButtonIndex]
+        filterTutorsList(subject: scopeTitle, tutorName: searchBar.text)
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        let scopeTitle = searchBar.scopeButtonTitles?[searchBar.selectedScopeButtonIndex]
+        filterTutorsList(subject: scopeTitle, tutorName: searchBar.text)
+    }
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        // aka subject
+        let scopeTitle = searchBar.scopeButtonTitles?[selectedScope]
+        filterTutorsList(subject: scopeTitle, tutorName: searchBar.text)
+    }
+    
+}
+// MARK: UITableView Delegate methods
 extension TutorListViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -121,8 +153,13 @@ extension TutorListViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "DetailTutor", sender: self)
+    }
 }
 
+// MARK: Tutor TableViewCell
 class TutorCell : UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!

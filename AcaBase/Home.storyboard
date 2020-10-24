@@ -654,7 +654,7 @@ Lorem Ipsum is simply dummy text of the printing.</string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" image="boutique" id="YC3-w4-b86">
-                        <inset key="imageInsets" minX="17" minY="17" maxX="17" maxY="17"/>
+                        <inset key="imageInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                     </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xma-xa-0YB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -665,8 +665,8 @@ Lorem Ipsum is simply dummy text of the printing.</string>
         <scene sceneID="PsJ-F1-uwr">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="26E-Bx-dJJ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="home" id="ya6-v1-5dY">
-                        <inset key="imageInsets" minX="17" minY="17" maxX="17" maxY="17"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="home1" id="ya6-v1-5dY">
+                        <inset key="imageInsets" minX="50" minY="50" maxX="50" maxY="50"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KU9-Q1-cyN">
@@ -685,12 +685,12 @@ Lorem Ipsum is simply dummy text of the printing.</string>
     </scenes>
     <resources>
         <image name="bg_green" width="512" height="512"/>
-        <image name="boutique" width="64" height="64"/>
+        <image name="boutique" width="42.5" height="42.5"/>
         <image name="check_green" width="30" height="30"/>
         <image name="check_grey" width="30" height="30"/>
         <image name="green_shape" width="606.5" height="481.5"/>
-        <image name="home" width="64" height="64"/>
         <image name="home-image-4000x4000" width="1000" height="1000"/>
+        <image name="home1" width="128" height="128"/>
         <image name="notif" width="30" height="30"/>
         <image name="plus_btn" width="30" height="30"/>
         <image name="user" width="30" height="30"/>

@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TutorCell" rowHeight="100" id="eQR-SE-Pzl" customClass="TutorCell" customModule="AcaBase" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TutorCell" rowHeight="100" id="eQR-SE-Pzl" customClass="TutorCell" customModule="AcaBase" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eQR-SE-Pzl" id="2OS-T3-PBl">
@@ -127,11 +127,22 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="ZeR-mC-AUF" id="Ael-JS-r5m"/>
+                        <segue destination="mj7-qn-Dxb" kind="presentation" identifier="DetailTutor" modalPresentationStyle="overFullScreen" modalTransitionStyle="coverVertical" id="Gtv-Cy-wJb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zkY-7u-0Gw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="327.536231884058" y="142.63392857142856"/>
+        </scene>
+        <!--Tutor-->
+        <scene sceneID="uYH-wo-5fN">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Tutor" id="mj7-qn-Dxb" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="895-60-TJa"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Na6-7q-ZvK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="899" y="107"/>
         </scene>
     </scenes>
     <resources>

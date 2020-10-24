@@ -29,6 +29,20 @@ class TutorListRouter: NSObject, TutorListRoutingLogic, TutorListDataPassing
   
   // MARK: Routing
   
+    @objc func routeToDetailTutor(segue: UIStoryboardSegue?) {
+        if let segue = segue {
+            let destinationVC = segue.destination as! TutorViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToDetailTutor(source: dataStore!, destination: &destinationDS)
+        }
+    }
+    
+    func passDataToDetailTutor(source: TutorListDataStore, destination: inout TutorDataStore)
+    {
+        let selectedRow = viewController?.tableView?.indexPathsForSelectedRows?[0].row
+        destination.tutorToDisplay = source.tutorList?[selectedRow!]
+    }
+    
   //func routeToSomewhere(segue: UIStoryboardSegue?)
   //{
   //  if let segue = segue {

@@ -14,7 +14,27 @@ import UIKit
 
 class TutorListWorker
 {
-  func doSomeWork()
-  {
-  }
+    func getSubjectsFromTopicList(topicList: [TopicDAO]) -> [SubjectDAO]
+    {
+        var subjects = [SubjectDAO]()
+        for topic in topicList {
+            let subject = SubjectDAO(objectId: topic.objectId, name: topic.title ?? "unknown subject")
+            subjects.append(subject)
+        }
+        return subjects
+    }
+    
+    func filter(tutorList:[TutorDAO], with name: String?, and subject: String?) -> [TutorDAO]
+    {
+        var filteredTutorList = tutorList
+        
+        if let name = name, name.count > 0 {
+            filteredTutorList = filteredTutorList.filter { return $0.fullName.lowercased().contains(name.lowercased()) }
+        }
+        
+        if let subject = subject {
+            filteredTutorList = filteredTutorList.filter { return ($0.subjects!.contains { $0.name.lowercased() == subject.lowercased() }) }
+        }
+        return filteredTutorList
+    }
 }

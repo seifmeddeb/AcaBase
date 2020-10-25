@@ -26,7 +26,17 @@ class HomePresenter: HomePresentationLogic
     
     func presentTrainers(response: Home.Tutors.Response)
     {
-        let viewModel = Home.Tutors.ViewModel(tutors: response.tutors ?? [TutorDAO](), errorMsg: "error fetching trainers")
+        var tutorViewModels = [TutorViewModel]()
+        
+        for tutor in response.tutors {
+            let subjects = getSubjectsString(for: tutor.subjects)
+            let imageUrl = URL(string: tutor.picture ?? "")
+            let answerdQuestions = getAnsweredQuestions(answersNbr: tutor.answredQuestions)
+            let tutor = TutorViewModel(model: tutor, subjects: subjects, answeredQuestions: answerdQuestions, imageUrl: imageUrl)
+            tutorViewModels.append(tutor)
+        }
+        
+        let viewModel = Home.Tutors.ViewModel(tutorList: tutorViewModels, errorMsg: "error fetching trainers")
         viewController?.displayTrainers(viewModel: viewModel)
         
     }

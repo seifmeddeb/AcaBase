@@ -31,7 +31,8 @@ class TutorListPresenter: TutorListPresentationLogic
         for tutor in response.tutorList {
             let subjects = getSubjectsString(for: tutor.subjects)
             let imageUrl = URL(string: tutor.picture ?? "")
-            let tutor = TutorViewModel(model: tutor, subjects: subjects, imageUrl: imageUrl)
+            let answerdQuestions = getAnsweredQuestions(answersNbr: tutor.answredQuestions)
+            let tutor = TutorViewModel(model: tutor, subjects: subjects, answeredQuestions: answerdQuestions,  imageUrl: imageUrl)
             tutorViewModels.append(tutor)
         }
         
@@ -52,7 +53,8 @@ class TutorListPresenter: TutorListPresentationLogic
         for tutor in response.filtredTutorList {
             let subjects = getSubjectsString(for: tutor.subjects)
             let imageUrl = URL(string: tutor.picture ?? "")
-            let tutor = TutorViewModel(model: tutor, subjects: subjects, imageUrl: imageUrl)
+            let answerdQuestions = getAnsweredQuestions(answersNbr: tutor.answredQuestions)
+            let tutor = TutorViewModel(model: tutor, subjects: subjects, answeredQuestions: answerdQuestions, imageUrl: imageUrl)
             tutorViewModels.append(tutor)
         }
         

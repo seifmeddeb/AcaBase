@@ -23,11 +23,11 @@ enum Home
     }
     struct Response
     {
-        var tutors : [TutorDAO]?
+        var tutors = [TutorDAO]()
     }
     struct ViewModel
     {
-        var tutors : [TutorDAO]
+        var tutorList = [TutorViewModel]()
         var errorMsg : String?
     }
   }

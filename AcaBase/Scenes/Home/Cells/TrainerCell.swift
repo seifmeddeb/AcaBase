@@ -16,11 +16,11 @@ class TrainerCell: UICollectionViewCell {
     @IBOutlet weak var answersNbrLabel: UILabel!
     @IBOutlet weak var ratingView : RatingView!
     
-    func set(trainer: TutorDAO){
-        trainerImageView.setImageAsync(url: URL(string:trainer.picture ?? ""))
-        nameLabel.text = trainer.fullName
-        subjectLabel.text = trainer.followers ?? ""
-        answersNbrLabel.text = "\(trainer.answredQuestions) Answers"
-        ratingView.setRating(rating: trainer.rate)
+    func set(trainer: TutorViewModel){
+        trainerImageView.setImageAsync(url: trainer.imageUrl)
+        nameLabel.text = trainer.model.fullName
+        subjectLabel.text = trainer.subjects
+        answersNbrLabel.attributedText = trainer.answeredQuestions
+        ratingView.setRating(rating: trainer.model.rate)
     }
 }

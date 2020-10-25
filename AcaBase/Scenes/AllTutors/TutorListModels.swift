@@ -55,5 +55,6 @@ struct TutorViewModel {
     
     var model : TutorDAO
     var subjects : String
+    var answeredQuestions : NSAttributedString
     var imageUrl : URL?
 }

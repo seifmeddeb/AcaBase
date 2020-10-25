@@ -74,7 +74,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     
     // MARK: Properties
     
-    var trainers = [TutorDAO]()
+    var trainers = [TutorViewModel]()
     var topics = [TopicDAO]()
     
     // MARK: View lifecycle
@@ -130,7 +130,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     func displayTrainers(viewModel: Home.Tutors.ViewModel)
     {
         //nameTextField.text = viewModel.name
-        trainers = viewModel.tutors
+        trainers = viewModel.tutorList
         self.collectionView.reloadData()
     }
     

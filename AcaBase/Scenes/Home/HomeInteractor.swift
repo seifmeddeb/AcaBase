@@ -37,7 +37,7 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore
     {
         workerApi.getTutors { (tutors) in
             self.tutors = tutors
-            let response = Home.Tutors.Response(tutors:tutors )
+            let response = Home.Tutors.Response(tutors:tutors ?? [TutorDAO]() )
             self.presenter?.presentTrainers(response: response)
         }
     }

@@ -170,7 +170,7 @@ class TutorCell : UITableViewCell {
     func set(tutor: TutorViewModel) {
         nameLabel.text = tutor.model.fullName
         subjectsLabel.text = tutor.subjects
-        answersLabel.attributedText = getAnsweredQuestions(answersNbr: tutor.model.answredQuestions)
+        answersLabel.attributedText = tutor.answeredQuestions
         pictureImgView.setImageAsync(url: tutor.imageUrl)
         ratingView.setRating(rating: tutor.model.rate)
     }

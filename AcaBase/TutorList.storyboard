@@ -61,12 +61,22 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hos-ul-EB2" customClass="RatingView" customModule="AcaBase" customModuleProvider="target">
+                                                            <rect key="frame" x="90" y="61" width="100" height="20"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="100" id="FfU-HW-jnG"/>
+                                                                <constraint firstAttribute="height" constant="20" id="gbH-3E-nfx"/>
+                                                            </constraints>
+                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="SMp-HJ-hMg" secondAttribute="trailing" constant="20" id="52F-hW-Dp6"/>
                                                         <constraint firstAttribute="trailing" secondItem="KOi-Ft-nGU" secondAttribute="trailing" constant="20" id="H52-jM-gjY"/>
+                                                        <constraint firstItem="hos-ul-EB2" firstAttribute="leading" secondItem="PvX-K6-uvs" secondAttribute="trailing" constant="5" id="KuZ-Un-ExD"/>
                                                         <constraint firstItem="SMp-HJ-hMg" firstAttribute="top" secondItem="eDj-81-rfB" secondAttribute="top" constant="5" id="M5T-M0-HYl"/>
+                                                        <constraint firstItem="hos-ul-EB2" firstAttribute="top" secondItem="zac-HL-95a" secondAttribute="bottom" constant="5" id="PCQ-qc-KzQ"/>
                                                         <constraint firstItem="zac-HL-95a" firstAttribute="top" secondItem="KOi-Ft-nGU" secondAttribute="bottom" constant="5" id="RCX-0j-sMn"/>
                                                         <constraint firstItem="KOi-Ft-nGU" firstAttribute="top" secondItem="SMp-HJ-hMg" secondAttribute="bottom" constant="5" id="V5g-Xf-VIB"/>
                                                         <constraint firstItem="SMp-HJ-hMg" firstAttribute="leading" secondItem="PvX-K6-uvs" secondAttribute="trailing" constant="5" id="b3A-Rz-hUE"/>
@@ -106,6 +116,7 @@
                                             <outlet property="answersLabel" destination="zac-HL-95a" id="Vju-iv-KVY"/>
                                             <outlet property="nameLabel" destination="SMp-HJ-hMg" id="jHR-Or-G07"/>
                                             <outlet property="pictureImgView" destination="PvX-K6-uvs" id="Y7j-KC-ruO"/>
+                                            <outlet property="ratingView" destination="hos-ul-EB2" id="CYH-Gy-ZaU"/>
                                             <outlet property="subjectsLabel" destination="KOi-Ft-nGU" id="2sj-7Q-sMO"/>
                                         </connections>
                                     </tableViewCell>

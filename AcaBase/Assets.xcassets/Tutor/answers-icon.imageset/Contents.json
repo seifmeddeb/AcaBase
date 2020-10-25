@@ -1,15 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "answers-icon.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "tutor_fav.png",
+      "filename" : "answers-icon@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "answers-icon@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

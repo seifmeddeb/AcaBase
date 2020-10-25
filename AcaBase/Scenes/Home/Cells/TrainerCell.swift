@@ -14,13 +14,13 @@ class TrainerCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var subjectLabel: UILabel!
     @IBOutlet weak var answersNbrLabel: UILabel!
-    
+    @IBOutlet weak var ratingView : RatingView!
     
     func set(trainer: TutorDAO){
         trainerImageView.setImageAsync(url: URL(string:trainer.picture ?? ""))
         nameLabel.text = trainer.fullName
         subjectLabel.text = trainer.followers ?? ""
         answersNbrLabel.text = "\(trainer.answredQuestions) Answers"
-        
+        ratingView.setRating(rating: trainer.rate)
     }
 }

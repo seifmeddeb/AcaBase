@@ -88,7 +88,8 @@ class TutorViewController: UIViewController, TutorDisplayLogic
         self.view.backgroundColor = UIColor.clear
     }
     
-    
+    // MARK: Properties
+    var feedBackList = [FeedBackDAO]()
     // MARK: IBOutlets
     @IBOutlet weak var parentScrollView: UIScrollView!
     @IBOutlet weak var contentScrollView: UIScrollView!
@@ -130,6 +131,27 @@ class TutorViewController: UIViewController, TutorDisplayLogic
             self.answersValueLabel.text = "\(tutor.answredQuestions)"
             self.reactivityValueLabel.text = tutor.reactivity
             self.experienceDescLbl.text = tutor.cv
+            
+            if let feedBackList = tutor.feedBacks, feedBackList.count > 0  {
+                self.feedBackList = feedBackList
+                self.reviewsTableView.reloadData()
+            } else {
+                let feedBack = FeedBackDAO(objectId: 1, userName: "Amine", comment: "tuteu hedha bhim ki ****", rate: 1, subject: "Anglais")
+                let feedBack1 = FeedBackDAO(objectId: 2, userName: "Seif", comment: "*** omha el 10 Leeeef. *** omha el 10 Leeeef *** omha el 10 Leeeef.  *** omha el 10 Leeeef.  *** omha el 10 Leeeef.  *** omha el 10 Leeeef.  *** omha el 10 Leeeef. *** omha el 10 Leeeef. *** omha el 10 Leeeef. *** omha el 10 Leeeef. *** omha el 10 Leeeef. *** omha el 10 Leeeef. *** omha el 10 Leeeef. *** omha el 10 Leeeef. *** omha el 10 Leeeef. *** omha el 10 Leeeef. *** omha el 10 Leeeef. *** omha el 10 Leeeef. ", rate: 4, subject: "Chinois")
+                self.feedBackList.append(feedBack)
+                self.feedBackList.append(feedBack1)
+                self.feedBackList.append(feedBack)
+                self.feedBackList.append(feedBack1)
+                self.feedBackList.append(feedBack)
+                self.feedBackList.append(feedBack1)
+                self.feedBackList.append(feedBack)
+                self.feedBackList.append(feedBack1)
+                self.feedBackList.append(feedBack)
+                self.feedBackList.append(feedBack1)
+                self.feedBackList.append(feedBack)
+                self.feedBackList.append(feedBack1)
+                self.reviewsTableView.reloadData()
+            }
         }
     }
     
@@ -159,6 +181,9 @@ extension TutorViewController : UIScrollViewDelegate {
                 contentScrollView.isScrollEnabled = true
             }
             
+        }
+        if scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.bounds.height {
+                scrollView.contentOffset.y = scrollView.contentSize.height - scrollView.bounds.height
         }
         
     }
@@ -223,4 +248,37 @@ extension TutorViewController : UIScrollViewDelegate {
         self.view.backgroundColor = UIColor.clear
         dismiss(animated: true, completion: nil)
     }
+}
+extension TutorViewController : UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return feedBackList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RatingCell", for: indexPath) as! RatingCell
+        let viewModel = self.feedBackList[indexPath.row]
+        cell.set(feedBack: viewModel)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+}
+// MARK: Rating TableViewCell
+class RatingCell : UITableViewCell {
+    
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var subjectLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var ratingView: RatingView!
+    
+    func set(feedBack: FeedBackDAO) {
+        userNameLabel.font = UIFont.italicSystemFont(ofSize: 12)
+        userNameLabel.text = "\"\(feedBack.userName ?? "")\""
+        subjectLabel.text = feedBack.subject
+        descriptionLabel.text = feedBack.comment
+        ratingView.setRating(rating: feedBack.rate)
+    }
+    
 }

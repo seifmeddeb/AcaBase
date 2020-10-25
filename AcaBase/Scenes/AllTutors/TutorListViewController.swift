@@ -166,12 +166,13 @@ class TutorCell : UITableViewCell {
     @IBOutlet weak var subjectsLabel: UILabel!
     @IBOutlet weak var answersLabel: UILabel!
     @IBOutlet weak var pictureImgView: UIImageView!
-    
+    @IBOutlet weak var ratingView : RatingView!
     func set(tutor: TutorViewModel) {
         nameLabel.text = tutor.model.fullName
         subjectsLabel.text = tutor.subjects
         answersLabel.attributedText = getAnsweredQuestions(answersNbr: tutor.model.answredQuestions)
         pictureImgView.setImageAsync(url: tutor.imageUrl)
+        ratingView.setRating(rating: tutor.model.rate)
     }
     
 }

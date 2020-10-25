@@ -58,6 +58,8 @@
 		3043BBE7250D7EFF005AB2A1 /* UINavigationController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3043BBE6250D7EFF005AB2A1 /* UINavigationController+Helpers.swift */; };
 		306683B5251D48E5004F8797 /* MainTabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306683B4251D48E5004F8797 /* MainTabbarViewController.swift */; };
 		306683BD251D4FF6004F8797 /* Tutor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 306683BC251D4FF6004F8797 /* Tutor.storyboard */; };
+		306BD818254592540078A041 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306BD817254592540078A041 /* RatingView.swift */; };
+		306BD81D254595500078A041 /* RatingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 306BD81C254595500078A041 /* RatingView.xib */; };
 		30775AB0245CD0B700677FE5 /* UserWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775AAF245CD0B700677FE5 /* UserWorker.swift */; };
 		30775AB2245CD0DC00677FE5 /* UserCoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775AB1245CD0DC00677FE5 /* UserCoreDataStore.swift */; };
 		30775AB4245CD21200677FE5 /* CoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775AB3245CD21200677FE5 /* CoreDataStore.swift */; };
@@ -167,6 +169,8 @@
 		3043BBE6250D7EFF005AB2A1 /* UINavigationController+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Helpers.swift"; sourceTree = "<group>"; };
 		306683B4251D48E5004F8797 /* MainTabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarViewController.swift; sourceTree = "<group>"; };
 		306683BC251D4FF6004F8797 /* Tutor.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tutor.storyboard; sourceTree = "<group>"; };
+		306BD817254592540078A041 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		306BD81C254595500078A041 /* RatingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatingView.xib; sourceTree = "<group>"; };
 		30775AAF245CD0B700677FE5 /* UserWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWorker.swift; sourceTree = "<group>"; };
 		30775AB1245CD0DC00677FE5 /* UserCoreDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoreDataStore.swift; sourceTree = "<group>"; };
 		30775AB3245CD21200677FE5 /* CoreDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStore.swift; sourceTree = "<group>"; };
@@ -411,6 +415,7 @@
 			children = (
 				300E9A24252E6DA400E37E11 /* ViewController+Helpers */,
 				3083A4DB246CA48400EEE2C8 /* ImagePickerManager.swift */,
+				306BD8212545955E0078A041 /* RatingView */,
 				3043BBE025094E7D005AB2A1 /* UIImageView+Helpers .swift */,
 				3083A4DD246DB54300EEE2C8 /* CustomView.swift */,
 				3083A4DF2472260200EEE2C8 /* Strings.swift */,
@@ -437,6 +442,15 @@
 				306683B4251D48E5004F8797 /* MainTabbarViewController.swift */,
 			);
 			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		306BD8212545955E0078A041 /* RatingView */ = {
+			isa = PBXGroup;
+			children = (
+				306BD817254592540078A041 /* RatingView.swift */,
+				306BD81C254595500078A041 /* RatingView.xib */,
+			);
+			path = RatingView;
 			sourceTree = "<group>";
 		};
 		30775AAC245CD08200677FE5 /* Services */ = {
@@ -644,6 +658,7 @@
 				303139EB245C4DB7005EEF87 /* Assets.xcassets in Resources */,
 				303139E6245C4DB5005EEF87 /* Main.storyboard in Resources */,
 				30F8BE502528C5090059417A /* TutorList.storyboard in Resources */,
+				306BD81D254595500078A041 /* RatingView.xib in Resources */,
 				306683BD251D4FF6004F8797 /* Tutor.storyboard in Resources */,
 				3078CC8C2482CD4E009BB013 /* Home.storyboard in Resources */,
 			);
@@ -750,6 +765,7 @@
 				307A2F0F249672F500F15F3C /* HomeInteractor.swift in Sources */,
 				3019FD05252107F9004C259E /* TutorPresenter.swift in Sources */,
 				3019FCF82520F36E004C259E /* CustomView.swift in Sources */,
+				306BD818254592540078A041 /* RatingView.swift in Sources */,
 				30775AB8245DA8EC00677FE5 /* UserAPI.swift in Sources */,
 				3019FD0A252107F9004C259E /* TutorInteractor.swift in Sources */,
 				30775AB6245CD84100677FE5 /* User.swift in Sources */,

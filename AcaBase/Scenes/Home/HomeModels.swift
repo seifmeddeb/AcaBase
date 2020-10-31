@@ -14,37 +14,53 @@ import UIKit
 
 enum Home
 {
-  // MARK: Use cases
-  
-  enum Tutors
-  {
-    struct Request
-    {
-    }
-    struct Response
-    {
-        var tutors = [TutorDAO]()
-    }
-    struct ViewModel
-    {
-        var tutorList = [TutorViewModel]()
-        var errorMsg : String?
-    }
-  }
+    // MARK: Use cases
     
-  enum Topics
-  {
-    struct Request
+    enum Tutors
     {
+        struct Request
+        {
+        }
+        struct Response
+        {
+            var tutors = [TutorDAO]()
+        }
+        struct ViewModel
+        {
+            var tutorList = [TutorViewModel]()
+            var errorMsg : String?
+        }
     }
-    struct Response
+    
+    enum Topics
     {
-        var topics : [TopicDAO]?
+        struct Request
+        {
+        }
+        struct Response
+        {
+            var topics : [TopicDAO]?
+        }
+        struct ViewModel
+        {
+            var topics : [TopicDAO]
+            var errorMsg : String?
+        }
     }
-    struct ViewModel
+    
+    enum Quizs
     {
-        var topics : [TopicDAO]
-        var errorMsg : String?
+        struct Request
+        {
+        }
+        struct Response
+        {
+            var quizs : [QuizDAO]?
+        }
+        struct ViewModel
+        {
+            var quizs : [QuizDAO]
+            var errorMsg : String?
+        }
     }
-  }
 }

@@ -16,6 +16,7 @@ protocol HomeDisplayLogic: class
 {
     func displayTrainers(viewModel: Home.Tutors.ViewModel)
     func displayTopics(viewModel: Home.Topics.ViewModel)
+    func displayQuizs(viewModel: Home.Quizs.ViewModel)
 }
 
 class HomeViewController: UIViewController, HomeDisplayLogic
@@ -76,6 +77,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     
     var trainers = [TutorViewModel]()
     var topics = [TopicDAO]()
+    var quizs = [QuizDAO]()
     
     // MARK: View lifecycle
     
@@ -85,7 +87,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
         scrollView.delegate = self
         getTrainers()
         getTopics()
-
+        getHomeQuizs()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -142,10 +144,21 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     }
     
     func displayTopics(viewModel: Home.Topics.ViewModel) {
+        // FIXME: just to fetch the subjects
         topics = viewModel.topics
-        self.topicCollectionView.reloadData()
     }
     
+    // MARK: get home quizs
+    
+    func getHomeQuizs(){
+        let request = Home.Quizs.Request()
+        interactor?.getHomeQuizs(request: request)
+    }
+    
+    func displayQuizs(viewModel: Home.Quizs.ViewModel) {
+        quizs = viewModel.quizs
+        self.topicCollectionView.reloadData()
+    }
     // MARK: Private functions
     
     private func navbarAnimation(){
@@ -176,7 +189,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if topicCollectionView == collectionView {
-            return (topics.count > 3) ? 4 : 0
+            return (quizs.count > 3) ? 4 : 0
         }
         return (trainers.count > 3) ? 4 : 0
     }
@@ -185,7 +198,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if topicCollectionView == collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "topicCell", for: indexPath) as! TopicCell
-            cell.set(viewModel: topics[indexPath.row])
+            cell.set(viewModel: quizs[indexPath.row])
             return cell
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teacherCell", for: indexPath) as! TrainerCell
@@ -202,7 +215,9 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "DetailTutor", sender: self)
+        if self.collectionView == collectionView {
+            performSegue(withIdentifier: "DetailTutor", sender: self)
+        }
     }
 }
 

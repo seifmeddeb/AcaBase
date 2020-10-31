@@ -16,12 +16,14 @@ protocol HomeBusinessLogic
 {
     func getTrainers(request: Home.Tutors.Request)
     func getTopics(request: Home.Topics.Request)
+    func getHomeQuizs(request: Home.Quizs.Request)
 }
 
 protocol HomeDataStore
 {
     var tutors: [TutorDAO]? { get set }
     var topics: [TopicDAO]? { get set }
+    var quizs: [QuizDAO]? { get set }
 }
 
 class HomeInteractor: HomeBusinessLogic, HomeDataStore
@@ -30,6 +32,7 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore
     var workerApi = HomeWorker(mainPageStore: MainPageAPI())
     var tutors: [TutorDAO]?
     var topics: [TopicDAO]?
+    var quizs: [QuizDAO]?
     
     // MARK: HomeBusinessLogic Stubs
     
@@ -47,6 +50,14 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore
             self.topics = topics
             let response = Home.Topics.Response(topics: topics )
             self.presenter?.presentTopics(response: response)
+        }
+    }
+    
+    func getHomeQuizs(request: Home.Quizs.Request) {
+        workerApi.getHomeQuiz { quizs in
+            self.quizs = quizs
+            let response = Home.Quizs.Response(quizs: quizs )
+            self.presenter?.presentQuizs(response: response)
         }
     }
 }

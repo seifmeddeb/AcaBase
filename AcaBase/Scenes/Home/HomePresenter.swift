@@ -16,6 +16,7 @@ protocol HomePresentationLogic
 {
     func presentTrainers(response: Home.Tutors.Response)
     func presentTopics(response: Home.Topics.Response)
+    func presentQuizs(response: Home.Quizs.Response)
 }
 
 class HomePresenter: HomePresentationLogic
@@ -44,5 +45,10 @@ class HomePresenter: HomePresentationLogic
     func presentTopics(response: Home.Topics.Response) {
         let viewModel = Home.Topics.ViewModel(topics: response.topics ?? [TopicDAO](), errorMsg: "error fetching trainers")
         viewController?.displayTopics(viewModel: viewModel)
+    }
+    
+    func presentQuizs(response: Home.Quizs.Response) {
+        let viewModel = Home.Quizs.ViewModel(quizs: response.quizs ?? [QuizDAO](), errorMsg: "error fetching quizs")
+        viewController?.displayQuizs(viewModel: viewModel)
     }
 }

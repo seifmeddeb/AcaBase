@@ -70,7 +70,8 @@ class TutorViewController: UIViewController, TutorDisplayLogic
     {
         super.viewDidLoad()
         showTutor()
-        
+        contentViewHeightConstraint.constant = self.view.bounds.height
+        self.view.layoutIfNeeded()
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -111,6 +112,8 @@ class TutorViewController: UIViewController, TutorDisplayLogic
     @IBOutlet weak var reviewsTitleLbl: UILabel!
     @IBOutlet weak var parentContentView: UIView!
     @IBOutlet weak var reviewsTableView: UITableView!
+    @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
+    
     
     
     // MARK: showTutor

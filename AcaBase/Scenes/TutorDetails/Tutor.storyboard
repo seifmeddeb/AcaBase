@@ -545,6 +545,7 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. </str
                         <outlet property="answersNameLabel" destination="6QG-BR-pYl" id="y9z-fr-h3m"/>
                         <outlet property="answersValueLabel" destination="5dq-qX-TtE" id="ubh-lL-2Fy"/>
                         <outlet property="contentScrollView" destination="09z-RC-SBk" id="h7V-5I-Jui"/>
+                        <outlet property="contentViewHeightConstraint" destination="C1h-Fb-eOv" id="fxX-bh-JSa"/>
                         <outlet property="experienceDescLbl" destination="lJ1-k2-D2w" id="03E-9g-XBe"/>
                         <outlet property="experienceTitleLbl" destination="jqF-XB-wym" id="trd-SE-D8C"/>
                         <outlet property="favouriteNameLabel" destination="7UB-x7-CTp" id="bzp-Hz-4nI"/>

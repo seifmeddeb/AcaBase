@@ -53,6 +53,9 @@
                                                         <real key="value" value="10"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <segue destination="Klu-16-BJw" kind="show" id="JyE-lC-TgA"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EEF-qR-Vpx">
                                                 <rect key="frame" x="374" y="20" width="20" height="20"/>
@@ -117,7 +120,7 @@ Cg
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CrX-bG-NuY">
                                                 <rect key="frame" x="41.5" y="309" width="331" height="96.5"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_green" translatesAutoresizingMaskIntoConstraints="NO" id="grW-s7-pgG">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-home-green" translatesAutoresizingMaskIntoConstraints="NO" id="grW-s7-pgG">
                                                         <rect key="frame" x="0.0" y="0.0" width="331" height="96.5"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZD5-wa-FfU">
@@ -457,6 +460,9 @@ Lorem Ipsum is simply dummy text of the printing.</string>
                                                                 </fragment>
                                                             </attributedString>
                                                         </state>
+                                                        <connections>
+                                                            <segue destination="Z2p-0K-Dw4" kind="show" id="bLh-Jc-EgI"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -645,6 +651,16 @@ Lorem Ipsum is simply dummy text of the printing.</string>
             </objects>
             <point key="canvasLocation" x="1902.8985507246377" y="77.678571428571431"/>
         </scene>
+        <!--Question-->
+        <scene sceneID="ZKm-Me-J2g">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Question" id="Klu-16-BJw" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="yb3-L2-7DY"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aOw-65-Roi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2520" y="-2"/>
+        </scene>
         <!--Tutor-->
         <scene sceneID="ExY-Ti-rLy">
             <objects>
@@ -663,7 +679,17 @@ Lorem Ipsum is simply dummy text of the printing.</string>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g56-gB-gRt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2580" y="146"/>
+            <point key="canvasLocation" x="2524" y="147"/>
+        </scene>
+        <!--QuizList-->
+        <scene sceneID="CD6-yo-4Fh">
+            <objects>
+                <viewControllerPlaceholder storyboardName="QuizList" id="Z2p-0K-Dw4" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="OTi-wY-0uu"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LGA-ZS-cgf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2520" y="207"/>
         </scene>
         <!--Main Tabbar View Controller-->
         <scene sceneID="q8K-Ip-bIG">
@@ -674,40 +700,41 @@ Lorem Ipsum is simply dummy text of the printing.</string>
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.019607843137254902" green="0.32941176470588235" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                <real key="value" value="3"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                <real key="value" value="0.20000000000000001"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                <size key="value" width="-1" height="-2"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="26E-Bx-dJJ" kind="relationship" relationship="viewControllers" id="qBQ-HY-myN"/>
-                        <segue destination="zZC-tX-nFb" kind="relationship" relationship="viewControllers" id="a6a-x5-4Up"/>
+                        <segue destination="gbX-kt-3lo" kind="relationship" relationship="viewControllers" id="Hu5-aM-Qmg"/>
+                        <segue destination="4H2-PY-FMW" kind="relationship" relationship="viewControllers" id="CZ7-p4-KLt"/>
+                        <segue destination="7ks-ES-Hbx" kind="relationship" relationship="viewControllers" id="IEP-0d-6un"/>
+                        <segue destination="AdF-QY-2gD" kind="relationship" relationship="viewControllers" id="8Vn-GG-LV1"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ya0-oH-oxV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="82.608695652173921" y="77.678571428571431"/>
         </scene>
-        <!--Item-->
-        <scene sceneID="b7Z-LM-UDO">
-            <objects>
-                <viewController id="zZC-tX-nFb" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="9Uc-kX-Nrd">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="nm3-8R-21L"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="boutique" id="YC3-w4-b86">
-                        <inset key="imageInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                    </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xma-xa-0YB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="83" y="802"/>
-        </scene>
         <!--Home-->
         <scene sceneID="PsJ-F1-uwr">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="26E-Bx-dJJ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="home1" id="ya6-v1-5dY">
-                        <inset key="imageInsets" minX="50" minY="50" maxX="50" maxY="50"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="home" id="ya6-v1-5dY">
+                        <inset key="imageInsets" minX="0.0" minY="4" maxX="0.0" maxY="2"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KU9-Q1-cyN">
@@ -723,15 +750,58 @@ Lorem Ipsum is simply dummy text of the printing.</string>
             </objects>
             <point key="canvasLocation" x="992.75362318840587" y="77.678571428571431"/>
         </scene>
+        <!--Store-->
+        <scene sceneID="WSW-h7-Bwl">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Store" id="AdF-QY-2gD" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="fZO-rU-xAX"/>
+                    <navigationItem key="navigationItem" id="Ydv-y5-b1Y"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZAX-VI-xY2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="337" y="534"/>
+        </scene>
+        <!--Practice-->
+        <scene sceneID="OGe-F5-MQy">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Practice" id="gbX-kt-3lo" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="78u-aD-QpH"/>
+                    <navigationItem key="navigationItem" id="bYy-zl-IeK"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e1L-Bq-vsN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-138" y="534"/>
+        </scene>
+        <!--Chat-->
+        <scene sceneID="q8t-F7-Tzx">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Chat" id="4H2-PY-FMW" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="VpP-bf-5k8"/>
+                    <navigationItem key="navigationItem" id="hzB-ST-tef"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gFv-gf-13F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1" y="534"/>
+        </scene>
+        <!--Live-->
+        <scene sceneID="my1-4U-t2Z">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Live" id="7ks-ES-Hbx" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="63W-y8-RQX"/>
+                    <navigationItem key="navigationItem" id="S4t-Na-IMT"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WkW-cW-b72" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="162" y="534"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="bg_green" width="512" height="512"/>
-        <image name="boutique" width="42.5" height="42.5"/>
+        <image name="bg-home-green" width="666.5" height="194"/>
         <image name="check_green" width="30" height="30"/>
         <image name="check_grey" width="30" height="30"/>
         <image name="green_shape" width="606.5" height="481.5"/>
+        <image name="home" width="37.5" height="37.5"/>
         <image name="home-image-4000x4000" width="1000" height="1000"/>
-        <image name="home1" width="128" height="128"/>
         <image name="notif" width="30" height="30"/>
         <image name="plus_btn" width="30" height="30"/>
         <image name="user" width="30" height="30"/>

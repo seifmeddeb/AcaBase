@@ -59,13 +59,19 @@ struct QuizDAO : Codable {
     var objectId: Int
     var title: String?
     var desc: String?
+    var nbrQuestions: Int?
+    var valideAnswers: Int?
     var questions : [QuestionDAO]?
+    var subject : SubjectDAO?
     
     enum CodingKeys: String, CodingKey {
         case objectId = "id"
         case title = "label"
+        case nbrQuestions = "nbrQuestions"
+        case valideAnswers = "valide_answers"
         case desc = "description"
         case questions = "questions"
+        case subject = "subject"
     }
     
 }

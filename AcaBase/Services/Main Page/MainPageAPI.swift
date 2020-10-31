@@ -49,5 +49,22 @@ class MainPageAPI : MainPageStoreProtocol {
         }
     }
     
+    func fetchHomeQuiz(completionHandler: @escaping (() throws -> [QuizDAO]) -> Void) {
+        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer "+UserDefaults.standard.string(forKey: "token")!)])
+        AF.request(homeQuizUrl,
+                   method: .get,
+                   parameters: nil,
+                   headers: headers)
+            .validate(statusCode:200..<300)
+            .responseDecodable(of: [QuizDAO].self) { response in
+                
+                guard let topicsList = response.value else {
+                    print("fetchTopics: \(response.error!)")
+                    completionHandler{throw response.error!}
+                    return
+                }
+                completionHandler{return topicsList}
+        }
+    }
     
 }

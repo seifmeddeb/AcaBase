@@ -14,9 +14,9 @@ class TopicCell: UICollectionViewCell {
     @IBOutlet weak var descLbl: UILabel!
     @IBOutlet weak var checkBtn: UIButton!
     
-    func set(viewModel: TopicDAO) {
+    func set(viewModel: QuizDAO) {
         titleLbl.text = viewModel.title
-        descLbl.text = "chapter 1 FIX ME"
-        imageView.setImageAsync(url: URL(string: viewModel.icon ?? ""))
+        descLbl.text = viewModel.desc
+        imageView.setImageAsync(url: URL(string: viewModel.subject?.icon ?? ""))
     }
 }

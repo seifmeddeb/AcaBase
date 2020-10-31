@@ -54,4 +54,29 @@ class HomeWorker {
             }
         }
     }
+    
+    func getHomeQuiz(completionHandler: @escaping ([QuizDAO]?) -> Void){
+        self.mainPageStore.fetchHomeQuiz { (quizs: () throws -> [QuizDAO]) -> Void in
+            do {
+                let quizs = try quizs()
+                DispatchQueue.main.async {
+                    completionHandler(quizs)
+                }
+            } catch {
+                let nserror = error as NSError
+                print("Unresolved error \(nserror), \(nserror.userInfo)")
+                DispatchQueue.main.async {
+                    completionHandler(nil)
+                }
+            }
+        }
+    }
+}
+
+protocol MainPageStoreProtocol {
+    
+    func fetchTrainers(completionHandler: @escaping (() throws -> [TutorDAO]) -> Void)
+    func fetchTopics(completionHandler: @escaping (() throws -> [TopicDAO]) -> Void)
+    func fetchHomeQuiz(completionHandler: @escaping (() throws -> [QuizDAO]) -> Void)
+    
 }

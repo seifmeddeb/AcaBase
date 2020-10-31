@@ -16,11 +16,22 @@ class MainPageWorker {
     {
       self.mainPageStore = mainPageStore
     }
-}
-
-protocol MainPageStoreProtocol {
     
-    func fetchTrainers(completionHandler: @escaping (() throws -> [TutorDAO]) -> Void)
-    func fetchTopics(completionHandler: @escaping (() throws -> [TopicDAO]) -> Void)
+    func fetchTrainers(completionHandler: @escaping (() throws -> [TutorDAO]) -> Void){
+        self.mainPageStore.fetchTrainers { (tutors: () throws -> [TutorDAO]) -> Void in
+            completionHandler(tutors)
+        }
+    }
     
+    func fetchTopics(completionHandler: @escaping (() throws -> [TopicDAO]) -> Void){
+        self.mainPageStore.fetchTopics { (topics: () throws -> [TopicDAO]) -> Void in
+            completionHandler(topics)
+        }
+    }
+    
+    func fetchHomeQuiz(completionHandler: @escaping (() throws -> [QuizDAO]) -> Void){
+        self.mainPageStore.fetchHomeQuiz { (quizs: () throws -> [QuizDAO]) -> Void in
+            completionHandler(quizs)
+        }
+    }
 }

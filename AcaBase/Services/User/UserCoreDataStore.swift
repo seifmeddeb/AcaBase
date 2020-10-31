@@ -23,7 +23,7 @@ class UserCoreDataStore : UsersStoreProtocol {
                 let users = try self.moc.fetch(fetchRequest) as! [UserDAO]
                 completionHandler { return users.last }
             } catch {
-                completionHandler { throw UsersStoreError.CannotFetch("Cannot fetch orders") }
+                completionHandler { throw CoreDataError.CannotFetch("Cannot fetch orders") }
             }
         }
     }
@@ -43,14 +43,9 @@ class UserCoreDataStore : UsersStoreProtocol {
                 try self.moc.save()
                 completionHandler { return userToCreate }
             } catch {
-                completionHandler { throw UsersStoreError.CannotCreate("Cannot Create user") }
+                completionHandler { throw CoreDataError.CannotCreate("Cannot Create user") }
             }
         }
-    }
-    
-    enum UsersStoreError : Error {
-        case CannotFetch(String)
-        case CannotCreate(String)
     }
     
     // API functions not to be implemented

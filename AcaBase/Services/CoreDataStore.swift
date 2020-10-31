@@ -47,3 +47,8 @@ class CoreDataStore {
         }
     }
 }
+
+enum CoreDataError : Error {
+    case CannotFetch(String)
+    case CannotCreate(String)
+}

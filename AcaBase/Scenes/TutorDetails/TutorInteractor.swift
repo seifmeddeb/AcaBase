@@ -32,7 +32,6 @@ class TutorInteractor: TutorBusinessLogic, TutorDataStore
     
     func getTutor(request: Tutor.Display.Request)
     {
-        
         if let tutor = tutorToDisplay {
             let response = Tutor.Display.Response(tutor: tutor)
             presenter?.presentTutor(response: response)

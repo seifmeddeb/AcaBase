@@ -25,11 +25,13 @@ enum TutorList
         {
             var tutorList = [TutorDAO]()
             var subjectsList = [SubjectDAO]()
+            var isSelection = false
         }
         struct ViewModel
         {
             var tutorList = [TutorViewModel]()
             var subjectsList = [Int:String]()
+            var isSelection = false
         }
     }
     

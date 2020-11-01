@@ -70,7 +70,7 @@ class TutorListViewController: UIViewController, TutorListDisplayLogic
     {
         super.viewDidLoad()
         getTutorsList()
-        
+        navigationController?.delegate = self
         self.title = "Find a tutor"
     }
     
@@ -87,6 +87,8 @@ class TutorListViewController: UIViewController, TutorListDisplayLogic
     
     var tutorList = [TutorViewModel]()
     var searchBar : UISearchBar!
+    var selectATutor = false
+    var selectedTutor : TutorViewModel?
     // MARK: IBOutlets
     
     @IBOutlet weak var tableView: UITableView!
@@ -101,6 +103,7 @@ class TutorListViewController: UIViewController, TutorListDisplayLogic
     func displayTutorList(viewModel: TutorList.Tutors.ViewModel)
     {
         self.tutorList = viewModel.tutorList
+        selectATutor = viewModel.isSelection
         self.setSearchBarUI(subjects: viewModel.subjectsList)
         let scopeTitle = searchBar.scopeButtonTitles?[searchBar.selectedScopeButtonIndex]
         filterTutorsList(subject: scopeTitle, tutorName: searchBar.text)
@@ -155,7 +158,20 @@ extension TutorListViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if selectATutor {
+            self.selectedTutor = self.tutorList[indexPath.row]
+            self.navigationController?.popViewController(animated: true)
+        }
         performSegue(withIdentifier: "DetailTutor", sender: self)
+    }
+}
+extension TutorListViewController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        if let viewController = viewController as? QuestionViewController {
+            // FIXME: Fix me Not so clean architecture
+            viewController.tutor = self.selectedTutor
+            viewController.subjects = self.selectedTutor?.model.subjects ?? [SubjectDAO]()
+        }
     }
 }
 

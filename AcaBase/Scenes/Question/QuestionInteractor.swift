@@ -14,28 +14,39 @@ import UIKit
 
 protocol QuestionBusinessLogic
 {
-  func doSomething(request: Question.Something.Request)
+    func getQuestionData(request: Question.ViewData.Request)
 }
 
 protocol QuestionDataStore
 {
-  //var name: String { get set }
+    var tutors: [TutorDAO]? { get set }
+    var topics: [TopicDAO]? { get set }
+    var tutor: TutorDAO? { get set }
 }
 
 class QuestionInteractor: QuestionBusinessLogic, QuestionDataStore
 {
-  var presenter: QuestionPresentationLogic?
-  var worker: QuestionWorker?
-  //var name: String = ""
-  
-  // MARK: Do something
-  
-  func doSomething(request: Question.Something.Request)
-  {
-    worker = QuestionWorker()
-    worker?.doSomeWork()
+    var presenter: QuestionPresentationLogic?
+    var worker: QuestionWorker?
+    var tutorWorker: TutorListWorker?
+    var tutors: [TutorDAO]?
+    var topics: [TopicDAO]?
+    var tutor: TutorDAO?
     
-    let response = Question.Something.Response()
-    presenter?.presentSomething(response: response)
-  }
+    // MARK: getQuestionData
+    func getQuestionData(request: Question.ViewData.Request)
+    {
+        tutorWorker = TutorListWorker()
+        var subjectList = [SubjectDAO]()
+        if let topicList = self.topics {
+            subjectList = tutorWorker?.getSubjectsFromTopicList(topicList: topicList) ?? [SubjectDAO]()
+        }
+        if let tutor = self.tutor {
+            subjectList = tutor.subjects ?? [SubjectDAO]()
+        }
+        
+        let response = Question.ViewData.Response(tutor: self.tutor, subjectList: subjectList)
+        presenter?.presentQuestionData(response: response)
+        
+    }
 }

@@ -15,6 +15,7 @@ import UIKit
 @objc protocol HomeRoutingLogic
 {
     func routeToLogin(segue: UIStoryboardSegue?)
+    func routeToQuestion(segue: UIStoryboardSegue?)
 }
 
 protocol HomeDataPassing
@@ -53,6 +54,21 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing
         }
     }
     
+    @objc func routeToQuestion(segue: UIStoryboardSegue?) {
+        if let segue = segue {
+            let destinationVC = segue.destination as! QuestionViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToQuestion(source: dataStore!, destination: &destinationDS)
+        } else {
+            let storyboard = UIStoryboard(name: "Question", bundle: nil)
+            let destinationVC = storyboard.instantiateViewController(withIdentifier: "QuestionViewController") as! QuestionViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToQuestion(source: dataStore!, destination: &destinationDS)
+            navigateToQuestion(source: viewController!, destination: destinationVC)
+        }
+    }
+    
+    // MARK: Passing data
     func passDataToDetailTutor(source: HomeDataStore, destination: inout TutorDataStore)
     {
         let selectedRow = viewController?.collectionView?.indexPathsForSelectedItems?[0].row
@@ -63,7 +79,21 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing
     {
         destination.tutorList = source.tutors ?? [TutorDAO]()
         destination.topicList = source.topics ?? [TopicDAO]()
+        destination.isSelection = false
     }
+    
+    func passDataToQuestion(source: HomeDataStore, destination: inout QuestionDataStore)
+    {
+        destination.tutors = source.tutors ?? [TutorDAO]()
+        destination.topics = source.topics ?? [TopicDAO]()
+    }
+    
+    // MARK: Navigation
+    func navigateToQuestion(source: HomeViewController, destination: QuestionViewController)
+    {
+        source.show(destination, sender: nil)
+    }
+    
     //func routeToSomewhere(segue: UIStoryboardSegue?)
     //{
     //  if let segue = segue {

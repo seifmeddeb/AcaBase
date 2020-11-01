@@ -16,16 +16,20 @@ enum Question
 {
   // MARK: Use cases
   
-  enum Something
+  enum ViewData
   {
     struct Request
     {
     }
     struct Response
     {
+        var tutor : TutorDAO?
+        var subjectList : [SubjectDAO]?
     }
     struct ViewModel
     {
+        var tutor : TutorViewModel?
+        var subjectList = [SubjectDAO]()
     }
   }
 }

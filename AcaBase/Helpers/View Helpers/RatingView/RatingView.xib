@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -27,6 +26,7 @@
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q03-5f-zaR">
                     <rect key="frame" x="110" y="0.0" width="41" height="44"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -36,31 +36,31 @@
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="0S9-7z-yVs">
                             <rect key="frame" x="0.0" y="0.0" width="22" height="44"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <color key="tintColor" red="0.99215686270000003" green="0.7843137255" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                         </imageView>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="L0p-ye-Tqj">
                             <rect key="frame" x="22" y="0.0" width="22" height="44"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <color key="tintColor" red="0.99215686270000003" green="0.7843137255" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                         </imageView>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="lfP-9q-hKM">
                             <rect key="frame" x="44" y="0.0" width="22" height="44"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <color key="tintColor" red="0.99215686270000003" green="0.7843137255" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                         </imageView>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="ll8-V9-1BP">
                             <rect key="frame" x="66" y="0.0" width="22" height="44"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <color key="tintColor" red="0.99215686270000003" green="0.7843137255" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                         </imageView>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="yFa-Gj-zb8">
                             <rect key="frame" x="88" y="0.0" width="22" height="44"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <color key="tintColor" red="0.99215686270000003" green="0.7843137255" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="0S9-7z-yVs" firstAttribute="leading" secondItem="gh6-kK-mlV" secondAttribute="leading" id="0ML-Oz-cO2"/>
                         <constraint firstAttribute="bottom" secondItem="lfP-9q-hKM" secondAttribute="bottom" id="2uB-BS-oEz"/>
@@ -87,7 +87,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="isV-eq-g74"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="gh6-kK-mlV" firstAttribute="leading" secondItem="ZhT-AZ-VCg" secondAttribute="leading" id="7fP-lf-U8U"/>
                 <constraint firstAttribute="trailing" secondItem="q03-5f-zaR" secondAttribute="trailing" id="NB3-OQ-4Q0"/>
@@ -106,8 +106,5 @@
     </objects>
     <resources>
         <image name="star" width="24" height="24"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

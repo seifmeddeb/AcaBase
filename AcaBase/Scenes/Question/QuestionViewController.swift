@@ -14,7 +14,7 @@ import UIKit
 
 protocol QuestionDisplayLogic: class
 {
-    func displaySomething(viewModel: Question.Something.ViewModel)
+    func displayQuestionData(viewModel: Question.ViewData.ViewModel)
 }
 
 class QuestionViewController: UIViewController, QuestionDisplayLogic
@@ -57,11 +57,20 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
+            if (scene == "TutorList" && self.tutor == nil) || (scene != "TutorList") {
+                let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+                if let router = router, router.responds(to: selector) {
+                    router.perform(selector, with: segue)
+                }
             }
         }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if (identifier == "TutorList" && self.tutor == nil) || (identifier != "TutorList") {
+            return true
+        }
+        return false
     }
     
     // MARK: View lifecycle
@@ -69,34 +78,89 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        doSomething()
+        getQuestionData()
         setPickerViewWithToolBar()
-        hideKeyboardWhenTappedAround() 
+        hideKeyboardWhenTappedAround()
+        addToolBarToTextViewKeyboard()
+        self.title = "Poser une question"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = false
+        setNormalNavBarWhenAppearing()
+        registerForKeyboardNotifications()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        deregisterFromKeyboardNotifications()
+        self.tutor = nil
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if let tutor = self.tutor {
+            self.updateTutorView(with: tutor)
+        }
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
     }
     
     // MARK: Outlets
     
     @IBOutlet weak var subjectTextField: UITextField!
     @IBOutlet weak var imagesCollectionView: UICollectionView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var descTextView: UITextView!
+    @IBOutlet weak var textViewParent: UIView!
+    
+    // tutor details outlets
+    @IBOutlet weak var tutorView: UIView!
+    @IBOutlet weak var fullName: UILabel!
+    @IBOutlet weak var AnswersLbl: UILabel!
+    @IBOutlet weak var subjectsLbl: UILabel!
+    @IBOutlet weak var ratingView: RatingView!
+    @IBOutlet weak var tutorImageView: UIImageView!
+    @IBOutlet weak var noTutorView: UIView!
     
     // MARK: Properties
     
     let subjectPickerView = UIPickerView()
-    var subjects = ["Mathématique","Phisique"]
+    var subjects = [SubjectDAO]()
+    var images = [UIImage]()
+    var tutor : TutorViewModel?
     
-    // MARK: Do something
-    func doSomething()
+    // MARK: getQuestionData
+    func getQuestionData()
     {
-        let request = Question.Something.Request()
-        interactor?.doSomething(request: request)
+        let request = Question.ViewData.Request()
+        interactor?.getQuestionData(request: request)
     }
     
-    func displaySomething(viewModel: Question.Something.ViewModel)
+    func displayQuestionData(viewModel: Question.ViewData.ViewModel)
     {
-        //nameTextField.text = viewModel.name
+        self.subjects = viewModel.subjectList
+        if let tutor = viewModel.tutor {
+            self.tutor = tutor
+            self.subjects = tutor.model.subjects ?? [SubjectDAO]()
+            self.updateTutorView(with: tutor)
+        }
     }
     
     // MARK: Private functions
+    
+    private func updateTutorView(with viewModel: TutorViewModel){
+        self.tutorView.isHidden = false
+        self.noTutorView.isHidden = true
+        self.fullName.text = viewModel.model.fullName
+        let answeredQuestion = "Answers: \(viewModel.model.answredQuestions)"
+        self.AnswersLbl.text = answeredQuestion
+        self.subjectsLbl.text = viewModel.subjects
+        self.ratingView.setRating(rating: viewModel.model.rate)
+        self.tutorImageView.setImageAsync(url: viewModel.imageUrl)
+    }
     
     private func setPickerViewWithToolBar() {
         
@@ -111,9 +175,9 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
         toolBar.tintColor = primaryGreen
         toolBar.sizeToFit()
         
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(self.donePicker))
+        let doneButton = UIBarButtonItem(title: "Terminé", style: UIBarButtonItem.Style.done, target: self, action: #selector(self.donePicker))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.cancelPicker))
+        let cancelButton = UIBarButtonItem(title: "Annulé", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.cancelPicker))
         
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
@@ -124,17 +188,41 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
     @objc private func donePicker() {
         let row = self.subjectPickerView.selectedRow(inComponent: 0)
         self.subjectPickerView.selectRow(row, inComponent: 0, animated: false)
-        self.subjectTextField.text = self.subjects[row]
+        self.subjectTextField.text = self.subjects[row].name
         self.subjectTextField.resignFirstResponder()
     }
     @objc private func cancelPicker() {
         self.subjectTextField.text = nil
         self.subjectTextField.resignFirstResponder()
     }
+    
+    private func addToolBarToTextViewKeyboard() {
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = primaryGreen
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Terminé", style: UIBarButtonItem.Style.done, target: self, action: #selector(self.doneTextView))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Annulé", style: UIBarButtonItem.Style.plain, target: self, action: #selector(self.cancelTextView))
+        
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        descTextView.inputAccessoryView = toolBar
+    }
+    @objc private func doneTextView() {
+        self.descTextView.resignFirstResponder()
+    }
+    @objc private func cancelTextView() {
+        self.descTextView.text = nil
+        self.descTextView.resignFirstResponder()
+    }
 }
 extension QuestionViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return images.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -142,7 +230,12 @@ extension QuestionViewController : UICollectionViewDelegate, UICollectionViewDat
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SelectionCell", for: indexPath)
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCell
+            cell.set(image: images[indexPath.row-1])
+            cell.didPressDelete {
+                self.images.remove(at: indexPath.row-1)
+                collectionView.reloadData()
+            }
             return cell
         }
     }
@@ -155,6 +248,13 @@ extension QuestionViewController : UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // FIXME: add click event handler
+        if indexPath.row == 0 {
+            ImagePickerManager().pickImage(self){ image in
+                self.images.append(image)
+                collectionView.reloadData()
+                collectionView.scrollToItem(at: IndexPath(row: self.images.count, section: 0), at: .right, animated: true)
+            }
+        }
     }
 }
 extension QuestionViewController : UIPickerViewDelegate, UIPickerViewDataSource {
@@ -167,16 +267,77 @@ extension QuestionViewController : UIPickerViewDelegate, UIPickerViewDataSource 
     }
     
     func pickerView( _ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return subjects[row]
+        return subjects[row].name
     }
     
     func pickerView( _ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        subjectTextField.text = subjects[row]
+        subjectTextField.text = subjects[row].name
     }
 }
 extension QuestionViewController : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+extension QuestionViewController : UITextViewDelegate {
+    
+    func registerForKeyboardNotifications(){
+        //Adding notifies on keyboard appearing
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func deregisterFromKeyboardNotifications(){
+        //Removing notifies on keyboard appearing
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWasShown(notification: NSNotification){
+        //Need to calculate keyboard exact size due to Apple suggestions
+        self.scrollView.isScrollEnabled = true
+        let info = notification.userInfo!
+        let keyboardSize = (info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size
+        let contentInsets : UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize!.height, right: 0.0)
+        
+        self.scrollView.contentInset = contentInsets
+        self.scrollView.scrollIndicatorInsets = contentInsets
+        
+        var aRect : CGRect = self.view.frame
+        aRect.size.height -= (keyboardSize!.height + 40)
+        if let activeTextView = self.textViewParent {
+            if (!aRect.contains(activeTextView.frame.origin)){
+                self.scrollView.scrollRectToVisible(activeTextView.frame, animated: true)
+            }
+        }
+    }
+    
+    @objc func keyboardWillBeHidden(notification: NSNotification){
+        //Once keyboard disappears, restore original positions
+        self.scrollView.contentInset = UIEdgeInsets.zero
+        self.scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
+        self.view.endEditing(true)
+    }
+}
+
+class ImageCell : UICollectionViewCell {
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var deleteBtn: UIButton!
+    // Properties
+    private var didPressDelete: (() ->Void)?
+    
+    func set(image: UIImage){
+        self.imageView.image = image
+    }
+    
+    @discardableResult
+    func didPressDelete(_ completion: (()->Void)?) ->Self {
+        self.didPressDelete = completion
+        return self
+    }
+    
+    @IBAction func deletePressed(_ sender: Any) {
+        didPressDelete?()
     }
 }

@@ -22,6 +22,7 @@ protocol TutorListDataStore
 {
     var tutorList : [TutorDAO]? { get set }
     var topicList : [TopicDAO]? { get set }
+    var isSelection : Bool! { get set }
 }
 
 class TutorListInteractor: TutorListBusinessLogic, TutorListDataStore
@@ -30,19 +31,20 @@ class TutorListInteractor: TutorListBusinessLogic, TutorListDataStore
     var worker: TutorListWorker!
     var tutorList : [TutorDAO]?
     var topicList : [TopicDAO]?
+    var isSelection: Bool!
     
-    // MARK: Do something
-    
+    // MARK: getTutors
     func getTutors(request: TutorList.Tutors.Request)
     {
         worker = TutorListWorker()
         if let tutorList = self.tutorList, let topicList = self.topicList {
             let subjectList = worker.getSubjectsFromTopicList(topicList: topicList)
-            let response = TutorList.Tutors.Response(tutorList: tutorList,subjectsList: subjectList)
+            let response = TutorList.Tutors.Response(tutorList: tutorList,subjectsList: subjectList, isSelection: isSelection)
             presenter?.presentTutorList(response: response)
         }
     }
     
+    // MARK: filterTutors
     func filterTutors(request: TutorList.FilterTutors.Request)
     {
         worker = TutorListWorker()

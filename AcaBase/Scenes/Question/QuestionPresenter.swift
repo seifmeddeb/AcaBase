@@ -14,18 +14,27 @@ import UIKit
 
 protocol QuestionPresentationLogic
 {
-  func presentSomething(response: Question.Something.Response)
+    func presentQuestionData(response: Question.ViewData.Response)
 }
 
 class QuestionPresenter: QuestionPresentationLogic
 {
-  weak var viewController: QuestionDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentSomething(response: Question.Something.Response)
-  {
-    let viewModel = Question.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
-  }
+    weak var viewController: QuestionDisplayLogic?
+    
+    // MARK: presentQuestionData
+    
+    func presentQuestionData(response: Question.ViewData.Response)
+    {
+        var tutorViewModel : TutorViewModel?
+        
+        if let tutor = response.tutor {
+            let subjects = getSubjectsString(for: tutor.subjects)
+            let imageUrl = URL(string: tutor.picture ?? "")
+            let answerdQuestions = getAnsweredQuestions(answersNbr: tutor.answredQuestions)
+            tutorViewModel = TutorViewModel(model: tutor, subjects: subjects, answeredQuestions: answerdQuestions, imageUrl: imageUrl)
+        }
+        let viewModel = Question.ViewData.ViewModel(tutor: tutorViewModel, subjectList: response.subjectList ?? [SubjectDAO]())
+        viewController?.displayQuestionData(viewModel: viewModel)
+    }
+    
 }

@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 extension UIViewController{
+    
+    // used in homeviewcontroller
     func setHomePageNavBar(for navigationItem: UINavigationItem, titleViewOpacity: CGFloat? = nil){
         
         let homeViewController = self as! HomeViewController
@@ -51,5 +53,28 @@ extension UIViewController{
         let leftHeight = lefttBarItem.customView?.heightAnchor.constraint(equalToConstant: 20)
         leftHeight?.isActive = true
         navigationItem.leftBarButtonItem = lefttBarItem
+    }
+    
+    // Used in question viewcontroller and potentially other viewcontrollers
+    func setNormalNavBarWhenAppearing() {
+        if let navigationBar = self.navigationController?.navigationBar {
+            navigationBar.tintColor = primaryBlue
+            navigationBar.barTintColor = .white
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: primaryBlue]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: primaryBlue]
+            navBarAppearance.backgroundColor = .white
+            navigationBar.standardAppearance = navBarAppearance
+            navigationBar.scrollEdgeAppearance = navBarAppearance
+            navigationBar.barStyle = .black
+            navigationBar.alpha = 1
+            navigationBar.layer.masksToBounds = false
+            navigationBar.layer.shadowColor = UIColor.lightGray.cgColor
+            navigationBar.layer.shadowOpacity = 0.4
+            navigationBar.layer.shadowOffset = CGSize(width: 0, height: 4.0)
+            navigationBar.layer.shadowRadius = 1
+            navigationBar.prefersLargeTitles = false
+        }
     }
 }

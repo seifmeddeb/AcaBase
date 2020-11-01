@@ -42,7 +42,7 @@ class TutorListPresenter: TutorListPresentationLogic
             subjectsViewModel[subject.objectId] = subject.name
         }
         
-        let viewModel = TutorList.Tutors.ViewModel(tutorList: tutorViewModels,subjectsList: subjectsViewModel)
+        let viewModel = TutorList.Tutors.ViewModel(tutorList: tutorViewModels,subjectsList: subjectsViewModel,isSelection: response.isSelection)
         viewController?.displayTutorList(viewModel: viewModel)
     }
     

@@ -103,6 +103,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
         self.navigationController?.navigationBar.compactAppearance = navBarAppearance
         self.navigationController?.navigationBar.standardAppearance = navBarAppearance
         self.navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         self.setHomePageNavBar(for: self.navigationItem, titleViewOpacity: offset)
         navbarAnimation()
     }
@@ -110,7 +111,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     // MARK: Actions
     
     @objc func clickTitleButton() {
-        print("clickTitleButton")
+        router?.routeToQuestion(segue: nil)
     }
     
     @objc func clickRightButton() {

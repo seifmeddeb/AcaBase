@@ -527,6 +527,7 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. </str
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="askQuestionPressed:" destination="MHE-2L-htU" eventType="touchUpInside" id="Zk2-Nf-YaW"/>
+                                    <segue destination="2eF-J0-p2j" kind="show" identifier="Question" id="BPJ-bd-i12"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -567,6 +568,16 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. </str
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bZI-BR-aNu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="189.85507246376812" y="160.04464285714286"/>
+        </scene>
+        <!--Question-->
+        <scene sceneID="lSy-Ec-PB6">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Question" id="2eF-J0-p2j" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="eYM-Xc-HNm"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WD4-tb-pOS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="751" y="160"/>
         </scene>
     </scenes>
     <resources>

@@ -14,47 +14,45 @@ import UIKit
 
 @objc protocol TutorRoutingLogic
 {
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
+    //func routeToSomewhere(segue: UIStoryboardSegue?)
 }
 
 protocol TutorDataPassing
 {
-  var dataStore: TutorDataStore? { get }
+    var dataStore: TutorDataStore? { get }
 }
 
 class TutorRouter: NSObject, TutorRoutingLogic, TutorDataPassing
 {
-  weak var viewController: TutorViewController?
-  var dataStore: TutorDataStore?
-  
-  // MARK: Routing
-  
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
-  //{
-  //  if let segue = segue {
-  //    let destinationVC = segue.destination as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //  } else {
-  //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-  //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-  //  }
-  //}
-
-  // MARK: Navigation
-  
-  //func navigateToSomewhere(source: TutorViewController, destination: SomewhereViewController)
-  //{
-  //  source.show(destination, sender: nil)
-  //}
-  
-  // MARK: Passing data
-  
-  //func passDataToSomewhere(source: TutorDataStore, destination: inout SomewhereDataStore)
-  //{
-  //  destination.name = source.name
-  //}
+    weak var viewController: TutorViewController?
+    var dataStore: TutorDataStore?
+    
+    // MARK: Routing
+    
+    @objc func routeToQuestion(segue: UIStoryboardSegue?) {
+        if let segue = segue {
+            let destinationVC = segue.destination as! QuestionViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToQuestion(source: dataStore!, destination: &destinationDS)
+        } else {
+            let storyboard = UIStoryboard(name: "Question", bundle: nil)
+            let destinationVC = storyboard.instantiateViewController(withIdentifier: "QuestionViewController") as! QuestionViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToQuestion(source: dataStore!, destination: &destinationDS)
+            navigateToQuestion(source: viewController!, destination: destinationVC)
+        }
+    }
+    
+    // MARK: Navigation
+    
+    func passDataToQuestion(source: TutorDataStore, destination: inout QuestionDataStore)
+    {
+        destination.tutor = source.tutorToDisplay
+    }
+    
+    // MARK: Navigation
+    func navigateToQuestion(source: TutorViewController, destination: QuestionViewController)
+    {
+        source.show(destination, sender: nil)
+    }
 }

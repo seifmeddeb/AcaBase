@@ -71,7 +71,7 @@ class TutorListViewController: UIViewController, TutorListDisplayLogic
         super.viewDidLoad()
         getTutorsList()
         navigationController?.delegate = self
-        self.title = "Find a tutor"
+        self.title = "Trouver un tuteur"
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -161,8 +161,9 @@ extension TutorListViewController : UITableViewDelegate, UITableViewDataSource {
         if selectATutor {
             self.selectedTutor = self.tutorList[indexPath.row]
             self.navigationController?.popViewController(animated: true)
+        } else {
+            performSegue(withIdentifier: "DetailTutor", sender: self)
         }
-        performSegue(withIdentifier: "DetailTutor", sender: self)
     }
 }
 extension TutorListViewController: UINavigationControllerDelegate {

@@ -57,20 +57,11 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if let scene = segue.identifier {
-            if (scene == "TutorList" && self.tutor == nil) || (scene != "TutorList") {
-                let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-                if let router = router, router.responds(to: selector) {
-                    router.perform(selector, with: segue)
-                }
+            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+            if let router = router, router.responds(to: selector) {
+                router.perform(selector, with: segue)
             }
         }
-    }
-    
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if (identifier == "TutorList" && self.tutor == nil) || (identifier != "TutorList") {
-            return true
-        }
-        return false
     }
     
     // MARK: View lifecycle
@@ -124,6 +115,7 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
     @IBOutlet weak var ratingView: RatingView!
     @IBOutlet weak var tutorImageView: UIImageView!
     @IBOutlet weak var noTutorView: UIView!
+    @IBOutlet weak var selctTutorBtn: UIButton!
     
     // MARK: Properties
     
@@ -142,6 +134,7 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
     func displayQuestionData(viewModel: Question.ViewData.ViewModel)
     {
         self.subjects = viewModel.subjectList
+        selctTutorBtn.isEnabled = !viewModel.disableTutorSelection
         if let tutor = viewModel.tutor {
             self.tutor = tutor
             self.subjects = tutor.model.subjects ?? [SubjectDAO]()
@@ -218,6 +211,30 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
     @objc private func cancelTextView() {
         self.descTextView.text = nil
         self.descTextView.resignFirstResponder()
+    }
+}
+extension QuestionViewController : UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 13
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "RecordingCell", for: indexPath) as! RecordingCell
+            //let viewModel = self.feedBackList[indexPath.row]
+            cell.set(name: "testAudio.mp3", size: "12Mo")
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AttachementCell", for: indexPath) as! AttachementCell
+            //let viewModel = self.feedBackList[indexPath.row]
+            cell.set(name: "testfile.pdf", size: "32Ko")
+            return cell
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }
 extension QuestionViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -320,24 +337,24 @@ extension QuestionViewController : UITextViewDelegate {
         self.view.endEditing(true)
     }
 }
-
-class ImageCell : UICollectionViewCell {
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var deleteBtn: UIButton!
-    // Properties
-    private var didPressDelete: (() ->Void)?
-    
-    func set(image: UIImage){
-        self.imageView.image = image
-    }
-    
-    @discardableResult
-    func didPressDelete(_ completion: (()->Void)?) ->Self {
-        self.didPressDelete = completion
-        return self
-    }
-    
-    @IBAction func deletePressed(_ sender: Any) {
-        didPressDelete?()
-    }
-}
+//
+//class ImageCell : UICollectionViewCell {
+//    @IBOutlet weak var imageView: UIImageView!
+//    @IBOutlet weak var deleteBtn: UIButton!
+//    // Properties
+//    private var didPressDelete: (() ->Void)?
+//
+//    func set(image: UIImage){
+//        self.imageView.image = image
+//    }
+//
+//    @discardableResult
+//    func didPressDelete(_ completion: (()->Void)?) ->Self {
+//        self.didPressDelete = completion
+//        return self
+//    }
+//
+//    @IBAction func deletePressed(_ sender: Any) {
+//        didPressDelete?()
+//    }
+//}

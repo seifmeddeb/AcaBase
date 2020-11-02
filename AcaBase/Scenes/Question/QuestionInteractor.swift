@@ -19,9 +19,14 @@ protocol QuestionBusinessLogic
 
 protocol QuestionDataStore
 {
+    // going into the view
     var tutors: [TutorDAO]? { get set }
     var topics: [TopicDAO]? { get set }
     var tutor: TutorDAO? { get set }
+    
+    // going back to the view
+    /// var recordingList : [String]? // should be object with name (can get url from it)and size
+    /// var attachementList : [String]? // same
 }
 
 class QuestionInteractor: QuestionBusinessLogic, QuestionDataStore
@@ -38,14 +43,16 @@ class QuestionInteractor: QuestionBusinessLogic, QuestionDataStore
     {
         tutorWorker = TutorListWorker()
         var subjectList = [SubjectDAO]()
+        var disableTutorSelection = false
         if let topicList = self.topics {
             subjectList = tutorWorker?.getSubjectsFromTopicList(topicList: topicList) ?? [SubjectDAO]()
         }
         if let tutor = self.tutor {
             subjectList = tutor.subjects ?? [SubjectDAO]()
+            disableTutorSelection = true
         }
         
-        let response = Question.ViewData.Response(tutor: self.tutor, subjectList: subjectList)
+        let response = Question.ViewData.Response(tutor: self.tutor, subjectList: subjectList, disableTutorSelection: disableTutorSelection)
         presenter?.presentQuestionData(response: response)
         
     }

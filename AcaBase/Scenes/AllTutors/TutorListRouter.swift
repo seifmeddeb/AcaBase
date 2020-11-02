@@ -31,7 +31,8 @@ class TutorListRouter: NSObject, TutorListRoutingLogic, TutorListDataPassing
   
     @objc func routeToDetailTutor(segue: UIStoryboardSegue?) {
         if let segue = segue {
-            let destinationVC = segue.destination as! TutorViewController
+            let navigationController = segue.destination as! UINavigationController
+            let destinationVC = navigationController.viewControllers[0] as! TutorViewController
             var destinationDS = destinationVC.router!.dataStore!
             passDataToDetailTutor(source: dataStore!, destination: &destinationDS)
         }

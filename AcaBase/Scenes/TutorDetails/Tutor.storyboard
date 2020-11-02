@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MHE-2L-htU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8mm-3M-598">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -542,6 +542,7 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. </str
                             <constraint firstItem="MdG-Nb-OOv" firstAttribute="leading" secondItem="FUx-E9-LHE" secondAttribute="leading" id="tCQ-nW-Qqp"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="5Oy-VZ-psJ"/>
                     <connections>
                         <outlet property="answersNameLabel" destination="6QG-BR-pYl" id="y9z-fr-h3m"/>
                         <outlet property="answersValueLabel" destination="5dq-qX-TtE" id="ubh-lL-2Fy"/>
@@ -567,7 +568,7 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. </str
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bZI-BR-aNu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="189.85507246376812" y="160.04464285714286"/>
+            <point key="canvasLocation" x="1100" y="160.04464285714286"/>
         </scene>
         <!--Question-->
         <scene sceneID="lSy-Ec-PB6">
@@ -577,7 +578,25 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. </str
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WD4-tb-pOS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="751" y="160"/>
+            <point key="canvasLocation" x="1660.144927536232" y="159.375"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="k7B-0E-4uf">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8mm-3M-598" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hgu-4r-iCu">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="MHE-2L-htU" kind="relationship" relationship="rootViewController" id="0Ve-Ba-Jhm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D1B-Ef-UKZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="189.85507246376812" y="160.04464285714286"/>
         </scene>
     </scenes>
     <resources>

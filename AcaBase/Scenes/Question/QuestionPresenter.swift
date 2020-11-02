@@ -33,7 +33,7 @@ class QuestionPresenter: QuestionPresentationLogic
             let answerdQuestions = getAnsweredQuestions(answersNbr: tutor.answredQuestions)
             tutorViewModel = TutorViewModel(model: tutor, subjects: subjects, answeredQuestions: answerdQuestions, imageUrl: imageUrl)
         }
-        let viewModel = Question.ViewData.ViewModel(tutor: tutorViewModel, subjectList: response.subjectList ?? [SubjectDAO]())
+        let viewModel = Question.ViewData.ViewModel(tutor: tutorViewModel, subjectList: response.subjectList ?? [SubjectDAO](), disableTutorSelection: response.disableTutorSelection)
         viewController?.displayQuestionData(viewModel: viewModel)
     }
     

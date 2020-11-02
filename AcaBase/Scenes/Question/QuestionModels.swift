@@ -25,11 +25,13 @@ enum Question
     {
         var tutor : TutorDAO?
         var subjectList : [SubjectDAO]?
+        var disableTutorSelection = false
     }
     struct ViewModel
     {
         var tutor : TutorViewModel?
         var subjectList = [SubjectDAO]()
+        var disableTutorSelection : Bool
     }
   }
 }

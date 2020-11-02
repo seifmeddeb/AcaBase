@@ -81,12 +81,20 @@ class TutorViewController: UIViewController, TutorDisplayLogic
         let gesture = UITapGestureRecognizer(target: self, action:  #selector (self.dismissViewController (_:)))
         gesture.delegate = self
         self.parentContentView.addGestureRecognizer(gesture)
-            
+        if parentScrollView.contentOffset.y <= 0 {
+            self.contentScrollView.isUserInteractionEnabled = false
+        } else {
+            self.contentScrollView.isUserInteractionEnabled = true
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool)
     {   super.viewDidDisappear(animated)
         self.view.backgroundColor = UIColor.clear
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     // MARK: Properties
@@ -208,11 +216,13 @@ extension TutorViewController : UIScrollViewDelegate {
             // minimize view
             if scrollView.contentOffset.y <= 120 {
                 scrollView.setContentOffset(CGPoint.zero, animated: true)
+                self.contentScrollView.isUserInteractionEnabled = false
             }
             // maximize view
             if scrollView.contentOffset.y > 120 {
                 let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height)
                 scrollView.setContentOffset(bottomOffset, animated: true)
+                self.contentScrollView.isUserInteractionEnabled = true
             }
         }
     }

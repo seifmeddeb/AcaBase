@@ -16,7 +16,7 @@ class RecordingCell: UITableViewCell {
     // Properties
     private var didPressDelete: (() ->Void)?
     private var didPressPlay: (() ->Void)?
-    
+    var attachement :Attachement?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -28,9 +28,11 @@ class RecordingCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func set(name: String, size: String){
-        self.nameLbl.text = name
-        self.sizeLbl.text = size
+    func set(viewModel: Attachement){
+        self.attachement = viewModel
+        self.nameLbl.text = viewModel.name
+        self.sizeLbl.text = viewModel.size
+        self.playStopBtn.setImage(UIImage(named: "baseline_play_arrow_black_24pt"), for: .normal)
     }
     
     @discardableResult
@@ -49,7 +51,13 @@ class RecordingCell: UITableViewCell {
         self.didPressDelete?()
     }
     @IBAction func playStopPressed(_ sender: Any) {
-        self.playStopBtn.isSelected = !(self.playStopBtn.isSelected)
+
+        let playImage = UIImage(named: "baseline_play_arrow_black_24pt")
+        if self.playStopBtn.currentImage == playImage {
+        self.playStopBtn.setImage(UIImage(named: "baseline_stop_black_24pt"), for: .normal)
+        } else {
+        self.playStopBtn.setImage(playImage, for: .normal)
+        }
         self.didPressPlay?()
     }
     

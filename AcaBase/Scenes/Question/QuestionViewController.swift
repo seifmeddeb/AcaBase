@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 protocol QuestionDisplayLogic: class
 {
@@ -116,6 +117,7 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
     @IBOutlet weak var tutorImageView: UIImageView!
     @IBOutlet weak var noTutorView: UIView!
     @IBOutlet weak var selctTutorBtn: UIButton!
+    @IBOutlet weak var tableView: UITableView!
     
     // MARK: Properties
     
@@ -123,7 +125,10 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
     var subjects = [SubjectDAO]()
     var images = [UIImage]()
     var tutor : TutorViewModel?
-    
+    var attachementsList = [Attachement]()
+    var player: AVAudioPlayer?
+    var trackPlayedCell : RecordingCell?
+    var currentURL :URL?
     // MARK: getQuestionData
     func getQuestionData()
     {
@@ -212,22 +217,65 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
         self.descTextView.text = nil
         self.descTextView.resignFirstResponder()
     }
+    
+    private func playSound(url: URL) {
+        if let player = player{
+            player.stop()
+            self.player = nil
+        }
+        if currentURL != url {
+            currentURL = url
+            do {
+                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+                try AVAudioSession.sharedInstance().setActive(true)
+                
+                /* The following line is required for the player to work on iOS 11. Change the file type accordingly*/
+                player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.m4a.rawValue)
+                player?.delegate = self
+                /* iOS 10 and earlier require the following line:
+                 player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeMPEGLayer3) */
+                
+                guard let player = player else { return }
+                
+                player.play()
+                
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        } else {
+            self.currentURL = nil
+        }
+    }
 }
 extension QuestionViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 13
+        return attachementsList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
+        let attachement = attachementsList[indexPath.row]
+        if attachement.isAudio {
             let cell = tableView.dequeueReusableCell(withIdentifier: "RecordingCell", for: indexPath) as! RecordingCell
-            //let viewModel = self.feedBackList[indexPath.row]
-            cell.set(name: "testAudio.mp3", size: "12Mo")
+            cell.set(viewModel: attachement)
+            cell.didPressPlay {
+                if let lastCell = self.trackPlayedCell, lastCell != cell {
+                    lastCell.playStopBtn.setImage(UIImage(named: "baseline_play_arrow_black_24pt"), for: .normal)
+                }
+                self.trackPlayedCell = cell
+                self.playSound(url: attachement.url!)
+            }
+            cell.didPressDelete {
+                if attachement.url == self.trackPlayedCell?.attachement?.url && ((self.player?.isPlaying) != nil) {
+                    self.player?.stop()
+                    self.player = nil
+                }
+                self.attachementsList.remove(at: indexPath.row)
+                self.tableView.reloadData()
+            }
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "AttachementCell", for: indexPath) as! AttachementCell
-            //let viewModel = self.feedBackList[indexPath.row]
-            cell.set(name: "testfile.pdf", size: "32Ko")
+            cell.set(viewModel: attachement)
             return cell
         }
         
@@ -335,6 +383,14 @@ extension QuestionViewController : UITextViewDelegate {
         self.scrollView.contentInset = UIEdgeInsets.zero
         self.scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
         self.view.endEditing(true)
+    }
+}
+extension QuestionViewController : AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        if let lastCell = self.trackPlayedCell {
+            lastCell.playStopBtn.setImage(UIImage(named: "baseline_play_arrow_black_24pt"), for: .normal)
+            self.currentURL = nil
+        }
     }
 }
 //

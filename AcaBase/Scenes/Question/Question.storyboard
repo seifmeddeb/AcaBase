@@ -498,7 +498,6 @@ Appuyez ici si vous voulez sélectionner un tuteur</string>
                                                                             </constraints>
                                                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <state key="normal" image="baseline_play_arrow_black_24pt"/>
-                                                                            <state key="selected" image="baseline_stop_black_24pt"/>
                                                                             <connections>
                                                                                 <action selector="playStopPressed:" destination="XDZ-Rd-czk" eventType="touchUpInside" id="tE8-6k-Blf"/>
                                                                             </connections>
@@ -764,6 +763,9 @@ Appuyez ici si vous voulez sélectionner un tuteur</string>
                                                 <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="cZz-TJ-eWA" kind="presentation" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="zSh-EH-lVb"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -808,6 +810,7 @@ Appuyez ici si vous voulez sélectionner un tuteur</string>
                         <outlet property="selctTutorBtn" destination="zaG-gB-sSM" id="1Xz-sz-eRT"/>
                         <outlet property="subjectTextField" destination="nB3-yQ-Qlw" id="pXq-RO-ey8"/>
                         <outlet property="subjectsLbl" destination="PSw-vH-gNJ" id="lGa-qp-WoH"/>
+                        <outlet property="tableView" destination="rw9-kX-5gP" id="Y3R-Q2-igN"/>
                         <outlet property="textViewParent" destination="yYC-fC-xKr" id="52l-pi-EOD"/>
                         <outlet property="tutorImageView" destination="shk-SI-ApN" id="KJF-ID-bGv"/>
                         <outlet property="tutorView" destination="HaS-RI-Wgn" id="l0p-6r-SLh"/>
@@ -827,6 +830,14 @@ Appuyez ici si vous voulez sélectionner un tuteur</string>
             </objects>
             <point key="canvasLocation" x="744" y="150"/>
         </scene>
+        <!--AudioRecord-->
+        <scene sceneID="d8D-1q-DqO">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AudioRecord" id="cZz-TJ-eWA" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wc1-gz-BCD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="752" y="218"/>
+        </scene>
     </scenes>
     <resources>
         <image name="baseline_add_a_photo_black_48pt" width="48" height="48"/>
@@ -834,7 +845,6 @@ Appuyez ici si vous voulez sélectionner un tuteur</string>
         <image name="baseline_help_black_24pt" width="24" height="24"/>
         <image name="baseline_keyboard_arrow_down_black_24pt" width="24" height="24"/>
         <image name="baseline_play_arrow_black_24pt" width="24" height="24"/>
-        <image name="baseline_stop_black_24pt" width="24" height="24"/>
         <image name="bg-question" width="640" height="960"/>
         <image name="icn-mic" width="37.5" height="37.5"/>
         <image name="icn-paperclip" width="37.5" height="37.5"/>

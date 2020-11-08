@@ -170,6 +170,7 @@ extension TutorListViewController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         if let viewController = viewController as? QuestionViewController {
             // FIXME: Fix me Not so clean architecture
+            // Going through router is messy too because of the @objc annotation
             viewController.tutor = self.selectedTutor
             viewController.subjects = self.selectedTutor?.model.subjects ?? [SubjectDAO]()
         }

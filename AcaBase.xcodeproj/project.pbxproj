@@ -16,6 +16,7 @@
 		3019FD08252107F9004C259E /* TutorModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3019FD02252107F9004C259E /* TutorModels.swift */; };
 		3019FD09252107F9004C259E /* TutorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3019FD03252107F9004C259E /* TutorViewController.swift */; };
 		3019FD0A252107F9004C259E /* TutorInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3019FD04252107F9004C259E /* TutorInteractor.swift */; };
+		301A6C8B2551CD6000452289 /* Attachement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301A6C8A2551CD6000452289 /* Attachement.swift */; };
 		303139DF245C4DB5005EEF87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303139DE245C4DB5005EEF87 /* AppDelegate.swift */; };
 		303139E1245C4DB5005EEF87 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303139E0245C4DB5005EEF87 /* SceneDelegate.swift */; };
 		303139E6245C4DB5005EEF87 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 303139E4245C4DB5005EEF87 /* Main.storyboard */; };
@@ -115,6 +116,14 @@
 		3095C27C254A24D90078F2A7 /* QuestionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3095C276254A24D90078F2A7 /* QuestionModels.swift */; };
 		3095C27D254A24D90078F2A7 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3095C277254A24D90078F2A7 /* QuestionViewController.swift */; };
 		3095C27E254A24D90078F2A7 /* QuestionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3095C278254A24D90078F2A7 /* QuestionInteractor.swift */; };
+		309FE16A2551A26B00564AE0 /* AudioRecordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309FE1642551A26B00564AE0 /* AudioRecordPresenter.swift */; };
+		309FE16B2551A26B00564AE0 /* AudioRecordWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309FE1652551A26B00564AE0 /* AudioRecordWorker.swift */; };
+		309FE16C2551A26B00564AE0 /* AudioRecordRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309FE1662551A26B00564AE0 /* AudioRecordRouter.swift */; };
+		309FE16D2551A26B00564AE0 /* AudioRecordModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309FE1672551A26B00564AE0 /* AudioRecordModels.swift */; };
+		309FE16E2551A26B00564AE0 /* AudioRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309FE1682551A26B00564AE0 /* AudioRecordViewController.swift */; };
+		309FE16F2551A26B00564AE0 /* AudioRecordInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309FE1692551A26B00564AE0 /* AudioRecordInteractor.swift */; };
+		309FE1742551A28300564AE0 /* AudioRecord.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 309FE1732551A28300564AE0 /* AudioRecord.storyboard */; };
+		309FE1792551B07900564AE0 /* RecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309FE1782551B07900564AE0 /* RecordManager.swift */; };
 		30F8BE462528C4C50059417A /* TutorListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F8BE402528C4C50059417A /* TutorListPresenter.swift */; };
 		30F8BE472528C4C50059417A /* TutorListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F8BE412528C4C50059417A /* TutorListWorker.swift */; };
 		30F8BE482528C4C50059417A /* TutorListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F8BE422528C4C50059417A /* TutorListRouter.swift */; };
@@ -155,6 +164,7 @@
 		3019FD02252107F9004C259E /* TutorModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorModels.swift; sourceTree = "<group>"; };
 		3019FD03252107F9004C259E /* TutorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorViewController.swift; sourceTree = "<group>"; };
 		3019FD04252107F9004C259E /* TutorInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorInteractor.swift; sourceTree = "<group>"; };
+		301A6C8A2551CD6000452289 /* Attachement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachement.swift; sourceTree = "<group>"; };
 		303139DB245C4DB4005EEF87 /* AcaBase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AcaBase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		303139DE245C4DB5005EEF87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		303139E0245C4DB5005EEF87 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -261,6 +271,14 @@
 		3095C276254A24D90078F2A7 /* QuestionModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionModels.swift; sourceTree = "<group>"; };
 		3095C277254A24D90078F2A7 /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 		3095C278254A24D90078F2A7 /* QuestionInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionInteractor.swift; sourceTree = "<group>"; };
+		309FE1642551A26B00564AE0 /* AudioRecordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecordPresenter.swift; sourceTree = "<group>"; };
+		309FE1652551A26B00564AE0 /* AudioRecordWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecordWorker.swift; sourceTree = "<group>"; };
+		309FE1662551A26B00564AE0 /* AudioRecordRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecordRouter.swift; sourceTree = "<group>"; };
+		309FE1672551A26B00564AE0 /* AudioRecordModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecordModels.swift; sourceTree = "<group>"; };
+		309FE1682551A26B00564AE0 /* AudioRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecordViewController.swift; sourceTree = "<group>"; };
+		309FE1692551A26B00564AE0 /* AudioRecordInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecordInteractor.swift; sourceTree = "<group>"; };
+		309FE1732551A28300564AE0 /* AudioRecord.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AudioRecord.storyboard; sourceTree = "<group>"; };
+		309FE1782551B07900564AE0 /* RecordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordManager.swift; sourceTree = "<group>"; };
 		30F8BE402528C4C50059417A /* TutorListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorListPresenter.swift; sourceTree = "<group>"; };
 		30F8BE412528C4C50059417A /* TutorListWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorListWorker.swift; sourceTree = "<group>"; };
 		30F8BE422528C4C50059417A /* TutorListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorListRouter.swift; sourceTree = "<group>"; };
@@ -408,6 +426,7 @@
 		30313A1E245C50E7005EEF87 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				309FE1632551A24C00564AE0 /* AudioRecord */,
 				3095C272254A24B00078F2A7 /* Question */,
 				3095C25A254A215C0078F2A7 /* QuizList */,
 				30F8BE3F2528C4870059417A /* AllTutors */,
@@ -568,6 +587,7 @@
 				30872B06250E432800D2E6EE /* Topic.swift */,
 				3043BBD025093890005AB2A1 /* Subject.swift */,
 				3043BBD2250938E2005AB2A1 /* feedback.swift */,
+				301A6C8A2551CD6000452289 /* Attachement.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -603,6 +623,7 @@
 				3043BBDA25093B6B005AB2A1 /* View Helpers */,
 				3043BBDB25093B91005AB2A1 /* Endpoints.swift */,
 				300E9A2A252E878600E37E11 /* HelperFunctions.swift */,
+				309FE1782551B07900564AE0 /* RecordManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -634,6 +655,20 @@
 				3083E5AE254DF940009B13E6 /* Question.storyboard */,
 			);
 			path = Question;
+			sourceTree = "<group>";
+		};
+		309FE1632551A24C00564AE0 /* AudioRecord */ = {
+			isa = PBXGroup;
+			children = (
+				309FE1642551A26B00564AE0 /* AudioRecordPresenter.swift */,
+				309FE1652551A26B00564AE0 /* AudioRecordWorker.swift */,
+				309FE1662551A26B00564AE0 /* AudioRecordRouter.swift */,
+				309FE1672551A26B00564AE0 /* AudioRecordModels.swift */,
+				309FE1682551A26B00564AE0 /* AudioRecordViewController.swift */,
+				309FE1692551A26B00564AE0 /* AudioRecordInteractor.swift */,
+				309FE1732551A28300564AE0 /* AudioRecord.storyboard */,
+			);
+			path = AudioRecord;
 			sourceTree = "<group>";
 		};
 		30F8BE3F2528C4870059417A /* AllTutors */ = {
@@ -780,6 +815,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				309FE1742551A28300564AE0 /* AudioRecord.storyboard in Resources */,
 				30635537254ED41F005AAAB2 /* Roboto-Thin.ttf in Resources */,
 				303139EE245C4DB7005EEF87 /* LaunchScreen.storyboard in Resources */,
 				30635540254ED41F005AAAB2 /* Roboto-Bold.ttf in Resources */,
@@ -903,6 +939,8 @@
 				3043BBCF25093681005AB2A1 /* Trainer.swift in Sources */,
 				30313A31245C5998005EEF87 /* LoginWorker.swift in Sources */,
 				30F8BE482528C4C50059417A /* TutorListRouter.swift in Sources */,
+				309FE16C2551A26B00564AE0 /* AudioRecordRouter.swift in Sources */,
+				301A6C8B2551CD6000452289 /* Attachement.swift in Sources */,
 				3081B9F225508CC0003A7C99 /* ImageCell.swift in Sources */,
 				303139E9245C4DB5005EEF87 /* AcaBase.xcdatamodeld in Sources */,
 				3095C261254A217F0078F2A7 /* QuizListPresenter.swift in Sources */,
@@ -927,6 +965,7 @@
 				3043BBE5250D7157005AB2A1 /* UIColor+CustomColors.swift in Sources */,
 				30F8BE4B2528C4C50059417A /* TutorListInteractor.swift in Sources */,
 				307A2F0D249672F500F15F3C /* HomeModels.swift in Sources */,
+				309FE16B2551A26B00564AE0 /* AudioRecordWorker.swift in Sources */,
 				3095C2562549F1960078F2A7 /* MainPageCoreDataStore.swift in Sources */,
 				3095C266254A217F0078F2A7 /* QuizListInteractor.swift in Sources */,
 				300E9A26252E6DD800E37E11 /* TutorListViewController+UIHelpers.swift in Sources */,
@@ -934,11 +973,13 @@
 				307A2F0E249672F500F15F3C /* HomeViewController.swift in Sources */,
 				3081B9ED2550883D003A7C99 /* RecordingCell.swift in Sources */,
 				30775AB4245CD21200677FE5 /* CoreDataStore.swift in Sources */,
+				309FE16F2551A26B00564AE0 /* AudioRecordInteractor.swift in Sources */,
 				307A2F0B249672F500F15F3C /* HomeWorker.swift in Sources */,
 				30872B07250E432800D2E6EE /* Topic.swift in Sources */,
 				3043BBD125093890005AB2A1 /* Subject.swift in Sources */,
 				3095C27B254A24D90078F2A7 /* QuestionRouter.swift in Sources */,
 				3083A4DC246CA48400EEE2C8 /* ImagePickerManager.swift in Sources */,
+				309FE16A2551A26B00564AE0 /* AudioRecordPresenter.swift in Sources */,
 				3083A4E02472260200EEE2C8 /* Strings.swift in Sources */,
 				30775ABC245F44A900677FE5 /* ManagedUser+CoreDataProperties.swift in Sources */,
 				303139DF245C4DB5005EEF87 /* AppDelegate.swift in Sources */,
@@ -955,6 +996,7 @@
 				30775AB0245CD0B700677FE5 /* UserWorker.swift in Sources */,
 				30313A1C245C50CE005EEF87 /* SplashInteractor.swift in Sources */,
 				30313A3E245C66D3005EEF87 /* SubscribeWorker.swift in Sources */,
+				309FE1792551B07900564AE0 /* RecordManager.swift in Sources */,
 				30313A3F245C66D3005EEF87 /* SubscribeRouter.swift in Sources */,
 				30313A17245C50CE005EEF87 /* SplashPresenter.swift in Sources */,
 				30F8BE492528C4C50059417A /* TutorListModels.swift in Sources */,
@@ -974,6 +1016,8 @@
 				3095C264254A217F0078F2A7 /* QuizListModels.swift in Sources */,
 				3043BBD5250939CE005AB2A1 /* MainPageWorker.swift in Sources */,
 				30313A3D245C66D3005EEF87 /* SubscribePresenter.swift in Sources */,
+				309FE16E2551A26B00564AE0 /* AudioRecordViewController.swift in Sources */,
+				309FE16D2551A26B00564AE0 /* AudioRecordModels.swift in Sources */,
 				30313A1A245C50CE005EEF87 /* SplashModels.swift in Sources */,
 				3095C279254A24D90078F2A7 /* QuestionPresenter.swift in Sources */,
 				30872B05250E41B400D2E6EE /* TopicCell.swift in Sources */,

@@ -23,10 +23,6 @@ protocol QuestionDataStore
     var tutors: [TutorDAO]? { get set }
     var topics: [TopicDAO]? { get set }
     var tutor: TutorDAO? { get set }
-    
-    // going back to the view
-    /// var recordingList : [String]? // should be object with name (can get url from it)and size
-    /// var attachementList : [String]? // same
 }
 
 class QuestionInteractor: QuestionBusinessLogic, QuestionDataStore

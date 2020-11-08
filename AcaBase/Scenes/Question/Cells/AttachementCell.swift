@@ -26,9 +26,9 @@ class AttachementCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func set(name: String, size: String){
-        self.nameLbl.text = name
-        self.sizeLbl.text = size
+    func set(viewModel: Attachement){
+        self.nameLbl.text = viewModel.name
+        self.sizeLbl.text = viewModel.size
     }
     
     @discardableResult

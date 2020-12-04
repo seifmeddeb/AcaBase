@@ -173,7 +173,11 @@ class TutorViewController: UIViewController, TutorDisplayLogic
     @IBAction func addToFavouritePressed(_ sender: Any) {
     }
     @objc func dismissViewController(_ sender:UITapGestureRecognizer){
-        self.dismiss()
+        let touchPoint = sender.location(in: self.view)
+
+        if touchPoint.y < (self.contentScrollView.frame.origin.y + 40) {
+            self.dismiss()
+        }
     }
 }
 extension TutorViewController: UIGestureRecognizerDelegate {

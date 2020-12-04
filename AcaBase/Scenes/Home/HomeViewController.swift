@@ -108,6 +108,11 @@ class HomeViewController: UIViewController, HomeDisplayLogic
         navbarAnimation()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.hidesBarsOnSwipe = false
+    }
+    
     // MARK: Actions
     
     @objc func clickTitleButton() {

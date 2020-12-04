@@ -82,8 +82,8 @@
                                             <constraint firstAttribute="width" constant="56" id="5Zc-sV-Z87"/>
                                         </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="baseline_play_arrow_black_24pt"/>
-                                        <state key="selected" image="baseline_pause_white_24pt"/>
+                                        <state key="normal" image="baseline_mic_white_24pt"/>
+                                        <state key="selected" image="baseline_mic_off_white_24pt"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="28"/>
@@ -187,8 +187,8 @@
     <resources>
         <image name="baseline_delete_black_24pt" width="24" height="24"/>
         <image name="baseline_done_black_24pt" width="24" height="24"/>
-        <image name="baseline_pause_white_24pt" width="24" height="24"/>
-        <image name="baseline_play_arrow_black_24pt" width="24" height="24"/>
+        <image name="baseline_mic_off_white_24pt" width="24" height="24"/>
+        <image name="baseline_mic_white_24pt" width="24" height="24"/>
         <image name="icn-mic" width="37.5" height="37.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

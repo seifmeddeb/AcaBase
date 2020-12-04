@@ -28,11 +28,15 @@ class RecordingCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setPlayImage() {
+        playStopBtn.setImage(UIImage(named: "baseline_play_arrow_black_24pt"), for: .normal)
+    }
+    
     func set(viewModel: Attachement){
         self.attachement = viewModel
         self.nameLbl.text = viewModel.name
         self.sizeLbl.text = viewModel.size
-        self.playStopBtn.setImage(UIImage(named: "baseline_play_arrow_black_24pt"), for: .normal)
+        self.setPlayImage()
     }
     
     @discardableResult

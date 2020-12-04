@@ -463,14 +463,14 @@ Appuyez ici si vous voulez sélectionner un tuteur</string>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rw9-kX-5gP">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rw9-kX-5gP">
                                                 <rect key="frame" x="20" y="606" width="374" height="150"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="150" id="U17-1D-piB"/>
                                                 </constraints>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecordingCell" id="XDZ-Rd-czk" customClass="RecordingCell" customModule="AcaBase" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="RecordingCell" id="XDZ-Rd-czk" customClass="RecordingCell" customModule="AcaBase" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="374" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XDZ-Rd-czk" id="0ed-Is-NTR">
@@ -559,7 +559,7 @@ Appuyez ici si vous voulez sélectionner un tuteur</string>
                                                             <outlet property="sizeLbl" destination="Dx9-Qi-v96" id="kbp-mR-Clr"/>
                                                         </connections>
                                                     </tableViewCell>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AttachementCell" id="s4J-IA-LRM" customClass="AttachementCell" customModule="AcaBase" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AttachementCell" id="s4J-IA-LRM" customClass="AttachementCell" customModule="AcaBase" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="72" width="374" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="s4J-IA-LRM" id="FNn-Qc-o4A">
@@ -692,6 +692,9 @@ Appuyez ici si vous voulez sélectionner un tuteur</string>
                                         <state key="normal" title="Poser question">
                                             <color key="titleColor" red="0.019607843140000001" green="0.3294117647" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="askQuestionPressed:" destination="wzb-57-Blc" eventType="touchUpInside" id="8qW-C4-xaH"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -737,6 +740,9 @@ Appuyez ici si vous voulez sélectionner un tuteur</string>
                                                 <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="filesPressed:" destination="wzb-57-Blc" eventType="touchUpInside" id="s5l-a8-Sie"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E24-yj-n6S">
                                         <rect key="frame" x="0.0" y="0.0" width="56" height="56"/>
@@ -801,6 +807,7 @@ Appuyez ici si vous voulez sélectionner un tuteur</string>
                     </view>
                     <connections>
                         <outlet property="AnswersLbl" destination="Ff9-32-8aA" id="cvV-Ne-xQO"/>
+                        <outlet property="descBorderView" destination="yYC-fC-xKr" id="0dR-Hc-Ir6"/>
                         <outlet property="descTextView" destination="IsE-xH-N2u" id="GR8-GF-cRo"/>
                         <outlet property="fullName" destination="eFF-Bb-Un5" id="mhy-tw-197"/>
                         <outlet property="imagesCollectionView" destination="dYZ-RW-Tqg" id="hVT-oQ-WHE"/>
@@ -808,10 +815,13 @@ Appuyez ici si vous voulez sélectionner un tuteur</string>
                         <outlet property="ratingView" destination="3Bv-9I-bom" id="EfZ-29-R9C"/>
                         <outlet property="scrollView" destination="lkk-QI-qNO" id="XMa-dI-Zf3"/>
                         <outlet property="selctTutorBtn" destination="zaG-gB-sSM" id="1Xz-sz-eRT"/>
+                        <outlet property="subjectBorderView" destination="EdD-JG-9Bw" id="xAB-go-wRy"/>
                         <outlet property="subjectTextField" destination="nB3-yQ-Qlw" id="pXq-RO-ey8"/>
                         <outlet property="subjectsLbl" destination="PSw-vH-gNJ" id="lGa-qp-WoH"/>
                         <outlet property="tableView" destination="rw9-kX-5gP" id="Y3R-Q2-igN"/>
                         <outlet property="textViewParent" destination="yYC-fC-xKr" id="52l-pi-EOD"/>
+                        <outlet property="titleBorderView" destination="rDc-Rc-z63" id="pkZ-mS-8X7"/>
+                        <outlet property="titleTextField" destination="QCv-Zq-58S" id="1jZ-2u-vpR"/>
                         <outlet property="tutorImageView" destination="shk-SI-ApN" id="KJF-ID-bGv"/>
                         <outlet property="tutorView" destination="HaS-RI-Wgn" id="l0p-6r-SLh"/>
                     </connections>

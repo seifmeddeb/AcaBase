@@ -12,10 +12,13 @@
 
 import UIKit
 import AVFoundation
+import MobileCoreServices
 
 protocol QuestionDisplayLogic: class
 {
     func displayQuestionData(viewModel: Question.ViewData.ViewModel)
+    func displayChosenFile(viewModel: Question.FileData.ViewModel)
+    func displayChosenFileError(viewModel: Question.FileData.ViewModel)
 }
 
 class QuestionViewController: UIViewController, QuestionDisplayLogic
@@ -118,7 +121,11 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
     @IBOutlet weak var noTutorView: UIView!
     @IBOutlet weak var selctTutorBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var titleTextField: UITextField!
     
+    @IBOutlet weak var titleBorderView: UIView!
+    @IBOutlet weak var subjectBorderView: UIView!
+    @IBOutlet weak var descBorderView: UIView!
     // MARK: Properties
     
     let subjectPickerView = UIPickerView()
@@ -129,6 +136,11 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
     var player: AVAudioPlayer?
     var trackPlayedCell : RecordingCell?
     var currentURL :URL?
+    
+    // **********************************
+    // MARK: VIP Calls
+    // **********************************
+    
     // MARK: getQuestionData
     func getQuestionData()
     {
@@ -147,7 +159,52 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
         }
     }
     
+    // MARK: getFileData
+    func addChosenFile(url: URL)
+    {
+        let request = Question.FileData.Request(url: url)
+        interactor?.getFileData(request: request)
+    }
+    
+    func displayChosenFile(viewModel: Question.FileData.ViewModel)
+    {
+        if let fileAttached = viewModel.attachement {
+            self.attachementsList.append(fileAttached)
+            self.tableView.reloadData()
+        }
+    }
+    
+    func displayChosenFileError(viewModel: Question.FileData.ViewModel) {
+        let alert = UIAlertController(title: "", message: "Fichier ne peut pas être ajouter, notre équipe ont été informer de ce proplème", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive))
+        self.present(alert,animated: true)
+    }
+    
+    // **********************************
+    // MARK: IBActions
+    // **********************************
+    
+    @IBAction func filesPressed(_ sender: Any) {
+        let importMenu = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
+        importMenu.delegate = self
+        importMenu.modalPresentationStyle = .fullScreen
+        self.present(importMenu, animated: true, completion: nil)
+    }
+    
+    @IBAction func askQuestionPressed(_ sender: Any) {
+        
+        var color = titleTextField.text?.count == 0 ? UIColor.red : primaryGreen
+        titleBorderView.borderColor = color
+        color = subjectTextField.text?.count == 0 ? UIColor.red : primaryGreen
+        subjectBorderView.borderColor = color
+        color = descTextView.text?.count == 0 ? UIColor.red : primaryGreen
+        descBorderView.borderColor = color
+        
+    }
+    
+    // **********************************
     // MARK: Private functions
+    // **********************************
     
     private func updateTutorView(with viewModel: TutorViewModel){
         self.tutorView.isHidden = false
@@ -246,6 +303,21 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
             self.currentURL = nil
         }
     }
+    
+    private func deleteAttachedItem(_ attachement: Attachement, _ row: Int){
+        if attachement.url == self.trackPlayedCell?.attachement?.url && ((self.player?.isPlaying) != nil) {
+            self.player?.stop()
+            self.player = nil
+        }
+        
+        if !attachement.isAudio && ((self.player?.isPlaying) != nil) {
+            self.player?.stop()
+            self.player = nil
+        }
+        
+        self.attachementsList.remove(at: row)
+        self.tableView.reloadData()
+    }
 }
 extension QuestionViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -259,23 +331,21 @@ extension QuestionViewController : UITableViewDataSource {
             cell.set(viewModel: attachement)
             cell.didPressPlay {
                 if let lastCell = self.trackPlayedCell, lastCell != cell {
-                    lastCell.playStopBtn.setImage(UIImage(named: "baseline_play_arrow_black_24pt"), for: .normal)
+                    lastCell.setPlayImage()
                 }
                 self.trackPlayedCell = cell
                 self.playSound(url: attachement.url!)
             }
             cell.didPressDelete {
-                if attachement.url == self.trackPlayedCell?.attachement?.url && ((self.player?.isPlaying) != nil) {
-                    self.player?.stop()
-                    self.player = nil
-                }
-                self.attachementsList.remove(at: indexPath.row)
-                self.tableView.reloadData()
+                self.deleteAttachedItem(attachement, indexPath.row)
             }
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "AttachementCell", for: indexPath) as! AttachementCell
             cell.set(viewModel: attachement)
+            cell.didPressDelete {
+                self.deleteAttachedItem(attachement, indexPath.row)
+            }
             return cell
         }
         
@@ -388,29 +458,17 @@ extension QuestionViewController : UITextViewDelegate {
 extension QuestionViewController : AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         if let lastCell = self.trackPlayedCell {
-            lastCell.playStopBtn.setImage(UIImage(named: "baseline_play_arrow_black_24pt"), for: .normal)
+            lastCell.setPlayImage()
             self.currentURL = nil
         }
     }
 }
-//
-//class ImageCell : UICollectionViewCell {
-//    @IBOutlet weak var imageView: UIImageView!
-//    @IBOutlet weak var deleteBtn: UIButton!
-//    // Properties
-//    private var didPressDelete: (() ->Void)?
-//
-//    func set(image: UIImage){
-//        self.imageView.image = image
-//    }
-//
-//    @discardableResult
-//    func didPressDelete(_ completion: (()->Void)?) ->Self {
-//        self.didPressDelete = completion
-//        return self
-//    }
-//
-//    @IBAction func deletePressed(_ sender: Any) {
-//        didPressDelete?()
-//    }
-//}
+extension QuestionViewController : UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        if controller.documentPickerMode == UIDocumentPickerMode.import {
+            if let url = urls.first {
+                addChosenFile(url: url)
+            }
+        }
+    }
+}

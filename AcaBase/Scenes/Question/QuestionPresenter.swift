@@ -15,6 +15,7 @@ import UIKit
 protocol QuestionPresentationLogic
 {
     func presentQuestionData(response: Question.ViewData.Response)
+    func presentChosenFile(response: Question.FileData.Response)
 }
 
 class QuestionPresenter: QuestionPresentationLogic
@@ -35,6 +36,18 @@ class QuestionPresenter: QuestionPresentationLogic
         }
         let viewModel = Question.ViewData.ViewModel(tutor: tutorViewModel, subjectList: response.subjectList ?? [SubjectDAO](), disableTutorSelection: response.disableTutorSelection)
         viewController?.displayQuestionData(viewModel: viewModel)
+    }
+    
+    // MARK: presentChosenFile
+    
+    func presentChosenFile(response: Question.FileData.Response) {
+        if let attachement = response.attachement {
+            let viewModel = Question.FileData.ViewModel(attachement: attachement)
+            viewController?.displayChosenFile(viewModel: viewModel)
+        } else {
+            let viewModel = Question.FileData.ViewModel(errorMsg: "Fichier ne peut pas être ajouter, notre équipe ont été informer de ce proplème")
+            viewController?.displayChosenFileError(viewModel: viewModel)
+        }
     }
     
 }

@@ -15,6 +15,7 @@ import UIKit
 protocol QuestionBusinessLogic
 {
     func getQuestionData(request: Question.ViewData.Request)
+    func getFileData(request: Question.FileData.Request)
 }
 
 protocol QuestionDataStore
@@ -51,5 +52,13 @@ class QuestionInteractor: QuestionBusinessLogic, QuestionDataStore
         let response = Question.ViewData.Response(tutor: self.tutor, subjectList: subjectList, disableTutorSelection: disableTutorSelection)
         presenter?.presentQuestionData(response: response)
         
+    }
+    
+    // MARK: getFileData
+    func getFileData(request: Question.FileData.Request) {
+        let url = request.url
+        let attachement = Attachement(name: url.lastPathComponent, url: url, size: getFileSize(url: url), isAudio: false)
+        let response = Question.FileData.Response(attachement: attachement)
+        presenter?.presentChosenFile(response: response)
     }
 }

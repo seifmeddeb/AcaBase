@@ -15,6 +15,7 @@ import UIKit
 protocol PracticeDisplayLogic: class
 {
     func displaySubjects(viewModel: Practice.Subjects.ViewModel)
+    func displayModules(viewModel: Practice.Modules.ViewModel)
 }
 
 class PracticeViewController: UIViewController, PracticeDisplayLogic
@@ -67,12 +68,13 @@ class PracticeViewController: UIViewController, PracticeDisplayLogic
     // MARK: Properties
     
     var searchBar : UISearchBar!
-    var practiceList = [ModuleViewModel]()
+    var moduleList = [ModuleViewModel]()
+    var subjects = [String:Int]()
     
     // MARK: IBOutlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedHolderView: UIView!
-    @IBOutlet weak var segmentedControlSubjects: UISegmentedControl!
+    @IBOutlet weak var emptyTableView: UIView!
     
     // MARK: View lifecycle
     
@@ -89,7 +91,7 @@ class PracticeViewController: UIViewController, PracticeDisplayLogic
         setNavBarWhenAppearing()
     }
     
-    // MARK: Do something
+    // MARK: getSubjects
     func getSubjects()
     {
         let request = Practice.Subjects.Request()
@@ -98,22 +100,43 @@ class PracticeViewController: UIViewController, PracticeDisplayLogic
     
     func displaySubjects(viewModel: Practice.Subjects.ViewModel)
     {
+        self.subjects = viewModel.subjects
         self.setSubjectsFilter(subjects: viewModel.subjects)
     }
     
+    // MARK: getModules
+    func getModules(for topicId: Int)
+    {
+        let request = Practice.Modules.Request(topicId: topicId)
+        interactor?.getModules(request: request)
+    }
+    
+    func displayModules(viewModel: Practice.Modules.ViewModel) {
+        self.moduleList = viewModel.modules
+        self.emptyTableView.isHidden = (self.moduleList.count != 0)
+        self.tableView.reloadData()
+    }
+    
     @objc func segmentChanged(_ sender: UISegmentedControl) {
-        print(sender.selectedSegmentIndex)
+        if let title = sender.titleForSegment(at: sender.selectedSegmentIndex) {
+            if let id = self.subjects[title] {
+                self.getModules(for: id)
+                return
+            }
+            // FIXME: FireBase
+        }
     }
 }
-// MARK: UITableViewDelegate
+// MARK: UITableViewDelegate, UITableViewDataSource
 extension PracticeViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return self.moduleList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PracticeCell", for: indexPath) as! PracticeCell
+        cell.setModule(viewModel: moduleList[indexPath.row])
         //cell.progressView.setProgress(progress: "1/4")
         return cell
     }

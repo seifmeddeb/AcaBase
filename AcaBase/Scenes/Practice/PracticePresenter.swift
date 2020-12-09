@@ -14,24 +14,38 @@ import UIKit
 
 protocol PracticePresentationLogic
 {
-  func presentSubjects(response: Practice.Subjects.Response)
+    func presentSubjects(response: Practice.Subjects.Response)
+    func presentModules(response: Practice.Modules.Response)
 }
 
 class PracticePresenter: PracticePresentationLogic
 {
-  weak var viewController: PracticeDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentSubjects(response: Practice.Subjects.Response)
-  {
-    var subjectsViewModel = [String:Int]()
+    weak var viewController: PracticeDisplayLogic?
     
-    for subject in response.subjects {
-        subjectsViewModel[subject.name] = subject.objectId
+    // MARK: presentSubjects
+    
+    func presentSubjects(response: Practice.Subjects.Response)
+    {
+        var subjectsViewModel = [String:Int]()
+        
+        for subject in response.subjects {
+            subjectsViewModel[subject.name] = subject.objectId
+        }
+        
+        let viewModel = Practice.Subjects.ViewModel(subjects: subjectsViewModel)
+        viewController?.displaySubjects(viewModel: viewModel)
     }
     
-    let viewModel = Practice.Subjects.ViewModel(subjects: subjectsViewModel)
-    viewController?.displaySubjects(viewModel: viewModel)
-  }
+    // MARK: presentModules
+    func presentModules(response: Practice.Modules.Response) {
+        var moduleViewModels = [ModuleViewModel]()
+        if let modules = response.modules {
+            for module in modules {
+                let viewModel = ModuleViewModel(model: module, quizsNbr: module.quizsNbr, desc: "\(module.quizsNbr) quizs in \(module.model.chapters?.count ?? 0) chapters")
+                moduleViewModels.append(viewModel)
+            }
+        }
+        let viewModel = Practice.Modules.ViewModel(modules: moduleViewModels)
+        viewController?.displayModules(viewModel: viewModel)
+    }
 }

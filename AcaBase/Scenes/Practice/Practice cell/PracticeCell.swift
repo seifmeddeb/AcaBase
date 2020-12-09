@@ -15,6 +15,8 @@ class PracticeCell: UITableViewCell {
     @IBOutlet weak var descLabel: UILabel!
     @IBOutlet weak var progressView: UIView!
     
+    var chapterList = [ChapterDAO]()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.collectionView.delegate = self
@@ -28,16 +30,23 @@ class PracticeCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setModule(viewModel: ModuleViewModel) {
+        self.titleLabel.text = viewModel.model.model.title
+        self.descLabel.text = viewModel.desc
+        self.chapterList = viewModel.model.model.chapters ?? [ChapterDAO]()
+        self.collectionView.reloadData()
+    }
+    
 }
 
 extension PracticeCell : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return chapterList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChapterCell", for: indexPath) as! ChapterCell
-        //cell.set(trainer: trainers[indexPath.row])
+        cell.setChapter(viewModel: chapterList[indexPath.row])
         return cell
     }
     

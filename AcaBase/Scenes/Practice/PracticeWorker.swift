@@ -47,4 +47,45 @@ class PracticeWorker
         }
         return subjects
     }
+    
+    func getFilteredModules(topicId:Int, completionHandler: @escaping ([ModuleResponse]?) -> Void) {
+        self.mainPageStore.fetchTopics { (topics: () throws -> [TopicDAO]) in
+            do {
+                let topics = try topics()
+                guard let searchedTopic = topics.filter({ return $0.objectId == topicId }).first else {completionHandler(nil);return}
+                let moduleResponseList = self.getModuleResponseList(for: searchedTopic.modules)
+                DispatchQueue.main.async {
+                    completionHandler(moduleResponseList)
+                }
+            } catch {
+                let nserror = error as NSError
+                print("Unresolved error \(nserror), \(nserror.userInfo)")
+                DispatchQueue.main.async {
+                    completionHandler(nil)
+                }
+            }
+        }
+    }
+    
+    private func getModuleResponseList(for moduleList: [ModuleDAO]?) -> [ModuleResponse]?
+    {
+        guard let modules = moduleList else { return nil }
+        var moduleResponseList = [ModuleResponse]()
+        for module in modules {
+            moduleResponseList.append(ModuleResponse(model: module, quizsNbr: getQuizsNbr(for: module)))
+        }
+        return moduleResponseList
+    }
+    
+    private func getQuizsNbr(for module: ModuleDAO) -> Int
+    {
+        guard let chapters = module.chapters else { return 0 }
+        var quizsNbr = 0
+        for chapter in chapters {
+            if let quizs = chapter.quizs {
+                quizsNbr += quizs.count
+            }
+        }
+        return quizsNbr
+    }
 }

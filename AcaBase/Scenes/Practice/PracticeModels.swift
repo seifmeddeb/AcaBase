@@ -13,6 +13,7 @@
 import UIKit
 
 typealias ModuleViewModel = Practice.Modules.ViewModel.ModuleViewModel
+typealias ModuleResponse = Practice.Modules.Response.ModuleResponse
 
 enum Practice
 {
@@ -37,17 +38,22 @@ enum Practice
     {
         struct Request
         {
-            var id : Int
+            var topicId : Int
         }
         struct Response
         {
-            var modules = [ModuleDAO]()
+            struct ModuleResponse {
+                var model : ModuleDAO
+                var quizsNbr : Int
+            }
+            var modules : [ModuleResponse]?
         }
         struct ViewModel
         {
             struct ModuleViewModel {
-                var model : TopicDAO
-                var imageUrl : URL?
+                var model : ModuleResponse
+                var quizsNbr : Int
+                var desc : String
             }
             var modules = [ModuleViewModel]()
         }

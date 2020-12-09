@@ -17,9 +17,9 @@ class ChapterCell: UICollectionViewCell {
         // Initialization code
     }
     
-//    func setChapter(viewModel: ) {
-//        titleLbl.text = viewModel.title ?? "No title"
-//        savedQuizesLbl.text = viewModel.savedQuizes ?? "No title"
-//    }
+    func setChapter(viewModel: ChapterDAO) {
+        titleLbl.text = viewModel.title ?? ""
+        savedQuizesLbl.text = viewModel.desc ?? ""
+    }
 
 }

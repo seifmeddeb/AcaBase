@@ -28,7 +28,7 @@ extension PracticeViewController {
     }
     
     func setSubjectsFilter(subjects: [String:Int]) {
-        let titles = Array(subjects.keys)
+        let titles = Array(subjects.keys).sorted{return $0 < $1}
         let segmentControl = UISegmentedControl(items: titles)
 
         segmentControl.selectedSegmentIndex = 0

@@ -15,6 +15,7 @@ import UIKit
 protocol PracticeBusinessLogic
 {
     func getSubjects(request: Practice.Subjects.Request)
+    func getModules(request: Practice.Modules.Request)
 }
 
 protocol PracticeDataStore
@@ -40,4 +41,12 @@ class PracticeInteractor: PracticeBusinessLogic, PracticeDataStore
         
     }
     
+    // MARK: getModules
+    func getModules(request: Practice.Modules.Request) {
+        worker = PracticeWorker(mainPageStore: MainPageAPI())
+        worker.getFilteredModules(topicId: request.topicId) { modules in
+            let response = Practice.Modules.Response(modules: modules)
+            self.presenter?.presentModules(response: response)
+        }
+    }
 }

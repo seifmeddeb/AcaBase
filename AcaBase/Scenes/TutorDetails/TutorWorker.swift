@@ -14,7 +14,32 @@ import UIKit
 
 class TutorWorker
 {
-  func doSomeWork()
-  {
-  }
+    var tutorStore : TutorStoreProtocol
+    
+    init(tutorStore: TutorStoreProtocol)
+    {
+        self.tutorStore = tutorStore
+    }
+    
+    func addToFavorites(id: Int,completionHandler: @escaping (String) -> Void)
+    {
+        let request = FavoriteRequest(trainerId: id)
+        self.tutorStore.addToFavorites(request: request) { (response: () throws -> FavoriteResponse) in
+            do {
+                let _ = try response()
+                DispatchQueue.main.async {
+                    completionHandler("Tuteur ajouté au favoris")
+                }
+            } catch {
+                let nserror = error as NSError
+                print("Unresolved error \(nserror), \(nserror.userInfo)")
+                DispatchQueue.main.async {
+                    completionHandler("Un problème est survenu veuillez réessayer plus tard")
+                }
+            }
+        }
+    }
+}
+protocol TutorStoreProtocol {
+    func addToFavorites(request: FavoriteRequest, completionHandler: @escaping (() throws -> FavoriteResponse) -> Void)
 }

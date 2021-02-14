@@ -83,6 +83,10 @@ class TutorListViewController: UIViewController, TutorListDisplayLogic
         self.resetNavBarWhenAppearing()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = false
+    }
+    
     // MARK: Properties
     
     var tutorList = [TutorViewModel]()
@@ -172,7 +176,11 @@ extension TutorListViewController: UINavigationControllerDelegate {
             // FIXME: Fix me Not so clean architecture
             // Going through router is messy too because of the @objc annotation
             viewController.tutor = self.selectedTutor
-            viewController.subjects = self.selectedTutor?.model.subjects ?? [SubjectDAO]()
+            if !viewController.isPrefilledSubject {
+                if let subjects = self.selectedTutor?.model.subjects {
+                    viewController.subjects = subjects
+                }
+            }
         }
     }
 }

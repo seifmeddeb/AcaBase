@@ -14,7 +14,22 @@ import UIKit
 
 class QuestionWorker
 {
-  func doSomeWork()
-  {
-  }
+    func getSubject(for questionSearched: QuestionDAO, from subjects: [TopicDAO]) -> TopicDAO?
+    {
+        // WTF is this shit worst shit i've ever written, fucked up APIs ... Shiiiiit
+        for subject in subjects {
+            for module in subject.modules ?? [] {
+                for chapter in module.chapters ?? [] {
+                    for quiz in chapter.quizs ?? [] {
+                        for question in quiz.questions ?? [] {
+                            if questionSearched.objectId == question.objectId {
+                                return subject
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return nil
+    }
 }

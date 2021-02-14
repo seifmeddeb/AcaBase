@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import AVKit
 
 extension UIImageView {
     public func setImageAsync(url: URL?){
@@ -20,5 +21,36 @@ extension UIImageView {
                 self.image = UIImage(data: data)
             }
         }
+    }
+    
+    public func setVideoThumbnail(from url: URL){
+        
+        if url.host == "youtu.be" {
+            let urlString = "http://img.youtube.com/vi/\(url.lastPathComponent)/1.jpg"
+            if let url = URL(string: urlString) {
+                self.setImageAsync(url: url)
+                return
+            }
+        } else {
+            
+            let asset = AVAsset(url: url)
+            let assetImgGenerate = AVAssetImageGenerator(asset: asset)
+            assetImgGenerate.appliesPreferredTrackTransform = true
+            assetImgGenerate.maximumSize = CGSize(width: 130, height: 50)
+            
+            let time = CMTimeMakeWithSeconds(0.0, preferredTimescale: 20)
+            do {
+                let img = try assetImgGenerate.copyCGImage(at: time, actualTime: nil)
+                let thumbnail = UIImage(cgImage: img)
+                self.image = thumbnail
+                return
+            }
+            catch {
+                //print(error.localizedDescription)
+                self.image = UIImage(named: "image-not-found")!
+                return
+            }
+        }
+        self.image = UIImage(named: "image-not-found")!
     }
 }

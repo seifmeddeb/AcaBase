@@ -14,21 +14,21 @@ import UIKit
 
 @objc protocol TutorListRoutingLogic
 {
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
+    //func routeToSomewhere(segue: UIStoryboardSegue?)
 }
 
 protocol TutorListDataPassing
 {
-  var dataStore: TutorListDataStore? { get }
+    var dataStore: TutorListDataStore? { get }
 }
 
 class TutorListRouter: NSObject, TutorListRoutingLogic, TutorListDataPassing
 {
-  weak var viewController: TutorListViewController?
-  var dataStore: TutorListDataStore?
-  
-  // MARK: Routing
-  
+    weak var viewController: TutorListViewController?
+    var dataStore: TutorListDataStore?
+    
+    // MARK: Routing
+    
     @objc func routeToDetailTutor(segue: UIStoryboardSegue?) {
         if let segue = segue {
             let navigationController = segue.destination as! UINavigationController
@@ -41,35 +41,35 @@ class TutorListRouter: NSObject, TutorListRoutingLogic, TutorListDataPassing
     func passDataToDetailTutor(source: TutorListDataStore, destination: inout TutorDataStore)
     {
         let selectedRow = viewController?.tableView?.indexPathsForSelectedRows?[0].row
-        destination.tutorToDisplay = source.tutorList?[selectedRow!]
+        destination.tutorToDisplay = viewController?.tutorList[selectedRow!].model
     }
     
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
-  //{
-  //  if let segue = segue {
-  //    let destinationVC = segue.destination as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //  } else {
-  //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-  //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-  //  }
-  //}
-
-  // MARK: Navigation
-  
-  //func navigateToSomewhere(source: TutorListViewController, destination: SomewhereViewController)
-  //{
-  //  source.show(destination, sender: nil)
-  //}
-  
-  // MARK: Passing data
-  
-  //func passDataToSomewhere(source: TutorListDataStore, destination: inout SomewhereDataStore)
-  //{
-  //  destination.name = source.name
-  //}
+    //func routeToSomewhere(segue: UIStoryboardSegue?)
+    //{
+    //  if let segue = segue {
+    //    let destinationVC = segue.destination as! SomewhereViewController
+    //    var destinationDS = destinationVC.router!.dataStore!
+    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
+    //  } else {
+    //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
+    //    var destinationDS = destinationVC.router!.dataStore!
+    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
+    //    navigateToSomewhere(source: viewController!, destination: destinationVC)
+    //  }
+    //}
+    
+    // MARK: Navigation
+    
+    //func navigateToSomewhere(source: TutorListViewController, destination: SomewhereViewController)
+    //{
+    //  source.show(destination, sender: nil)
+    //}
+    
+    // MARK: Passing data
+    
+    //func passDataToSomewhere(source: TutorListDataStore, destination: inout SomewhereDataStore)
+    //{
+    //  destination.name = source.name
+    //}
 }

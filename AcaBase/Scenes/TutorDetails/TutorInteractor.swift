@@ -15,6 +15,7 @@ import UIKit
 protocol TutorBusinessLogic
 {
     func getTutor(request: Tutor.Display.Request)
+    func addToFavorites(request: Tutor.Favorite.Request)
 }
 
 protocol TutorDataStore
@@ -35,6 +36,24 @@ class TutorInteractor: TutorBusinessLogic, TutorDataStore
         if let tutor = tutorToDisplay {
             let response = Tutor.Display.Response(tutor: tutor)
             presenter?.presentTutor(response: response)
+        }
+    }
+    
+    // MARK: addToFavorites
+    
+    func addToFavorites(request: Tutor.Favorite.Request)
+    {
+        self.worker = TutorWorker(tutorStore: TutorApi())
+        let worker = self.worker!
+        
+        if let tutor = tutorToDisplay {
+            worker.addToFavorites(id: tutor.objectId) { message in
+                let response = Tutor.Favorite.Response(message: message)
+                self.presenter?.presentFavorite(response: response)
+            }
+        } else {
+            let response = Tutor.Favorite.Response(message: "Oups! un probleme est survenu réessayer plus tard !")
+            presenter?.presentFavorite(response: response)
         }
     }
 }

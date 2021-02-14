@@ -11,22 +11,6 @@ import UIKit
 
 extension PracticeViewController {
     
-    func setNavBarWhenAppearing() {
-        if let navigationBar = self.navigationController?.navigationBar {
-            navigationBar.tintColor = primaryBlue
-            navigationBar.barTintColor = .white
-            let navBarAppearance = UINavigationBarAppearance()
-            navBarAppearance.configureWithOpaqueBackground()
-            navBarAppearance.titleTextAttributes = [.foregroundColor: primaryBlue]
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: primaryBlue]
-            navBarAppearance.backgroundColor = .white
-            navBarAppearance.shadowColor = .clear
-            navigationBar.standardAppearance = navBarAppearance
-            navigationBar.scrollEdgeAppearance = navBarAppearance
-            navigationBar.barStyle = .black
-        }
-    }
-    
     func setSubjectsFilter(subjects: [String:Int]) {
         let titles = Array(subjects.keys).sorted{return $0 < $1}
         let segmentControl = UISegmentedControl(items: titles)

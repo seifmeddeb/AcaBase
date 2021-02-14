@@ -16,6 +16,7 @@ protocol QuestionPresentationLogic
 {
     func presentQuestionData(response: Question.ViewData.Response)
     func presentChosenFile(response: Question.FileData.Response)
+    func presentPrefilledQuestion(response: Question.FromQuiz.Response)
 }
 
 class QuestionPresenter: QuestionPresentationLogic
@@ -48,6 +49,24 @@ class QuestionPresenter: QuestionPresentationLogic
             let viewModel = Question.FileData.ViewModel(errorMsg: "Fichier ne peut pas être ajouter, notre équipe ont été informer de ce proplème")
             viewController?.displayChosenFileError(viewModel: viewModel)
         }
+    }
+    
+    // MARK: presentPrefilledQuestion
+    
+    func presentPrefilledQuestion(response: Question.FromQuiz.Response) {
+        let question = response.question
+        let subject = response.subject
+        
+        
+        var desc = ""
+        if let questions = question.options {
+            for option in questions.enumerated()  {
+                desc += "\n\(option.offset+1) - \(option.element.title ?? "")\n"
+            }
+        }
+        
+        let viewModel = Question.FromQuiz.ViewModel(title: question.title ?? "", subject: subject.title ?? "", desc: desc, subjectList: response.subjectList ?? [SubjectDAO]())
+        viewController?.displayPrefilledQuestion(viewModel: viewModel)
     }
     
 }

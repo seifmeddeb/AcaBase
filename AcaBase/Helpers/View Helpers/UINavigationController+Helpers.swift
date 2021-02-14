@@ -77,4 +77,25 @@ extension UIViewController{
             navigationBar.prefersLargeTitles = false
         }
     }
+    
+    // nav bar with no bottom shadow
+    func setNavBarWhenAppearing() {
+        if let navigationBar = self.navigationController?.navigationBar {
+            navigationBar.tintColor = primaryBlue
+            navigationBar.barTintColor = .white
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: primaryBlue]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: primaryBlue]
+            navBarAppearance.backgroundColor = .white
+            navBarAppearance.shadowColor = .clear
+            navigationBar.standardAppearance = navBarAppearance
+            navigationBar.scrollEdgeAppearance = navBarAppearance
+            navigationBar.barStyle = .black
+            navigationBar.layer.shadowColor = UIColor.clear.cgColor
+            navigationBar.layer.shadowOpacity = 0
+            navigationBar.layer.shadowOffset = CGSize(width: 0, height: 0)
+            navigationBar.layer.shadowRadius = 0
+        }
+    }
 }

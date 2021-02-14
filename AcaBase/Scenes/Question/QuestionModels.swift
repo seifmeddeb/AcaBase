@@ -50,4 +50,25 @@ enum Question
             var errorMsg : String?
         }
     }
+    
+    enum FromQuiz
+    {
+        struct Request
+        {
+        }
+        struct Response
+        {
+            var question : QuestionDAO
+            var subject : TopicDAO
+            var subjectList : [SubjectDAO]?
+        }
+        struct ViewModel
+        {
+            var title : String
+            var subject : String
+            var desc : String
+            var subjectList = [SubjectDAO]()
+        }
+    }
+    
 }

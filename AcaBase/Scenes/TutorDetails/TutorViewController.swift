@@ -15,6 +15,7 @@ import UIKit
 protocol TutorDisplayLogic: class
 {
     func displayTutor(viewModel: Tutor.Display.ViewModel)
+    func displayFavorite(viewModel: Tutor.Favorite.ViewModel)
 }
 
 class TutorViewController: UIViewController, TutorDisplayLogic
@@ -166,11 +167,29 @@ class TutorViewController: UIViewController, TutorDisplayLogic
         }
     }
     
+    // MARK: addFavorite
+    func addFavorite()
+    {
+        Indicator.sharedInstance.showIndicator()
+        let request = Tutor.Favorite.Request()
+        interactor?.addToFavorites(request: request)
+    }
+    
+    func displayFavorite(viewModel: Tutor.Favorite.ViewModel) {
+        Indicator.sharedInstance.hideIndicator()
+        let alert = UIAlertController(title: "", message: viewModel.message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true)
+    }
+    
     // MARK: Actions
     
     @IBAction func askQuestionPressed(_ sender: Any) {
     }
     @IBAction func addToFavouritePressed(_ sender: Any) {
+        addFavorite()
     }
     @objc func dismissViewController(_ sender:UITapGestureRecognizer){
         let touchPoint = sender.location(in: self.view)

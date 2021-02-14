@@ -165,7 +165,7 @@ class AudioRecordViewController: UIViewController, AudioRecordDisplayLogic
             self.attachement = attachement
             // save
             if let tabController = presentingViewController as? UITabBarController {
-                if let navController = tabController.viewControllers?[0] as? UINavigationController {
+                if let navController = tabController.viewControllers?[tabController.selectedIndex] as? UINavigationController {
                     if let presenter = navController.topViewController as? QuestionViewController {
                         if let attachement = self.attachement {
                             presenter.attachementsList.append(attachement)

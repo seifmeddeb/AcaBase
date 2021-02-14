@@ -44,14 +44,30 @@ struct ChapterDAO : Codable {
     var title: String?
     var desc: String?
     var quizs : [QuizDAO]?
+    var videos : [VideoDAO]?
     
     enum CodingKeys: String, CodingKey {
         case objectId = "id"
         case title = "label"
         case desc = "description"
         case quizs = "quiz"
+        case videos = "videos"
     }
     
+}
+
+struct VideoDAO : Codable {
+    var objectId: Int
+    var title: String?
+    var videoUrl: String?
+    var provider: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case objectId = "id"
+        case title = "label"
+        case videoUrl = "url"
+        case provider = "provider"
+    }
 }
 
 struct QuizDAO : Codable {
@@ -76,7 +92,7 @@ struct QuizDAO : Codable {
     
 }
 
-struct QuestionDAO : Codable {
+struct QuestionDAO : Codable,Equatable {
     
     var objectId: Int
     var title: String?
@@ -84,6 +100,7 @@ struct QuestionDAO : Codable {
     var questionImage: String?
     var answerImage: String?
     var options : [OptionDAO]?
+    var state = QuestionState.Undefined
     
     enum CodingKeys: String, CodingKey {
         case objectId = "question_id"
@@ -94,20 +111,29 @@ struct QuestionDAO : Codable {
         case options = "question_options"
     }
     
+    static func == (lhs: QuestionDAO, rhs: QuestionDAO) -> Bool {
+        return lhs.objectId == rhs.objectId
+    }
+    
 }
 
-struct OptionDAO : Codable {
+struct OptionDAO : Codable,Equatable {
     
     var objectId: Int
     var title: String?
     var isTrue: Bool
     var image: String?
+    var state = QuestionState.Undefined
     
     enum CodingKeys: String, CodingKey {
         case objectId = "id"
         case title = "label"
         case isTrue = "isTrue"
         case image = "image"
+    }
+    
+    static func == (lhs: OptionDAO, rhs: OptionDAO) -> Bool {
+        return lhs.objectId == rhs.objectId
     }
     
 }

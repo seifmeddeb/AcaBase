@@ -15,6 +15,7 @@ import UIKit
 protocol TutorPresentationLogic
 {
     func presentTutor(response: Tutor.Display.Response)
+    func presentFavorite(response: Tutor.Favorite.Response)
 }
 
 class TutorPresenter: TutorPresentationLogic
@@ -31,5 +32,13 @@ class TutorPresenter: TutorPresentationLogic
         let viewModel = Tutor.Display.ViewModel(tutor: response.tutor,pictureUrl: pictureUrl,subjects: subjects)
         
         viewController?.displayTutor(viewModel: viewModel)
+    }
+    
+    // MARK: presentTutor
+    
+    func presentFavorite(response: Tutor.Favorite.Response) {
+        let viewModel = Tutor.Favorite.ViewModel(message: response.message)
+        
+        viewController?.displayFavorite(viewModel: viewModel)
     }
 }

@@ -20,6 +20,18 @@ extension UITableView {
         self.register(nib, forCellReuseIdentifier: name)
         return self
     }
+    
+    @discardableResult
+    func register<T: UITableViewHeaderFooterView>(_ cellClass: T.Type) ->Self {
+        guard let name = NSStringFromClass(cellClass)
+            .components(separatedBy: ".").last else {
+            fatalError("Unknown Class Name")
+        }
+        let nib = UINib(nibName: name, bundle: Bundle(for: T.self))
+        self.register(nib, forHeaderFooterViewReuseIdentifier: name)
+        return self
+    }
+    
 }
 extension UICollectionView {
     @discardableResult

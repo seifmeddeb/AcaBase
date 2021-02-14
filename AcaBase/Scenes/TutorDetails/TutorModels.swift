@@ -14,22 +14,37 @@ import UIKit
 
 enum Tutor
 {
-  // MARK: Use cases
-  
-  enum Display
-  {
-    struct Request
+    // MARK: Use cases
+    
+    enum Display
     {
+        struct Request
+        {
+        }
+        struct Response
+        {
+            var tutor : TutorDAO!
+        }
+        struct ViewModel
+        {
+            var tutor : TutorDAO!
+            var pictureUrl : URL?
+            var subjects : String!
+        }
     }
-    struct Response
+    
+    enum Favorite
     {
-        var tutor : TutorDAO!
+        struct Request
+        {
+        }
+        struct Response
+        {
+            var message : String
+        }
+        struct ViewModel
+        {
+            var message : String
+        }
     }
-    struct ViewModel
-    {
-        var tutor : TutorDAO!
-        var pictureUrl : URL?
-        var subjects : String!
-    }
-  }
 }

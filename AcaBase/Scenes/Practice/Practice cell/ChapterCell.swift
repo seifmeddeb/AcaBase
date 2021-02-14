@@ -19,7 +19,7 @@ class ChapterCell: UICollectionViewCell {
     
     func setChapter(viewModel: ChapterDAO) {
         titleLbl.text = viewModel.title ?? ""
-        savedQuizesLbl.text = viewModel.desc ?? ""
+        savedQuizesLbl.text = "0 Quiz passé sur \(viewModel.quizs?.count ?? 0) disponible"
     }
 
 }

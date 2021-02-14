@@ -70,7 +70,7 @@ class PracticeViewController: UIViewController, PracticeDisplayLogic
     var searchBar : UISearchBar!
     var moduleList = [ModuleViewModel]()
     var subjects = [String:Int]()
-    
+    var selectedChapter : ChapterDAO?
     // MARK: IBOutlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedHolderView: UIView!
@@ -123,7 +123,7 @@ class PracticeViewController: UIViewController, PracticeDisplayLogic
                 self.getModules(for: id)
                 return
             }
-            // FIXME: FireBase
+            // FIXME: FireBase error logging
         }
     }
 }
@@ -137,7 +137,12 @@ extension PracticeViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PracticeCell", for: indexPath) as! PracticeCell
         cell.setModule(viewModel: moduleList[indexPath.row])
+        // FIXME: where do we pick the value of the saved progress ??? the asign in here
         //cell.progressView.setProgress(progress: "1/4")
+        cell.didSelectChapter{ chapter in
+            self.selectedChapter = chapter
+            self.router?.routeToDetailChapter(segue: nil)
+        }
         return cell
     }
     

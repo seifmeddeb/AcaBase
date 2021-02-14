@@ -73,6 +73,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     @IBOutlet weak var topicCollectionView: UICollectionView!
     @IBOutlet weak var scrollTopConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
     // MARK: Properties
     
     var trainers = [TutorViewModel]()
@@ -88,6 +89,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
         getTrainers()
         getTopics()
         getHomeQuizs()
+        self.setHomePageNavBar(for: self.navigationItem, titleViewOpacity: offset)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -96,23 +98,12 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.backgroundColor = .white
-        self.navigationController?.navigationBar.compactAppearance = navBarAppearance
-        self.navigationController?.navigationBar.standardAppearance = navBarAppearance
-        self.navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.setHomePageNavBar(for: self.navigationItem, titleViewOpacity: offset)
         navbarAnimation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.hidesBarsOnSwipe = false
+        self.scrollView.setContentOffset(.zero, animated: false)
     }
-    
     // MARK: Actions
     
     @objc func clickTitleButton() {
@@ -173,6 +164,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
             navigationItem.leftBarButtonItem?.customView?.alpha = 1
             navigationItem.rightBarButtonItem?.customView?.alpha = 1
             navigationItem.titleView?.alpha = 1
+            self.navigationController?.navigationBar.alpha = 1
             navigationController?.navigationBar.backgroundColor = UIColor(white: 1, alpha: 1)
             self.navigationController?.navigationBar.layer.masksToBounds = false
             self.navigationController?.navigationBar.layer.shadowColor = UIColor.lightGray.cgColor
@@ -187,7 +179,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
             self.navigationController?.navigationBar.alpha = offset
             navigationController?.navigationBar.backgroundColor = UIColor(white: 1, alpha: offset)
             self.navigationController?.navigationBar.isHidden = (offset <= 0)
-            print(offset)
+            
         }
     }
 }

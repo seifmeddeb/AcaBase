@@ -13,9 +13,12 @@ class PracticeCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descLabel: UILabel!
-    @IBOutlet weak var progressView: UIView!
-    
+    @IBOutlet weak var progressView: GradientArcView!
+    @IBOutlet weak var progressLabel: UILabel!
+    @IBOutlet weak var noChaptersView: UIView!
     var chapterList = [ChapterDAO]()
+    // Properties
+    private var didSelectChapter: ((ChapterDAO) ->Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,13 +33,22 @@ class PracticeCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    @discardableResult
+    func didSelectChapter(_ completion: ((ChapterDAO)->Void)?) ->Self {
+        self.didSelectChapter = completion
+        return self
+    }
+    
     func setModule(viewModel: ModuleViewModel) {
         self.titleLabel.text = viewModel.model.model.title
         self.descLabel.text = viewModel.desc
+        self.progressLabel.text = "1/\(viewModel.quizsNbr)"
+        self.progressView.setValue(1, viewModel.quizsNbr > 0 ? viewModel.quizsNbr : 5)
+        self.progressView.setNeedsLayout()
         self.chapterList = viewModel.model.model.chapters ?? [ChapterDAO]()
+        self.noChaptersView.isHidden = (chapterList.count != 0)
         self.collectionView.reloadData()
     }
-    
 }
 
 extension PracticeCell : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -56,7 +68,8 @@ extension PracticeCell : UICollectionViewDelegate, UICollectionViewDataSource, U
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let selectedChapter = chapterList[indexPath.row]
+        self.didSelectChapter?(selectedChapter)
     }
     
 }

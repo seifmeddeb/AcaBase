@@ -23,6 +23,17 @@ func getSubjectsString(for subjects: [SubjectDAO]?) -> String {
     return subjectsString
 }
 
+func getImageUrl(for url: String?) -> String {
+    var urlStr = ""
+    if let imageUrl = url {
+        urlStr = imageUrl
+        if imageUrl.hasPrefix("/questions") {
+            urlStr = "http://vps800310.ovh.net/"+imageUrl
+        }
+    }
+    return urlStr
+}
+
 func getAnsweredQuestions(answersNbr: Int) -> NSAttributedString {
     let answersLocalized = "Answers:"
     let string = "\(answersLocalized) \(answersNbr)"

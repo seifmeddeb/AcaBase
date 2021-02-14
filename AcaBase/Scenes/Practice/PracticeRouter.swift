@@ -14,47 +14,47 @@ import UIKit
 
 @objc protocol PracticeRoutingLogic
 {
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func routeToDetailChapter(segue: UIStoryboardSegue?)
 }
 
 protocol PracticeDataPassing
 {
-  var dataStore: PracticeDataStore? { get }
+    var dataStore: PracticeDataStore? { get }
 }
 
 class PracticeRouter: NSObject, PracticeRoutingLogic, PracticeDataPassing
 {
-  weak var viewController: PracticeViewController?
-  var dataStore: PracticeDataStore?
-  
-  // MARK: Routing
-  
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
-  //{
-  //  if let segue = segue {
-  //    let destinationVC = segue.destination as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //  } else {
-  //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-  //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-  //  }
-  //}
-
-  // MARK: Navigation
-  
-  //func navigateToSomewhere(source: PracticeViewController, destination: SomewhereViewController)
-  //{
-  //  source.show(destination, sender: nil)
-  //}
-  
-  // MARK: Passing data
-  
-  //func passDataToSomewhere(source: PracticeDataStore, destination: inout SomewhereDataStore)
-  //{
-  //  destination.name = source.name
-  //}
+    weak var viewController: PracticeViewController?
+    var dataStore: PracticeDataStore?
+    
+    // MARK: Routing
+    
+    func routeToDetailChapter(segue: UIStoryboardSegue?)
+    {
+        if let segue = segue {
+            let destinationVC = segue.destination as! LessonViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToDetailChapter(source: dataStore!, destination: &destinationDS)
+        } else {
+            let storyboard = UIStoryboard(name: "Lesson", bundle: nil)
+            let destinationVC = storyboard.instantiateViewController(withIdentifier: "LessonViewController") as! LessonViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToDetailChapter(source: dataStore!, destination: &destinationDS)
+            navigateToDetailChapter(source: viewController!, destination: destinationVC)
+        }
+    }
+    
+    // MARK: Navigation
+    
+    func navigateToDetailChapter(source: PracticeViewController, destination: LessonViewController)
+    {
+        source.show(destination, sender: nil)
+    }
+    
+    // MARK: Passing data
+    
+    func passDataToDetailChapter(source: PracticeDataStore, destination: inout LessonDataStore)
+    {
+        destination.chapter = viewController?.selectedChapter
+    }
 }

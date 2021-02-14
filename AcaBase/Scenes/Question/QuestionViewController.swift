@@ -19,6 +19,7 @@ protocol QuestionDisplayLogic: class
     func displayQuestionData(viewModel: Question.ViewData.ViewModel)
     func displayChosenFile(viewModel: Question.FileData.ViewModel)
     func displayChosenFileError(viewModel: Question.FileData.ViewModel)
+    func displayPrefilledQuestion(viewModel: Question.FromQuiz.ViewModel)
 }
 
 class QuestionViewController: UIViewController, QuestionDisplayLogic
@@ -126,8 +127,8 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
     @IBOutlet weak var titleBorderView: UIView!
     @IBOutlet weak var subjectBorderView: UIView!
     @IBOutlet weak var descBorderView: UIView!
-    // MARK: Properties
     
+    // MARK: Properties
     let subjectPickerView = UIPickerView()
     var subjects = [SubjectDAO]()
     var images = [UIImage]()
@@ -136,7 +137,7 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
     var player: AVAudioPlayer?
     var trackPlayedCell : RecordingCell?
     var currentURL :URL?
-    
+    var isPrefilledSubject = false
     // **********************************
     // MARK: VIP Calls
     // **********************************
@@ -150,11 +151,16 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
     
     func displayQuestionData(viewModel: Question.ViewData.ViewModel)
     {
-        self.subjects = viewModel.subjectList
+        if !self.isPrefilledSubject {
+            self.subjects = viewModel.subjectList
+        }
         selctTutorBtn.isEnabled = !viewModel.disableTutorSelection
+        getPrefilledQuestion()
         if let tutor = viewModel.tutor {
             self.tutor = tutor
-            self.subjects = tutor.model.subjects ?? [SubjectDAO]()
+            if let subjects = tutor.model.subjects, !self.isPrefilledSubject {
+                self.subjects = subjects
+            }
             self.updateTutorView(with: tutor)
         }
     }
@@ -178,6 +184,20 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
         let alert = UIAlertController(title: "", message: "Fichier ne peut pas être ajouter, notre équipe ont été informer de ce proplème", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .destructive))
         self.present(alert,animated: true)
+    }
+    
+    // MARK: getPrefilledQuestion
+    func getPrefilledQuestion() {
+        let request = Question.FromQuiz.Request()
+        interactor?.getPrefilledQuestion(request: request)
+    }
+    
+    func displayPrefilledQuestion(viewModel: Question.FromQuiz.ViewModel) {
+        self.subjects = viewModel.subjectList
+        subjectTextField.text = viewModel.subject
+        titleTextField.text = viewModel.title
+        descTextView.text = viewModel.desc
+        isPrefilledSubject = true
     }
     
     // **********************************

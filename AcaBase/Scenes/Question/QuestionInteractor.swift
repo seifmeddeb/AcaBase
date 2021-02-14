@@ -16,6 +16,7 @@ protocol QuestionBusinessLogic
 {
     func getQuestionData(request: Question.ViewData.Request)
     func getFileData(request: Question.FileData.Request)
+    func getPrefilledQuestion(request: Question.FromQuiz.Request)
 }
 
 protocol QuestionDataStore
@@ -24,6 +25,8 @@ protocol QuestionDataStore
     var tutors: [TutorDAO]? { get set }
     var topics: [TopicDAO]? { get set }
     var tutor: TutorDAO? { get set }
+    var question : QuestionDAO? { get set }
+    var subject : SubjectDAO? { get set }
 }
 
 class QuestionInteractor: QuestionBusinessLogic, QuestionDataStore
@@ -33,7 +36,11 @@ class QuestionInteractor: QuestionBusinessLogic, QuestionDataStore
     var tutorWorker: TutorListWorker?
     var tutors: [TutorDAO]?
     var topics: [TopicDAO]?
+    // selected tutor
     var tutor: TutorDAO?
+    // when comming from a quiz pass the question data
+    var question: QuestionDAO?
+    var subject: SubjectDAO?
     
     // MARK: getQuestionData
     func getQuestionData(request: Question.ViewData.Request)
@@ -49,8 +56,33 @@ class QuestionInteractor: QuestionBusinessLogic, QuestionDataStore
             disableTutorSelection = true
         }
         
-        let response = Question.ViewData.Response(tutor: self.tutor, subjectList: subjectList, disableTutorSelection: disableTutorSelection)
-        presenter?.presentQuestionData(response: response)
+        
+        if subjectList.count > 0 {
+            let response = Question.ViewData.Response(tutor: self.tutor, subjectList: subjectList, disableTutorSelection: disableTutorSelection)
+            presenter?.presentQuestionData(response: response)
+        } else {
+            let homeWorker = HomeWorker(mainPageStore: MainPageAPI())
+            homeWorker.getTopics(completionHandler: { (topics) in
+                if let topicList = topics {
+                    self.topics = topicList
+                    subjectList = self.tutorWorker?.getSubjectsFromTopicList(topicList: topicList) ?? [SubjectDAO]()
+                    if let tutor = self.tutor {
+                        subjectList = tutor.subjects ?? [SubjectDAO]()
+                        disableTutorSelection = true
+                    }
+                    let response = Question.ViewData.Response(tutor: self.tutor, subjectList: subjectList, disableTutorSelection: disableTutorSelection)
+                    self.presenter?.presentQuestionData(response: response)
+                }
+            })
+        }
+        
+        // getTutors for DataStore
+        if self.tutors == nil {
+            let homeWorker = HomeWorker(mainPageStore: MainPageAPI())
+            homeWorker.getTutors { (tutors) in
+                self.tutors = tutors
+            }
+        }
         
     }
     
@@ -60,5 +92,24 @@ class QuestionInteractor: QuestionBusinessLogic, QuestionDataStore
         let attachement = Attachement(name: url.lastPathComponent, url: url, size: getFileSize(url: url), isAudio: false)
         let response = Question.FileData.Response(attachement: attachement)
         presenter?.presentChosenFile(response: response)
+    }
+    
+    // MARK: getPrefilledQuestion
+    func getPrefilledQuestion(request: Question.FromQuiz.Request) {
+        
+        self.worker = QuestionWorker()
+        tutorWorker = TutorListWorker()
+        
+        if let question = self.question {
+            if let topics = self.topics {
+                var subjectList = self.tutorWorker?.getSubjectsFromTopicList(topicList: topics) ?? [SubjectDAO]()
+                if let subject = self.worker!.getSubject(for: question, from: topics) {
+                    subjectList = subjectList.filter({ $0.objectId == subject.objectId})
+                    self.topics = topics.filter({ $0.objectId == subject.objectId})
+                    let response = Question.FromQuiz.Response(question: question, subject: subject, subjectList: subjectList)
+                    presenter?.presentPrefilledQuestion(response: response)
+                }
+            }
+        }
     }
 }

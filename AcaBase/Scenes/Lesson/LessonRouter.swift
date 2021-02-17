@@ -14,19 +14,20 @@ import UIKit
 
 @objc protocol LessonRoutingLogic
 {
-  func routeToDetailQuiz(segue: UIStoryboardSegue?)
+    func routeToDetailQuiz(segue: UIStoryboardSegue?)
+    func routeToVideoDetails(segue: UIStoryboardSegue?)
 }
 
 protocol LessonDataPassing
 {
-  var dataStore: LessonDataStore? { get }
+    var dataStore: LessonDataStore? { get }
 }
 
 class LessonRouter: NSObject, LessonRoutingLogic, LessonDataPassing
 {
-  weak var viewController: LessonViewController?
-  var dataStore: LessonDataStore?
-  
+    weak var viewController: LessonViewController?
+    var dataStore: LessonDataStore?
+    
     // MARK: Routing
     
     func routeToDetailQuiz(segue: UIStoryboardSegue?)
@@ -44,9 +45,28 @@ class LessonRouter: NSObject, LessonRoutingLogic, LessonDataPassing
         }
     }
     
+    func routeToVideoDetails(segue: UIStoryboardSegue?)
+    {
+        if let segue = segue {
+            let destinationVC = segue.destination as! VideoDetailsViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToVideoDetails(source: dataStore!, destination: &destinationDS)
+        } else {
+            let destinationVC = VideoDetailsViewController()
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToVideoDetails(source: dataStore!, destination: &destinationDS)
+            navigateToVideoDetails(source: viewController!, destination: destinationVC)
+        }
+    }
+    
     // MARK: Navigation
     
     func navigateToQuizDetails(source: LessonViewController, destination: QuizDetailsViewController)
+    {
+        source.show(destination, sender: nil)
+    }
+    
+    func navigateToVideoDetails(source: LessonViewController, destination: VideoDetailsViewController)
     {
         source.show(destination, sender: nil)
     }
@@ -56,5 +76,18 @@ class LessonRouter: NSObject, LessonRoutingLogic, LessonDataPassing
     func passDataToQuizDetails(source: LessonDataStore, destination: inout QuizDetailsDataStore)
     {
         destination.quiz = viewController?.selectedQuiz
+    }
+    
+    func passDataToVideoDetails(source: LessonDataStore, destination: inout VideoDetailsDataStore)
+    {
+        let selectedRow = viewController?.tableView?.indexPathsForSelectedRows?[0].row
+        let item = viewController?.items[selectedRow!]
+        switch item {
+        case .video(let viewModel):
+            destination.url = viewModel.url
+        default:
+            break;
+        }
+        
     }
 }

@@ -58,12 +58,30 @@ class MainPageAPI : MainPageStoreProtocol {
             .validate(statusCode:200..<300)
             .responseDecodable(of: [QuizDAO].self) { response in
                 
-                guard let topicsList = response.value else {
+                guard let quizsList = response.value else {
                     print("fetchTopics: \(response.error!)")
                     completionHandler{throw response.error!}
                     return
                 }
-                completionHandler{return topicsList}
+                completionHandler{return quizsList}
+        }
+    }
+    
+    func getHomeVideos(completionHandler: @escaping (() throws -> [VideoDAO]) -> Void) {
+        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer "+UserDefaults.standard.string(forKey: "token")!)])
+        AF.request(videosUrl,
+                   method: .get,
+                   parameters: nil,
+                   headers: headers)
+            .validate(statusCode:200..<300)
+            .responseDecodable(of: [VideoDAO].self) { response in
+                
+                guard let videosList = response.value else {
+                    print("fetchVideos: \(response.error!)")
+                    completionHandler{throw response.error!}
+                    return
+                }
+                completionHandler{return videosList}
         }
     }
     

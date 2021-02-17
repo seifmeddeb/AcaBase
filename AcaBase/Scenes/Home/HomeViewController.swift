@@ -17,6 +17,7 @@ protocol HomeDisplayLogic: class
     func displayTrainers(viewModel: Home.Tutors.ViewModel)
     func displayTopics(viewModel: Home.Topics.ViewModel)
     func displayQuizs(viewModel: Home.Quizs.ViewModel)
+    func displayHomeVideos(viewModel: Home.Videos.ViewModel)
 }
 
 class HomeViewController: UIViewController, HomeDisplayLogic
@@ -72,6 +73,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var topicCollectionView: UICollectionView!
     @IBOutlet weak var scrollTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var videosTableView: UITableView!
     
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     // MARK: Properties
@@ -79,16 +81,19 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     var trainers = [TutorViewModel]()
     var topics = [TopicDAO]()
     var quizs = [QuizDAO]()
+    var videos = [VideoAlias]()
     
     // MARK: View lifecycle
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        videosTableView.register(VideoCell.self)
         scrollView.delegate = self
         getTrainers()
         getTopics()
         getHomeQuizs()
+        getHomeVideos()
         self.setHomePageNavBar(for: self.navigationItem, titleViewOpacity: offset)
     }
     
@@ -123,7 +128,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     func getTrainers()
     {
         let request = Home.Tutors.Request()
-        interactor?.getTrainers(request: request)
+        interactor?.getHomeTrainers(request: request)
     }
     
     func displayTrainers(viewModel: Home.Tutors.ViewModel)
@@ -137,7 +142,7 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     
     func getTopics() {
         let request = Home.Topics.Request()
-        interactor?.getTopics(request: request)
+        interactor?.getHomeTopics(request: request)
     }
     
     func displayTopics(viewModel: Home.Topics.ViewModel) {
@@ -155,6 +160,18 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     func displayQuizs(viewModel: Home.Quizs.ViewModel) {
         quizs = viewModel.quizs
         self.topicCollectionView.reloadData()
+    }
+    
+    // MARK: get home videos
+    
+    func getHomeVideos(){
+        let request = Home.Videos.Request()
+        interactor?.getHomeVideos(request: request)
+    }
+    
+    func displayHomeVideos(viewModel: Home.Videos.ViewModel) {
+        videos = viewModel.videoList
+        self.videosTableView.reloadData()
     }
     // MARK: Private functions
     
@@ -225,4 +242,26 @@ extension HomeViewController: UIScrollViewDelegate {
         self.offset = self.scrollView.contentOffset.y / 150
         self.navbarAnimation()
     }
+}
+
+extension HomeViewController : UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return videos.count > 5 ? 5 : videos.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let item = videos[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell", for: indexPath) as! VideoCell
+        cell.setVideo(viewModel: item)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.router?.routeToVideoDetails(segue: nil)
+    }
+    
 }

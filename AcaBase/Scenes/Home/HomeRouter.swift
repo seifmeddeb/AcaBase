@@ -16,6 +16,7 @@ import UIKit
 {
     func routeToLogin(segue: UIStoryboardSegue?)
     func routeToQuestion(segue: UIStoryboardSegue?)
+    func routeToVideoDetails(segue: UIStoryboardSegue?)
 }
 
 protocol HomeDataPassing
@@ -69,6 +70,20 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing
         }
     }
     
+    func routeToVideoDetails(segue: UIStoryboardSegue?)
+    {
+        if let segue = segue {
+            let destinationVC = segue.destination as! VideoDetailsViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToVideoDetails(source: dataStore!, destination: &destinationDS)
+        } else {
+            let destinationVC = VideoDetailsViewController()
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToVideoDetails(source: dataStore!, destination: &destinationDS)
+            navigateToVideoDetails(source: viewController!, destination: destinationVC)
+        }
+    }
+    
     // MARK: Passing data
     func passDataToDetailTutor(source: HomeDataStore, destination: inout TutorDataStore)
     {
@@ -88,9 +103,21 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing
         destination.tutors = source.tutors ?? [TutorDAO]()
         destination.topics = source.topics ?? [TopicDAO]()
     }
+        
+    func passDataToVideoDetails(source: HomeDataStore, destination: inout VideoDetailsDataStore)
+    {
+        let selectedRow = viewController?.videosTableView?.indexPathsForSelectedRows?[0].row
+        let item = viewController?.videos[selectedRow!]
+        destination.url = item?.url        
+    }
     
     // MARK: Navigation
     func navigateToQuestion(source: HomeViewController, destination: QuestionViewController)
+    {
+        source.show(destination, sender: nil)
+    }
+    
+    func navigateToVideoDetails(source: HomeViewController, destination: VideoDetailsViewController)
     {
         source.show(destination, sender: nil)
     }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l3u-9z-5SK" userLabel="content view">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1500"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1611"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home-image-4000x4000" translatesAutoresizingMaskIntoConstraints="NO" id="H7j-pH-1if">
                                                 <rect key="frame" x="0.0" y="-75" width="414" height="414"/>
@@ -592,6 +592,30 @@ Lorem Ipsum is simply dummy text of the printing.</string>
                                                     <constraint firstAttribute="width" constant="70" id="Hao-vE-194"/>
                                                 </constraints>
                                             </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LvO-AJ-gct">
+                                                <rect key="frame" x="20" y="1006.5" width="49.5" height="19"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Cours">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.23137254901960785" green="0.47058823529411764" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <font key="NSFont" size="17" name="Arial-BoldMT"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QVG-W6-QXQ">
+                                                <rect key="frame" x="4" y="1041" width="406" height="550"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="550" id="KpE-PP-fe7"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="8Cl-hd-7UM" id="HC3-Hf-893"/>
+                                                    <outlet property="delegate" destination="8Cl-hd-7UM" id="0yF-8O-R1u"/>
+                                                </connections>
+                                            </tableView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -600,27 +624,32 @@ Lorem Ipsum is simply dummy text of the printing.</string>
                                             <constraint firstItem="THP-kq-tl9" firstAttribute="leading" secondItem="xD0-FY-G5n" secondAttribute="leading" id="8Wy-pD-AdL"/>
                                             <constraint firstItem="SM7-wY-P5m" firstAttribute="centerY" secondItem="EEF-qR-Vpx" secondAttribute="centerY" id="9NK-dl-qQJ"/>
                                             <constraint firstItem="8P0-qq-4Y9" firstAttribute="leading" secondItem="l3u-9z-5SK" secondAttribute="leading" id="Aqs-vI-8f8"/>
+                                            <constraint firstItem="LvO-AJ-gct" firstAttribute="top" secondItem="AEZ-FE-g1X" secondAttribute="bottom" constant="30" id="B1J-Ix-PbH"/>
                                             <constraint firstItem="CrX-bG-NuY" firstAttribute="centerX" secondItem="l3u-9z-5SK" secondAttribute="centerX" id="BxY-By-ljv"/>
                                             <constraint firstItem="PXK-HV-vVE" firstAttribute="leading" secondItem="l3u-9z-5SK" secondAttribute="leading" constant="20" id="DhN-cC-qr5"/>
                                             <constraint firstAttribute="trailing" secondItem="8P0-qq-4Y9" secondAttribute="trailing" id="DnD-Ig-ZrS"/>
                                             <constraint firstItem="PXK-HV-vVE" firstAttribute="top" secondItem="HJ3-mn-dwA" secondAttribute="bottom" constant="20" id="FFQ-pc-wRI"/>
+                                            <constraint firstItem="QVG-W6-QXQ" firstAttribute="top" secondItem="LvO-AJ-gct" secondAttribute="bottom" constant="15.5" id="GDp-zj-LyN"/>
                                             <constraint firstItem="8P0-qq-4Y9" firstAttribute="top" secondItem="PXK-HV-vVE" secondAttribute="top" id="J4Q-ww-Rj3"/>
                                             <constraint firstItem="xD0-FY-G5n" firstAttribute="leading" secondItem="l3u-9z-5SK" secondAttribute="leading" constant="20" id="Ld3-mX-q24"/>
                                             <constraint firstAttribute="trailing" secondItem="5kC-VM-sNf" secondAttribute="trailing" constant="20" id="ODQ-rN-IPA"/>
+                                            <constraint firstItem="LvO-AJ-gct" firstAttribute="leading" secondItem="l3u-9z-5SK" secondAttribute="leading" constant="20" id="OUD-9B-ffs"/>
                                             <constraint firstItem="xD0-FY-G5n" firstAttribute="top" secondItem="THP-kq-tl9" secondAttribute="bottom" constant="15" id="Ote-DU-EG5"/>
                                             <constraint firstItem="XAQ-kR-lMH" firstAttribute="top" secondItem="l3u-9z-5SK" secondAttribute="top" constant="16" id="PTR-1k-l1G"/>
+                                            <constraint firstAttribute="bottom" secondItem="QVG-W6-QXQ" secondAttribute="bottom" constant="20" id="SO0-so-eAa"/>
                                             <constraint firstItem="HJ3-mn-dwA" firstAttribute="leading" secondItem="l3u-9z-5SK" secondAttribute="leading" id="UVE-Jm-Ns0"/>
                                             <constraint firstItem="CrX-bG-NuY" firstAttribute="top" secondItem="H7j-pH-1if" secondAttribute="bottom" constant="-30" id="V1c-gS-gDM"/>
                                             <constraint firstItem="H7j-pH-1if" firstAttribute="top" secondItem="l3u-9z-5SK" secondAttribute="top" constant="-75" id="VrP-D2-tYO"/>
                                             <constraint firstItem="AEZ-FE-g1X" firstAttribute="leading" secondItem="l3u-9z-5SK" secondAttribute="leading" constant="20" id="c7m-0g-E4p"/>
                                             <constraint firstItem="XAQ-kR-lMH" firstAttribute="leading" secondItem="l3u-9z-5SK" secondAttribute="leading" constant="16" id="cC7-Ug-JQW"/>
+                                            <constraint firstAttribute="trailing" secondItem="QVG-W6-QXQ" secondAttribute="trailing" constant="4" id="dgv-h7-rqN"/>
                                             <constraint firstItem="THP-kq-tl9" firstAttribute="width" secondItem="l3u-9z-5SK" secondAttribute="width" multiplier="0.33" id="dyw-z9-mqH"/>
                                             <constraint firstItem="5kC-VM-sNf" firstAttribute="leading" secondItem="l3u-9z-5SK" secondAttribute="leading" constant="20" id="hFO-n5-nTJ"/>
                                             <constraint firstAttribute="trailing" secondItem="PXK-HV-vVE" secondAttribute="trailing" constant="20" id="i6F-af-TcY"/>
-                                            <constraint firstAttribute="bottom" secondItem="AEZ-FE-g1X" secondAttribute="bottom" constant="523.5" id="icC-XU-2Iw"/>
                                             <constraint firstItem="H7j-pH-1if" firstAttribute="leading" secondItem="l3u-9z-5SK" secondAttribute="leading" id="mIg-aT-zLz"/>
                                             <constraint firstItem="HJ3-mn-dwA" firstAttribute="top" secondItem="5kC-VM-sNf" secondAttribute="bottom" constant="15" id="nba-G7-NuE"/>
                                             <constraint firstItem="CrX-bG-NuY" firstAttribute="width" secondItem="l3u-9z-5SK" secondAttribute="width" multiplier="0.8" id="pKy-Cr-n4V"/>
+                                            <constraint firstItem="QVG-W6-QXQ" firstAttribute="leading" secondItem="l3u-9z-5SK" secondAttribute="leading" constant="4" id="s6R-87-cCs"/>
                                             <constraint firstItem="EEF-qR-Vpx" firstAttribute="leading" secondItem="SM7-wY-P5m" secondAttribute="trailing" constant="20" id="ujz-ca-7kw"/>
                                             <constraint firstItem="AEZ-FE-g1X" firstAttribute="top" secondItem="PXK-HV-vVE" secondAttribute="bottom" constant="10" id="vLF-wW-0ye"/>
                                             <constraint firstAttribute="trailing" secondItem="EEF-qR-Vpx" secondAttribute="trailing" constant="20" id="vgh-XN-4WM"/>
@@ -658,6 +687,7 @@ Lorem Ipsum is simply dummy text of the printing.</string>
                         <outlet property="scrollView" destination="8EY-bz-Y8A" id="Bno-rp-Ysb"/>
                         <outlet property="topConstraint" destination="l0x-Am-vlc" id="HhU-Zt-u06"/>
                         <outlet property="topicCollectionView" destination="AEZ-FE-g1X" id="HXS-iL-ynj"/>
+                        <outlet property="videosTableView" destination="QVG-W6-QXQ" id="niE-a1-lFz"/>
                         <segue destination="XJZ-a2-o1n" kind="presentation" identifier="DetailTutor" modalPresentationStyle="overFullScreen" modalTransitionStyle="coverVertical" id="Pdf-D7-eda"/>
                     </connections>
                 </viewController>

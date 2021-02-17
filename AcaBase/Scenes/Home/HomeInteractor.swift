@@ -14,9 +14,10 @@ import UIKit
 
 protocol HomeBusinessLogic
 {
-    func getTrainers(request: Home.Tutors.Request)
-    func getTopics(request: Home.Topics.Request)
+    func getHomeTrainers(request: Home.Tutors.Request)
+    func getHomeTopics(request: Home.Topics.Request)
     func getHomeQuizs(request: Home.Quizs.Request)
+    func getHomeVideos(request: Home.Videos.Request)
 }
 
 protocol HomeDataStore
@@ -36,7 +37,7 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore
     
     // MARK: HomeBusinessLogic Stubs
     
-    func getTrainers(request: Home.Tutors.Request)
+    func getHomeTrainers(request: Home.Tutors.Request)
     {
         workerApi.getTutors { (tutors) in
             self.tutors = tutors
@@ -45,7 +46,7 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore
         }
     }
     
-    func getTopics(request: Home.Topics.Request) {
+    func getHomeTopics(request: Home.Topics.Request) {
         workerApi.getTopics { topics in
             self.topics = topics
             let response = Home.Topics.Response(topics: topics )
@@ -58,6 +59,14 @@ class HomeInteractor: HomeBusinessLogic, HomeDataStore
             self.quizs = quizs
             let response = Home.Quizs.Response(quizs: quizs )
             self.presenter?.presentQuizs(response: response)
+        }
+    }
+    
+    func getHomeVideos(request: Home.Videos.Request) {
+        workerApi.getHomeVideos { videos in
+            let videoResponseList = self.workerApi.getVideosResponse(for: videos)
+            let response = Home.Videos.Response(videoList: videoResponseList)
+            self.presenter?.presentHomeVideos(response: response)
         }
     }
 }

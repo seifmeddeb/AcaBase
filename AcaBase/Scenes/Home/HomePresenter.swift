@@ -17,14 +17,14 @@ protocol HomePresentationLogic
     func presentTrainers(response: Home.Tutors.Response)
     func presentTopics(response: Home.Topics.Response)
     func presentQuizs(response: Home.Quizs.Response)
+    func presentHomeVideos(response: Home.Videos.Response)
 }
 
 class HomePresenter: HomePresentationLogic
 {
     weak var viewController: HomeDisplayLogic?
     
-    // MARK: Do something
-    
+    // MARK: presentTrainers
     func presentTrainers(response: Home.Tutors.Response)
     {
         var tutorViewModels = [TutorViewModel]()
@@ -42,13 +42,31 @@ class HomePresenter: HomePresentationLogic
         
     }
     
+    // MARK: presentTopics
     func presentTopics(response: Home.Topics.Response) {
         let viewModel = Home.Topics.ViewModel(topics: response.topics ?? [TopicDAO](), errorMsg: "error fetching trainers")
         viewController?.displayTopics(viewModel: viewModel)
     }
     
+    // MARK: presentQuizs
     func presentQuizs(response: Home.Quizs.Response) {
         let viewModel = Home.Quizs.ViewModel(quizs: response.quizs ?? [QuizDAO](), errorMsg: "error fetching quizs")
         viewController?.displayQuizs(viewModel: viewModel)
+    }
+    
+    // MARK: presentVideos
+    func presentHomeVideos(response: Home.Videos.Response) {
+        var videosViewModel = [VideoAlias]()
+        for video in response.videoList {
+            var videoItem = VideoAlias()
+            videoItem.title = video.title ?? "Video sans titre"
+            videoItem.provider = video.provider ?? "Video sans tuteur"
+            videoItem.views = video.views ?? "100"
+            videoItem.time = video.time ?? "il y a 1 min"
+            videoItem.url = URL(string: video.url ?? "")
+            videosViewModel.append(videoItem)
+        }
+        let viewModel = Home.Videos.ViewModel(videoList: videosViewModel)
+        viewController?.displayHomeVideos(viewModel: viewModel)
     }
 }

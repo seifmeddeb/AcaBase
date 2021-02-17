@@ -61,12 +61,30 @@ struct VideoDAO : Codable {
     var title: String?
     var videoUrl: String?
     var provider: String?
+    var nbrViews: Int?
+    var desc: String?
+    var createdAt: CreatedAtDAO?
     
     enum CodingKeys: String, CodingKey {
         case objectId = "id"
         case title = "label"
         case videoUrl = "url"
         case provider = "provider"
+        case nbrViews = "nbrViews"
+        case desc = "description"
+        case createdAt = "createdAt"
+    }
+}
+
+struct CreatedAtDAO : Codable {
+    var date: String
+    var timezoneType: Int
+    var timezone: String
+    // dateformat: 2020-06-13 23:21:28.000000
+    enum CodingKeys: String, CodingKey {
+        case date = "date"
+        case timezoneType = "timezone_type"
+        case timezone = "timezone"
     }
 }
 

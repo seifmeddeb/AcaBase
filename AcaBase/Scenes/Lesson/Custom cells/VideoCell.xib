@@ -64,11 +64,8 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 hour ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M0e-0e-lGT">
-                                        <rect key="frame" x="65" y="2.5" width="57" height="15"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="57" id="Gsz-0j-50K"/>
-                                        </constraints>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 hour ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="M0e-0e-lGT">
+                                        <rect key="frame" x="65" y="3" width="57" height="14"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -79,12 +76,13 @@
                                     <constraint firstItem="M0e-0e-lGT" firstAttribute="leading" secondItem="o7a-Mr-AgY" secondAttribute="trailing" constant="2" id="7ku-oc-oaX"/>
                                     <constraint firstItem="o7a-Mr-AgY" firstAttribute="top" secondItem="YOB-k9-Wya" secondAttribute="top" id="95X-XX-QLN"/>
                                     <constraint firstItem="yMx-Gw-8XI" firstAttribute="leading" secondItem="YOB-k9-Wya" secondAttribute="leading" id="EjY-OA-Fmk"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="M0e-0e-lGT" secondAttribute="trailing" constant="3" id="JxI-4N-yMK"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="M0e-0e-lGT" secondAttribute="trailing" id="JxI-4N-yMK"/>
                                     <constraint firstItem="M0e-0e-lGT" firstAttribute="centerY" secondItem="YOB-k9-Wya" secondAttribute="centerY" id="QC4-Ke-BOU"/>
                                     <constraint firstItem="yMx-Gw-8XI" firstAttribute="centerY" secondItem="YOB-k9-Wya" secondAttribute="centerY" id="eYC-uU-eZb"/>
                                     <constraint firstAttribute="height" constant="20" id="mFM-cO-gMA"/>
                                     <constraint firstItem="o7a-Mr-AgY" firstAttribute="leading" secondItem="yMx-Gw-8XI" secondAttribute="trailing" constant="5" id="o9Q-il-G9T"/>
                                     <constraint firstAttribute="bottom" secondItem="o7a-Mr-AgY" secondAttribute="bottom" id="pHC-AA-RAE"/>
+                                    <constraint firstItem="o7a-Mr-AgY" firstAttribute="width" secondItem="YOB-k9-Wya" secondAttribute="width" multiplier="0.286713" id="y7w-hM-28m"/>
                                     <constraint firstItem="o7a-Mr-AgY" firstAttribute="centerY" secondItem="YOB-k9-Wya" secondAttribute="centerY" id="zQV-Os-myC"/>
                                 </constraints>
                             </view>

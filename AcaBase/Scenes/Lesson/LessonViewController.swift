@@ -182,7 +182,7 @@ extension LessonViewController : UITableViewDataSource, UITableViewDelegate {
         switch item {
         case .video(let viewModel):
             self.selectedVideo = viewModel
-            //self.router?.routeToDetailVideo(segue: nil)
+            self.router?.routeToVideoDetails(segue: nil)
         case .quiz(let viewModel):
             self.selectedQuiz = viewModel.model
             self.router?.routeToDetailQuiz(segue: nil)

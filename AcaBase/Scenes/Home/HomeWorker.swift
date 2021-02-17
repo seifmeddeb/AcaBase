@@ -55,7 +55,7 @@ class HomeWorker {
         }
     }
     
-    func getHomeQuiz(completionHandler: @escaping ([QuizDAO]?) -> Void){
+    func getHomeQuiz(completionHandler: @escaping ([QuizDAO]?) -> Void) {
         self.mainPageStore.fetchHomeQuiz { (quizs: () throws -> [QuizDAO]) -> Void in
             do {
                 let quizs = try quizs()
@@ -71,6 +71,40 @@ class HomeWorker {
             }
         }
     }
+    
+    func getHomeVideos(completionHandler: @escaping ([VideoDAO]?) -> Void) {
+        self.mainPageStore.getHomeVideos { (videos: () throws -> [VideoDAO]) -> Void in
+            do {
+                let videos = try videos()
+                DispatchQueue.main.async {
+                    completionHandler(videos)
+                }
+            } catch {
+                let nserror = error as NSError
+                print("Unresolved error \(nserror), \(nserror.userInfo)")
+                DispatchQueue.main.async {
+                    completionHandler(nil)
+                }
+            }
+        }
+    }
+    
+    func getVideosResponse(for videos: [VideoDAO]?) -> [VideoResponseAlias] {
+        var videosResponse = [VideoResponseAlias]()
+        if let videos = videos {
+            for video in videos {
+                var videoResponse = VideoResponseAlias()
+                videoResponse.title = video.title
+                videoResponse.provider = video.provider
+                videoResponse.time = getElapsedTimeSince(time: video.createdAt?.date ?? "")
+                videoResponse.views = "\(video.nbrViews ?? 78678)"
+                videoResponse.url = video.videoUrl
+                
+                videosResponse.append(videoResponse)
+            }
+        }
+        return videosResponse
+    }
 }
 
 protocol MainPageStoreProtocol {
@@ -78,5 +112,5 @@ protocol MainPageStoreProtocol {
     func fetchTrainers(completionHandler: @escaping (() throws -> [TutorDAO]) -> Void)
     func fetchTopics(completionHandler: @escaping (() throws -> [TopicDAO]) -> Void)
     func fetchHomeQuiz(completionHandler: @escaping (() throws -> [QuizDAO]) -> Void)
-    
+    func getHomeVideos(completionHandler: @escaping (() throws -> [VideoDAO]) -> Void)
 }

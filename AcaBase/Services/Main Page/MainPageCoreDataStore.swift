@@ -51,5 +51,17 @@ class MainPageCoreDataStore : MainPageStoreProtocol {
         }
     }
     
+    func getHomeVideos(completionHandler: @escaping (() throws -> [VideoDAO]) -> Void) {
+        moc.perform {
+            do {
+                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ManagedVideo")
+                let videos = try self.moc.fetch(fetchRequest) as! [VideoDAO]
+                completionHandler { return videos }
+            } catch {
+                completionHandler { throw CoreDataError.CannotFetch("Cannot fetch Quiz") }
+            }
+        }
+    }
+    
     
 }

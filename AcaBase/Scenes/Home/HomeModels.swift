@@ -63,4 +63,19 @@ enum Home
             var errorMsg : String?
         }
     }
+    
+    enum Videos
+    {
+        struct Request
+        {
+        }
+        struct Response
+        {
+            var videoList = [VideoResponseAlias]()
+        }
+        struct ViewModel
+        {
+            var videoList = [VideoAlias]()
+        }
+    }
 }

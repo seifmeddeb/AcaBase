@@ -14,7 +14,6 @@ import UIKit
 
 typealias VideoAlias = Lesson.Videos.ViewModel.VideoViewModel
 typealias QuizAlias = Lesson.Quizs.ViewModel.QuizViewModel
-
 typealias VideoResponseAlias = Lesson.Videos.Response.VideoResponse
 
 enum Lesson

@@ -102,3 +102,45 @@ func getStringFrom(seconds: Int) -> String {
 
     return seconds < 10 ? "0\(seconds)" : "\(seconds)"
 }
+
+func getElapsedTimeSince(time: String) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSSSS"
+    
+    var elapsedTime = ""
+    if let date = dateFormatter.date(from: time) {
+        let interval = Date().timeIntervalSince(date)
+        elapsedTime = getElapsedTimeText(from: interval)
+    } else {
+        elapsedTime = "il y a 1 heure"
+    }
+    
+    return elapsedTime
+}
+
+func getElapsedTimeText(from interval: TimeInterval) -> String {
+    let hour = Int(interval / 3600)
+    let days = Int(hour / 24)
+    let months = Int(days / 30)
+    let years = Int(months / 12)
+    let minute = Int(interval.truncatingRemainder(dividingBy: 3600) / 60)
+    if years > 0 {
+        return "il y a \(years) an\(years > 1 ? "s" : "")"
+    }
+    if months > 0 {
+        return "il y a \(months) mois"
+    }
+    if days > 0 {
+        return "il y a \(days) jour\(days > 1 ? "s" : "")"
+    }
+    switch hour {
+    case 0:
+        return "il y a \(minute) minute\(minute > 1 ? "s" : "")"
+    case 1:
+        return "il y a 1 heure"
+    case 2...23:
+        return "il y a \(hour) heures"
+    default:
+        return ""
+    }
+}

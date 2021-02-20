@@ -33,8 +33,10 @@ class QuestionResponseCell: UITableViewCell {
         self.titleLbl.text = viewModel.title
         self.descLbl.text = viewModel.desc
         if let imageUrl = viewModel.imageUrl {
-            self.imageForCell.setImageAsync(url: imageUrl)
             self.imageHeightConstraint.constant = 150
+            self.imageForCell.setImageAsync(url: imageUrl)
+        } else {
+            self.imageHeightConstraint.constant = 0
         }
         self.bottomSeparator.isHidden = false
         self.topSeparator.isHidden = true
@@ -44,8 +46,10 @@ class QuestionResponseCell: UITableViewCell {
         self.titleLbl.text = viewModel.title
         self.descLbl.text = viewModel.desc
         if let imageUrl = viewModel.imageUrl {
-            self.imageForCell.setImageAsync(url: imageUrl)
             self.imageHeightConstraint.constant = 150
+            self.imageForCell.setImageAsync(url: imageUrl)
+        } else {
+            self.imageHeightConstraint.constant = 0
         }
         
         self.bottomSeparator.isHidden = true

@@ -27,13 +27,14 @@ enum Lesson
         }
         struct Response
         {
-            var title : String?
-            var description : String?
+            var chapter : ChapterDAO
         }
         struct ViewModel
         {
-            var title = ""
-            var description = ""
+            var title : String
+            var description : String
+            var totalNbrQuiz : Int
+            var answeredUserQuiz : Int
         }
     }
     

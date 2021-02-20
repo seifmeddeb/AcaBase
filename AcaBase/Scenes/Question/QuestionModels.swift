@@ -71,4 +71,25 @@ enum Question
         }
     }
     
+    enum Ask
+    {
+        struct Request
+        {
+            var title : String
+            var tutorId : Int
+            var subjectId : Int
+            var description : String
+        }
+        struct Response
+        {
+            var questionId : Int
+            var error : Error?
+        }
+        struct ViewModel
+        {
+            var questionId : Int
+            var errorMessage : String?
+        }
+    }
+    
 }

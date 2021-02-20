@@ -53,7 +53,7 @@ private extension GradientArcView {
 
     func updateGradient() {
         gradientLayer.frame = bounds
-        gradientLayer.colors = [startColor, endColor].map { $0.cgColor }
+        gradientLayer.colors = [endColor, startColor].map { $0.cgColor }
 
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
         let radius = ((min(bounds.width, bounds.height) - lineWidth) / 2) - 9
@@ -70,7 +70,7 @@ private extension GradientArcView {
     
     func updateGradient(_ endAngle: Double, isAnimated: Bool? = false) {
         gradientLayer.frame = bounds
-        gradientLayer.colors = [startColor, endColor].map { $0.cgColor }
+        gradientLayer.colors = [endColor, startColor].map { $0.cgColor }
 
         let center = CGPoint(x: bounds.midX, y: bounds.midY)
         let radius = ((min(bounds.width, bounds.height) - lineWidth) / 2) - 9

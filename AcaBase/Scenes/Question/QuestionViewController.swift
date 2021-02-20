@@ -17,9 +17,14 @@ import MobileCoreServices
 protocol QuestionDisplayLogic: class
 {
     func displayQuestionData(viewModel: Question.ViewData.ViewModel)
+    
     func displayChosenFile(viewModel: Question.FileData.ViewModel)
     func displayChosenFileError(viewModel: Question.FileData.ViewModel)
+    
     func displayPrefilledQuestion(viewModel: Question.FromQuiz.ViewModel)
+    
+    func displayAskQuestionError(viewModel: Question.Ask.ViewModel)
+    func displayAskQuestion(viewModel: Question.Ask.ViewModel)
 }
 
 class QuestionViewController: UIViewController, QuestionDisplayLogic
@@ -138,6 +143,7 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
     var trackPlayedCell : RecordingCell?
     var currentURL :URL?
     var isPrefilledSubject = false
+    var subjectIndex = -1
     // **********************************
     // MARK: VIP Calls
     // **********************************
@@ -200,6 +206,37 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
         isPrefilledSubject = true
     }
     
+    // MARK: ask Question
+    func askQuestion() {
+        
+        guard let tutorId = self.tutor?.model.objectId else { return }
+        guard let title = titleTextField.text else { return }
+        guard let description = descTextView.text else { return }
+        if subjectIndex < 0 { return }
+        
+        Indicator.sharedInstance.showIndicator()
+        
+        let request = Question.Ask.Request(title: title, tutorId: tutorId, subjectId: self.subjects[subjectIndex].objectId, description: description)
+        interactor?.askQuestion(request: request)
+    }
+    
+    func displayAskQuestionError(viewModel: Question.Ask.ViewModel) {
+        Indicator.sharedInstance.hideIndicator()
+        
+        let alert = UIAlertController(title: "", message: "Service non disponible pour le moment 😥", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true)
+        
+        print("\(viewModel.errorMessage ?? "error is nil")")
+    }
+    
+    func displayAskQuestion(viewModel: Question.Ask.ViewModel) {
+        Indicator.sharedInstance.hideIndicator()
+        print("\(viewModel.questionId)")
+    }
+    
     // **********************************
     // MARK: IBActions
     // **********************************
@@ -220,6 +257,7 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
         color = descTextView.text?.count == 0 ? UIColor.red : primaryGreen
         descBorderView.borderColor = color
         
+        self.askQuestion()
     }
     
     // **********************************
@@ -227,6 +265,11 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
     // **********************************
     
     private func updateTutorView(with viewModel: TutorViewModel){
+        ///<<<<<< Force user to update subject after Tutor selection
+            self.subjectIndex = -1
+            self.subjectBorderView.borderColor = UIColor.red
+            self.subjectTextField.text = nil
+        ///>>>>>>>>>>
         self.tutorView.isHidden = false
         self.noTutorView.isHidden = true
         self.fullName.text = viewModel.model.fullName
@@ -262,11 +305,13 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
     
     @objc private func donePicker() {
         let row = self.subjectPickerView.selectedRow(inComponent: 0)
+        self.subjectIndex = row
         self.subjectPickerView.selectRow(row, inComponent: 0, animated: false)
         self.subjectTextField.text = self.subjects[row].name
         self.subjectTextField.resignFirstResponder()
     }
     @objc private func cancelPicker() {
+        self.subjectIndex = -1
         self.subjectTextField.text = nil
         self.subjectTextField.resignFirstResponder()
     }

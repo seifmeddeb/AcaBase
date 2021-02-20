@@ -15,6 +15,12 @@ import AVKit
 
 class LessonWorker
 {
+    var chapterStore : ChapterDetailsStoreProtocol
+    
+    init(chapterStore: ChapterDetailsStoreProtocol)
+    {
+        self.chapterStore = chapterStore
+    }
     
     func getQuizs(for chapter:ChapterDAO) -> [QuizDAO]
     {
@@ -38,4 +44,25 @@ class LessonWorker
         }
         return videosResponse
     }
+    
+    func getChapterDetails(chapter: ChapterDAO, completionHandler: @escaping (ChapterDAO?) -> Void) {
+        self.chapterStore.getChapterDetails(chapterId: chapter.objectId) { (response: () throws -> ChapterDAO) in
+            do {
+                let response = try response()
+                DispatchQueue.main.async {
+                    completionHandler(response)
+                }
+            } catch {
+                let nserror = error as NSError
+                print("Unresolved error \(nserror), \(nserror.userInfo)")
+                DispatchQueue.main.async {
+                    completionHandler(nil)
+                }
+            }
+        }
+    }
+}
+
+protocol ChapterDetailsStoreProtocol {
+    func getChapterDetails(chapterId:Int, completionHandler: @escaping (() throws -> ChapterDAO) -> Void)
 }

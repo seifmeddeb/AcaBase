@@ -43,6 +43,8 @@ struct ChapterDAO : Codable {
     var objectId: Int
     var title: String?
     var desc: String?
+    var totalNbrQuiz: Int?
+    var answeredUserQuiz: String?
     var quizs : [QuizDAO]?
     var videos : [VideoDAO]?
     
@@ -50,6 +52,8 @@ struct ChapterDAO : Codable {
         case objectId = "id"
         case title = "label"
         case desc = "description"
+        case totalNbrQuiz = "totalNbrQuiz"
+        case answeredUserQuiz = "answeredUserQuiz"
         case quizs = "quiz"
         case videos = "videos"
     }

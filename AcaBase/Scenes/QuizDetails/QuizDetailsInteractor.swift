@@ -97,10 +97,18 @@ class QuizDetailsInteractor: QuizDetailsBusinessLogic, QuizDetailsDataStore
         
         if let unwrappedQuiz = quiz {
             questions = worker.fetchQuestions(for: unwrappedQuiz)
-        }
+        
         let correctAnswers = worker.getScore(for: questions)
         
-        let response = QuizDetails.Score.Response(correctAnswers: correctAnswers, questions: questions)
-        presenter?.presentScore(response: response)
+            worker.saveScore(quizScore: ScoreRequest(quizId: unwrappedQuiz.objectId, validAnswers: correctAnswers)) { (success) in
+                if success {
+                    let response = QuizDetails.Score.Response(correctAnswers: correctAnswers, questions: questions)
+                    self.presenter?.presentScore(response: response)
+                } else {
+                    // FIXME: We should display something
+                }
+            }
+        }
+        
     }
 }

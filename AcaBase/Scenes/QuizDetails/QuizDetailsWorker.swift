@@ -14,6 +14,14 @@ import UIKit
 
 class QuizDetailsWorker
 {
+    
+    var quizStore : QuizStoreProtocol
+    
+    init(quizStore: QuizStoreProtocol = QuizAPI())
+    {
+        self.quizStore = quizStore
+    }
+    
     func fetchQuestions(for quiz: QuizDAO) -> [QuestionDAO]
     {
         return quiz.questions ?? [QuestionDAO]()
@@ -114,5 +122,27 @@ class QuizDetailsWorker
             }
         }
     }
+    
+    func saveScore(quizScore: ScoreRequest, completionHandler: @escaping (Bool) -> Void) {
+        self.quizStore.saveScore(quizScore: quizScore) { (response: () throws -> Void) in
+            do {
+                let _ = try response()
+                DispatchQueue.main.async {
+                    completionHandler(true)
+                }
+            } catch {
+                let nserror = error as NSError
+                print("Unresolved error \(nserror), \(nserror.userInfo)")
+                DispatchQueue.main.async {
+                    completionHandler(false)
+                }
+            }
+        }
+    }
+    
+}
+protocol QuizStoreProtocol {
+    
+    func saveScore(quizScore: ScoreRequest, completionHandler: @escaping (() throws -> Void) -> Void)
     
 }

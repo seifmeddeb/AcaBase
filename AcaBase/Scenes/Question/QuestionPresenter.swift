@@ -17,6 +17,8 @@ protocol QuestionPresentationLogic
     func presentQuestionData(response: Question.ViewData.Response)
     func presentChosenFile(response: Question.FileData.Response)
     func presentPrefilledQuestion(response: Question.FromQuiz.Response)
+    func presentAskQuestionError(response: Question.Ask.Response)
+    func presentAskQuestion(response: Question.Ask.Response)
 }
 
 class QuestionPresenter: QuestionPresentationLogic
@@ -67,6 +69,18 @@ class QuestionPresenter: QuestionPresentationLogic
         
         let viewModel = Question.FromQuiz.ViewModel(title: question.title ?? "", subject: subject.title ?? "", desc: desc, subjectList: response.subjectList ?? [SubjectDAO]())
         viewController?.displayPrefilledQuestion(viewModel: viewModel)
+    }
+    
+    // MARK: present ASK Question
+    
+    func presentAskQuestion(response: Question.Ask.Response) {
+        let viewModel = Question.Ask.ViewModel(questionId: response.questionId, errorMessage: response.error?.localizedDescription)
+        viewController?.displayAskQuestion(viewModel: viewModel)
+    }
+    
+    func presentAskQuestionError(response: Question.Ask.Response) {
+        let viewModel = Question.Ask.ViewModel(questionId: response.questionId, errorMessage: response.error?.localizedDescription)
+        viewController?.displayAskQuestionError(viewModel: viewModel)
     }
     
 }

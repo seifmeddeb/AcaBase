@@ -22,3 +22,14 @@ let topicsUrl = mainUrl+"subjects"
 let homeQuizUrl = mainUrl+"home/quiz"
 let videosUrl = mainUrl+"videos"
 let trainerFavUrl = mainUrl+"trainer/add/fav"
+
+// MARK: ASK URLs
+let askUrl = mainUrl+"user/ask"
+let attachementsUrl = mainUrl+"quiz/score/register"
+
+
+//MARK: Chapter with progress
+func getChapterDetailsUrl( _ chapterId: Int) -> String { return "\(mainUrl)chapters/\(chapterId)/structure" }
+
+//MARK: Quiz Urls
+let quizScoreUrl = mainUrl+"quiz/score/register"

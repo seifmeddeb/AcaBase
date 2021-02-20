@@ -33,16 +33,22 @@ class LessonInteractor: LessonBusinessLogic, LessonDataStore
     
     // MARK: getChapter
     func getChapter(request: Lesson.Chapter.Request) {
+        self.worker = LessonWorker(chapterStore: ChapterDetailsAPI())
         if let chapter = chapter {
-            let response = Lesson.Chapter.Response(title: chapter.title, description: chapter.desc)
-            presenter?.presentChapter(response: response)
+            self.worker?.getChapterDetails(chapter: chapter, completionHandler: { chapterDetails in
+                if let chapterDetails = chapterDetails {
+                    self.chapter = chapterDetails
+                    let response = Lesson.Chapter.Response(chapter: chapterDetails)
+                    self.presenter?.presentChapter(response: response)
+                }
+            })
         }
     }
     
     // MARK: getVideos
     func getVideos(request: Lesson.Videos.Request)
     {
-        worker = LessonWorker()
+        worker = LessonWorker(chapterStore: ChapterDetailsAPI())
         var videosResponse = [VideoResponseAlias]()
         if let chapterUnwrapped = chapter {
             videosResponse = worker!.getVideos(for: chapterUnwrapped)
@@ -54,12 +60,23 @@ class LessonInteractor: LessonBusinessLogic, LessonDataStore
     // MARK: getQuizs
     func getQuizs(request: Lesson.Quizs.Request)
     {
-        worker = LessonWorker()
-        var quizsResponse = [QuizDAO]()
-        if let chapterUnwrapped = chapter {
-            quizsResponse = worker!.getQuizs(for: chapterUnwrapped)
+        worker = LessonWorker(chapterStore: ChapterDetailsAPI())
+        if let chapter = chapter {
+            var quizsResponse = [QuizDAO]()
+//            if request.shouldUpdate {
+//                self.worker?.getChapterDetails(chapter: chapter, completionHandler: { chapterDetails in
+//                    if let chapterDetails = chapterDetails {
+//                        self.chapter = chapterDetails
+//                        quizsResponse = self.worker!.getQuizs(for: chapterDetails)
+//                        let response = Lesson.Quizs.Response(quizList: quizsResponse)
+//                        self.presenter?.presentQuizs(response: response)
+//                    }
+//                })
+//            } else {
+                quizsResponse = worker!.getQuizs(for: chapter)
+                let response = Lesson.Quizs.Response(quizList: quizsResponse)
+                presenter?.presentQuizs(response: response)
+//            }
         }
-        let response = Lesson.Quizs.Response(quizList: quizsResponse)
-        presenter?.presentQuizs(response: response)
     }
 }

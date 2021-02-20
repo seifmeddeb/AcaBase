@@ -17,6 +17,7 @@ protocol QuestionBusinessLogic
     func getQuestionData(request: Question.ViewData.Request)
     func getFileData(request: Question.FileData.Request)
     func getPrefilledQuestion(request: Question.FromQuiz.Request)
+    func askQuestion(request: Question.Ask.Request)
 }
 
 protocol QuestionDataStore
@@ -111,5 +112,21 @@ class QuestionInteractor: QuestionBusinessLogic, QuestionDataStore
                 }
             }
         }
+    }
+    
+    // MARK: Ask Question
+    func askQuestion(request: Question.Ask.Request) {
+        self.worker = QuestionWorker(askStore: AskAPI())
+        let request = AskRequest(title: request.title, subject: request.subjectId, trainerId: request.tutorId, description: request.description)
+        
+        self.worker?.askQuestion(request: request, completionHandler: { (questionId, error) in
+            if let error = error {
+                let response = Question.Ask.Response(questionId: questionId, error: error)
+                self.presenter?.presentAskQuestionError(response: response)
+            } else {
+                let response = Question.Ask.Response(questionId: questionId, error: error)
+                self.presenter?.presentAskQuestion(response: response)
+            }
+        })
     }
 }

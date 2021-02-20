@@ -75,7 +75,6 @@ class LessonViewController: UIViewController, LessonDisplayLogic
         tableView.register(VideoCell.self)
         tableView.register(QuizCell.self)
         getChapter()
-        getVideos()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,6 +87,7 @@ class LessonViewController: UIViewController, LessonDisplayLogic
     var items = [Lesson.CellType]()
     var selectedQuiz : QuizDAO?
     var selectedVideo : VideoAlias?
+    var chapterProgress : (total:Int, answered:Int) = (0,0)
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var progressView: GradientArcView!
@@ -102,6 +102,10 @@ class LessonViewController: UIViewController, LessonDisplayLogic
     }
     func displayChapter(viewModel: Lesson.Chapter.ViewModel) {
         self.title = viewModel.title
+        self.chapterProgress.answered = viewModel.answeredUserQuiz
+        self.chapterProgress.total = viewModel.totalNbrQuiz
+        
+        getVideos()
     }
     
     // MARK: getVideos
@@ -152,14 +156,13 @@ extension LessonViewController : UITableViewDataSource, UITableViewDelegate {
         case .quiz(let viewModel):
             let cell = tableView.dequeueReusableCell(withIdentifier: "QuizCell", for: indexPath) as! QuizCell
             cell.setCell(with: viewModel)
-            //cell.progressView.setProgress(progress: "1/4")
             return cell
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "LessonHeaderView") as! LessonHeaderView
-        view.setHeader(progress: 3, total: 4)
+        view.setHeader(progress: self.chapterProgress.answered, total: self.chapterProgress.total)
         view.didSelectQuizs {
             self.getQuizs()
         }
@@ -174,7 +177,7 @@ extension LessonViewController : UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 120
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

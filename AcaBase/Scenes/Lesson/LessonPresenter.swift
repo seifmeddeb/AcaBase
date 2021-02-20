@@ -25,7 +25,11 @@ class LessonPresenter: LessonPresentationLogic
     
     // MARK: presentChapter
     func presentChapter(response: Lesson.Chapter.Response) {
-        let viewModel = Lesson.Chapter.ViewModel(title: response.title ?? "chapitre sans titre", description: response.description ?? "chapitre sans description")
+        
+        let totalNbrQuiz = response.chapter.totalNbrQuiz ?? 0
+        let answeredUserQuiz = Int(response.chapter.answeredUserQuiz ?? "0") ?? 0
+        
+        let viewModel = Lesson.Chapter.ViewModel(title: response.chapter.title ?? "chapitre sans titre", description: response.chapter.desc ?? "chapitre sans description",totalNbrQuiz: totalNbrQuiz,answeredUserQuiz: answeredUserQuiz)
         viewController?.displayChapter(viewModel: viewModel)
     }
     
@@ -53,7 +57,11 @@ class LessonPresenter: LessonPresentationLogic
         
         var quizsViewModel = [Lesson.CellType]()
         for quiz in response.quizList {
-            let quizItem = QuizAlias(model: quiz, progress: 50.0)
+            
+            let totalNbrQuiz = Double(quiz.nbrQuestions ?? 0)
+            let answeredUserQuiz = Double(quiz.valideAnswers ?? 0)
+            
+            let quizItem = QuizAlias(model: quiz, progress: Double(answeredUserQuiz/totalNbrQuiz))
             quizsViewModel.append(Lesson.CellType.quiz(quizItem))
         }
         let viewModel = Lesson.Quizs.ViewModel(quizList: quizsViewModel)

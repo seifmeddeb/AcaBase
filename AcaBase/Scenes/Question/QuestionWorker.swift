@@ -14,6 +14,31 @@ import UIKit
 
 class QuestionWorker
 {
+    var askStore : AskStoreProtocol?
+    
+    init(askStore: AskStoreProtocol = AskAPI())
+    {
+        self.askStore = askStore
+    }
+    
+    func askQuestion(request: AskRequest,completionHandler: @escaping (Int,Error?) -> Void)
+    {
+        self.askStore?.askQuestion(request: request) { (response: () throws -> AskResponse) in
+            do {
+                let response = try response()
+                DispatchQueue.main.async {
+                    completionHandler(response.questionId , nil)
+                }
+            } catch {
+                let nserror = error as NSError
+                print("Unresolved error \(nserror), \(nserror.userInfo)")
+                DispatchQueue.main.async {
+                    completionHandler(-1 , nserror)
+                }
+            }
+        }
+    }
+    
     func getSubject(for questionSearched: QuestionDAO, from subjects: [TopicDAO]) -> TopicDAO?
     {
         // WTF is this shit worst shit i've ever written, fucked up APIs ... Shiiiiit
@@ -32,4 +57,8 @@ class QuestionWorker
         }
         return nil
     }
+    
+}
+protocol AskStoreProtocol {
+    func askQuestion(request: AskRequest, completionHandler: @escaping (() throws -> AskResponse) -> Void)
 }

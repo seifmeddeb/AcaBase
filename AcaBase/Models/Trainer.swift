@@ -14,7 +14,7 @@ struct TutorDAO : Codable {
     var email: String
     var fullName: String
     var cv: String
-    var answredQuestions: Int
+    var answredQuestions: String
     var rate: Int
     var reactivity: String?
     var picture: String?

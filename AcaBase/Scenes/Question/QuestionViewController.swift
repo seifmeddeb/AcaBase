@@ -209,14 +209,14 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
     // MARK: ask Question
     func askQuestion() {
         
-        guard let tutorId = self.tutor?.model.objectId else { return }
+        //guard let tutorId = self.tutor?.model.objectId else { return }
         guard let title = titleTextField.text else { return }
         guard let description = descTextView.text else { return }
         if subjectIndex < 0 { return }
         
         Indicator.sharedInstance.showIndicator()
         
-        let request = Question.Ask.Request(title: title, tutorId: tutorId, subjectId: self.subjects[subjectIndex].objectId, description: description)
+        let request = Question.Ask.Request(title: title, tutorId: 0, subjectId: self.subjects[subjectIndex].objectId, description: description)
         interactor?.askQuestion(request: request)
     }
     

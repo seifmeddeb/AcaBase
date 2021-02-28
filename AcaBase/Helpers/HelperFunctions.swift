@@ -34,7 +34,7 @@ func getImageUrl(for url: String?) -> String {
     return urlStr
 }
 
-func getAnsweredQuestions(answersNbr: Int) -> NSAttributedString {
+func getAnsweredQuestions(answersNbr: String) -> NSAttributedString {
     let answersLocalized = "Answers:"
     let string = "\(answersLocalized) \(answersNbr)"
     let attStr = NSMutableAttributedString(string: string, attributes: [NSAttributedString.Key.foregroundColor : UIColor.gray])

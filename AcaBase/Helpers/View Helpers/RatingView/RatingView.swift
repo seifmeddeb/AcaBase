@@ -23,14 +23,26 @@ class RatingView: UIView {
         commonInit()
     }
     
+    var isEditable : Bool = false {
+        didSet {
+            if !oldValue {
+                self.setGestureReconizer()
+            }
+        }
+    }
+    
+    var rating = 0
+    
     private func commonInit() {
         Bundle.main.loadNibNamed("RatingView", owner: self, options: nil)
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleHeight,.flexibleWidth]
+        self.contentView.isUserInteractionEnabled = true
     }
     
     func setRating(rating: Int) {
+        self.rating = rating
         ratingLabel.text = "\(rating).0"
         //let roundRating = Int(rating.rounded())
         for star in stars {
@@ -39,6 +51,20 @@ class RatingView: UIView {
                 star.tintColor = starColor
             }
         }
+    }
+    
+    func setGestureReconizer() {
+        for star in stars {
+            star.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleStarTap(_:)))
+            star.addGestureRecognizer(tap)
+        }
+    }
+    
+    @objc func handleStarTap(_ sender: UITapGestureRecognizer? = nil) {
+        
+        let tag = sender?.view?.tag ?? 0
+        self.setRating(rating: tag)
     }
 
 }

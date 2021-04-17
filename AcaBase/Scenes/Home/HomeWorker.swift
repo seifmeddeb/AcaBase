@@ -96,7 +96,7 @@ class HomeWorker {
                 var videoResponse = VideoResponseAlias()
                 videoResponse.title = video.title
                 videoResponse.provider = video.provider
-                videoResponse.time = getElapsedTimeSince(time: video.createdAt?.date ?? "")
+                videoResponse.time = getElapsedTimeSince(time: "")
                 videoResponse.views = "\(video.nbrViews ?? 78678)"
                 videoResponse.url = video.videoUrl
                 

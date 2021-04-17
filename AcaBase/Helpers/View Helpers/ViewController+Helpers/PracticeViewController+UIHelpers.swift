@@ -23,7 +23,11 @@ extension PracticeViewController {
         UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
         UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: primaryBlue], for: .normal)
         
-        UISegmentedControl.appearance().selectedSegmentTintColor = primaryBlue
+        if #available(iOS 13.0, *) {
+            UISegmentedControl.appearance().selectedSegmentTintColor = primaryBlue
+        } else {
+            // Fallback on earlier versions
+        }
         segmentControl.sendActions(for: .valueChanged)
         segmentControl.frame = CGRect(x: 10, y: 0, width: self.segmentedHolderView.bounds.width-20, height: 30)
         segmentControl.apportionsSegmentWidthsByContent = true

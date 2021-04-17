@@ -60,13 +60,18 @@ extension UIViewController{
         if let navigationBar = self.navigationController?.navigationBar {
             navigationBar.tintColor = primaryBlue
             navigationBar.barTintColor = .white
-            let navBarAppearance = UINavigationBarAppearance()
-            navBarAppearance.configureWithOpaqueBackground()
-            navBarAppearance.titleTextAttributes = [.foregroundColor: primaryBlue]
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: primaryBlue]
-            navBarAppearance.backgroundColor = .white
-            navigationBar.standardAppearance = navBarAppearance
-            navigationBar.scrollEdgeAppearance = navBarAppearance
+            if #available(iOS 13.0, *) {
+                let navBarAppearance = UINavigationBarAppearance()
+                
+                navBarAppearance.configureWithOpaqueBackground()
+                navBarAppearance.titleTextAttributes = [.foregroundColor: primaryBlue]
+                navBarAppearance.largeTitleTextAttributes = [.foregroundColor: primaryBlue]
+                navBarAppearance.backgroundColor = .white
+                navigationBar.standardAppearance = navBarAppearance
+                navigationBar.scrollEdgeAppearance = navBarAppearance
+            } else {
+                // Fallback on earlier versions
+            }
             navigationBar.barStyle = .black
             navigationBar.alpha = 1
             navigationBar.layer.masksToBounds = false
@@ -75,6 +80,7 @@ extension UIViewController{
             navigationBar.layer.shadowOffset = CGSize(width: 0, height: 4.0)
             navigationBar.layer.shadowRadius = 1
             navigationBar.prefersLargeTitles = false
+            
         }
     }
     
@@ -83,14 +89,19 @@ extension UIViewController{
         if let navigationBar = self.navigationController?.navigationBar {
             navigationBar.tintColor = primaryBlue
             navigationBar.barTintColor = .white
-            let navBarAppearance = UINavigationBarAppearance()
-            navBarAppearance.configureWithOpaqueBackground()
-            navBarAppearance.titleTextAttributes = [.foregroundColor: primaryBlue]
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: primaryBlue]
-            navBarAppearance.backgroundColor = .white
-            navBarAppearance.shadowColor = .clear
-            navigationBar.standardAppearance = navBarAppearance
-            navigationBar.scrollEdgeAppearance = navBarAppearance
+            if #available(iOS 13.0, *) {
+                let navBarAppearance = UINavigationBarAppearance()
+                
+                navBarAppearance.configureWithOpaqueBackground()
+                navBarAppearance.titleTextAttributes = [.foregroundColor: primaryBlue]
+                navBarAppearance.largeTitleTextAttributes = [.foregroundColor: primaryBlue]
+                navBarAppearance.backgroundColor = .white
+                navBarAppearance.shadowColor = .clear
+                navigationBar.standardAppearance = navBarAppearance
+                navigationBar.scrollEdgeAppearance = navBarAppearance
+            } else {
+                // Fallback on earlier versions
+            }
             navigationBar.barStyle = .black
             navigationBar.layer.shadowColor = UIColor.clear.cgColor
             navigationBar.layer.shadowOpacity = 0

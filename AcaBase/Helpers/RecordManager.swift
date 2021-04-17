@@ -36,7 +36,8 @@ class RecordManager {
         }
     }
     
-    func startRecording() {
+    @discardableResult
+    func startRecording() ->  AVAudioRecorder? {
         let audioFilename = getDocumentsDirectory().appendingPathComponent("recording\(fileDateComplement()).m4a")
         self.audioFileUrl = audioFilename
         let settings = [
@@ -48,12 +49,14 @@ class RecordManager {
         
         do {
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
+            audioRecorder?.isMeteringEnabled = true
             audioRecorder?.delegate = callingViewController
             audioRecorder?.record()
-            
+            return audioRecorder
         } catch {
             stopRecording(success: false)
         }
+        return nil
     }
     
     func stopRecording(success: Bool) {
@@ -116,8 +119,14 @@ class RecordManager {
         guard let url = audioFileUrl else {
             return nil
         }
-        let attachement = Attachement(name: url.lastPathComponent, url: url, size: getFileSize(url: url), isAudio: true)
+        let attachement = Attachement(name: url.lastPathComponent, objectUrl: url, size: getFileSize(url: url), isAudio: true, duration: getRecordedAudioDuration(url: url))
         return attachement
+    }
+    
+    private func getRecordedAudioDuration(url: URL) -> Double {
+        let audioAsset = AVURLAsset.init(url: url, options: nil)
+        let duration = audioAsset.duration
+        return CMTimeGetSeconds(duration)
     }
     
 }

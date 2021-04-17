@@ -122,7 +122,7 @@ class SubscribeViewController: UIViewController, SubscribeDisplayLogic
     // MARK: IBActions
     
     @IBAction func profileImage(_ sender: Any) {
-        ImagePickerManager().pickImage(self){ image in
+        ImagePickerManager.shared.pickImage(self){ image in
             self.profileImageView.image = image
         }
     }

@@ -12,7 +12,7 @@ import Alamofire
 class MainPageAPI : MainPageStoreProtocol {
     
     func fetchTrainers(completionHandler: @escaping (() throws -> [TutorDAO]) -> Void) {
-        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer "+UserDefaults.standard.string(forKey: "token")!)])
+        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer "+UserManager.shared.token!)])
         
         AF.request(trainersUrl,
                    method: .get,
@@ -32,7 +32,7 @@ class MainPageAPI : MainPageStoreProtocol {
     }
     
     func fetchTopics(completionHandler: @escaping (() throws -> [TopicDAO]) -> Void) {
-        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer "+UserDefaults.standard.string(forKey: "token")!)])
+        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer "+UserManager.shared.token!)])
         AF.request(topicsUrl,
                    method: .get,
                    parameters: nil,
@@ -50,7 +50,7 @@ class MainPageAPI : MainPageStoreProtocol {
     }
     
     func fetchHomeQuiz(completionHandler: @escaping (() throws -> [QuizDAO]) -> Void) {
-        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer "+UserDefaults.standard.string(forKey: "token")!)])
+        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer "+UserManager.shared.token!)])
         AF.request(homeQuizUrl,
                    method: .get,
                    parameters: nil,
@@ -68,7 +68,7 @@ class MainPageAPI : MainPageStoreProtocol {
     }
     
     func getHomeVideos(completionHandler: @escaping (() throws -> [VideoDAO]) -> Void) {
-        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer "+UserDefaults.standard.string(forKey: "token")!)])
+        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer "+UserManager.shared.token!)])
         AF.request(videosUrl,
                    method: .get,
                    parameters: nil,

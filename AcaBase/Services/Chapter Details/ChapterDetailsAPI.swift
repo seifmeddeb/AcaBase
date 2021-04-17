@@ -12,7 +12,7 @@ import Alamofire
 class ChapterDetailsAPI : ChapterDetailsStoreProtocol {
     
     func getChapterDetails(chapterId:Int, completionHandler: @escaping (() throws -> ChapterDAO) -> Void) {
-        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer "+UserDefaults.standard.string(forKey: "token")!)])
+        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer "+UserManager.shared.token!)])
         
         AF.request(getChapterDetailsUrl(chapterId),
                    method: .get,

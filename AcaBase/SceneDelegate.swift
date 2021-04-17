@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import Firebase
 
+@available(iOS 13.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -17,13 +19,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        
+        FirebaseApp.configure()
+        
         guard let _ = (scene as? UIWindowScene) else { return }
         
         let Loginstoryboard = UIStoryboard(name: "Main", bundle: nil)
         let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
         
         // if user is logged in before
-        if let _ = UserDefaults.standard.string(forKey: "token") {
+        if let _ = UserManager.shared.token {
             // instantiate the main tab bar controller and set it as root view controller
             // using the storyboard identifier we set earlier
             let mainTabBarController = homeStoryboard.instantiateViewController(identifier: "HomeTabBarController")

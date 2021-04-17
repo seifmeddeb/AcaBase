@@ -60,8 +60,13 @@ class LessonPresenter: LessonPresentationLogic
             
             let totalNbrQuiz = Double(quiz.nbrQuestions ?? 0)
             let answeredUserQuiz = Double(quiz.valideAnswers ?? 0)
+
+            var progress = 0.0
+            if totalNbrQuiz > 0 {
+                progress = Double(answeredUserQuiz/totalNbrQuiz)
+            }
             
-            let quizItem = QuizAlias(model: quiz, progress: Double(answeredUserQuiz/totalNbrQuiz))
+            let quizItem = QuizAlias(model: quiz, progress: progress)
             quizsViewModel.append(Lesson.CellType.quiz(quizItem))
         }
         let viewModel = Lesson.Quizs.ViewModel(quizList: quizsViewModel)

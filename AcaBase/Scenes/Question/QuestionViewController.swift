@@ -106,7 +106,11 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            return .default
+        }
     }
     
     // MARK: Outlets
@@ -215,8 +219,9 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
         if subjectIndex < 0 { return }
         
         Indicator.sharedInstance.showIndicator()
-        
-        let request = Question.Ask.Request(title: title, tutorId: 0, subjectId: self.subjects[subjectIndex].objectId, description: description)
+        print("Traaaainnnerrr Id:")
+        print(tutor?.model.objectId ?? -1)
+        let request = Question.Ask.Request(title: title, tutorId: tutor?.model.objectId ?? nil, subjectId: self.subjects[subjectIndex].objectId, description: description, images: self.images, attachements: self.attachementsList)
         interactor?.askQuestion(request: request)
     }
     
@@ -234,7 +239,15 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
     
     func displayAskQuestion(viewModel: Question.Ask.ViewModel) {
         Indicator.sharedInstance.hideIndicator()
-        print("\(viewModel.questionId)")
+        let alert = UIAlertController(title: "Question posé 🎉", message: " Vous allez recevoir une réponse de l'un de nos tuteurs dans les plus brefs délais\n", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+            alert.dismiss(animated: true, completion: nil)
+            self.navigationController?.popViewController(animated: true)
+            self.tabBarController?.selectedIndex = 2
+        }))
+        self.present(alert, animated: true)
+        
+        print("\(viewModel.errorMessage ?? "error is nil")")
     }
     
     // **********************************
@@ -370,7 +383,7 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
     }
     
     private func deleteAttachedItem(_ attachement: Attachement, _ row: Int){
-        if attachement.url == self.trackPlayedCell?.attachement?.url && ((self.player?.isPlaying) != nil) {
+        if attachement.objectUrl == self.trackPlayedCell?.attachement?.objectUrl && ((self.player?.isPlaying) != nil) {
             self.player?.stop()
             self.player = nil
         }
@@ -399,7 +412,7 @@ extension QuestionViewController : UITableViewDataSource {
                     lastCell.setPlayImage()
                 }
                 self.trackPlayedCell = cell
-                self.playSound(url: attachement.url!)
+                self.playSound(url: attachement.objectUrl!)
             }
             cell.didPressDelete {
                 self.deleteAttachedItem(attachement, indexPath.row)
@@ -449,7 +462,7 @@ extension QuestionViewController : UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // FIXME: add click event handler
         if indexPath.row == 0 {
-            ImagePickerManager().pickImage(self){ image in
+            ImagePickerManager.shared.pickImage(self){ image in
                 self.images.append(image)
                 collectionView.reloadData()
                 collectionView.scrollToItem(at: IndexPath(row: self.images.count, section: 0), at: .right, animated: true)

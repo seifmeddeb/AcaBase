@@ -11,13 +11,18 @@ import UIKit
 import AVKit
 
 extension UIImageView {
-    public func setImageAsync(url: URL?){
+    public func setImageAsync(url: URL?, placeholder: UIImage? = nil){
         self.image = nil
         guard let url = url else {return}
         DispatchQueue.global().async {
             let data = try? Data(contentsOf: url)
             DispatchQueue.main.async {
-                guard let data = data else {return}
+                guard let data = data else {
+                    if let image = placeholder {
+                        self.image = image
+                    }
+                    return
+                }
                 self.image = UIImage(data: data)
             }
         }
@@ -52,5 +57,16 @@ extension UIImageView {
             }
         }
         self.image = UIImage(named: "image-not-found")!
+    }
+}
+
+public func getImageAsync(url: URL?,completion: @escaping (UIImage?) -> ()) {
+    guard let url = url else {return}
+    DispatchQueue.global().async {
+        let data = try? Data(contentsOf: url)
+        DispatchQueue.main.async {
+            guard let data = data else {return }
+            completion(UIImage(data: data))
+        }
     }
 }

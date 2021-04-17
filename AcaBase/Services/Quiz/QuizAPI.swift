@@ -12,7 +12,7 @@ import Alamofire
 class QuizAPI : QuizStoreProtocol {
     
     func saveScore(quizScore: ScoreRequest, completionHandler: @escaping (() throws -> Void) -> Void) {
-        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer "+UserDefaults.standard.string(forKey: "token")!)])
+        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer "+UserManager.shared.token!)])
         
         AF.request(quizScoreUrl,
                    method: .post,

@@ -10,8 +10,8 @@ import Foundation
 
 struct AskRequest : Codable {
     var title : String
-    var subject : Int
-    var trainerId : Int
+    var subject : String
+    var trainerId : String?
     var description : String
     
     enum CodingKeys: String, CodingKey {

@@ -10,7 +10,8 @@ import Foundation
 
 struct Attachement {
     var name : String?
-    var url : URL?
+    var objectUrl : URL?
     var size : String?
     var isAudio : Bool
+    var duration : Double?
 }

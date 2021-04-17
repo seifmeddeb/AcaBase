@@ -98,7 +98,12 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

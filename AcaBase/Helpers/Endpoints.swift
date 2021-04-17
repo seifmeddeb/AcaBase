@@ -8,28 +8,39 @@
 
 import Foundation
 
-let mainUrl = "http://vps800310.ovh.net/api/"
+let mainUrl = "http://vps800310.ovh.net"
+let mainAPIUrl = "http://vps800310.ovh.net/api/"
 
 // MARK: User URLs
-let registerUrl = mainUrl+"register"
-let loginUrl = mainUrl+"login_check"
-let resetPasswordUrl = mainUrl+"user/password/reset"
+let registerUrl = mainAPIUrl+"register"
+let loginUrl = mainAPIUrl+"login_check"
+let resetPasswordUrl = mainAPIUrl+"user/password/reset"
 
 
 // MARK: Main Page URLs
-let trainersUrl = mainUrl+"trainers"
-let topicsUrl = mainUrl+"subjects"
-let homeQuizUrl = mainUrl+"home/quiz"
-let videosUrl = mainUrl+"videos"
-let trainerFavUrl = mainUrl+"trainer/add/fav"
+let trainersUrl = mainAPIUrl+"trainers"
+let topicsUrl = mainAPIUrl+"subjects"
+let homeQuizUrl = mainAPIUrl+"home/quiz"
+let videosUrl = mainAPIUrl+"videos"
+let trainerFavUrl = mainAPIUrl+"trainer/add/fav"
 
 // MARK: ASK URLs
-let askUrl = mainUrl+"user/ask"
-let attachementsUrl = mainUrl+"quiz/score/register"
+let askUrl = mainAPIUrl+"user/ask"
+let attachementsUrl = mainAPIUrl+"user/ask/attachements"
 
 
 //MARK: Chapter with progress
-func getChapterDetailsUrl( _ chapterId: Int) -> String { return "\(mainUrl)chapters/\(chapterId)/structure" }
+func getChapterDetailsUrl( _ chapterId: Int) -> String { return "\(mainAPIUrl)chapters/\(chapterId)/structure" }
 
 //MARK: Quiz Urls
-let quizScoreUrl = mainUrl+"quiz/score/register"
+let quizScoreUrl = mainAPIUrl+"quiz/score/register"
+
+
+// MARK: Chat URLs
+let attachementChatUrl = mainAPIUrl+"upload/new"
+
+// MARK: Shop URL
+let shopUrl = mainAPIUrl+"subscription"
+
+// MARK: Payment URL
+let paymentUrl = mainAPIUrl+"payment/process"

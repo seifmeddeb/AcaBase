@@ -41,8 +41,9 @@ class SubscribeInteractor: SubscribeBusinessLogic, SubscribeDataStore
                 
                 do {
                     response.user = try userDAO()
-                    UserDefaults.standard.set(response.user?.accessToken, forKey: "token")
-                    UserDefaults.standard.synchronize()
+                    if let user = response.user {
+                        UserManager.shared.cacheCurrentUser(user: user)
+                    }                    
                 } catch {
                     if let subscribeError = error as? UserAPIError.Subscribe {
                         response.errorMsg = subscribeError.message

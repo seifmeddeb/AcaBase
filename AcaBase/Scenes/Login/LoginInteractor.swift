@@ -26,19 +26,11 @@ protocol LoginDataStore
 
 class LoginInteractor: LoginBusinessLogic, LoginDataStore
 {
-    var userToPass: UserDAO?
-    
-    func fetchAutoFillEmails(request: Login.Users.Request) {
-        worker.fetchAllUsers(completionHandler: { (users) in
-            let response = Login.Users.Response(users: users)
-            self.presenter?.presentAutoFillEmails(response: response)
-        })
-    }
-    
     var presenter: LoginPresentationLogic?
     var worker = UserWorker(usersStore: UserCoreDataStore())
     var workerApi = UserWorker(usersStore: UserAPI())
     var workerDataValidation = DataValidationWorker()
+    var userToPass: UserDAO?
     
     // MARK: Login User
     
@@ -50,8 +42,9 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore
         } else {
             workerApi.loginUser(loginRequest:request , completionHandler: { userResponse in
                 let response = Login.User.Response(user: userResponse)
-                UserDefaults.standard.set(response.user?.accessToken, forKey: "token")
-                UserDefaults.standard.synchronize()
+                if let user = response.user {
+                    UserManager.shared.cacheCurrentUser(user: user)
+                }
                 self.presenter?.presentLoginUser(response: response)
             })
         }
@@ -79,6 +72,14 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore
                 self.presenter?.presentResetPassword(response: response)
             })
         }
+    }
+    
+    // MARK: fetchAutoFillEmails
+    func fetchAutoFillEmails(request: Login.Users.Request) {
+        worker.fetchAllUsers(completionHandler: { (users) in
+            let response = Login.Users.Response(users: users)
+            self.presenter?.presentAutoFillEmails(response: response)
+        })
     }
 }
     

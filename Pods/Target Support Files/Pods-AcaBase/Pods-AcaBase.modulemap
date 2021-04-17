@@ -1,4 +1,4 @@
-module Pods_AcaBase {
+framework module Pods_AcaBase {
   umbrella header "Pods-AcaBase-umbrella.h"
 
   export *

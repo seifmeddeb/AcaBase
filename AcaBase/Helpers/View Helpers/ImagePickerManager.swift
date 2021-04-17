@@ -12,18 +12,20 @@ import UIKit
 
 class ImagePickerManager: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    static let shared = ImagePickerManager()
+    
+    private override init() {
+        super.init()
+    }
+    
     var picker = UIImagePickerController();
     var alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
     var viewController: UIViewController?
-    var pickImageCallback : ((UIImage) -> ())?;
-
-    override init(){
-        super.init()
-    }
+    var pickImageCallback : ((UIImage) -> ())?
 
     func pickImage(_ viewController: UIViewController, _ callback: @escaping ((UIImage) -> ())) {
-        pickImageCallback = callback;
-        self.viewController = viewController;
+        pickImageCallback = callback
+        self.viewController = viewController
 
         let cameraAction = UIAlertAction(title: "Camera", style: .default){
             UIAlertAction in
@@ -45,6 +47,7 @@ class ImagePickerManager: NSObject, UIImagePickerControllerDelegate, UINavigatio
         alert.popoverPresentationController?.sourceView = self.viewController!.view
         viewController.present(alert, animated: true, completion: nil)
     }
+    
     func openCamera(){
         alert.dismiss(animated: true, completion: nil)
         if(UIImagePickerController .isSourceTypeAvailable(.camera)){
@@ -68,12 +71,6 @@ class ImagePickerManager: NSObject, UIImagePickerControllerDelegate, UINavigatio
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
-    //for swift below 4.2
-    //func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-    //    picker.dismiss(animated: true, completion: nil)
-    //    let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-    //    pickImageCallback?(image)
-    //}
 
     // For Swift 4.2+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -89,4 +86,29 @@ class ImagePickerManager: NSObject, UIImagePickerControllerDelegate, UINavigatio
     @objc func imagePickerController(_ picker: UIImagePickerController, pickedImage: UIImage?) {
     }
 
+}
+
+// MARK: For ChatViewController
+extension ImagePickerManager {
+    func openGallery(viewController: UIViewController, _ callback: @escaping ((UIImage) -> ())) {
+        picker.delegate = self
+        pickImageCallback = callback
+        picker.sourceType = .photoLibrary
+        viewController.present(picker, animated: true, completion: nil)
+    }
+    
+    func openCamera(viewController: UIViewController, _ callback: @escaping ((UIImage) -> ())) {
+        picker.delegate = self
+        pickImageCallback = callback
+        if(UIImagePickerController .isSourceTypeAvailable(.camera)){
+            picker.sourceType = .camera
+            viewController.present(picker, animated: true, completion: nil)
+        } else {
+            let alertWarning = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
+            alertWarning.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+                alertWarning.dismiss(animated: true, completion: nil)
+            }))
+            viewController.present(alertWarning, animated: true, completion: nil)
+        }
+    }
 }

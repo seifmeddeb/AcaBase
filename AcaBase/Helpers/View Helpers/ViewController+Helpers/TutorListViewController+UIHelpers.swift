@@ -15,13 +15,19 @@ extension TutorListViewController : UISearchControllerDelegate {
         if let navigationBar = self.navigationController?.navigationBar {
             navigationBar.tintColor = primaryBlue
             navigationBar.barTintColor = .white
-            let navBarAppearance = UINavigationBarAppearance()
-            navBarAppearance.configureWithOpaqueBackground()
-            navBarAppearance.titleTextAttributes = [.foregroundColor: primaryBlue]
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: primaryBlue]
-            navBarAppearance.backgroundColor = .white
-            navigationBar.standardAppearance = navBarAppearance
-            navigationBar.scrollEdgeAppearance = navBarAppearance
+            
+            if #available(iOS 13.0, *) {
+                let navBarAppearance = UINavigationBarAppearance()
+                
+                navBarAppearance.configureWithOpaqueBackground()
+                navBarAppearance.titleTextAttributes = [.foregroundColor: primaryBlue]
+                navBarAppearance.largeTitleTextAttributes = [.foregroundColor: primaryBlue]
+                navBarAppearance.backgroundColor = .white
+                navigationBar.standardAppearance = navBarAppearance
+                navigationBar.scrollEdgeAppearance = navBarAppearance
+            } else {
+                // Fallback on earlier versions
+            }
             navigationBar.barStyle = .default
             navigationBar.alpha = 1
             navigationBar.prefersLargeTitles = false
@@ -40,13 +46,18 @@ extension TutorListViewController : UISearchControllerDelegate {
         if let navigationBar = self.navigationController?.navigationBar {
             navigationBar.tintColor = primaryBlue
             navigationBar.barTintColor = primaryBlue
-            let navBarAppearance = UINavigationBarAppearance()
-            navBarAppearance.configureWithOpaqueBackground()
-            navBarAppearance.titleTextAttributes = [.foregroundColor: primaryBlue]
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: primaryBlue]
-            navBarAppearance.backgroundColor = primaryBlue
-            navigationBar.standardAppearance = navBarAppearance
-            navigationBar.scrollEdgeAppearance = navBarAppearance
+            if #available(iOS 13.0, *) {
+                let navBarAppearance = UINavigationBarAppearance()
+                
+                navBarAppearance.configureWithOpaqueBackground()
+                navBarAppearance.titleTextAttributes = [.foregroundColor: primaryBlue]
+                navBarAppearance.largeTitleTextAttributes = [.foregroundColor: primaryBlue]
+                navBarAppearance.backgroundColor = primaryBlue
+                navigationBar.standardAppearance = navBarAppearance
+                navigationBar.scrollEdgeAppearance = navBarAppearance
+            } else {
+                // Fallback on earlier versions
+            }
             navigationBar.barStyle = .black
             navigationBar.alpha = 1
             navigationBar.layer.masksToBounds = false
@@ -59,16 +70,22 @@ extension TutorListViewController : UISearchControllerDelegate {
         
         UISegmentedControl.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([.foregroundColor: primaryBlue], for: .normal)
         UISegmentedControl.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-        UISegmentedControl.appearance(whenContainedInInstancesOf: [UISearchBar.self]).selectedSegmentTintColor = primaryBlue
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [.foregroundColor: UIColor.white]
-//        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search", attributes: [.foregroundColor: primaryBlue.withAlphaComponent(0.4)])
-        searchBar.searchTextField.textColor = primaryBlue
-        searchBar.searchTextField.defaultTextAttributes = [.foregroundColor: primaryBlue]
-        if let glassIconView = searchBar.searchTextField.leftView as? UIImageView {
-            //Magnifying glass
-            glassIconView.image = glassIconView.image?.withRenderingMode(.alwaysTemplate)
-            glassIconView.tintColor = primaryBlue
+        if #available(iOS 13.0, *) {
+            UISegmentedControl.appearance(whenContainedInInstancesOf: [UISearchBar.self]).selectedSegmentTintColor = primaryBlue
+            searchBar.searchTextField.textColor = primaryBlue
+            searchBar.searchTextField.defaultTextAttributes = [.foregroundColor: primaryBlue]
+            if let glassIconView = searchBar.searchTextField.leftView as? UIImageView {
+                //Magnifying glass
+                glassIconView.image = glassIconView.image?.withRenderingMode(.alwaysTemplate)
+                glassIconView.tintColor = primaryBlue
+            }
+        } else {
+            // Fallback on earlier versions
         }
+        
+//        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search", attributes: [.foregroundColor: primaryBlue.withAlphaComponent(0.4)])
+        
         let subjectsNames = Array(subjects.values)
         searchController.searchBar.scopeButtonTitles = subjectsNames
         searchController.searchBar.showsScopeBar = true

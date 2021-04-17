@@ -12,14 +12,14 @@ import Alamofire
 class AskAPI : AskStoreProtocol {
     
     func askQuestion(request: AskRequest, completionHandler: @escaping (() throws -> AskResponse) -> Void) {
-        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer "+UserDefaults.standard.string(forKey: "token")!)])
+        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer "+UserManager.shared.token!)])
         
         AF.request(askUrl,
                    method: .post,
                    parameters: request,
                    encoder: URLEncodedFormParameterEncoder.default,
                    headers: headers)
-            .validate(statusCode:200..<300)
+            .validate(statusCode:200..<499)
             .responseDecodable(of: AskResponse.self) { response in
                 
                 guard let askResponse = response.value else {
@@ -30,5 +30,55 @@ class AskAPI : AskStoreProtocol {
                 completionHandler{return askResponse}
                 
         }
+    }
+    
+    func uploadAttachements(questionId: String, images: [UIImage], attachements: [Attachement], completionHandler: @escaping (Error?) -> Void) {
+        let parameters : Parameters = ["questionId": questionId]
+        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer "+UserManager.shared.token!)])
+        
+        AF.upload(
+            multipartFormData: { multipartFormData in
+                for (key, value) in parameters {
+                    if let temp = value as? String {
+                        multipartFormData.append(temp.data(using: .utf8)!, withName: key)
+                    }
+                    if let temp = value as? Int {
+                        multipartFormData.append("\(temp)".data(using: .utf8)!, withName: key)
+                    }
+                    if let temp = value as? NSArray {
+                        temp.forEach({ element in
+                            let keyObj = key + "[]"
+                            if let string = element as? String {
+                                multipartFormData.append(string.data(using: .utf8)!, withName: keyObj)
+                            } else
+                            if let num = element as? Int {
+                                let value = "\(num)"
+                                multipartFormData.append(value.data(using: .utf8)!, withName: keyObj)
+                            }
+                        })
+                    }
+                }
+                for image in images {
+                    multipartFormData.append(image.jpegData(compressionQuality: 0.5)!, withName: "image" , fileName: "image\(fileDateComplement()).jpeg", mimeType: "image/jpeg")
+                }
+                for file in attachements {
+                    if let url = file.objectUrl {
+                        let mimeType = url.absoluteString.mimeType()
+                        multipartFormData.append(url, withName: file.isAudio ? "Audio" : "Fichier" , fileName: file.name ?? "", mimeType:mimeType)
+                    }
+                }
+            },
+            to: "\(attachementsUrl)?questionId=\(questionId)", method: .post , headers: headers)
+            .validate(statusCode: 200..<300)
+            .response { resp in
+                switch resp.result{
+                case .failure(let error):
+                    print(error)
+                    completionHandler(error)
+                case.success( _):
+                    completionHandler(nil)
+                    print("🥶🥶Response after upload Img: \(resp.result)")
+                }
+            }
     }
 }

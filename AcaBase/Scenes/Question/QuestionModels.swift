@@ -76,9 +76,11 @@ enum Question
         struct Request
         {
             var title : String
-            var tutorId : Int
+            var tutorId : Int?
             var subjectId : Int
             var description : String
+            var images : [UIImage]
+            var attachements : [Attachement]
         }
         struct Response
         {

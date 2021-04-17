@@ -90,7 +90,7 @@ class QuestionInteractor: QuestionBusinessLogic, QuestionDataStore
     // MARK: getFileData
     func getFileData(request: Question.FileData.Request) {
         let url = request.url
-        let attachement = Attachement(name: url.lastPathComponent, url: url, size: getFileSize(url: url), isAudio: false)
+        let attachement = Attachement(name: url.lastPathComponent, objectUrl: url, size: getFileSize(url: url), isAudio: false)
         let response = Question.FileData.Response(attachement: attachement)
         presenter?.presentChosenFile(response: response)
     }
@@ -117,15 +117,31 @@ class QuestionInteractor: QuestionBusinessLogic, QuestionDataStore
     // MARK: Ask Question
     func askQuestion(request: Question.Ask.Request) {
         self.worker = QuestionWorker(askStore: AskAPI())
-        let request = AskRequest(title: request.title, subject: request.subjectId, trainerId: request.tutorId, description: request.description)
+        var tutorId : String?
+        if let id = request.tutorId {
+            tutorId = "\(id)"
+        }
+        let askRequest = AskRequest(title: request.title, subject: "\(request.subjectId)", trainerId: tutorId ?? nil, description: request.description)
         
-        self.worker?.askQuestion(request: request, completionHandler: { (questionId, error) in
+        self.worker?.askQuestion(request: askRequest, completionHandler: { (questionId, error) in
             if let error = error {
                 let response = Question.Ask.Response(questionId: questionId, error: error)
                 self.presenter?.presentAskQuestionError(response: response)
             } else {
-                let response = Question.Ask.Response(questionId: questionId, error: error)
-                self.presenter?.presentAskQuestion(response: response)
+                if request.images.count > 0 || request.attachements.count > 0 {
+                    self.worker?.uploadAttachments(questionId: "\(questionId)", images: request.images, attachements: request.attachements, completionHandler: { (error) in
+                        if let error = error {
+                            let response = Question.Ask.Response(questionId: questionId, error: error)
+                            self.presenter?.presentAskQuestionError(response: response)
+                        } else {
+                            let response = Question.Ask.Response(questionId: questionId, error: error)
+                            self.presenter?.presentAskQuestion(response: response)
+                        }
+                    })
+                } else {
+                    let response = Question.Ask.Response(questionId: questionId, error: error)
+                    self.presenter?.presentAskQuestion(response: response)
+                }
             }
         })
     }

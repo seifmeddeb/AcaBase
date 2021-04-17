@@ -67,7 +67,7 @@ struct VideoDAO : Codable {
     var provider: String?
     var nbrViews: Int?
     var desc: String?
-    var createdAt: CreatedAtDAO?
+    var createdAt: Int?
     
     enum CodingKeys: String, CodingKey {
         case objectId = "id"

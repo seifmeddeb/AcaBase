@@ -6,6 +6,7 @@
 	<string>Need to use microphone to record your question </string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>RifficFree-Bold.ttf</string>
 		<string>Montserrat-BlackItalic.ttf</string>
 		<string>Montserrat-Bold.ttf</string>
 		<string>Montserrat-BoldItalic.ttf</string>

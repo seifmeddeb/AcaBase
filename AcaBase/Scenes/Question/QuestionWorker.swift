@@ -58,7 +58,18 @@ class QuestionWorker
         return nil
     }
     
+    func uploadAttachments(questionId: String, images: [UIImage], attachements: [Attachement], completionHandler: @escaping (Error?) -> Void) {
+        self.askStore?.uploadAttachements(questionId: questionId, images: images, attachements: attachements, completionHandler: { (error) in
+            if let error = error {
+                completionHandler(error)
+            } else {
+                completionHandler(nil)
+            }
+        })
+    }
+    
 }
 protocol AskStoreProtocol {
     func askQuestion(request: AskRequest, completionHandler: @escaping (() throws -> AskResponse) -> Void)
+    func uploadAttachements(questionId: String, images: [UIImage], attachements: [Attachement], completionHandler: @escaping (Error?) -> Void)
 }

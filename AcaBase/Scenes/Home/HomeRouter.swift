@@ -33,10 +33,15 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing
     
     func routeToLogin(segue: UIStoryboardSegue?)
     {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let loginNavController = storyboard.instantiateViewController(identifier: "LoginNavigationController")
-        
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginNavController)
+        if #available(iOS 13.0, *) {
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let loginNavController = storyboard.instantiateViewController(identifier: "LoginNavigationController")
+            
+            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginNavController)
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     @objc func routeToDetailTutor(segue: UIStoryboardSegue?) {

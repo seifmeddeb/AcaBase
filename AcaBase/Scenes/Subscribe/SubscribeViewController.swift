@@ -78,22 +78,20 @@ class SubscribeViewController: UIViewController, SubscribeDisplayLogic
         lastNameTextField.delegate = self
         phoneTextField.delegate = self
         confPassTextField.delegate = self
-        textFields = [firstNameTextField,emailTextField,passwordTextField,lastNameTextField,phoneTextField,confPassTextField]
+        textFields = [firstNameBorderView,emailBorderView,passwordBorderView,lastNameBorderView,phoneBorderView,confPassBorderView]
         labels = [firstNameErrorLbl,lastNameErrorLbl,phoneErrorLbl,emailErrorLbl,pswErrorLbl,pswConfErrorLbl,pictureErrorLbl]
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = false
+        self.title = "Créer un compte"
         registerForKeyboardNotifications()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         deregisterFromKeyboardNotifications()
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
     }
     
     // MARK: IBOutlets
@@ -106,6 +104,14 @@ class SubscribeViewController: UIViewController, SubscribeDisplayLogic
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var confPassTextField: UITextField!
+    
+    @IBOutlet weak var firstNameBorderView: UIView!
+    @IBOutlet weak var emailBorderView: UIView!
+    @IBOutlet weak var passwordBorderView: UIView!
+    @IBOutlet weak var lastNameBorderView: UIView!
+    @IBOutlet weak var phoneBorderView: UIView!
+    @IBOutlet weak var confPassBorderView: UIView!
+    
     @IBOutlet weak var profileImageView: UIImageView!
     
     @IBOutlet weak var firstNameErrorLbl: UILabel!
@@ -117,7 +123,7 @@ class SubscribeViewController: UIViewController, SubscribeDisplayLogic
     @IBOutlet weak var pictureErrorLbl: UILabel!
     
     private var activeField: UITextField?
-    private var textFields = [UITextField?]()
+    private var textFields = [UIView]()
     private var labels = [UILabel?]()
     // MARK: IBActions
     
@@ -139,7 +145,7 @@ class SubscribeViewController: UIViewController, SubscribeDisplayLogic
     func registerUser()
     {
         startAnimating(activityIndicator)
-        var request = Subscribe.User.Request(firstName: firstNameTextField.text ?? "", lastName: lastNameTextField.text ?? "", phone: phoneTextField.text ?? "", email: emailTextField.text ?? "", password: passwordTextField.text ?? "", image: "data:image/png;base64,\("sdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsd"/*self.profileImageView.image?.pngData()?.base64EncodedString() ?? ""*/)")
+        var request = Subscribe.User.Request(firstName: firstNameTextField.text ?? "", lastName: lastNameTextField.text ?? "", phone: phoneTextField.text ?? "", email: emailTextField.text ?? "", password: passwordTextField.text ?? "", image: "data:image/png;base64,\(self.profileImageView.image?.pngData()?.base64EncodedString() ?? "")")
         request.passwordRepeat = confPassTextField.text ?? ""
         interactor?.registerUser(request: request)
     }
@@ -173,25 +179,25 @@ class SubscribeViewController: UIViewController, SubscribeDisplayLogic
         stopAnimating(activityIndicator)
         resetFormErrors(for: textFields, and: labels)
         if let lastNameTxt = viewModel.lastNameError {
-            setError(for: lastNameTextField, label: lastNameErrorLbl, text: lastNameTxt)
+            setError(for: lastNameBorderView, label: lastNameErrorLbl, text: lastNameTxt)
         }
         if let firstNameTxt = viewModel.firstNameError {
-            setError(for: firstNameTextField, label: firstNameErrorLbl, text: firstNameTxt)
+            setError(for: firstNameBorderView, label: firstNameErrorLbl, text: firstNameTxt)
         }
         if let phoneTxt = viewModel.phoneError {
-            setError(for: phoneTextField, label: phoneErrorLbl, text: phoneTxt)
+            setError(for: phoneBorderView, label: phoneErrorLbl, text: phoneTxt)
         }
         if let emailTxt = viewModel.emailError {
-            setError(for: emailTextField, label: emailErrorLbl, text: emailTxt)
+            setError(for: emailBorderView, label: emailErrorLbl, text: emailTxt)
         }
         if let pictureTxt = viewModel.pictureError {
             pictureErrorLbl.text = pictureTxt
         }
         if let pswTxt = viewModel.passwordError {
-            setError(for: passwordTextField, label: pswErrorLbl, text: pswTxt)
+            setError(for: passwordBorderView, label: pswErrorLbl, text: pswTxt)
         }
         if let pswConfTxt = viewModel.passwordRepeatError {
-            setError(for: confPassTextField, label: pswConfErrorLbl, text: pswConfTxt)
+            setError(for: confPassBorderView, label: pswConfErrorLbl, text: pswConfTxt)
         }
     }
 }
@@ -245,7 +251,7 @@ extension SubscribeViewController : UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
        // Try to find next responder
-       if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+       if let nextField = textField.superview?.superview?.viewWithTag(textField.tag + 1)?.subviews[0] as? UITextField {
           nextField.becomeFirstResponder()
        } else {
           // Not found, so remove keyboard.

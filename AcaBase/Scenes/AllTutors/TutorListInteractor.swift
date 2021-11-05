@@ -15,6 +15,7 @@ import UIKit
 protocol TutorListBusinessLogic
 {
     func getTutors(request: TutorList.Tutors.Request)
+    func updateFavTrainers(request: TutorList.Update.Request)
     func filterTutors(request: TutorList.FilterTutors.Request)
 }
 
@@ -23,15 +24,18 @@ protocol TutorListDataStore
     var tutorList : [TutorDAO]? { get set }
     var topicList : [TopicDAO]? { get set }
     var isSelection : Bool! { get set }
+    var isFav : Bool? { get set }
 }
 
 class TutorListInteractor: TutorListBusinessLogic, TutorListDataStore
 {
     var presenter: TutorListPresentationLogic?
     var worker: TutorListWorker!
+    var homeWorker : HomeWorker!
     var tutorList : [TutorDAO]?
     var topicList : [TopicDAO]?
     var isSelection: Bool!
+    var isFav: Bool?
     
     // MARK: getTutors
     func getTutors(request: TutorList.Tutors.Request)
@@ -39,8 +43,14 @@ class TutorListInteractor: TutorListBusinessLogic, TutorListDataStore
         worker = TutorListWorker()
         if let tutorList = self.tutorList, let topicList = self.topicList {
             let subjectList = worker.getSubjectsFromTopicList(topicList: topicList)
-            let response = TutorList.Tutors.Response(tutorList: tutorList,subjectsList: subjectList, isSelection: isSelection)
-            presenter?.presentTutorList(response: response)
+            if isFav ?? false {
+                let favTutors = worker.getFavTutors(tutorList: tutorList)
+                let response = TutorList.Tutors.Response(tutorList: favTutors,subjectsList: subjectList, isSelection: isSelection)
+                presenter?.presentTutorList(response: response)
+            } else {
+                let response = TutorList.Tutors.Response(tutorList: tutorList,subjectsList: subjectList, isSelection: isSelection)
+                presenter?.presentTutorList(response: response)
+            }
         }
     }
     
@@ -49,9 +59,27 @@ class TutorListInteractor: TutorListBusinessLogic, TutorListDataStore
     {
         worker = TutorListWorker()
         if let tutorList = self.tutorList {
-            let filtredTutorList = worker.filter(tutorList: tutorList, with: request.tutorName, and: request.subject)
+            var filtredTutorList = worker.filter(tutorList: tutorList, with: request.tutorName, and: request.subject)
+            if isFav ?? false {
+                filtredTutorList = worker.getFavTutors(tutorList: filtredTutorList)
+            }
             let response = TutorList.FilterTutors.Response(filtredTutorList: filtredTutorList)
             presenter?.presentFilteredTutorList(response: response)
+        }
+    }
+    
+    // MARK: updateTutors
+    func updateFavTrainers(request: TutorList.Update.Request)
+    {
+        homeWorker = HomeWorker(mainPageStore: MainPageAPI())
+        worker = TutorListWorker()
+        homeWorker.getTutors { (tutors) in
+            if let tutorList = tutors {
+                self.tutorList = tutors
+                let favTutors = self.worker.getFavTutors(tutorList: tutorList)
+                let response = TutorList.Update.Response(tutorList: favTutors)
+                self.presenter?.presentUpdatedTutorList(response: response)
+            }
         }
     }
 }

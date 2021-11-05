@@ -136,7 +136,7 @@ extension DetailsShopViewController : UITableViewDataSource {
             case .footer(let offer):
                 let cell = tableView.dequeueReusableCell(withIdentifier: "DetailShopPaymentCell", for: indexPath) as! DetailShopPaymentCell
                 cell.didPressPayDelegate {
-                    let queryItems = [URLQueryItem(name: "packId", value: "\(offer.model.objectId)"), URLQueryItem(name: "token", value: UserManager.shared.token!)]
+                    let queryItems = [URLQueryItem(name: "packid", value: "\(offer.model.objectId)"), URLQueryItem(name: "token", value: UserManager.shared.token!)]
                     var urlComps = URLComponents(string: paymentUrl)!
                     urlComps.queryItems = queryItems
                     UIApplication.shared.open(urlComps.url!)

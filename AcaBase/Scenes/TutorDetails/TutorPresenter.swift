@@ -23,7 +23,6 @@ class TutorPresenter: TutorPresentationLogic
     weak var viewController: TutorDisplayLogic?
     
     // MARK: presentTutor
-    
     func presentTutor(response: Tutor.Display.Response)
     {
         let tutor = response.tutor
@@ -34,10 +33,9 @@ class TutorPresenter: TutorPresentationLogic
         viewController?.displayTutor(viewModel: viewModel)
     }
     
-    // MARK: presentTutor
-    
+    // MARK: presentFavorite
     func presentFavorite(response: Tutor.Favorite.Response) {
-        let viewModel = Tutor.Favorite.ViewModel(message: response.message)
+        let viewModel = Tutor.Favorite.ViewModel(message: response.message, isFav: response.isFav)
         
         viewController?.displayFavorite(viewModel: viewModel)
     }

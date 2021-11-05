@@ -51,6 +51,21 @@ enum TutorList
             var filtredTutorList = [TutorViewModel]()
         }
     }
+    
+    enum Update
+    {
+        struct Request
+        {
+        }
+        struct Response
+        {
+            var tutorList = [TutorDAO]()
+        }
+        struct ViewModel
+        {
+            var tutorList = [TutorViewModel]()
+        }
+    }
 }
 
 struct TutorViewModel {

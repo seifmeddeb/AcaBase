@@ -15,6 +15,7 @@ import UIKit
 protocol TutorListPresentationLogic
 {
     func presentTutorList(response: TutorList.Tutors.Response)
+    func presentUpdatedTutorList(response: TutorList.Update.Response)
     func presentFilteredTutorList(response: TutorList.FilterTutors.Response)
 }
 
@@ -60,5 +61,23 @@ class TutorListPresenter: TutorListPresentationLogic
         
         let viewModel = TutorList.FilterTutors.ViewModel(filtredTutorList: tutorViewModels)
         viewController?.displayFilteredTutorList(viewModel: viewModel)
+    }
+    
+    func presentUpdatedTutorList(response: TutorList.Update.Response) {
+        var tutorViewModels = [TutorViewModel]()
+        
+        for tutor in response.tutorList {
+            let subjects = getSubjectsString(for: tutor.subjects)
+            let imageUrl = URL(string: tutor.picture ?? "")
+            let answerdQuestions = getAnsweredQuestions(answersNbr: tutor.answredQuestions)
+            let tutor = TutorViewModel(model: tutor, subjects: subjects, answeredQuestions: answerdQuestions,  imageUrl: imageUrl)
+            tutorViewModels.append(tutor)
+        }
+        
+        let viewModel = TutorList.Update.ViewModel(tutorList: tutorViewModels)
+        if let _ = viewController {
+            
+        }
+        viewController?.displayUpdatedTutorList(viewModel: viewModel)
     }
 }

@@ -38,7 +38,7 @@ struct TutorDAO : Codable {
         case isFav = "is_fav"
         
         case subjects = "subjects"
-        case feedBacks = "feedBacks"
+        case feedBacks = "feedbacks"
     }
     
 }

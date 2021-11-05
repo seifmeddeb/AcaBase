@@ -14,7 +14,7 @@ import UIKit
 
 @objc protocol TutorRoutingLogic
 {
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func routeToTutorsList(segue: UIStoryboardSegue?)
 }
 
 protocol TutorDataPassing
@@ -43,6 +43,20 @@ class TutorRouter: NSObject, TutorRoutingLogic, TutorDataPassing
         }
     }
     
+    @objc func routeToTutorsList(segue: UIStoryboardSegue?) {
+        if let tabbarVC = viewController?.presentingViewController as? UITabBarController, let navController = tabbarVC.viewControllers?[tabbarVC.selectedIndex] as? UINavigationController {
+            if let destinationVC = navController.viewControllers[navController.viewControllers.count-1] as? TutorListViewController {
+                navigateToTutorList(source: viewController!, destination: destinationVC)
+            }
+            else if let destinationVC = navController.viewControllers[navController.viewControllers.count-1] as? HomeViewController {
+                navigateToHome(source: viewController!, destination: destinationVC)
+                
+            } else {
+                viewController!.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
+    
     // MARK: Navigation
     
     func passDataToQuestion(source: TutorDataStore, destination: inout QuestionDataStore)
@@ -51,8 +65,25 @@ class TutorRouter: NSObject, TutorRoutingLogic, TutorDataPassing
     }
     
     // MARK: Navigation
+    
     func navigateToQuestion(source: TutorViewController, destination: QuestionViewController)
     {
         source.show(destination, sender: nil)
+    }
+    
+    func navigateToTutorList(source: TutorViewController, destination: TutorListViewController)
+    {
+        source.dismiss(animated: true) {
+            let request = TutorList.Update.Request()
+            destination.interactor?.updateFavTrainers(request: request)
+        }
+    }
+    
+    func navigateToHome(source: TutorViewController, destination: HomeViewController)
+    {
+        source.dismiss(animated: true) {
+            let request = Home.Tutors.Request()
+            destination.interactor?.getHomeTrainers(request: request)
+        }
     }
 }

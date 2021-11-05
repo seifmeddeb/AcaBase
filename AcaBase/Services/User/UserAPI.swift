@@ -90,6 +90,27 @@ class UserAPI : UsersStoreProtocol {
                 
         }
     }
+    
+    // MARK: User Statistics
+    func fetchUserStats(completionHandler: @escaping (() throws -> UserDAO) -> Void) {
+        let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer "+UserManager.shared.token!)])
+        
+        AF.request(userStatsUrl,
+                   method: .post,
+                   parameters: nil,
+                   headers: headers)
+            .validate(statusCode:200..<499)
+            .responseDecodable(of: UserDAO.self) { response in
+                
+                guard let userStats = response.value else {
+                    print("fetchUserStats Error: \(response.error!)")
+                    completionHandler{throw response.error!}
+                    return
+                }
+                completionHandler{return userStats}
+                
+        }
+    }
 }
 enum UserAPIError : Error {
     struct Subscribe : Error, Codable {

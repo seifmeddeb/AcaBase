@@ -14,47 +14,76 @@ import UIKit
 
 @objc protocol UserProfileRoutingLogic
 {
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func routeToFavTutorList(segue: UIStoryboardSegue?)
+    func routeToMyLearningPath(segue: UIStoryboardSegue?)
 }
 
 protocol UserProfileDataPassing
 {
-  var dataStore: UserProfileDataStore? { get }
+    var dataStore: UserProfileDataStore? { get }
 }
 
 class UserProfileRouter: NSObject, UserProfileRoutingLogic, UserProfileDataPassing
 {
-  weak var viewController: UserProfileViewController?
-  var dataStore: UserProfileDataStore?
-  
-  // MARK: Routing
-  
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
-  //{
-  //  if let segue = segue {
-  //    let destinationVC = segue.destination as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //  } else {
-  //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-  //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-  //  }
-  //}
-
-  // MARK: Navigation
-  
-  //func navigateToSomewhere(source: UserProfileViewController, destination: SomewhereViewController)
-  //{
-  //  source.show(destination, sender: nil)
-  //}
-  
-  // MARK: Passing data
-  
-  //func passDataToSomewhere(source: UserProfileDataStore, destination: inout SomewhereDataStore)
-  //{
-  //  destination.name = source.name
-  //}
+    weak var viewController: UserProfileViewController?
+    var dataStore: UserProfileDataStore?
+    
+    // MARK: Routing
+    
+    @objc func routeToFavTutorList(segue: UIStoryboardSegue?) {
+        if let segue = segue {
+            let destinationVC = segue.destination as! TutorListViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToTutorList(source: dataStore!, destination: &destinationDS)
+        } else {
+            let storyboard = UIStoryboard(name: "TutorList", bundle: nil)
+            let destinationVC = storyboard.instantiateViewController(withIdentifier: "TutorListViewController") as! TutorListViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToTutorList(source: dataStore!, destination: &destinationDS)
+            navigateToTutorList(source: viewController!, destination: destinationVC)
+        }
+    }
+    
+    @objc func routeToMyLearningPath(segue: UIStoryboardSegue?) {
+        if let segue = segue {
+            let destinationVC = segue.destination as! StatsViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToStats(source: dataStore!, destination: &destinationDS)
+        } else {
+            let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+            let destinationVC = storyboard.instantiateViewController(withIdentifier: "StatsViewController") as! StatsViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToStats(source: dataStore!, destination: &destinationDS)
+            navigateToStats(source: viewController!, destination: destinationVC)
+        }
+    }
+    
+    // MARK: Navigation
+    
+    func navigateToTutorList(source: UserProfileViewController, destination: TutorListViewController)
+    {
+        destination.title = "Mes tuteurs préférés"
+        source.show(destination, sender: nil)
+    }
+    
+    func navigateToStats(source: UserProfileViewController, destination: StatsViewController)
+    {
+        destination.title = "Mon parcours d’apprentissage"
+        source.show(destination, sender: nil)
+    }
+    
+    // MARK: Passing data
+    
+    func passDataToTutorList(source: UserProfileDataStore, destination: inout TutorListDataStore)
+    {
+        destination.tutorList = source.tutorList
+        destination.topicList = source.topicList
+        destination.isSelection = false
+        destination.isFav = true
+    }
+    
+    func passDataToStats(source: UserProfileDataStore, destination: inout StatsDataStore)
+    {
+        destination.currentUserInfo = source.currentUserInfo
+    }
 }

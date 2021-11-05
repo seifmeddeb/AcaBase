@@ -56,6 +56,7 @@ class CurrentUser : NSObject, Codable, NSCoding, NSSecureCoding {
     var status: String
     var level: Level?
     var region: String?
+    var statistics: Statistics?
     
     enum CodingKeys: String, CodingKey {
         case userId = "user_id"
@@ -71,9 +72,10 @@ class CurrentUser : NSObject, Codable, NSCoding, NSSecureCoding {
         case status = "status"
         case level = "level"
         case region = "region"
+        case statistics = "statistics"
     }
     
-    internal init(userId: Int, userName: String, gender: String? = nil, email: String, firstName: String, lastName: String, phone: String, birthday: String? = nil, picture: String, status: String, level: Level? = nil, region: String? = nil) {
+    internal init(userId: Int, userName: String, gender: String? = nil, email: String, firstName: String, lastName: String, phone: String, birthday: String? = nil, picture: String, status: String, level: Level? = nil, region: String? = nil, statistics: Statistics? = nil) {
         self.userId = userId
         self.userName = userName
         self.gender = gender
@@ -86,6 +88,7 @@ class CurrentUser : NSObject, Codable, NSCoding, NSSecureCoding {
         self.status = status
         self.level = level
         self.region = region
+        self.statistics = statistics
     }
     
     func encode(with coder: NSCoder) {
@@ -102,6 +105,7 @@ class CurrentUser : NSObject, Codable, NSCoding, NSSecureCoding {
         coder.encode(status, forKey: "status")
         coder.encode(level, forKey: "level")
         coder.encode(region, forKey: "region")
+        coder.encode(statistics, forKey: "statistics")
     }
     
     
@@ -122,8 +126,9 @@ class CurrentUser : NSObject, Codable, NSCoding, NSSecureCoding {
         let status = coder.decodeObject(forKey: "status") as! String
         let level = coder.decodeObject(forKey: "level") as? Level
         let region = coder.decodeObject(forKey: "region") as? String
+        let statistics = coder.decodeObject(forKey: "statistics") as? Statistics
         
-        self.init(userId: userId, userName: userName, gender: gender, email: email, firstName: firstName, lastName: lastName, phone: phone, birthday: birthday, picture: picture, status: status, level: level, region: region)
+        self.init(userId: userId, userName: userName, gender: gender, email: email, firstName: firstName, lastName: lastName, phone: phone, birthday: birthday, picture: picture, status: status, level: level, region: region, statistics: statistics)
     }
     
     static var supportsSecureCoding: Bool {
@@ -167,6 +172,88 @@ class Level : NSObject, Codable, NSCoding, NSSecureCoding {
         return true
     }
     
+}
+
+class Statistics : NSObject, Codable, NSCoding, NSSecureCoding {
+    var leftDays : Int
+    var leftQuestions : Int
+    var nbrSolvedQuestions : Int
+    var nbrTakenCourses : Int
+    var nbrFinishedQuiz : Int
+    var totalHours : Int
+    var totalDays : Int
+    var totalQuestions : Int
+    var learningPathPerDays : [LearningPathPerDays]? = nil
+    
+    internal init(leftDays: Int, leftQuestions: Int, nbrSolvedQuestions: Int, nbrTakenCourses: Int, nbrFinishedQuiz: Int, totalHours: Int, totalDays: Int, totalQuestions: Int, learningPathPerDays: [LearningPathPerDays]? = nil) {
+        
+        self.leftDays = leftDays
+        self.leftQuestions = leftQuestions
+        self.nbrSolvedQuestions = nbrSolvedQuestions
+        self.nbrTakenCourses = nbrTakenCourses
+        self.nbrFinishedQuiz = nbrFinishedQuiz
+        self.totalHours = totalHours
+        self.totalDays = totalDays
+        self.totalQuestions = totalQuestions
+        self.learningPathPerDays = learningPathPerDays
+    }
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(leftDays, forKey: "leftDays")
+        coder.encode(leftQuestions, forKey: "leftQuestions")
+        coder.encode(nbrSolvedQuestions, forKey: "nbrSolvedQuestions")
+        coder.encode(nbrTakenCourses, forKey: "nbrTakenCourses")
+        coder.encode(nbrFinishedQuiz, forKey: "nbrFinishedQuiz")
+        coder.encode(totalHours, forKey: "totalHours")
+        coder.encode(totalDays, forKey: "totalDays")
+        coder.encode(totalQuestions, forKey: "totalQuestions")
+        coder.encode(learningPathPerDays, forKey: "learningPathPerDays")
+    }
+
+    required convenience init?(coder: NSCoder) {
+        let leftDays = coder.decodeInteger(forKey: "leftDays")
+        let leftQuestions = coder.decodeInteger(forKey: "leftQuestions")
+        let nbrSolvedQuestions = coder.decodeInteger(forKey: "nbrSolvedQuestions")
+        let nbrTakenCourses = coder.decodeInteger(forKey: "nbrTakenCourses")
+        let nbrFinishedQuiz = coder.decodeInteger(forKey: "nbrFinishedQuiz")
+        let totalHours = coder.decodeInteger(forKey: "totalHours")
+        let totalDays = coder.decodeInteger(forKey: "totalDays")
+        let totalQuestions = coder.decodeInteger(forKey: "totalQuestions")
+        let learningPathPerDays = coder.decodeObject(forKey: "learningPathPerDays") as? [LearningPathPerDays]
+        
+        self.init(leftDays: leftDays, leftQuestions: leftQuestions, nbrSolvedQuestions: nbrSolvedQuestions, nbrTakenCourses: nbrTakenCourses, nbrFinishedQuiz: nbrFinishedQuiz, totalHours: totalHours, totalDays: totalDays, totalQuestions: totalQuestions, learningPathPerDays: learningPathPerDays)
+    }
+    
+    static var supportsSecureCoding: Bool {
+        return true
+    }
+    
+}
+
+class LearningPathPerDays : NSObject, Codable, NSCoding, NSSecureCoding {
+    var timestamp: Int
+    var value: Int
+    
+    internal init(timestamp: Int, value: Int) {
+        self.timestamp = timestamp
+        self.value = value
+    }
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(timestamp, forKey: "timestamp")
+        coder.encode(value, forKey: "value")
+    }
+
+    required convenience init?(coder: NSCoder) {
+        let timestamp = coder.decodeInteger(forKey: "timestamp")
+        let value = coder.decodeInteger(forKey: "value")
+        
+        self.init(timestamp: timestamp, value: value)
+    }
+    
+    static var supportsSecureCoding: Bool {
+        return true
+    }
 }
 
 struct SubscribeRequest : Codable {

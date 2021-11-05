@@ -100,6 +100,7 @@ class TutorViewController: UIViewController, TutorDisplayLogic
     
     // MARK: Properties
     var feedBackList = [FeedBackDAO]()
+    var tutor : TutorDAO?
     // MARK: IBOutlets
     @IBOutlet weak var parentScrollView: UIScrollView!
     @IBOutlet weak var contentScrollView: UIScrollView!
@@ -122,6 +123,8 @@ class TutorViewController: UIViewController, TutorDisplayLogic
     @IBOutlet weak var parentContentView: UIView!
     @IBOutlet weak var reviewsTableView: UITableView!
     @IBOutlet weak var contentViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var favTutorBtn: UIButton!
+    
     
     
     
@@ -135,6 +138,8 @@ class TutorViewController: UIViewController, TutorDisplayLogic
     func displayTutor(viewModel: Tutor.Display.ViewModel)
     {
         if let tutor = viewModel.tutor {
+            self.tutor = tutor
+            self.favTutorBtn.isSelected = tutor.isFav
             self.profileImageView.setImageAsync(url: viewModel.pictureUrl)
             self.nameLabel.text = tutor.fullName
             self.subjectLabel.text = viewModel.subjects
@@ -145,38 +150,32 @@ class TutorViewController: UIViewController, TutorDisplayLogic
             self.experienceDescLbl.text = tutor.cv
             
             if let feedBackList = tutor.feedBacks, feedBackList.count > 0  {
+                self.reviewsTableView.isHidden = false
                 self.feedBackList = feedBackList
                 self.reviewsTableView.reloadData()
             } else {
-                let feedBack = FeedBackDAO(objectId: 1, userName: "Amine", comment: "tuteu hedha bhim ki ****", rate: 1, subject: "Anglais")
-                let feedBack1 = FeedBackDAO(objectId: 2, userName: "Seif", comment: "*** omha el 10 Leeeef. *** omha el 10 Leeeef *** omha el 10 Leeeef.  *** omha el 10 Leeeef.  *** omha el 10 Leeeef.  *** omha el 10 Leeeef.  *** omha el 10 Leeeef. *** omha el 10 Leeeef. *** omha el 10 Leeeef. *** omha el 10 Leeeef. *** omha el 10 Leeeef. *** omha el 10 Leeeef. *** omha el 10 Leeeef. *** omha el 10 Leeeef. *** omha el 10 Leeeef. *** omha el 10 Leeeef. *** omha el 10 Leeeef. *** omha el 10 Leeeef. ", rate: 4, subject: "Chinois")
-                self.feedBackList.append(feedBack)
-                self.feedBackList.append(feedBack1)
-                self.feedBackList.append(feedBack)
-                self.feedBackList.append(feedBack1)
-                self.feedBackList.append(feedBack)
-                self.feedBackList.append(feedBack1)
-                self.feedBackList.append(feedBack)
-                self.feedBackList.append(feedBack1)
-                self.feedBackList.append(feedBack)
-                self.feedBackList.append(feedBack1)
-                self.feedBackList.append(feedBack)
-                self.feedBackList.append(feedBack1)
-                self.reviewsTableView.reloadData()
+                self.reviewsTableView.isHidden = true
             }
         }
     }
     
     // MARK: addFavorite
-    func addFavorite()
+    func addOrRemoveFavorite()
     {
         Indicator.sharedInstance.showIndicator()
-        let request = Tutor.Favorite.Request()
-        interactor?.addToFavorites(request: request)
+        if self.tutor?.isFav ?? false {
+            let request = Tutor.Favorite.Request(isFav: self.tutor?.isFav ?? false)
+            interactor?.removeFromFavorites(request: request)
+        } else {
+            let request = Tutor.Favorite.Request(isFav: self.tutor?.isFav ?? false)
+            interactor?.addToFavorites(request: request)
+        }
     }
     
     func displayFavorite(viewModel: Tutor.Favorite.ViewModel) {
         Indicator.sharedInstance.hideIndicator()
+        self.tutor?.isFav = viewModel.isFav
+        favTutorBtn.isSelected = viewModel.isFav
         let alert = UIAlertController(title: "", message: viewModel.message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
             alert.dismiss(animated: true, completion: nil)
@@ -189,13 +188,17 @@ class TutorViewController: UIViewController, TutorDisplayLogic
     @IBAction func askQuestionPressed(_ sender: Any) {
     }
     @IBAction func addToFavouritePressed(_ sender: Any) {
-        addFavorite()
+        addOrRemoveFavorite()
     }
     @objc func dismissViewController(_ sender:UITapGestureRecognizer){
         let touchPoint = sender.location(in: self.view)
 
         if touchPoint.y < (self.contentScrollView.frame.origin.y + 40) {
             self.dismiss()
+        } else {
+            let bottomOffset = CGPoint(x: 0, y: parentScrollView.contentSize.height - parentScrollView.bounds.size.height)
+            parentScrollView.setContentOffset(bottomOffset, animated: true)
+            self.contentScrollView.isUserInteractionEnabled = true
         }
     }
 }
@@ -282,7 +285,7 @@ extension TutorViewController : UIScrollViewDelegate {
     
     func dismiss(){
         self.view.backgroundColor = UIColor.clear
-        dismiss(animated: true, completion: nil)
+        self.router?.routeToTutorsList(segue: nil)
     }
 }
 extension TutorViewController : UITableViewDataSource {
@@ -314,7 +317,7 @@ class RatingCell : UITableViewCell {
         userNameLabel.text = "\"\(feedBack.userName ?? "")\""
         subjectLabel.text = feedBack.subject
         descriptionLabel.text = feedBack.comment
-        ratingView.setRating(rating: feedBack.rate)
+        ratingView.setRating(rating: Int(feedBack.rate ?? "0") ?? 0)
     }
     
 }

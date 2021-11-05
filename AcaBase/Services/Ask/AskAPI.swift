@@ -17,11 +17,15 @@ class AskAPI : AskStoreProtocol {
         AF.request(askUrl,
                    method: .post,
                    parameters: request,
-                   encoder: URLEncodedFormParameterEncoder.default,
+                   encoder: JSONParameterEncoder.default,
                    headers: headers)
             .validate(statusCode:200..<499)
             .responseDecodable(of: AskResponse.self) { response in
                 
+                if let data = response.request?.httpBody {
+                    let str = String(data: data, encoding: .utf8)
+                    print("Ask Question Request: \(str ?? "empty")")
+                }
                 guard let askResponse = response.value else {
                     print("Ask Question Error: \(response.error!)")
                     completionHandler{throw response.error!}

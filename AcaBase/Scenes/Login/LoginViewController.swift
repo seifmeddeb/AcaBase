@@ -80,16 +80,14 @@ class LoginViewController: UIViewController, LoginDisplayLogic
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = false
+        self.title = "Se Connecter"
         registerForKeyboardNotifications()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         deregisterFromKeyboardNotifications()
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
     }
     
     // MARK: IBOutlets
@@ -100,6 +98,8 @@ class LoginViewController: UIViewController, LoginDisplayLogic
     @IBOutlet weak var pswTextField: UITextField!
     @IBOutlet weak var errorEmailLabel: UILabel!
     @IBOutlet weak var errorPasswordLabel: UILabel!
+    @IBOutlet weak var loginBorderView: UIView!
+    @IBOutlet weak var pwdBorderView: UIView!
     private var activeField: UITextField?
     
     // MARK: IBActions
@@ -109,16 +109,16 @@ class LoginViewController: UIViewController, LoginDisplayLogic
     }
     
     @IBAction func forgotPassword(_ sender: Any) {
-        let alert = UIAlertController(title: "Reset Password", message: "A Password reset email will be sent to the provided email address", preferredStyle: .alert)
+        let alert = UIAlertController(title: "réinitialiser votre mot de passe", message: "Un courriel de réinitialisation du mot de passe sera envoyé à l’adresse courriel fournie.", preferredStyle: .alert)
         alert.addTextField {
-            $0.placeholder = "your email address"
+            $0.placeholder = "Votre adresse e-mail"
             $0.keyboardType = .emailAddress
             $0.addTarget(alert, action: #selector(alert.textDidChangeInResetPasswordAlert), for: .editingChanged)
         }
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive))
+        alert.addAction(UIAlertAction(title: "Annuler", style: .destructive))
         
-        let resetAction = UIAlertAction(title: "Reset Password", style: .default) { [unowned self] _ in
+        let resetAction = UIAlertAction(title: "Confirmer", style: .default) { [unowned self] _ in
             guard let email = alert.textFields?[0].text else { return }
             self.resetPassword(for: email)
         }
@@ -147,11 +147,11 @@ class LoginViewController: UIViewController, LoginDisplayLogic
         resetFormErrors()
         var hasFormError = false
         if let emailError = viewModel.emailError {
-            setError(for: emailTextField, label: errorEmailLabel, text: emailError)
+            setError(for: loginBorderView, label: errorEmailLabel, text: emailError)
             hasFormError = true
         }
         if let passwordError = viewModel.passwordError {
-            setError(for: pswTextField, label: errorPasswordLabel, text: passwordError)
+            setError(for: pwdBorderView, label: errorPasswordLabel, text: passwordError)
             hasFormError = true
         }
         if !hasFormError {
@@ -193,8 +193,8 @@ class LoginViewController: UIViewController, LoginDisplayLogic
     }
     
     private func resetFormErrors() {
-        pswTextField.layer.borderWidth = 0
-        emailTextField.layer.borderWidth = 0
+        loginBorderView.borderColor = primaryGreen
+        pwdBorderView.borderColor = primaryGreen
         errorPasswordLabel.text = ""
         errorEmailLabel.text = ""
     }
@@ -261,7 +261,8 @@ extension LoginViewController : UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Try to find next responder
-        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+        //let sd = textField.superview?.superview?.viewWithTag(textField.tag + 1)?.viewWithTag(textField.tag + 1)?.viewWithTag(textField.tag + 1) as! UITextField
+        if let nextField = textField.superview?.superview?.viewWithTag(textField.tag + 1)?.subviews[0] as? UITextField {
             nextField.becomeFirstResponder()
         } else {
             // Not found, so remove keyboard.

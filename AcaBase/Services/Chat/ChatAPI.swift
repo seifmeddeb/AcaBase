@@ -42,7 +42,7 @@ class ChatAPI : ChatStoreProtocol {
     func submitChatRating(request: RateTutorRequest, completionHandler: @escaping (() throws -> ()) -> Void) {
         let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer "+UserManager.shared.token!)])
         
-        AF.request(quizScoreUrl,
+        AF.request(endSessionUrl,
                    method: .post,
                    parameters: request,
                    encoder: JSONParameterEncoder.default,
@@ -51,7 +51,7 @@ class ChatAPI : ChatStoreProtocol {
             .response{ response in
                 
                 guard let _ = response.value else {
-                    print("Rate tutor Error: \(response.error!)")
+                    print("End Session Error: \(response.error!)")
                     completionHandler{throw response.error!}
                     return
                 }

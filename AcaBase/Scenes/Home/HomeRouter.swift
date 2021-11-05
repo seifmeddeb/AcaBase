@@ -17,6 +17,7 @@ import UIKit
     func routeToLogin(segue: UIStoryboardSegue?)
     func routeToQuestion(segue: UIStoryboardSegue?)
     func routeToVideoDetails(segue: UIStoryboardSegue?)
+    func routeToUserProfile(segue: UIStoryboardSegue?)
 }
 
 protocol HomeDataPassing
@@ -56,6 +57,7 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing
     @objc func routeToTutorList(segue: UIStoryboardSegue?) {
         if let segue = segue {
             let destinationVC = segue.destination as! TutorListViewController
+            destinationVC.title = "Trouver un tuteur"
             var destinationDS = destinationVC.router!.dataStore!
             passDataToTutorList(source: dataStore!, destination: &destinationDS)
         }
@@ -89,6 +91,20 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing
         }
     }
     
+    func routeToUserProfile(segue: UIStoryboardSegue?) {
+        if let segue = segue {
+            let destinationVC = segue.destination as! UserProfileViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToUserProfile(source: dataStore!, destination: &destinationDS)
+        } else {
+            let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+            let destinationVC = storyboard.instantiateViewController(withIdentifier: "UserProfileViewController") as! UserProfileViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToUserProfile(source: dataStore!, destination: &destinationDS)
+            navigateToUserProfile(source: viewController!, destination: destinationVC)
+        }
+    }
+    
     // MARK: Passing data
     func passDataToDetailTutor(source: HomeDataStore, destination: inout TutorDataStore)
     {
@@ -116,6 +132,12 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing
         destination.url = item?.url        
     }
     
+    func passDataToUserProfile(source: HomeDataStore, destination: inout UserProfileDataStore)
+    {
+        destination.tutorList = source.tutors ?? [TutorDAO]()
+        destination.topicList = source.topics ?? [TopicDAO]()
+    }
+    
     // MARK: Navigation
     func navigateToQuestion(source: HomeViewController, destination: QuestionViewController)
     {
@@ -127,32 +149,8 @@ class HomeRouter: NSObject, HomeRoutingLogic, HomeDataPassing
         source.show(destination, sender: nil)
     }
     
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
-    //{
-    //  if let segue = segue {
-    //    let destinationVC = segue.destination as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //  } else {
-    //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-    //  }
-    //}
-    
-    // MARK: Navigation
-    
-    //func navigateToSomewhere(source: HomeViewController, destination: SomewhereViewController)
-    //{
-    //  source.show(destination, sender: nil)
-    //}
-    
-    // MARK: Passing data
-    
-    //func passDataToSomewhere(source: HomeDataStore, destination: inout SomewhereDataStore)
-    //{
-    //  destination.name = source.name
-    //}
+    func navigateToUserProfile(source: HomeViewController, destination: UserProfileViewController)
+    {
+        source.show(destination, sender: nil)
+    }
 }

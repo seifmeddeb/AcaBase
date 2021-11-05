@@ -21,20 +21,53 @@ class TutorWorker
         self.tutorStore = tutorStore
     }
     
-    func addToFavorites(id: Int,completionHandler: @escaping (String) -> Void)
+    func addToFavorites(id: Int, completionHandler: @escaping (() throws -> String) -> Void)
     {
         let request = FavoriteRequest(trainerId: id)
         self.tutorStore.addToFavorites(request: request) { (response: () throws -> FavoriteResponse) in
             do {
-                let _ = try response()
-                DispatchQueue.main.async {
-                    completionHandler("Tuteur ajouté au favoris")
+                let favResponse = try response()
+                if let _ = favResponse.nbrFav{
+                    DispatchQueue.main.async {
+                        completionHandler{"🎉  Tuteur ajouté au favoris"}
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        completionHandler{throw FavError(title: "")}
+                    }
                 }
+                
             } catch {
                 let nserror = error as NSError
                 print("Unresolved error \(nserror), \(nserror.userInfo)")
                 DispatchQueue.main.async {
-                    completionHandler("Un problème est survenu veuillez réessayer plus tard")
+                    completionHandler{ throw error}
+                }
+            }
+        }
+    }
+    
+    func removeFromFavorites(id: Int, completionHandler: @escaping (() throws -> String) -> Void)
+    {
+        let request = FavoriteRequest(trainerId: id)
+        self.tutorStore.removeFromFavorites(request: request) { (response: () throws -> FavoriteResponse) in
+            do {
+                let favResponse = try response()
+                if let _ = favResponse.nbrFav{
+                    DispatchQueue.main.async {
+                        completionHandler{"🎉 Tuteur supprimé des favoris"}
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        completionHandler{throw FavError(title: "")}
+                    }
+                }
+                
+            } catch {
+                let nserror = error as NSError
+                print("Unresolved error \(nserror), \(nserror.userInfo)")
+                DispatchQueue.main.async {
+                    completionHandler{ throw error}
                 }
             }
         }
@@ -42,4 +75,13 @@ class TutorWorker
 }
 protocol TutorStoreProtocol {
     func addToFavorites(request: FavoriteRequest, completionHandler: @escaping (() throws -> FavoriteResponse) -> Void)
+    func removeFromFavorites(request: FavoriteRequest, completionHandler: @escaping (() throws -> FavoriteResponse) -> Void)
 }
+
+struct FavError : Error {
+    var title: String
+    init(title: String) {
+        self.title = title
+    }
+}
+

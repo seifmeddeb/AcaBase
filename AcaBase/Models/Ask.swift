@@ -24,8 +24,8 @@ struct AskRequest : Codable {
 
 struct AskResponse : Codable {
     var code : Int
-    var message : String
-    var questionId : Int
+    var message : String?
+    var questionId : Int?
     
     enum CodingKeys: String, CodingKey {
         case code = "code"

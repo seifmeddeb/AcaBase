@@ -129,11 +129,12 @@ class ChatRatingViewController: UIViewController, ChatRatingDisplayLogic
     func displaySubmitRating(viewModel: ChatRating.SubmitRating.ViewModel)
     {
         Indicator.sharedInstance.hideIndicator()
-        let alert = UIAlertController(title: "Session Cloturer 🎉", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "🎉", message: "Session clôturé, merci pour votre retour", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
             alert.dismiss(animated: true, completion: nil)
+            let presentingVC = self.presentingViewController as? UINavigationController
             self.dismiss(animated: true) {
-                self.navigationController?.popViewController(animated: true)
+                presentingVC?.popViewController(animated: true)
             }
         }))
         self.present(alert, animated: true)

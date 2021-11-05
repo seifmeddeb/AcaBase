@@ -15,6 +15,7 @@ import UIKit
 protocol TutorListDisplayLogic: class
 {
     func displayTutorList(viewModel: TutorList.Tutors.ViewModel)
+    func displayUpdatedTutorList(viewModel: TutorList.Update.ViewModel)
     func displayFilteredTutorList(viewModel: TutorList.FilterTutors.ViewModel)
 }
 
@@ -71,7 +72,6 @@ class TutorListViewController: UIViewController, TutorListDisplayLogic
         super.viewDidLoad()
         getTutorsList()
         navigationController?.delegate = self
-        self.title = "Trouver un tuteur"
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -122,6 +122,12 @@ class TutorListViewController: UIViewController, TutorListDisplayLogic
     
     func displayFilteredTutorList(viewModel: TutorList.FilterTutors.ViewModel) {
         self.tutorList = viewModel.filtredTutorList
+        self.tableView.reloadData()
+    }
+    
+    // MARK: displayUpdatedTutors
+    func displayUpdatedTutorList(viewModel: TutorList.Update.ViewModel) {
+        self.tutorList = viewModel.tutorList
         self.tableView.reloadData()
     }
 }

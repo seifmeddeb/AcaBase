@@ -228,7 +228,7 @@ class QuestionViewController: UIViewController, QuestionDisplayLogic
     func displayAskQuestionError(viewModel: Question.Ask.ViewModel) {
         Indicator.sharedInstance.hideIndicator()
         
-        let alert = UIAlertController(title: "", message: "Service non disponible pour le moment 😥", preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: viewModel.errorMessage ?? "Service non disponible pour le moment 😥", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
             alert.dismiss(animated: true, completion: nil)
         }))

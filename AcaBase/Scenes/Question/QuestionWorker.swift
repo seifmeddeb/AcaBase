@@ -21,19 +21,19 @@ class QuestionWorker
         self.askStore = askStore
     }
     
-    func askQuestion(request: AskRequest,completionHandler: @escaping (Int,Error?) -> Void)
+    func askQuestion(request: AskRequest,completionHandler: @escaping (AskResponse?,Error?) -> Void)
     {
         self.askStore?.askQuestion(request: request) { (response: () throws -> AskResponse) in
             do {
                 let response = try response()
                 DispatchQueue.main.async {
-                    completionHandler(response.questionId , nil)
+                    completionHandler(response , nil)
                 }
             } catch {
                 let nserror = error as NSError
                 print("Unresolved error \(nserror), \(nserror.userInfo)")
                 DispatchQueue.main.async {
-                    completionHandler(-1 , nserror)
+                    completionHandler(nil , nserror)
                 }
             }
         }

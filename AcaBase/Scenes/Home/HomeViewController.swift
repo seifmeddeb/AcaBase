@@ -121,12 +121,11 @@ class HomeViewController: UIViewController, HomeDisplayLogic
     }
     
     @objc func clickRightButton() {
-        print("clickRightButton")
         router?.routeToLogin(segue: nil)
     }
     
     @objc func clickLeftButton() {
-        print("clickLeftButton")
+        router?.routeToUserProfile(segue: nil)
     }
     
     // MARK: ✅ Interactor Calls

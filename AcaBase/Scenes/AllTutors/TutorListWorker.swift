@@ -14,6 +14,12 @@ import UIKit
 
 class TutorListWorker
 {
+    func getFavTutors(tutorList: [TutorDAO]) -> [TutorDAO] {
+        var filteredTutorList = tutorList
+        filteredTutorList = filteredTutorList.filter { return $0.isFav == true }
+        return filteredTutorList
+    }
+        
     func getSubjectsFromTopicList(topicList: [TopicDAO]) -> [SubjectDAO]
     {
         var subjects = [SubjectDAO]()
@@ -24,7 +30,7 @@ class TutorListWorker
         return subjects
     }
     
-    func filter(tutorList:[TutorDAO], with name: String?, and subject: String?) -> [TutorDAO]
+    func filter(tutorList: [TutorDAO], with name: String?, and subject: String?) -> [TutorDAO]
     {
         var filteredTutorList = tutorList
         

@@ -86,6 +86,7 @@ enum Question
         {
             var questionId : Int
             var error : Error?
+            var message : String?
         }
         struct ViewModel
         {

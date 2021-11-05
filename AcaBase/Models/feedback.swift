@@ -10,10 +10,10 @@ import Foundation
 
 struct FeedBackDAO : Codable {
     
-    var objectId: Int
+    var objectId: Int?
     var userName: String?
     var comment: String?
-    var rate: Int
+    var rate: String?
     var subject: String?
     
     enum CodingKeys: String, CodingKey {

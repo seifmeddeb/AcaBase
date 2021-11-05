@@ -85,6 +85,21 @@ class UserWorker {
         }
     }
     
+    func fetchUserStats(completionHandler: @escaping (UserDAO?) -> Void) {
+        self.usersStore.fetchUserStats { (user: () throws -> UserDAO?) -> Void in
+            do {
+                let user = try user()
+                DispatchQueue.main.async {
+                  completionHandler(user)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                  completionHandler(nil)
+                }
+            }
+        }
+    }
+    
 }
 
 protocol UsersStoreProtocol {
@@ -94,5 +109,5 @@ protocol UsersStoreProtocol {
     func fetchAllUsers(completionHandler: @escaping ([UserDAO]?) -> Void)
     func loginUser(userRequest: Login.User.Request, completionHandler: @escaping (() throws -> UserDAO) -> Void)
     func ResetPassword(for request: Login.ResetPassword.Request, completionHandler: @escaping (() throws -> APIResponse) -> Void)
-    
+    func fetchUserStats(completionHandler: @escaping (() throws -> UserDAO) -> Void)
 }

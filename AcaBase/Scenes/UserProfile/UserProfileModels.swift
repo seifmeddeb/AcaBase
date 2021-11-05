@@ -12,20 +12,49 @@
 
 import UIKit
 
+typealias ProfileCellType = UserProfile.Profile.ViewModel.CellType
+typealias ProfileCellViewModel = UserProfile.Profile.ViewModel.Item
+
 enum UserProfile
 {
   // MARK: Use cases
   
-  enum Something
+  enum Profile
   {
     struct Request
     {
     }
     struct Response
     {
+        var user : CurrentUser?
+        var errorMsg : String?
     }
     struct ViewModel
     {
+        var profileList : [CellType]?
+        var errorMsg : String?
+        
+        struct Item {
+            var title : String?
+            var subtitle : String?
+            var color : UIColor?
+            
+            var user : CurrentUser?
+            var image : UIImage?
+            
+            var hasBigSeparator : Bool = false
+            var hasSmallSeparator : Bool = false
+            
+            var value : Int = 1
+            var total : Int = 1
+            
+        }
+                
+        enum CellType {
+            case header(Item)
+            case stat(Item)
+            case simple(Item)
+        }
     }
   }
 }

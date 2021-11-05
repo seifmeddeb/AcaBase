@@ -34,6 +34,7 @@ class QuestionRouter: NSObject, QuestionRoutingLogic, QuestionDataPassing
     @objc func routeToTutorList(segue: UIStoryboardSegue?) {
         if let segue = segue {
             let destinationVC = segue.destination as! TutorListViewController
+            destinationVC.title = "Trouver un tuteur"
             var destinationDS = destinationVC.router!.dataStore!
             passDataToTutorList(source: dataStore!, destination: &destinationDS)
         }

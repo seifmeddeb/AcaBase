@@ -11,18 +11,17 @@ import UIKit
 
 extension UIViewController {
     
-    func setError(for textField: UITextField, label: UILabel, text: String) {
+    func setError(for borderView: UIView, label: UILabel, text: String) {
         label.text = text
-        textField.layer.borderColor = UIColor.red.cgColor
-        textField.layer.borderWidth = 1.0
+        borderView.borderColor = UIColor.red
     }
     
-    func resetFormErrors(for textFields: [UITextField?], and labels: [UILabel?]) {
+    func resetFormErrors(for borderViews: [UIView], and labels: [UILabel?]) {
         for label in labels {
             label?.text = ""
         }
-        for textField in textFields {
-            textField?.layer.borderWidth = 0
+        for borderView in borderViews {
+            borderView.borderColor = primaryGreen
         }
     }
     

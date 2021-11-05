@@ -79,7 +79,7 @@ class QuestionPresenter: QuestionPresentationLogic
     }
     
     func presentAskQuestionError(response: Question.Ask.Response) {
-        let viewModel = Question.Ask.ViewModel(questionId: response.questionId, errorMessage: response.error?.localizedDescription)
+        let viewModel = Question.Ask.ViewModel(questionId: response.questionId, errorMessage: response.message)
         viewController?.displayAskQuestionError(viewModel: viewModel)
     }
     

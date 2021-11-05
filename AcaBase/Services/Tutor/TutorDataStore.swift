@@ -17,4 +17,8 @@ class TutorCoreDataStore : TutorStoreProtocol {
     func addToFavorites(request: FavoriteRequest, completionHandler: @escaping (() throws -> FavoriteResponse  ) -> Void) {
         
     }
+    
+    func removeFromFavorites(request: FavoriteRequest, completionHandler: @escaping (() throws -> FavoriteResponse) -> Void) {
+        
+    }
 }

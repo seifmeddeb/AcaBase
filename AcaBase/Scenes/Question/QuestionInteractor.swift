@@ -121,26 +121,31 @@ class QuestionInteractor: QuestionBusinessLogic, QuestionDataStore
         if let id = request.tutorId {
             tutorId = "\(id)"
         }
-        let askRequest = AskRequest(title: request.title, subject: "\(request.subjectId)", trainerId: tutorId ?? nil, description: request.description)
+        let askRequest = AskRequest(title: request.title, subject: "\(request.subjectId)", trainerId: tutorId ?? "-1", description: request.description)
         
-        self.worker?.askQuestion(request: askRequest, completionHandler: { (questionId, error) in
+        self.worker?.askQuestion(request: askRequest, completionHandler: { (askResponse, error) in
             if let error = error {
-                let response = Question.Ask.Response(questionId: questionId, error: error)
+                let response = Question.Ask.Response(questionId: -1, error: error)
                 self.presenter?.presentAskQuestionError(response: response)
             } else {
-                if request.images.count > 0 || request.attachements.count > 0 {
-                    self.worker?.uploadAttachments(questionId: "\(questionId)", images: request.images, attachements: request.attachements, completionHandler: { (error) in
-                        if let error = error {
-                            let response = Question.Ask.Response(questionId: questionId, error: error)
-                            self.presenter?.presentAskQuestionError(response: response)
-                        } else {
-                            let response = Question.Ask.Response(questionId: questionId, error: error)
-                            self.presenter?.presentAskQuestion(response: response)
-                        }
-                    })
+                if let questionId = askResponse?.questionId {
+                    if request.images.count > 0 || request.attachements.count > 0 {
+                        self.worker?.uploadAttachments(questionId: "\(questionId)", images: request.images, attachements: request.attachements, completionHandler: { (error) in
+                            if let error = error {
+                                let response = Question.Ask.Response(questionId: questionId, error: error)
+                                self.presenter?.presentAskQuestionError(response: response)
+                            } else {
+                                let response = Question.Ask.Response(questionId: questionId, error: error)
+                                self.presenter?.presentAskQuestion(response: response)
+                            }
+                        })
+                    } else {
+                        let response = Question.Ask.Response(questionId: questionId, error: error)
+                        self.presenter?.presentAskQuestion(response: response)
+                    }
                 } else {
-                    let response = Question.Ask.Response(questionId: questionId, error: error)
-                    self.presenter?.presentAskQuestion(response: response)
+                    let response = Question.Ask.Response(questionId: -1, message: askResponse?.message ?? "")
+                    self.presenter?.presentAskQuestionError(response: response)
                 }
             }
         })

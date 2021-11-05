@@ -766,7 +766,6 @@ Lorem Ipsum is simply dummy text of the printing.</string>
                         <segue destination="26E-Bx-dJJ" kind="relationship" relationship="viewControllers" id="qBQ-HY-myN"/>
                         <segue destination="gbX-kt-3lo" kind="relationship" relationship="viewControllers" id="Hu5-aM-Qmg"/>
                         <segue destination="4H2-PY-FMW" kind="relationship" relationship="viewControllers" id="CZ7-p4-KLt"/>
-                        <segue destination="7ks-ES-Hbx" kind="relationship" relationship="viewControllers" id="IEP-0d-6un"/>
                         <segue destination="AdF-QY-2gD" kind="relationship" relationship="viewControllers" id="8Vn-GG-LV1"/>
                     </connections>
                 </tabBarController>

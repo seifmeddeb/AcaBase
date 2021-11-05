@@ -14,28 +14,41 @@ import UIKit
 
 protocol UserProfileBusinessLogic
 {
-  func doSomething(request: UserProfile.Something.Request)
+    func getProfile(request: UserProfile.Profile.Request)
 }
 
 protocol UserProfileDataStore
 {
-  //var name: String { get set }
+    var tutorList : [TutorDAO]? { get set }
+    var topicList : [TopicDAO]? { get set }
+    var currentUserInfo : CurrentUser? { get set }
 }
 
 class UserProfileInteractor: UserProfileBusinessLogic, UserProfileDataStore
 {
-  var presenter: UserProfilePresentationLogic?
-  var worker: UserProfileWorker?
-  //var name: String = ""
-  
-  // MARK: Do something
-  
-  func doSomething(request: UserProfile.Something.Request)
-  {
-    worker = UserProfileWorker()
-    worker?.doSomeWork()
+    var presenter: UserProfilePresentationLogic?
+    var worker: UserWorker?
     
-    let response = UserProfile.Something.Response()
-    presenter?.presentSomething(response: response)
-  }
+    // passing these data from home page (mainly to pass them along to fav tutors list scene)
+    var tutorList: [TutorDAO]?
+    var topicList: [TopicDAO]?
+    
+    // passing this to my learning path
+    var currentUserInfo : CurrentUser?
+    
+    // MARK: getProfile
+    func getProfile(request: UserProfile.Profile.Request)
+    {
+        worker = UserWorker(usersStore: UserAPI())
+        worker?.fetchUserStats(completionHandler: { user in
+            if let currentUser = user?.currentUser {
+                self.currentUserInfo = currentUser
+                let response = UserProfile.Profile.Response(user: currentUser)
+                self.presenter?.presentProfile(response: response)
+            } else {
+                let response = UserProfile.Profile.Response(user: nil,errorMsg: "Service Indisponible instantanement, veuillez réessayer plus tard !")
+                self.presenter?.presentProfile(response: response)
+            }
+        })
+    }
 }

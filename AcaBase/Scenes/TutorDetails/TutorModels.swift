@@ -37,14 +37,17 @@ enum Tutor
     {
         struct Request
         {
+            var isFav: Bool
         }
         struct Response
         {
             var message : String
+            var isFav: Bool
         }
         struct ViewModel
         {
             var message : String
+            var isFav: Bool
         }
     }
 }

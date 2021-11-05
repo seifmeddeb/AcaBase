@@ -53,10 +53,10 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore
     private func validateLoginRequest(request: Login.User.Request) -> Login.User.Response? {
         var response : Login.User.Response?
         if !workerDataValidation.isValidEmail(request.email) {
-            response = Login.User.Response(emailError: "Please insert a valid email address")
+            response = Login.User.Response(emailError: "Veuillez insérer une adresse courriel valide")
         }
         if request.password.count < 1 {
-            response = Login.User.Response(emailError: response?.emailError, passwordError: "Please insert your password")
+            response = Login.User.Response(emailError: response?.emailError, passwordError: "Veuillez insérer votre mot de passe")
         }
         return response
     }
@@ -64,7 +64,7 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore
     // MARK: Reset Password
     func resetPassword(request: Login.ResetPassword.Request) {
         if !workerDataValidation.isValidEmail(request.email) {
-            let response = Login.ResetPassword.Response(apiResponse: APIResponse(status: "error", message: "Please insert a valid email address"))
+            let response = Login.ResetPassword.Response(apiResponse: APIResponse(status: "error", message: "Veuillez insérer une adresse courriel valide"))
             self.presenter?.presentResetPassword(response: response)
         } else {
             workerApi.ResetPassword(for: request, completionHandler: { userResponse in

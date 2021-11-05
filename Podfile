@@ -8,13 +8,18 @@ target 'AcaBase' do
   # Pods for AcaBase
 
 	pod 'Alamofire', '~> 5.1'
+  
 	pod 'MessageKit'
 	pod 'MessageInputBar'
+  
 	pod 'Firebase/Core'
 	pod 'Firebase/Auth'
 	pod 'Firebase/Storage'
 	pod 'Firebase/Firestore'
 	pod 'Firebase/Database'
+  
+  pod 'Charts'
+  
   post_install do |installer|
       installer.pods_project.targets.each do |target|
           if target.name == 'MessageKit'

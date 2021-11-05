@@ -120,6 +120,18 @@
 		30635540254ED41F005AAAB2 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 30635534254ED41F005AAAB2 /* Roboto-Bold.ttf */; };
 		30635541254ED41F005AAAB2 /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 30635535254ED41F005AAAB2 /* Roboto-MediumItalic.ttf */; };
 		30635542254ED41F005AAAB2 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 30635536254ED41F005AAAB2 /* Roboto-Black.ttf */; };
+		306380DB26FF0FE1004A8A12 /* StatsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306380D526FF0FE1004A8A12 /* StatsPresenter.swift */; };
+		306380DC26FF0FE1004A8A12 /* StatsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306380D626FF0FE1004A8A12 /* StatsWorker.swift */; };
+		306380DD26FF0FE1004A8A12 /* StatsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306380D726FF0FE1004A8A12 /* StatsRouter.swift */; };
+		306380DE26FF0FE1004A8A12 /* StatsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306380D826FF0FE1004A8A12 /* StatsModels.swift */; };
+		306380DF26FF0FE1004A8A12 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306380D926FF0FE1004A8A12 /* StatsViewController.swift */; };
+		306380E026FF0FE1004A8A12 /* StatsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306380DA26FF0FE1004A8A12 /* StatsInteractor.swift */; };
+		306380E92700A200004A8A12 /* WelcomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306380E32700A200004A8A12 /* WelcomePresenter.swift */; };
+		306380EA2700A200004A8A12 /* WelcomeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306380E42700A200004A8A12 /* WelcomeWorker.swift */; };
+		306380EB2700A200004A8A12 /* WelcomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306380E52700A200004A8A12 /* WelcomeRouter.swift */; };
+		306380EC2700A200004A8A12 /* WelcomeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306380E62700A200004A8A12 /* WelcomeModels.swift */; };
+		306380ED2700A200004A8A12 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306380E72700A200004A8A12 /* WelcomeViewController.swift */; };
+		306380EE2700A200004A8A12 /* WelcomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306380E82700A200004A8A12 /* WelcomeInteractor.swift */; };
 		306683BD251D4FF6004F8797 /* Tutor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 306683BC251D4FF6004F8797 /* Tutor.storyboard */; };
 		306B86C226183FC700735691 /* ChatRatingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306B86BC26183FC700735691 /* ChatRatingPresenter.swift */; };
 		306B86C326183FC700735691 /* ChatRatingWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306B86BD26183FC700735691 /* ChatRatingWorker.swift */; };
@@ -130,6 +142,9 @@
 		306B86CF26188B7800735691 /* RateTutorRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306B86CE26188B7800735691 /* RateTutorRequest.swift */; };
 		306BD818254592540078A041 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306BD817254592540078A041 /* RatingView.swift */; };
 		306BD81D254595500078A041 /* RatingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 306BD81C254595500078A041 /* RatingView.xib */; };
+		3075F0D526EE3AFD00FA304B /* ProfileHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3075F0D426EE3AFD00FA304B /* ProfileHeaderCell.swift */; };
+		3075F0D726EE3B2500FA304B /* StatisticsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3075F0D626EE3B2500FA304B /* StatisticsCell.swift */; };
+		3075F0D926EE3B4E00FA304B /* ProfileItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3075F0D826EE3B4E00FA304B /* ProfileItemCell.swift */; };
 		30775AB0245CD0B700677FE5 /* UserWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775AAF245CD0B700677FE5 /* UserWorker.swift */; };
 		30775AB2245CD0DC00677FE5 /* UserCoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775AB1245CD0DC00677FE5 /* UserCoreDataStore.swift */; };
 		30775AB4245CD21200677FE5 /* CoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30775AB3245CD21200677FE5 /* CoreDataStore.swift */; };
@@ -186,6 +201,7 @@
 		308FD41B259142DE0033EE9F /* LessonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FD415259142DD0033EE9F /* LessonViewController.swift */; };
 		308FD41C259142DE0033EE9F /* LessonInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308FD416259142DD0033EE9F /* LessonInteractor.swift */; };
 		308FD428259142ED0033EE9F /* Lesson.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 308FD427259142ED0033EE9F /* Lesson.storyboard */; };
+		30906EFB27302F8F0059CE16 /* StatsViewController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30906EFA27302F8F0059CE16 /* StatsViewController+Helpers.swift */; };
 		3095C2562549F1960078F2A7 /* MainPageCoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3095C2552549F1950078F2A7 /* MainPageCoreDataStore.swift */; };
 		3095C261254A217F0078F2A7 /* QuizListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3095C25B254A217F0078F2A7 /* QuizListPresenter.swift */; };
 		3095C262254A217F0078F2A7 /* QuizListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3095C25C254A217F0078F2A7 /* QuizListWorker.swift */; };
@@ -239,6 +255,8 @@
 		30D423A3262ADF9000EEC7D4 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D4239D262ADF9000EEC7D4 /* UserProfileViewController.swift */; };
 		30D423A4262ADF9000EEC7D4 /* UserProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D4239E262ADF9000EEC7D4 /* UserProfileInteractor.swift */; };
 		30D423A9262AE44900EEC7D4 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30D423A8262AE44900EEC7D4 /* Profile.storyboard */; };
+		30D89D642703D3C90051CB13 /* HeaderStatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D89D632703D3C90051CB13 /* HeaderStatCell.swift */; };
+		30D89D662703D3E10051CB13 /* StatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D89D652703D3E10051CB13 /* StatCell.swift */; };
 		30D8CD4825D95F8B000CD726 /* VideoDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D8CD4225D95F8B000CD726 /* VideoDetailsPresenter.swift */; };
 		30D8CD4925D95F8B000CD726 /* VideoDetailsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D8CD4325D95F8B000CD726 /* VideoDetailsWorker.swift */; };
 		30D8CD4A25D95F8B000CD726 /* VideoDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D8CD4425D95F8B000CD726 /* VideoDetailsRouter.swift */; };
@@ -413,6 +431,18 @@
 		30635534254ED41F005AAAB2 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		30635535254ED41F005AAAB2 /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
 		30635536254ED41F005AAAB2 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
+		306380D526FF0FE1004A8A12 /* StatsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsPresenter.swift; sourceTree = "<group>"; };
+		306380D626FF0FE1004A8A12 /* StatsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsWorker.swift; sourceTree = "<group>"; };
+		306380D726FF0FE1004A8A12 /* StatsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsRouter.swift; sourceTree = "<group>"; };
+		306380D826FF0FE1004A8A12 /* StatsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsModels.swift; sourceTree = "<group>"; };
+		306380D926FF0FE1004A8A12 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
+		306380DA26FF0FE1004A8A12 /* StatsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsInteractor.swift; sourceTree = "<group>"; };
+		306380E32700A200004A8A12 /* WelcomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePresenter.swift; sourceTree = "<group>"; };
+		306380E42700A200004A8A12 /* WelcomeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeWorker.swift; sourceTree = "<group>"; };
+		306380E52700A200004A8A12 /* WelcomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeRouter.swift; sourceTree = "<group>"; };
+		306380E62700A200004A8A12 /* WelcomeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeModels.swift; sourceTree = "<group>"; };
+		306380E72700A200004A8A12 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		306380E82700A200004A8A12 /* WelcomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeInteractor.swift; sourceTree = "<group>"; };
 		306683BC251D4FF6004F8797 /* Tutor.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tutor.storyboard; sourceTree = "<group>"; };
 		306B86BC26183FC700735691 /* ChatRatingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRatingPresenter.swift; sourceTree = "<group>"; };
 		306B86BD26183FC700735691 /* ChatRatingWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRatingWorker.swift; sourceTree = "<group>"; };
@@ -423,6 +453,9 @@
 		306B86CE26188B7800735691 /* RateTutorRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateTutorRequest.swift; sourceTree = "<group>"; };
 		306BD817254592540078A041 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		306BD81C254595500078A041 /* RatingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatingView.xib; sourceTree = "<group>"; };
+		3075F0D426EE3AFD00FA304B /* ProfileHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCell.swift; sourceTree = "<group>"; };
+		3075F0D626EE3B2500FA304B /* StatisticsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsCell.swift; sourceTree = "<group>"; };
+		3075F0D826EE3B4E00FA304B /* ProfileItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileItemCell.swift; sourceTree = "<group>"; };
 		30775AAF245CD0B700677FE5 /* UserWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWorker.swift; sourceTree = "<group>"; };
 		30775AB1245CD0DC00677FE5 /* UserCoreDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoreDataStore.swift; sourceTree = "<group>"; };
 		30775AB3245CD21200677FE5 /* CoreDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStore.swift; sourceTree = "<group>"; };
@@ -480,6 +513,7 @@
 		308FD415259142DD0033EE9F /* LessonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonViewController.swift; sourceTree = "<group>"; };
 		308FD416259142DD0033EE9F /* LessonInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonInteractor.swift; sourceTree = "<group>"; };
 		308FD427259142ED0033EE9F /* Lesson.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Lesson.storyboard; sourceTree = "<group>"; };
+		30906EFA27302F8F0059CE16 /* StatsViewController+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatsViewController+Helpers.swift"; sourceTree = "<group>"; };
 		3095C2552549F1950078F2A7 /* MainPageCoreDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageCoreDataStore.swift; sourceTree = "<group>"; };
 		3095C25B254A217F0078F2A7 /* QuizListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizListPresenter.swift; sourceTree = "<group>"; };
 		3095C25C254A217F0078F2A7 /* QuizListWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizListWorker.swift; sourceTree = "<group>"; };
@@ -533,6 +567,8 @@
 		30D4239D262ADF9000EEC7D4 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		30D4239E262ADF9000EEC7D4 /* UserProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileInteractor.swift; sourceTree = "<group>"; };
 		30D423A8262AE44900EEC7D4 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		30D89D632703D3C90051CB13 /* HeaderStatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderStatCell.swift; sourceTree = "<group>"; };
+		30D89D652703D3E10051CB13 /* StatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatCell.swift; sourceTree = "<group>"; };
 		30D8CD4225D95F8B000CD726 /* VideoDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailsPresenter.swift; sourceTree = "<group>"; };
 		30D8CD4325D95F8B000CD726 /* VideoDetailsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailsWorker.swift; sourceTree = "<group>"; };
 		30D8CD4425D95F8B000CD726 /* VideoDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailsRouter.swift; sourceTree = "<group>"; };
@@ -603,6 +639,7 @@
 			isa = PBXGroup;
 			children = (
 				300E9A25252E6DD800E37E11 /* TutorListViewController+UIHelpers.swift */,
+				30906EFA27302F8F0059CE16 /* StatsViewController+Helpers.swift */,
 				30CB085225F3B9FA008EA81F /* DiscussionViewController+SreachBarHelpers.swift */,
 				3083E5B3254E0CFB009B13E6 /* UIViewController+GlobalHelpers.swift */,
 				30486D3F257256AA00013F70 /* PracticeViewController+UIHelpers.swift */,
@@ -661,6 +698,7 @@
 				3083E59C254DEF4E009B13E6 /* Live.storyboard */,
 				3083E5A1254DEF59009B13E6 /* Chat.storyboard */,
 				303139EA245C4DB7005EEF87 /* Assets.xcassets */,
+				306380E127009868004A8A12 /* New Group */,
 				303139EC245C4DB7005EEF87 /* LaunchScreen.storyboard */,
 				303139EF245C4DB7005EEF87 /* Info.plist */,
 				303139E7245C4DB5005EEF87 /* AcaBase.xcdatamodeld */,
@@ -704,6 +742,8 @@
 		30313A1E245C50E7005EEF87 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				306380E22700A1E1004A8A12 /* Welcome */,
+				306380D426FF0FB9004A8A12 /* Stats */,
 				30D42398262ADF5500EEC7D4 /* UserProfile */,
 				308F3E592628633A00D0C6F8 /* DetailsShop */,
 				3049625626219999000580C5 /* Shop */,
@@ -927,6 +967,40 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		306380D426FF0FB9004A8A12 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				30D89D622703D3AE0051CB13 /* Custom Cells */,
+				306380D526FF0FE1004A8A12 /* StatsPresenter.swift */,
+				306380D626FF0FE1004A8A12 /* StatsWorker.swift */,
+				306380D726FF0FE1004A8A12 /* StatsRouter.swift */,
+				306380D826FF0FE1004A8A12 /* StatsModels.swift */,
+				306380D926FF0FE1004A8A12 /* StatsViewController.swift */,
+				306380DA26FF0FE1004A8A12 /* StatsInteractor.swift */,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
+		306380E127009868004A8A12 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		306380E22700A1E1004A8A12 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				306380E32700A200004A8A12 /* WelcomePresenter.swift */,
+				306380E42700A200004A8A12 /* WelcomeWorker.swift */,
+				306380E52700A200004A8A12 /* WelcomeRouter.swift */,
+				306380E62700A200004A8A12 /* WelcomeModels.swift */,
+				306380E72700A200004A8A12 /* WelcomeViewController.swift */,
+				306380E82700A200004A8A12 /* WelcomeInteractor.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
 		306B86BB26183F8B00735691 /* ChatRating */ = {
 			isa = PBXGroup;
 			children = (
@@ -947,6 +1021,16 @@
 				306BD81C254595500078A041 /* RatingView.xib */,
 			);
 			path = RatingView;
+			sourceTree = "<group>";
+		};
+		3075F0D326EE3AD000FA304B /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3075F0D426EE3AFD00FA304B /* ProfileHeaderCell.swift */,
+				3075F0D626EE3B2500FA304B /* StatisticsCell.swift */,
+				3075F0D826EE3B4E00FA304B /* ProfileItemCell.swift */,
+			);
+			path = "Custom Cells";
 			sourceTree = "<group>";
 		};
 		30775AAC245CD08200677FE5 /* Services */ = {
@@ -1215,6 +1299,7 @@
 		30D42398262ADF5500EEC7D4 /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
+				3075F0D326EE3AD000FA304B /* Custom Cells */,
 				30D42399262ADF9000EEC7D4 /* UserProfilePresenter.swift */,
 				30D4239A262ADF9000EEC7D4 /* UserProfileWorker.swift */,
 				30D4239B262ADF9000EEC7D4 /* UserProfileRouter.swift */,
@@ -1224,6 +1309,15 @@
 				30D423A8262AE44900EEC7D4 /* Profile.storyboard */,
 			);
 			path = UserProfile;
+			sourceTree = "<group>";
+		};
+		30D89D622703D3AE0051CB13 /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				30D89D632703D3C90051CB13 /* HeaderStatCell.swift */,
+				30D89D652703D3E10051CB13 /* StatCell.swift */,
+			);
+			path = "Custom Cells";
 			sourceTree = "<group>";
 		};
 		30D8CD4125D95F69000CD726 /* VideoDetails */ = {
@@ -1614,11 +1708,15 @@
 				306B86C326183FC700735691 /* ChatRatingWorker.swift in Sources */,
 				301A6C8B2551CD6000452289 /* Attachement.swift in Sources */,
 				30D8CDB825EBA21A000CD726 /* ChatPresenter.swift in Sources */,
+				306380DB26FF0FE1004A8A12 /* StatsPresenter.swift in Sources */,
+				306380EB2700A200004A8A12 /* WelcomeRouter.swift in Sources */,
 				3081B9F225508CC0003A7C99 /* ImageCell.swift in Sources */,
 				303139E9245C4DB5005EEF87 /* AcaBase.xcdatamodeld in Sources */,
 				30D8CD5325E1035E000CD726 /* AskAPI.swift in Sources */,
+				306380ED2700A200004A8A12 /* WelcomeViewController.swift in Sources */,
 				30CB085325F3B9FA008EA81F /* DiscussionViewController+SreachBarHelpers.swift in Sources */,
 				3095C261254A217F0078F2A7 /* QuizListPresenter.swift in Sources */,
+				3075F0D926EE3B4E00FA304B /* ProfileItemCell.swift in Sources */,
 				30CB084E25F3A68B008EA81F /* AttachementDAO.swift in Sources */,
 				3043BBE7250D7EFF005AB2A1 /* UINavigationController+Helpers.swift in Sources */,
 				30CB079325EBBCCF008EA81F /* Sender.swift in Sources */,
@@ -1632,6 +1730,7 @@
 				30496262262199BC000580C5 /* ShopInteractor.swift in Sources */,
 				3019FCF82520F36E004C259E /* CustomView.swift in Sources */,
 				306BD818254592540078A041 /* RatingView.swift in Sources */,
+				306380EE2700A200004A8A12 /* WelcomeInteractor.swift in Sources */,
 				308F3E7D2628B93500D0C6F8 /* DetailShopPaymentCell.swift in Sources */,
 				30775AB8245DA8EC00677FE5 /* UserAPI.swift in Sources */,
 				3019FD0A252107F9004C259E /* TutorInteractor.swift in Sources */,
@@ -1646,8 +1745,11 @@
 				30486D47257264BA00013F70 /* PracticeCell.swift in Sources */,
 				308668A1261123A90063837C /* RecordAnimationManager.swift in Sources */,
 				30CB079B25EBBDAA008EA81F /* DatabaseRepresentation.swift in Sources */,
+				306380E92700A200004A8A12 /* WelcomePresenter.swift in Sources */,
+				306380DF26FF0FE1004A8A12 /* StatsViewController.swift in Sources */,
 				30D423A2262ADF9000EEC7D4 /* UserProfileModels.swift in Sources */,
 				307A2F0C249672F500F15F3C /* HomeRouter.swift in Sources */,
+				3075F0D726EE3B2500FA304B /* StatisticsCell.swift in Sources */,
 				30313A19245C50CE005EEF87 /* SplashRouter.swift in Sources */,
 				3043BBDF25094B7E005AB2A1 /* TrainerCell.swift in Sources */,
 				30486D32257255A200013F70 /* PracticeRouter.swift in Sources */,
@@ -1663,6 +1765,7 @@
 				3081B9E8255087E8003A7C99 /* AttachementCell.swift in Sources */,
 				30486D6A2573C9C500013F70 /* ChapterCell.swift in Sources */,
 				3043BBDC25093B91005AB2A1 /* Endpoints.swift in Sources */,
+				306380DD26FF0FE1004A8A12 /* StatsRouter.swift in Sources */,
 				3029C84125F50661000A2433 /* URL+MimeType.swift in Sources */,
 				30313A40245C66D3005EEF87 /* SubscribeModels.swift in Sources */,
 				308FD41A259142DE0033EE9F /* LessonModels.swift in Sources */,
@@ -1691,11 +1794,13 @@
 				30872B07250E432800D2E6EE /* Topic.swift in Sources */,
 				30CB079C25EBBDAA008EA81F /* Message.swift in Sources */,
 				3029C84A26000438000A2433 /* UserManager.swift in Sources */,
+				3075F0D526EE3AFD00FA304B /* ProfileHeaderCell.swift in Sources */,
 				30CB07C325F1A021008EA81F /* UICollectionView+Helpers.swift in Sources */,
 				3043BBD125093890005AB2A1 /* Subject.swift in Sources */,
 				3049625E262199BC000580C5 /* ShopWorker.swift in Sources */,
 				308FD418259142DE0033EE9F /* LessonWorker.swift in Sources */,
 				3095C27B254A24D90078F2A7 /* QuestionRouter.swift in Sources */,
+				30D89D662703D3E10051CB13 /* StatCell.swift in Sources */,
 				3083A4DC246CA48400EEE2C8 /* ImagePickerManager.swift in Sources */,
 				304FAF182593D308003AE150 /* LessonHeaderView.swift in Sources */,
 				30D4239F262ADF9000EEC7D4 /* UserProfilePresenter.swift in Sources */,
@@ -1704,6 +1809,7 @@
 				30D8CDBA25EBA21A000CD726 /* ChatRouter.swift in Sources */,
 				309FE16A2551A26B00564AE0 /* AudioRecordPresenter.swift in Sources */,
 				3083A4E02472260200EEE2C8 /* Strings.swift in Sources */,
+				306380DC26FF0FE1004A8A12 /* StatsWorker.swift in Sources */,
 				30486D4E25726B8300013F70 /* GradientArcView.swift in Sources */,
 				30866897260146C60063837C /* AttachementResponse.swift in Sources */,
 				30CB085925F3C6D6008EA81F /* DiscussionCell.swift in Sources */,
@@ -1730,8 +1836,10 @@
 				30313A35245C5998005EEF87 /* LoginInteractor.swift in Sources */,
 				3095C265254A217F0078F2A7 /* QuizListViewController.swift in Sources */,
 				30D423A0262ADF9000EEC7D4 /* UserProfileWorker.swift in Sources */,
+				30D89D642703D3C90051CB13 /* HeaderStatCell.swift in Sources */,
 				30D8CDBD25EBA21A000CD726 /* ChatInteractor.swift in Sources */,
 				304962762621A41A000580C5 /* ShopAPI.swift in Sources */,
+				306380EC2700A200004A8A12 /* WelcomeModels.swift in Sources */,
 				3083A4E22472E07300EEE2C8 /* DataValidationWorker.swift in Sources */,
 				30DBA62225BD8E6A00F37A73 /* Indicator.swift in Sources */,
 				30775AB0245CD0B700677FE5 /* UserWorker.swift in Sources */,
@@ -1740,6 +1848,7 @@
 				30313A3E245C66D3005EEF87 /* SubscribeWorker.swift in Sources */,
 				309FE1792551B07900564AE0 /* RecordManager.swift in Sources */,
 				307E23312598CDE7006B87DF /* QuestionResponseCell.swift in Sources */,
+				306380DE26FF0FE1004A8A12 /* StatsModels.swift in Sources */,
 				30D8CD5825E10453000CD726 /* Ask.swift in Sources */,
 				3086689C260568CF0063837C /* BasicAudioController.swift in Sources */,
 				308F3E612628635D00D0C6F8 /* DetailsShopWorker.swift in Sources */,
@@ -1751,6 +1860,7 @@
 				309A44912598A37C00B73A13 /* QuizDetailsWorker.swift in Sources */,
 				30D8CDBB25EBA21A000CD726 /* ChatModels.swift in Sources */,
 				30775AB2245CD0DC00677FE5 /* UserCoreDataStore.swift in Sources */,
+				306380E026FF0FE1004A8A12 /* StatsInteractor.swift in Sources */,
 				308F3E652628635D00D0C6F8 /* DetailsShopInteractor.swift in Sources */,
 				303E691526223F3F00EABB8F /* OffersHeaderView.swift in Sources */,
 				30DBA61725BD82F700F37A73 /* TutorDataStore.swift in Sources */,
@@ -1778,6 +1888,7 @@
 				30CB084625F3A4DA008EA81F /* MessageDAO.swift in Sources */,
 				30D8CD5F25E191D3000CD726 /* ChapterDetailsAPI.swift in Sources */,
 				30313A33245C5998005EEF87 /* LoginModels.swift in Sources */,
+				30906EFB27302F8F0059CE16 /* StatsViewController+Helpers.swift in Sources */,
 				3095C264254A217F0078F2A7 /* QuizListModels.swift in Sources */,
 				308FD419259142DE0033EE9F /* LessonRouter.swift in Sources */,
 				3086689226013F880063837C /* ChatAPI.swift in Sources */,
@@ -1801,6 +1912,7 @@
 				30D8CD4925D95F8B000CD726 /* VideoDetailsWorker.swift in Sources */,
 				30D423A4262ADF9000EEC7D4 /* UserProfileInteractor.swift in Sources */,
 				3095C27C254A24D90078F2A7 /* QuestionModels.swift in Sources */,
+				306380EA2700A200004A8A12 /* WelcomeWorker.swift in Sources */,
 				30313A1B245C50CE005EEF87 /* SplashViewController.swift in Sources */,
 				30486D33257255A200013F70 /* PracticeModels.swift in Sources */,
 				3043BBE125094E7D005AB2A1 /* UIImageView+Helpers .swift in Sources */,

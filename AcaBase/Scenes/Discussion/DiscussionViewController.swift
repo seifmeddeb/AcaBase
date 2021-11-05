@@ -157,7 +157,10 @@ extension DiscussionViewController : UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        router?.routeToChat(segue: nil)
+        let discussion = discussionList[indexPath.row]
+        if !(discussion.model.closed ?? false) {
+            router?.routeToChat(segue: nil)
+        }
     }
     
     

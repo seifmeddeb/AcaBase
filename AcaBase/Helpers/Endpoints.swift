@@ -15,14 +15,15 @@ let mainAPIUrl = "http://vps800310.ovh.net/api/"
 let registerUrl = mainAPIUrl+"register"
 let loginUrl = mainAPIUrl+"login_check"
 let resetPasswordUrl = mainAPIUrl+"user/password/reset"
-
+let userStatsUrl = mainAPIUrl+"user/profile"
 
 // MARK: Main Page URLs
 let trainersUrl = mainAPIUrl+"trainers"
 let topicsUrl = mainAPIUrl+"subjects"
 let homeQuizUrl = mainAPIUrl+"home/quiz"
 let videosUrl = mainAPIUrl+"videos"
-let trainerFavUrl = mainAPIUrl+"trainer/add/fav"
+let trainerAddFavUrl = mainAPIUrl+"trainer/add/fav"
+let trainerRemoveFavUrl = mainAPIUrl+"trainer/remove/fav"
 
 // MARK: ASK URLs
 let askUrl = mainAPIUrl+"user/ask"
@@ -44,3 +45,6 @@ let shopUrl = mainAPIUrl+"subscription"
 
 // MARK: Payment URL
 let paymentUrl = mainAPIUrl+"payment/process"
+
+//MARK: EndSession Url
+let endSessionUrl = mainAPIUrl+"ask/finish"

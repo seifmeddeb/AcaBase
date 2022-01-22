@@ -18,3 +18,5 @@ let primaryRed = UIColor(red: 242/255, green: 94/255, blue: 94/255, alpha: 1.0)
 let starColor = UIColor(red: 253/255, green: 200/255, blue: 72/255, alpha: 1.0)
 let primaryYellow = UIColor(red: 247/255, green: 181/255, blue: 2/255, alpha: 1.0)
 let bgColorArcView = UIColor(red: 240/255, green: 243/255, blue: 254/255, alpha: 1.0)
+
+let pieChartColors = [primaryBlue,primaryGreen,primaryRed,primaryYellow,primaryGrey,.orange,.systemPink,.brown]

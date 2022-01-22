@@ -11,9 +11,9 @@ import UIKit
 
 extension StatsViewController : UISearchControllerDelegate {
  
-    func setSubjectsFilter(filters: [String:Int]) {
-        let titles = Array(filters.keys).sorted{return $0 < $1}
-        let segmentControl = UISegmentedControl(items: titles)
+    func setStatsFilter(filters: [String:Int]) {
+        let titles = Array(filters.keys)
+        let segmentControl = UISegmentedControl(items: ["Par Jour","Par Matière"])
 
         segmentControl.selectedSegmentIndex = 0
         segmentControl.sizeToFit()

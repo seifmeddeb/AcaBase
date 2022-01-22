@@ -24,7 +24,9 @@ class UserManager {
     private var user : UserDAO? {
         if let data = UserDefaults.standard.object(forKey: K_CURRENT_USER) {
             do {
-                let userData = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [UserDAO.self,CurrentUser.self,Level.self,Statistics.self], from: data as! Data)
+                let str = String(data: data as! Data, encoding: .utf8) ?? ""
+                print("👌 \(str)")
+                let userData = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [UserDAO.self,CurrentUser.self,Level.self,Statistics.self,LearningPathPerDays.self,LearningPathPerSubject.self, NSArray.self], from: data as! Data)
                 if let user = userData as? UserDAO {
                     return user
                 } else {

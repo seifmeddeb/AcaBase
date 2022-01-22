@@ -72,8 +72,8 @@ class StatsViewController: UIViewController, StatsDisplayLogic
         super.viewDidLoad()
         fetchStats()
         
-        let filters = ["Jour":0,"Semaine":1]
-        self.setSubjectsFilter(filters: filters)
+        let filters = ["Par Jour":0,"Par Matière":1]
+        self.setStatsFilter(filters: filters)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,15 +86,13 @@ class StatsViewController: UIViewController, StatsDisplayLogic
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var segmentedHolderView: UIView!
     var statsList = [StatCellType]()
-    
+    var chartIndex = 0
     
     // MARK: Segmented control changed
     
     @objc func segmentChanged(_ sender: UISegmentedControl) {
-        if let type = sender.titleForSegment(at: sender.selectedSegmentIndex) {
-            
-            // FIXME: update chart
-        }
+        self.chartIndex = sender.selectedSegmentIndex
+        self.collectionView.reloadData()
     }
     
     // MARK: fetchStats
@@ -154,7 +152,7 @@ extension StatsViewController : UICollectionViewDataSource, UICollectionViewDele
         case .chart(let item):
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HeaderStatCell", for: indexPath) as! HeaderStatCell
             
-            cell.setup(viewModel: item)
+            cell.setup(viewModel: item, index: self.chartIndex)
             return cell
         case .stat(let item):
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StatCell", for: indexPath) as! StatCell

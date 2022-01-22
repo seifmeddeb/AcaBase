@@ -512,6 +512,10 @@
                                                             <color key="textColor" red="0.015686274509803921" green="0.32549019607843138" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8WH-ur-ggZ" customClass="PieChartView" customModule="Charts">
+                                                            <rect key="frame" x="20" y="25" width="374" height="273.5"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7w8-hF-kg7" customClass="LineChartView" customModule="Charts">
                                                             <rect key="frame" x="20" y="76.5" width="374" height="210.5"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -519,16 +523,20 @@
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
+                                                        <constraint firstItem="8WH-ur-ggZ" firstAttribute="height" secondItem="7w8-hF-kg7" secondAttribute="height" multiplier="1.3" id="0gg-Sc-HGh"/>
                                                         <constraint firstItem="7w8-hF-kg7" firstAttribute="leading" secondItem="xKc-m3-uTl" secondAttribute="leading" constant="20" id="1UB-cj-6Ds"/>
                                                         <constraint firstItem="XdA-ud-8ky" firstAttribute="leading" secondItem="nte-by-gce" secondAttribute="leading" id="2Vx-o3-rh7"/>
+                                                        <constraint firstItem="8WH-ur-ggZ" firstAttribute="width" secondItem="7w8-hF-kg7" secondAttribute="width" id="4ke-Ld-qcY"/>
                                                         <constraint firstItem="nte-by-gce" firstAttribute="leading" secondItem="xKc-m3-uTl" secondAttribute="leading" constant="20" id="8jT-6W-Fvx"/>
                                                         <constraint firstAttribute="trailing" secondItem="nte-by-gce" secondAttribute="trailing" constant="20" id="F89-Wb-2kp"/>
                                                         <constraint firstItem="XdA-ud-8ky" firstAttribute="top" secondItem="nte-by-gce" secondAttribute="bottom" constant="5" id="G0S-Jm-RjG"/>
                                                         <constraint firstItem="nte-by-gce" firstAttribute="top" secondItem="xKc-m3-uTl" secondAttribute="top" constant="20" id="JUB-yq-09T"/>
                                                         <constraint firstAttribute="trailing" secondItem="XdA-ud-8ky" secondAttribute="trailing" constant="20" id="O9V-2u-fcP"/>
+                                                        <constraint firstItem="8WH-ur-ggZ" firstAttribute="centerY" secondItem="7w8-hF-kg7" secondAttribute="centerY" constant="-20" id="Tiw-7n-dFn"/>
                                                         <constraint firstAttribute="bottom" secondItem="7w8-hF-kg7" secondAttribute="bottom" constant="20" id="ZZr-NO-YGu"/>
                                                         <constraint firstAttribute="trailing" secondItem="7w8-hF-kg7" secondAttribute="trailing" constant="20" id="fFh-nP-VFs"/>
                                                         <constraint firstItem="7w8-hF-kg7" firstAttribute="top" secondItem="XdA-ud-8ky" secondAttribute="bottom" constant="20" id="r9E-1K-Ui9"/>
+                                                        <constraint firstItem="8WH-ur-ggZ" firstAttribute="centerX" secondItem="7w8-hF-kg7" secondAttribute="centerX" id="tK8-MM-zOm"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -548,6 +556,7 @@
                                         <connections>
                                             <outlet property="chartView" destination="7w8-hF-kg7" id="TA9-dc-56a"/>
                                             <outlet property="durationLbl" destination="XdA-ud-8ky" id="gOE-xn-gnn"/>
+                                            <outlet property="pieChartView" destination="8WH-ur-ggZ" id="2jM-p4-Ym9"/>
                                             <outlet property="titleLbl" destination="nte-by-gce" id="jyD-pB-taj"/>
                                         </connections>
                                     </collectionViewCell>

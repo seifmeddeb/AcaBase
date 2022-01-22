@@ -14,6 +14,7 @@ import UIKit
 
 typealias StatViewModel = Stats.Fetch.ViewModel.Item
 typealias StatCellType = Stats.Fetch.ViewModel.CellType
+typealias ChartEntry = Stats.Fetch.ViewModel.ChartEntry
 
 enum Stats
 {
@@ -37,7 +38,21 @@ enum Stats
                 var title : String?
                 var image : UIImage?
                 var value : Int = 0
-                var learningPathPerDays : [LearningPathPerDays]?
+                var chartEntries = [ChartEntry]()
+            }
+            
+            enum ChartEntry {
+                case line([String],[Double])
+                case hologram([String],[Double])
+                
+                var title : String {
+                    switch self {
+                    case .line:
+                        return "par jour"
+                    case .hologram:
+                        return "par matière"
+                    }
+                }
             }
             
             enum CellType {

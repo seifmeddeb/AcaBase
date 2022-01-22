@@ -28,7 +28,30 @@ class StatsPresenter: StatsPresentationLogic
         if let stats = response.currentUserInfo?.statistics {
             var statList = [StatCellType]()
             // chart data
-            statList.append(StatCellType.chart(StatViewModel(learningPathPerDays: stats.learningPathPerDays ?? [LearningPathPerDays]())))
+            var chartEntries = [ChartEntry]()
+            var labels = [String]()
+            var values = [Double]()
+            
+            if let learningPathPerDays = stats.learningPathPerDays {
+                for lppdItem in learningPathPerDays {
+                    labels.append(getDateFromTimeStamp(timeStamp: Double(lppdItem.timestamp)))
+                    values.append(Double(lppdItem.value))
+                }
+                chartEntries.append(ChartEntry.line(labels, values))
+            }
+            
+            labels = [String]()
+            values = [Double]()
+            
+            if let learningPathPerSubject = stats.learningPathPerSubject {
+                for lppsItem in learningPathPerSubject {
+                    labels.append(lppsItem.label)
+                    values.append(Double(lppsItem.value))
+                }
+                chartEntries.append(ChartEntry.hologram(labels, values))
+            }
+            
+            statList.append(StatCellType.chart(StatViewModel(chartEntries: chartEntries)))
             // 4 below elements data
             statList.append(StatCellType.stat(StatViewModel(title: "Questions résolues", image: UIImage(named: "solved-questions-icon"), value: stats.nbrSolvedQuestions )))
             statList.append(StatCellType.stat(StatViewModel(title: "Cours", image: UIImage(named: "courses-icon"), value: stats.nbrTakenCourses )))

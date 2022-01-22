@@ -30,8 +30,10 @@ class UserDAO : NSObject, Codable, NSCoding, NSSecureCoding {
     }
 
     required convenience init?(coder: NSCoder) {
-        let currentUser = coder.decodeObject(forKey: "currentUser") as! CurrentUser
         let accessToken = coder.decodeObject(forKey: "accessToken") as! String
+        let currentUser = coder.decodeObject(forKey: "currentUser") as! CurrentUser
+        
+        print("👌👌👌\(accessToken)")
         
         self.init(currentUser: currentUser, accessToken: accessToken)
     }
@@ -184,8 +186,9 @@ class Statistics : NSObject, Codable, NSCoding, NSSecureCoding {
     var totalDays : Int
     var totalQuestions : Int
     var learningPathPerDays : [LearningPathPerDays]? = nil
+    var learningPathPerSubject : [LearningPathPerSubject]? = nil
     
-    internal init(leftDays: Int, leftQuestions: Int, nbrSolvedQuestions: Int, nbrTakenCourses: Int, nbrFinishedQuiz: Int, totalHours: Int, totalDays: Int, totalQuestions: Int, learningPathPerDays: [LearningPathPerDays]? = nil) {
+    internal init(leftDays: Int, leftQuestions: Int, nbrSolvedQuestions: Int, nbrTakenCourses: Int, nbrFinishedQuiz: Int, totalHours: Int, totalDays: Int, totalQuestions: Int, learningPathPerDays: [LearningPathPerDays]? = nil, learningPathPerSubject: [LearningPathPerSubject]? = nil) {
         
         self.leftDays = leftDays
         self.leftQuestions = leftQuestions
@@ -196,6 +199,7 @@ class Statistics : NSObject, Codable, NSCoding, NSSecureCoding {
         self.totalDays = totalDays
         self.totalQuestions = totalQuestions
         self.learningPathPerDays = learningPathPerDays
+        self.learningPathPerSubject = learningPathPerSubject
     }
     
     func encode(with coder: NSCoder) {
@@ -208,6 +212,7 @@ class Statistics : NSObject, Codable, NSCoding, NSSecureCoding {
         coder.encode(totalDays, forKey: "totalDays")
         coder.encode(totalQuestions, forKey: "totalQuestions")
         coder.encode(learningPathPerDays, forKey: "learningPathPerDays")
+        coder.encode(learningPathPerSubject, forKey: "learningPathPerSubject")
     }
 
     required convenience init?(coder: NSCoder) {
@@ -220,8 +225,9 @@ class Statistics : NSObject, Codable, NSCoding, NSSecureCoding {
         let totalDays = coder.decodeInteger(forKey: "totalDays")
         let totalQuestions = coder.decodeInteger(forKey: "totalQuestions")
         let learningPathPerDays = coder.decodeObject(forKey: "learningPathPerDays") as? [LearningPathPerDays]
-        
-        self.init(leftDays: leftDays, leftQuestions: leftQuestions, nbrSolvedQuestions: nbrSolvedQuestions, nbrTakenCourses: nbrTakenCourses, nbrFinishedQuiz: nbrFinishedQuiz, totalHours: totalHours, totalDays: totalDays, totalQuestions: totalQuestions, learningPathPerDays: learningPathPerDays)
+        let learningPathPerSubject = coder.decodeObject(forKey: "learningPathPerSubject") as? [LearningPathPerSubject]
+
+        self.init(leftDays: leftDays, leftQuestions: leftQuestions, nbrSolvedQuestions: nbrSolvedQuestions, nbrTakenCourses: nbrTakenCourses, nbrFinishedQuiz: nbrFinishedQuiz, totalHours: totalHours, totalDays: totalDays, totalQuestions: totalQuestions, learningPathPerDays: learningPathPerDays, learningPathPerSubject: learningPathPerSubject)
     }
     
     static var supportsSecureCoding: Bool {
@@ -249,6 +255,32 @@ class LearningPathPerDays : NSObject, Codable, NSCoding, NSSecureCoding {
         let value = coder.decodeInteger(forKey: "value")
         
         self.init(timestamp: timestamp, value: value)
+    }
+    
+    static var supportsSecureCoding: Bool {
+        return true
+    }
+}
+
+class LearningPathPerSubject : NSObject, Codable, NSCoding, NSSecureCoding {
+    var label: String
+    var value: Int
+    
+    internal init(label: String, value: Int) {
+        self.label = label
+        self.value = value
+    }
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(label, forKey: "label")
+        coder.encode(value, forKey: "value")
+    }
+
+    required convenience init?(coder: NSCoder) {
+        let label = coder.decodeObject(forKey: "label") as! String
+        let value = coder.decodeInteger(forKey: "value")
+        
+        self.init(label: label, value: value)
     }
     
     static var supportsSecureCoding: Bool {

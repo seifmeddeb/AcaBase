@@ -8,7 +8,7 @@
 
 import Foundation
 
-let mainUrl = "http://vps800310.ovh.net"
+let mainUrl = "http://vps800310.ovh.net/"
 let mainAPIUrl = "http://vps800310.ovh.net/api/"
 
 // MARK: User URLs

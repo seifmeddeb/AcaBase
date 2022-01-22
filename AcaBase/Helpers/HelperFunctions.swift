@@ -144,3 +144,14 @@ func getElapsedTimeText(from interval: TimeInterval) -> String {
         return ""
     }
 }
+
+func getDateFromTimeStamp(timeStamp : Double) -> String {
+    
+    let date = NSDate(timeIntervalSince1970: timeStamp / 1000)
+    
+    let dayTimePeriodFormatter = DateFormatter()
+    dayTimePeriodFormatter.dateFormat = "MM-dd"
+    
+    let dateString = dayTimePeriodFormatter.string(from: date as Date)
+    return dateString
+}
